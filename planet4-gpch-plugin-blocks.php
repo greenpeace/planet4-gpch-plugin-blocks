@@ -11,5 +11,5 @@
 // Exit if accessed directly
 defined( 'ABSPATH' ) || exit;
 
-// TODO: Add some blocks
+// TODO: Add blocks
 
