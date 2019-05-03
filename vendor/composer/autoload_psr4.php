@@ -6,9 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Twig\\' => array($vendorDir . '/twig/twig/src'),
-    'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
-    'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\' => array($baseDir . '/includes/blocks'),
     'Greenpeace\\Planet4GPCHBlocks\\' => array($baseDir . '/includes'),
 );

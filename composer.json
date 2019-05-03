@@ -4,7 +4,6 @@
     "type": "wordpress-plugin",
     "license": "MIT",
     "require": {
-        "twig/twig": "^2.0"
     },
     "config": {
         "optimize-autoloader": true
