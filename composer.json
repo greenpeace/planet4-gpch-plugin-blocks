@@ -1,6 +1,6 @@
 {
     "name": "greenpeace/planet4-gpch-plugin-blocks",
-    "description": "Provides GPCH specific content blocks for Planet4",
+    "description": "Provides Planet4 content blocks specific to Greenpeace Switzerland",
     "type": "wordpress-plugin",
     "license": "MIT",
     "require": {},
