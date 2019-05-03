@@ -9,10 +9,10 @@
     },
     "autoload": {
         "psr-4": {
-            "Greenpeace\\Planet4GPCHGutenbergBlocks\\": [
+            "Greenpeace\\Planet4GPCHBlocks\\": [
                 "includes"
             ],
-            "Greenpeace\\Planet4GPCHGutenbergBlocks\\Blocks\\": [
+            "Greenpeace\\Planet4GPCHBlocks\\Blocks\\": [
                 "includes/blocks"
             ]
         }
