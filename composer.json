@@ -3,7 +3,9 @@
     "description": "Provides Planet4 content blocks specific to Greenpeace Switzerland",
     "type": "wordpress-plugin",
     "license": "MIT",
-    "require": {},
+    "require": {
+        "twig/twig": "^2.0"
+    },
     "config": {
         "optimize-autoloader": true
     },
