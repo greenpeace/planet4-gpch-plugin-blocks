@@ -21,6 +21,7 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 		 */
 		private $blocks;
 
+
 		/**
 		 * Returns the instance
 		 *
@@ -34,6 +35,7 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 			return self::$instance;
 		}
 
+
 		/**
 		 * Constructor.
 		 */
@@ -43,10 +45,12 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 				add_action( 'admin_notices', array( $this, 'error_message_no_acf' ) );
 			}
 
-			// Actions
-			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
+			// Scripts & Styles
+			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
-			add_filter( 'block_categories', array($this, 'registerBlockCategory'), 10, 2 );
+			// Register a block category
+			add_filter( 'block_categories', array( $this, 'registerBlockCategory' ), 10, 2 );
 
 			// Load Blocks
 			$this->blocks = [
@@ -74,27 +78,30 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 			);
 		}
 
+
 		/**
 		 * Outputs an error message in Wordpress admin
 		 */
 		public function error_message_no_acf() {
 			?>
-			<div class="error notice">
-				<p><?php _e( 'Planet 4 GPCH Blocks: Advanced Custom Fields must be installed and activated for this plugin to work.', 'planet4-gpch-blocks' ); ?></p>
-			</div>
+            <div class="error notice">
+                <p><?php _e( 'Planet 4 GPCH Blocks: Advanced Custom Fields must be installed and activated for this plugin to work.', 'planet4-gpch-blocks' ); ?></p>
+            </div>
 			<?php
 		}
+
 
 		/**
 		 * Enqueue our scripts
 		 */
-		public function enqueue_admin_scripts() {
-			/*
-			wp_enqueue_script( 'twitter-bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js', array( 'jquery' ), '4.1.1' );
+		public function enqueue_scripts() {
+			$file = '/assets/css/style.css';
 
-			wp_enqueue_style( 'twitter-bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css?ver=4.1.1', null, '4.1.1' );
-			wp_enqueue_style( 'planet4-plugin-blocks', '/wp-content/plugins/planet4-plugin-blocks/style.css', array( 'twitter-bootstrap' ), '1.9.0' );
-			*/
+			wp_enqueue_style( 'planet4-gpch-blocks-style',
+				P4_GPCH_PLUGIN_BLOCKS_BASE_URL . $file,
+				null,
+				filemtime( P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . $file )
+			);
 		}
 	}
 }
