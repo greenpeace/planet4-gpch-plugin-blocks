@@ -27,30 +27,11 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Form_Progress_Bar' ) ) {
 					'title'                 => 'Form progress bar',
 					'fields'                => array(
 						array(
-							'key'               => 'field_p4_gpch_blocks_fornm_ids',
-							'label'             => __('Form IDs', 'planet4-gpch-blocks' ),
-							'name'              => 'form_ids',
-							'type'              => 'text',
-							'instructions'      => __('To include more than one form, enter the IDs separated by commas (no spaces). Example: 1,2,3', 'planet4-gpch-blocks' ),
-							'required'          => 1,
-							'conditional_logic' => 0,
-							'wrapper'           => array(
-								'width' => '',
-								'class' => '',
-								'id'    => '',
-							),
-							'default_value'     => '',
-							'placeholder'       => '',
-							'prepend'           => '',
-							'append'            => '',
-							'maxlength'         => '',
-						),
-						array(
 							'key'               => 'field_p4_gpch_blocks_goal',
-							'label'             => __('Goal', 'planet4-gpch-blocks' ),
+							'label'             => __( 'Goal', 'planet4-gpch-blocks' ),
 							'name'              => 'goal',
 							'type'              => 'number',
-							'instructions'      => __('Number of form entries needed to fill the progress bar', 'planet4-gpch-blocks' ),
+							'instructions'      => __( 'Number of form entries needed to fill the progress bar', 'planet4-gpch-blocks' ),
 							'required'          => 1,
 							'conditional_logic' => 0,
 							'wrapper'           => array(
@@ -68,10 +49,10 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Form_Progress_Bar' ) ) {
 						),
 						array(
 							'key'               => 'field_p4_gpch_blocks_add_number',
-							'label'             => __('Add number', 'planet4-gpch-blocks' ),
+							'label'             => __( 'Add number', 'planet4-gpch-blocks' ),
 							'name'              => 'add_number',
 							'type'              => 'number',
-							'instructions'      => __('Add this number to the number of form entries', 'planet4-gpch-blocks' ),
+							'instructions'      => __( 'Add this number to the number of form entries', 'planet4-gpch-blocks' ),
 							'required'          => 0,
 							'conditional_logic' => 0,
 							'wrapper'           => array(
@@ -89,7 +70,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Form_Progress_Bar' ) ) {
 						),
 						array(
 							'key'               => 'field_p4_gpch_blocks_bar_color',
-							'label'             => __('Bar Color', 'planet4-gpch-blocks' ),
+							'label'             => __( 'Bar Color', 'planet4-gpch-blocks' ),
 							'name'              => 'bar_color',
 							'type'              => 'color_picker',
 							'instructions'      => '',
@@ -104,7 +85,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Form_Progress_Bar' ) ) {
 						),
 						array(
 							'key'               => 'field_p4_gpch_blocks_background_color',
-							'label'             => __('Background Color', 'planet4-gpch-blocks' ),
+							'label'             => __( 'Background Color', 'planet4-gpch-blocks' ),
 							'name'              => 'background_color',
 							'type'              => 'color_picker',
 							'instructions'      => '',
@@ -118,11 +99,57 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Form_Progress_Bar' ) ) {
 							'default_value'     => '#303133',
 						),
 						array(
+							'key'               => 'field_p4_gpch_blocks_use_form_entry_counter',
+							'label'             => __( 'Count Form entries', 'planet4-gpch-blocks' ),
+							'name'              => 'use_form_entry_counter',
+							'type'              => 'true_false',
+							'instructions'      => __( 'Would you like to count entries in a Gravity Form?', 'planet4-gpch-blocks' ),
+							'required'          => 0,
+							'conditional_logic' => 0,
+							'wrapper'           => array(
+								'width' => '',
+								'class' => '',
+								'id'    => '',
+							),
+							'message'           => '',
+							'default_value'     => 1,
+							'ui'                => 1,
+							'ui_on_text'        => '',
+							'ui_off_text'       => '',
+						),
+						array(
+							'key'               => 'field_p4_gpch_blocks_form_ids',
+							'label'             => __( 'Form IDs', 'planet4-gpch-blocks' ),
+							'name'              => 'form_ids',
+							'type'              => 'text',
+							'instructions'      => __( 'To include more than one form, enter the IDs separated by commas (no spaces). Example: 1,2,3', 'planet4-gpch-blocks' ),
+							'required'          => 1,
+							'conditional_logic' => array(
+								array(
+									array(
+										'field'    => 'field_p4_gpch_blocks_use_form_entry_counter',
+										'operator' => '==',
+										'value'    => '1',
+									),
+								),
+							),
+							'wrapper'           => array(
+								'width' => '',
+								'class' => '',
+								'id'    => '',
+							),
+							'default_value'     => '',
+							'placeholder'       => '',
+							'prepend'           => '',
+							'append'            => '',
+							'maxlength'         => '',
+						),
+						array(
 							'key'               => 'field_p4_gpch_blocks_use_global_counter',
-							'label'             => __('Use Global Counter', 'planet4-gpch-blocks' ),
+							'label'             => __( 'Use Global Counter', 'planet4-gpch-blocks' ),
 							'name'              => 'use_global_counter',
 							'type'              => 'true_false',
-							'instructions'      => __('Do you use a global petition counter?', 'planet4-gpch-blocks' ),
+							'instructions'      => __( 'Would you like to add the number of a global counter?', 'planet4-gpch-blocks' ),
 							'required'          => 0,
 							'conditional_logic' => 0,
 							'wrapper'           => array(
@@ -138,10 +165,10 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Form_Progress_Bar' ) ) {
 						),
 						array(
 							'key'               => 'field_p4_gpch_blocks_global_counter_url',
-							'label'             => __('Global Counter URL', 'planet4-gpch-blocks' ),
+							'label'             => __( 'Global Counter URL', 'planet4-gpch-blocks' ),
 							'name'              => 'global_counter_url',
 							'type'              => 'url',
-							'instructions'      => __('The URL of a global petition counter for the campaign. Adds the global number to the local number of signatures. Leave empty to ignore.', 'planet4-gpch-blocks' ),
+							'instructions'      => __( 'The URL of a global petition counter', 'planet4-gpch-blocks' ),
 							'conditional_logic' => array(
 								array(
 									array(
@@ -161,10 +188,10 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Form_Progress_Bar' ) ) {
 						),
 						array(
 							'key'               => 'field_p4_gpch_blocks_global_counter_json_key',
-							'label'             => __('Global Counter JSON key', 'planet4-gpch-blocks' ),
+							'label'             => __( 'Global Counter JSON key', 'planet4-gpch-blocks' ),
 							'name'              => 'global_counter_json_key',
 							'type'              => 'text',
-							'instructions'      => __('It\'s usually safe to keep the default to unique_count', 'planet4-gpch-blocks' ),
+							'instructions'      => __( 'It\'s usually safe to keep the default to unique_count', 'planet4-gpch-blocks' ),
 							'required'          => 0,
 							'conditional_logic' => array(
 								array(
@@ -185,38 +212,6 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Form_Progress_Bar' ) ) {
 							'prepend'           => '',
 							'append'            => '',
 							'maxlength'         => '',
-						),
-						array(
-							'key'               => 'field_p4_gpch_blocks_global_counter_only',
-							'label'             => __('How to count', 'planet4-gpch-blocks' ),
-							'name'              => 'global_counter_only',
-							'type'              => 'radio',
-							'instructions'      => '',
-							'required'          => 0,
-							'conditional_logic' => array(
-								array(
-									array(
-										'field'    => 'field_p4_gpch_blocks_use_global_counter',
-										'operator' => '==',
-										'value'    => '1',
-									),
-								),
-							),
-							'wrapper'           => array(
-								'width' => '',
-								'class' => '',
-								'id'    => '',
-							),
-							'choices'           => array(
-								1 => __('Ignore local form entries (if they are included in global counter)', 'planet4-gpch-blocks' ),
-								0 => __('Add local form entries to global counter', 'planet4-gpch-blocks' ),
-							),
-							'allow_null'        => 0,
-							'other_choice'      => 0,
-							'default_value'     => 1,
-							'layout'            => 'vertical',
-							'return_format'     => 'value',
-							'save_other_choice' => 0,
 						),
 					),
 					'location'              => array(
@@ -290,18 +285,17 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Form_Progress_Bar' ) ) {
 			}
 
 
-			// add global counter value if URL is specified
+			// Global Counter
 			if ( $fields['use_global_counter'] === true ) {
 				$sum += $this->get_global_petition_counter_number( $fields['global_counter_url'], $fields['global_counter_json_key'] );
 			}
 
 
-			// IDs of forms to count entries
-			$ids = explode( ',', $fields['form_ids'] );
+			// Form Entry Counter
+			if ( $fields['use_form_entry_counter'] === true) {
+				// IDs of forms to count entries
+				$ids = explode( ',', $fields['form_ids'] );
 
-			// Only count form entries when globalcounter_only isn't set
-			if ( key_exists( 'global_counter_only', $fields ) && $fields['global_counter_only'] != 1 ) {
-				// Count form entries
 				foreach ( $ids as $id ) {
 					if ( is_numeric( $id ) ) {
 						$counts = \GFFormsModel::get_form_counts( $id );
@@ -310,7 +304,6 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Form_Progress_Bar' ) ) {
 					}
 				}
 			}
-
 
 			// Prepare parameters for template
 			$params = array(
