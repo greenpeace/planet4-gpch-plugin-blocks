@@ -44,13 +44,17 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 			if ( ! class_exists( 'ACF' ) ) {
 				add_action( 'admin_notices', array( $this, 'error_message_no_acf' ) );
 			}
+			// Output an error message in case Timber isn't installed.
+			if ( ! class_exists( 'Timber' ) ) {
+				add_action( 'admin_notices', array( $this, 'error_message_no_timber' ) );
+			}
 
 			// Scripts & Styles
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
 			// Register a block category
-			add_filter( 'block_categories', array( $this, 'registerBlockCategory' ), 10, 2 );
+			add_filter( 'block_categories', array( $this, 'register_block_category' ), 10, 2 );
 
 			// Load Blocks
 			$this->blocks = [
@@ -66,7 +70,7 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 		 *
 		 * @return array
 		 */
-		public function registerBlockCategory( $categories, $post ) {
+		public function register_block_category( $categories, $post ) {
 			return array_merge(
 				$categories,
 				array(
@@ -80,12 +84,24 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 
 
 		/**
-		 * Outputs an error message in Wordpress admin
+		 * Outputs an error message in Wordpress admin about ACF not being installed
 		 */
 		public function error_message_no_acf() {
 			?>
             <div class="error notice">
                 <p><?php _e( 'Planet 4 GPCH Blocks: Advanced Custom Fields must be installed and activated for this plugin to work.', 'planet4-gpch-blocks' ); ?></p>
+            </div>
+			<?php
+		}
+
+
+		/**
+		 * Outputs an error message in Wordpress admin about Timber not being installed
+		 */
+		public function error_message_no_timber() {
+			?>
+            <div class="error notice">
+                <p><?php _e( 'Planet 4 GPCH Blocks: Timber must be installed and activated for this plugin to work.', 'planet4-gpch-blocks' ); ?></p>
             </div>
 			<?php
 		}
