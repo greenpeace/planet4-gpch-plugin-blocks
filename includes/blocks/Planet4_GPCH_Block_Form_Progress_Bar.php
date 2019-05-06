@@ -9,7 +9,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Form_Progress_Bar' ) ) {
 		 */
 		protected $template_file = P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'templates/blocks/form_progress_bar.twig';
 
-
+		// [Christoph Arndt] -> [just a comment]
 		public function __construct() {
 			$this->register_acf_field_group();
 
