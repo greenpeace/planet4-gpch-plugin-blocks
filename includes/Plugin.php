@@ -40,14 +40,8 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 		 * Constructor.
 		 */
 		private function __construct() {
-			// Output an error message in case ACF isn't installed.
-			if ( ! class_exists( 'ACF' ) ) {
-				add_action( 'admin_notices', array( $this, 'error_message_no_acf' ) );
-			}
-			// Output an error message in case Timber isn't installed.
-			if ( ! class_exists( 'Timber' ) ) {
-				add_action( 'admin_notices', array( $this, 'error_message_no_timber' ) );
-			}
+		    // Check dependencies
+			add_action('plugins_loaded', array($this, 'check_plugin_dependencies'));
 
 			// Scripts & Styles
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
@@ -61,6 +55,22 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 				new Blocks\Planet4_GPCH_Block_Form_Progress_Bar(),
 			];
 		}
+
+
+		/**
+		 * Check for dependencies and output an error message if needed
+		 */
+		public function check_plugin_dependencies() {
+			// Output an error message in case ACF isn't installed.
+			if ( ! class_exists( 'ACF' ) ) {
+				add_action( 'admin_notices', array( $this, 'error_message_no_acf' ) );
+			}
+			// Output an error message in case Timber isn't installed.
+			if ( ! class_exists( 'Timber' ) ) {
+				add_action( 'admin_notices', array( $this, 'error_message_no_timber' ) );
+			}
+        }
+
 
 		/**
 		 * Registers a new categories for our blocks
