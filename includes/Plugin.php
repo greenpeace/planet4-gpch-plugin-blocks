@@ -40,8 +40,8 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 		 * Constructor.
 		 */
 		private function __construct() {
-		    // Check dependencies
-			add_action('plugins_loaded', array($this, 'check_plugin_dependencies'));
+			// Check dependencies
+			add_action( 'plugins_loaded', array( $this, 'check_plugin_dependencies' ) );
 
 			// Scripts & Styles
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
@@ -51,6 +51,14 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 			add_filter( 'block_categories', array( $this, 'register_block_category' ), 10, 2 );
 
 			// Load Blocks
+			add_action( 'acf/init', array( $this, 'load_blocks' ) );
+		}
+
+
+		/**
+		 * Load our custom blocks
+		 */
+		public function load_blocks() {
 			$this->blocks = [
 				new Blocks\Planet4_GPCH_Block_Form_Progress_Bar(),
 			];
@@ -69,7 +77,7 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 			if ( ! class_exists( 'Timber' ) ) {
 				add_action( 'admin_notices', array( $this, 'error_message_no_timber' ) );
 			}
-        }
+		}
 
 
 		/**
