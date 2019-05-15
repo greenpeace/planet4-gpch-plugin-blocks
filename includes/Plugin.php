@@ -51,14 +51,6 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 			add_filter( 'block_categories', array( $this, 'register_block_category' ), 10, 2 );
 
 			// Load Blocks
-			add_action( 'acf/init', array( $this, 'load_blocks' ) );
-		}
-
-
-		/**
-		 * Load our custom blocks
-		 */
-		public function load_blocks() {
 			$this->blocks = [
 				new Blocks\Planet4_GPCH_Block_Form_Progress_Bar(),
 				new Blocks\Planet4_GPCH_Donation_Divider(),
