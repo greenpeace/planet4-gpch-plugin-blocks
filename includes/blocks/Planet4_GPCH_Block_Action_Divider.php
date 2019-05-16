@@ -2,12 +2,12 @@
 
 namespace Greenpeace\Planet4GPCHBlocks\Blocks;
 
-if ( ! class_exists( 'Planet4_GPCH_Donation_Divider' ) ) {
-	class Planet4_GPCH_Donation_Divider extends Planet4_GPCH_Base_Block {
+if ( ! class_exists( 'Planet4_GPCH_Action_Divider' ) ) {
+	class Planet4_GPCH_Action_Divider extends Planet4_GPCH_Base_Block {
 		/**
 		 * @var string Template file path
 		 */
-		protected $template_file = P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'templates/blocks/donation_divider.twig';
+		protected $template_file = P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'templates/blocks/action_divider.twig';
 
 		public function __construct() {
 			$this->register_acf_field_group();
@@ -21,11 +21,11 @@ if ( ! class_exists( 'Planet4_GPCH_Donation_Divider' ) ) {
 		protected function register_acf_field_group() {
 			if ( function_exists( 'acf_add_local_field_group' ) ) {
 				acf_add_local_field_group( array(
-					'key'                   => 'group_p4_gpch_blocks_donation_divider',
+					'key'                   => 'group_p4_gpch_blocks_action_divider',
 					'title'                 => 'Donation Devider',
 					'fields'                => array(
 						array(
-							'key'               => 'field_p4_gpch_blocks_donation_divider_text',
+							'key'               => 'field_p4_gpch_blocks_action_divider_text',
 							'label'             => __( 'Text', 'planet4-gpch-blocks' ),
 							'name'              => 'text',
 							'type'              => 'text',
@@ -44,9 +44,9 @@ if ( ! class_exists( 'Planet4_GPCH_Donation_Divider' ) ) {
 							'maxlength'         => 255,
 						),
 						array(
-							'key'               => 'field_p4_gpch_blocks_donation_divider_button_link',
+							'key'               => 'field_p4_gpch_blocks_action_divider_button_link',
 							'label'             => __( 'Action Link', 'planet4-gpch-blocks' ),
-							'name'              => 'donation_link',
+							'name'              => 'action_link',
 							'type'              => 'url',
 							'instructions'      => '',
 							'required'          => 1,
@@ -65,7 +65,7 @@ if ( ! class_exists( 'Planet4_GPCH_Donation_Divider' ) ) {
 							array(
 								'param'    => 'block',
 								'operator' => '==',
-								'value'    => 'acf/p4-gpch-block-donation-divider',
+								'value'    => 'acf/p4-gpch-block-action-divider',
 							),
 						),
 					),
@@ -89,13 +89,13 @@ if ( ! class_exists( 'Planet4_GPCH_Donation_Divider' ) ) {
 			if ( function_exists( 'acf_register_block' ) ) {
 				// register a block
 				acf_register_block( array(
-					'name'            => 'p4-gpch-block-donation-divider',
-					'title'           => __( 'Donation Divider', 'planet4-gpch-blocks' ),
+					'name'            => 'p4-gpch-block-action-divider',
+					'title'           => __( 'Action Divider', 'planet4-gpch-blocks' ),
 					'description'     => __( 'Divider Block with Donation Button', 'planet4-gpch-blocks' ),
 					'render_callback' => array( $this, 'render_block' ),
 					'category'        => 'gpch',
 					'icon'            => 'minus',
-					'keywords'        => array( 'donation', 'divider' ),
+					'keywords'        => array( 'action', 'divider' ),
 				) );
 			}
 		}
@@ -116,7 +116,7 @@ if ( ! class_exists( 'Planet4_GPCH_Donation_Divider' ) ) {
 
 			$params = array(
 				'text'   => $fields['text'],
-				'donation_link'   => $fields['donation_link'],
+				'action_link'   => $fields['action_link'],
 			);
 
 			// Output template
