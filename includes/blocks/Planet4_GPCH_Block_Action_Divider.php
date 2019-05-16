@@ -47,7 +47,7 @@ if ( ! class_exists( 'Planet4_GPCH_Action_Divider' ) ) {
 							'key'               => 'field_p4_gpch_blocks_action_divider_button_link',
 							'label'             => __( 'Action Link', 'planet4-gpch-blocks' ),
 							'name'              => 'action_link',
-							'type'              => 'url',
+							'type'              => 'link',
 							'instructions'      => '',
 							'required'          => 1,
 							'conditional_logic' => 0,
