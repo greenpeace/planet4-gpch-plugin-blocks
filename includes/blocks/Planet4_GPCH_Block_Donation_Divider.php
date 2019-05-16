@@ -26,7 +26,7 @@ if ( ! class_exists( 'Planet4_GPCH_Donation_Divider' ) ) {
 					'fields'                => array(
 						array(
 							'key'               => 'field_p4_gpch_blocks_donation_divider_text',
-							'label'             => 'Text',
+							'label'             => __( 'Text', 'planet4-gpch-blocks' ),
 							'name'              => 'text',
 							'type'              => 'text',
 							'instructions'      => '',
@@ -45,7 +45,7 @@ if ( ! class_exists( 'Planet4_GPCH_Donation_Divider' ) ) {
 						),
 						array(
 							'key'               => 'field_p4_gpch_blocks_donation_divider_button_link',
-							'label'             => 'Donation Link',
+							'label'             => __( 'Action Link', 'planet4-gpch-blocks' ),
 							'name'              => 'donation_link',
 							'type'              => 'url',
 							'instructions'      => '',
