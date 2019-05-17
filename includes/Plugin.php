@@ -53,6 +53,7 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 			// Load Blocks
 			$this->blocks = [
 				new Blocks\Planet4_GPCH_Block_Form_Progress_Bar(),
+				new Blocks\Planet4_GPCH_Block_Form_Counter_Text(),
 				new Blocks\Planet4_GPCH_Donation_Divider(),
 			];
 		}
