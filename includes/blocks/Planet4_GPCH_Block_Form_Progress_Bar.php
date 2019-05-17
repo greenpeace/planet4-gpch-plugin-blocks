@@ -3,13 +3,13 @@
 namespace Greenpeace\Planet4GPCHBlocks\Blocks;
 
 if ( ! class_exists( 'Planet4_GPCH_Block_Form_Progress_Bar' ) ) {
-	class Planet4_GPCH_Block_Form_Progress_Bar extends Planet4_GPCH_Base_Block {
+	class Planet4_GPCH_Block_Form_Progress_Bar extends Planet4_GPCH_Base_Form_Block {
 		/**
 		 * @var string Template file path
 		 */
 		protected $template_file = P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'templates/blocks/form_progress_bar.twig';
 
-		// [Christoph Arndt] -> [just a comment]
+
 		public function __construct() {
 			$this->register_acf_field_group();
 
@@ -276,33 +276,14 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Form_Progress_Bar' ) ) {
 				$this->render_error_message( __( 'Added number must be a numeric value', 'planet4-gpch-blocks' ) );
 			}
 
+			// get global counter and/or count form entries
+			$counter = $this->get_numbers($fields);
 
 			// If a number is added to the calculated total, start out with that number
 			if ( is_numeric( $fields['add_number'] ) ) {
-				$sum = $fields['add_number'];
+				$sum = $fields['add_number'] + $counter;
 			} else {
-				$sum = 0;
-			}
-
-
-			// Global Counter
-			if ( $fields['use_global_counter'] === true ) {
-				$sum += $this->get_global_petition_counter_number( $fields['global_counter_url'], $fields['global_counter_json_key'] );
-			}
-
-
-			// Form Entry Counter
-			if ( $fields['use_form_entry_counter'] === true) {
-				// IDs of forms to count entries
-				$ids = explode( ',', $fields['form_ids'] );
-
-				foreach ( $ids as $id ) {
-					if ( is_numeric( $id ) ) {
-						$counts = \GFFormsModel::get_form_counts( $id );
-
-						$sum += $counts['total'] - $counts['trash'] - $counts['spam'];
-					}
-				}
+				$sum = $counter;
 			}
 
 			// Prepare parameters for template
@@ -314,39 +295,6 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Form_Progress_Bar' ) ) {
 
 			// Output template
 			\Timber::render( $this->template_file, $params );
-		}
-
-
-		/**
-		 * Retrieves the number of signatures from a global petition counter.
-		 * Expects a JSON result
-		 *
-		 * @param $globalcounter_url
-		 * @param $globalcounter_jsonkey
-		 *
-		 * @return int
-		 */
-		protected function get_global_petition_counter_number( $globalcounter_url, $globalcounter_jsonkey ) {
-			// try cached value
-			$counterResult = wp_cache_get( md5( $globalcounter_url ), 'global_counters' );
-
-			// not in cache? get it from URL and write to cache
-			if ( $counterResult === false ) {
-				$ch = curl_init();
-				curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );
-				curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-				curl_setopt( $ch, CURLOPT_URL, $globalcounter_url );
-				$result = curl_exec( $ch );
-				curl_close( $ch );
-
-				$obj           = json_decode( $result );
-				$counterResult = (int) $obj->$globalcounter_jsonkey;
-
-				// set the cache and define a timeout of 600 seconds
-				wp_cache_set( md5( $globalcounter_url ), $counterResult, 'global_counters', 600 );
-			}
-
-			return $counterResult;
 		}
 	}
 }
