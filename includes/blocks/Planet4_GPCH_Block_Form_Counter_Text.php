@@ -2,12 +2,12 @@
 
 namespace Greenpeace\Planet4GPCHBlocks\Blocks;
 
-if ( ! class_exists( 'Planet4_GPCH_Block_Form_Progress_Bar' ) ) {
-	class Planet4_GPCH_Block_Form_Progress_Bar extends Planet4_GPCH_Base_Form_Block {
+if ( ! class_exists( 'Planet4_GPCH_Block_Form_Counter_Text' ) ) {
+	class Planet4_GPCH_Block_Form_Counter_Text extends Planet4_GPCH_Base_Form_Block {
 		/**
 		 * @var string Template file path
 		 */
-		protected $template_file = P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'templates/blocks/form_progress_bar.twig';
+		protected $template_file = P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'templates/blocks/form_counter_text.twig';
 
 
 		public function __construct() {
@@ -23,29 +23,46 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Form_Progress_Bar' ) ) {
 		protected function register_acf_field_group() {
 			if ( function_exists( 'acf_add_local_field_group' ) ) {
 				acf_add_local_field_group( array(
-					'key'                   => 'group_p4_gpch_blocks_form_progress_bar',
-					'title'                 => 'Form progress bar',
+					'key'                   => 'group_p4_gpch_blocks_form_counter_text',
+					'title'                 => 'Form Counter Text',
 					'fields'                => array(
 						array(
-							'key'               => 'field_p4_gpch_blocks_goal',
-							'label'             => __( 'Goal', 'planet4-gpch-blocks' ),
-							'name'              => 'goal',
-							'type'              => 'number',
-							'instructions'      => __( 'Number of form entries needed to fill the progress bar', 'planet4-gpch-blocks' ),
-							'required'          => 1,
+							'key'               => 'field_p4_gpch_blocks_text_before',
+							'label'             => __( 'Text before the number', 'planet4-gpch-blocks' ),
+							'name'              => 'text_before',
+							'type'              => 'text',
+							'instructions'      => '',
+							'required'          => 0,
 							'conditional_logic' => 0,
 							'wrapper'           => array(
 								'width' => '',
 								'class' => '',
 								'id'    => '',
 							),
-							'default_value'     => 1000,
+							'default_value'     => '',
 							'placeholder'       => '',
 							'prepend'           => '',
 							'append'            => '',
-							'min'               => '',
-							'max'               => '',
-							'step'              => 1,
+							'maxlength'         => 255,
+						),
+						array(
+							'key'               => 'field_p4_gpch_blocks_text_after',
+							'label'             => __( 'Text after the number', 'planet4-gpch-blocks' ),
+							'name'              => 'text_after',
+							'type'              => 'text',
+							'instructions'      => '',
+							'required'          => 0,
+							'conditional_logic' => 0,
+							'wrapper'           => array(
+								'width' => '',
+								'class' => '',
+								'id'    => '',
+							),
+							'default_value'     => '',
+							'placeholder'       => '',
+							'prepend'           => '',
+							'append'            => '',
+							'maxlength'         => 255,
 						),
 						array(
 							'key'               => 'field_p4_gpch_blocks_add_number',
@@ -67,36 +84,6 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Form_Progress_Bar' ) ) {
 							'min'               => '',
 							'max'               => '',
 							'step'              => 1,
-						),
-						array(
-							'key'               => 'field_p4_gpch_blocks_bar_color',
-							'label'             => __( 'Bar Color', 'planet4-gpch-blocks' ),
-							'name'              => 'bar_color',
-							'type'              => 'color_picker',
-							'instructions'      => '',
-							'required'          => 0,
-							'conditional_logic' => 0,
-							'wrapper'           => array(
-								'width' => '',
-								'class' => '',
-								'id'    => '',
-							),
-							'default_value'     => '#58b006',
-						),
-						array(
-							'key'               => 'field_p4_gpch_blocks_background_color',
-							'label'             => __( 'Background Color', 'planet4-gpch-blocks' ),
-							'name'              => 'background_color',
-							'type'              => 'color_picker',
-							'instructions'      => '',
-							'required'          => 0,
-							'conditional_logic' => 0,
-							'wrapper'           => array(
-								'width' => '',
-								'class' => '',
-								'id'    => '',
-							),
-							'default_value'     => '#303133',
 						),
 						array(
 							'key'               => 'field_p4_gpch_blocks_use_form_entry_counter',
@@ -219,7 +206,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Form_Progress_Bar' ) ) {
 							array(
 								'param'    => 'block',
 								'operator' => '==',
-								'value'    => 'acf/p4-gpch-block-form-progress-bar',
+								'value'    => 'acf/p4-gpch-block-form-counter-text',
 							),
 						),
 					),
@@ -244,13 +231,13 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Form_Progress_Bar' ) ) {
 			if ( function_exists( 'acf_register_block' ) ) {
 				// register a block
 				acf_register_block( array(
-					'name'            => 'p4-gpch-block-form-progress-bar',
-					'title'           => __( 'Form Progress Bar', 'planet4-gpch-blocks' ),
-					'description'     => __( 'Progress Bar for Gravity Forms (Petitions and other forms)', 'planet4-gpch-blocks' ),
+					'name'            => 'p4-gpch-block-form-counter-text',
+					'title'           => __( 'Form/Petition Counter with Text', 'planet4-gpch-blocks' ),
+					'description'     => __( 'Counter for Gravity Forms (Petitions and other forms) with additional text.', 'planet4-gpch-blocks' ),
 					'render_callback' => array( $this, 'render_block' ),
 					'category'        => 'gpch',
 					'icon'            => 'feedback',
-					'keywords'        => array( 'form', 'progress', 'bar', 'petition' ),
+					'keywords'        => array( 'form', 'progress', 'counter', 'petition' ),
 				) );
 			}
 		}
@@ -263,13 +250,6 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Form_Progress_Bar' ) ) {
 		 */
 		public function render_block( $block ) {
 			$fields = get_fields();
-
-			// Basic validation for goal
-			if ( ! is_numeric( $fields['goal'] ) ) {
-				$this->render_error_message( __( 'Goal must be a numeric value', 'planet4-gpch-blocks' ) );
-
-				return; // can't display anything without the goal, stop here
-			}
 
 			// Basic validation for added number
 			if ( ! is_numeric( $fields['add_number'] ) ) {
@@ -288,9 +268,9 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Form_Progress_Bar' ) ) {
 
 			// Prepare parameters for template
 			$params = array(
-				'bg_color'   => $fields['background_color'],
-				'bar_color'  => $fields['bar_color'],
-				'percentage' => $sum / $fields['goal'] * 100,
+				'number' => $sum,
+				'text_before' => $fields['text_before'],
+				'text_after' => $fields['text_after'],
 			);
 
 			// Output template

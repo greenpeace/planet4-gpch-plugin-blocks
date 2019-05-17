@@ -1,15 +1,15 @@
 .gpch-block-form-progress-outer {
-    display: block;
-    width: 100%;
-    padding: 4px 4px;
-
-    background-color: $color_gray_dark;
-
-    .gpch-block-form-progress-inner {
-        min-width: 2%;
-        min-height: 30px;
-
-        background-color: $color_green_light;
-    }
+	display: block;
+	width: 100%;
+	margin-bottom: 1rem;
+	padding: 4px 4px;
+	
+	background-color: $color_gray_dark;
+	
+	.gpch-block-form-progress-inner {
+		min-width: 2%;
+		min-height: 30px;
+		
+		background-color: $color_green_light;
+	}
 }
-
