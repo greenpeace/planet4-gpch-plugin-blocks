@@ -1,11 +1,4 @@
 <div class="action-divider">
-	<i class="menu-icon fa fa-heart"></i>
-	<p></p>
-	<div style="float:left; max-width:80%;">
-		<p class="action-divider-text">{{ text }}</p>
-		<p>
-			<a class="btn btn-lg btn-accent" href="{{ action_link }}">Unterstütze uns</a>
-		</p>
-	</div>
-	<div style="clear:both;"></div>
+	<p class="action-divider-text"><span class="dashicons-before {{ icon }}"></span> {{ text }}</p>
+	<p class="action-divider-button"><a class="btn btn-lg btn-accent" href="{{ url }}" target="{{ target }}">{{ title }}</a></p>
 </div>

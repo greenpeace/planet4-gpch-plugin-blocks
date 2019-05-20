@@ -1,4 +1,4 @@
-// [gpch] -> [grownnotmade] -> [Action Devider] -> [start]
+// [grownnotmade] -> [Action Devider Styles]
 
 .action-divider {
 	border: 4px solid #26774e;
@@ -6,42 +6,36 @@
 	border-right: 0;
 	margin: 2em 0;
 	padding: 1em 2em;
-
-	.menu-icon {
-		font-size: 3em;
-		float: left;
-		color: #d06283;
-		margin-right: 0.6em;
-	}
-
-	.btn {
-		margin-top: 1em;
-	}
 }
 
 .action-divider-text {
 	font-weight: bold;
-}
+	text-align: center;
+	margin-top: 1rem;
 
-.btn-accent {
-	color: #ffffff !important;
-	background-color: #d06283 !important;
-	border-color: #d06283 !important;
-
-	&:hover{
-		background-color: #26774e !important;
-		border-color: #26774e !important;
+	.dashicons-before:before
+	{
+		color: #d06283;
+		font-size: 40px;
+		width: 40px;
+		height: 40px;
+		vertical-align: middle;
+		margin-right: 10px;
 	}
 }
 
-.fa {
-	font-family: dashicons !important;
-	font-style: normal;
-	line-height: 1;
+.action-divider-button {
+	text-align: center;
+	margin-top: 1rem;
 }
 
-.fa-heart:before {
-	content: "\f487";
-}
+.btn-accent {
+	color: #ffffff;
+	background-color: #d06283;
+	border-color: #d06283;
 
-// [gpch] -> [grownnotmade] -> [Action Devider] -> [end]
+	&:hover{
+		background-color: #26774e;
+		border-color: #26774e;
+	}
+}
