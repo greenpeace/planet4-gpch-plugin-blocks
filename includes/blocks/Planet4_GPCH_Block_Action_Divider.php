@@ -72,6 +72,7 @@ if ( ! class_exists( 'Planet4_GPCH_Action_Divider' ) ) {
 								'id' => '',
 							),
 							'choices' => array(
+								'no-icon' => __( '-- no icon --', 'planet4-gpch-blocks' ),
 								'dashicons-menu' => 'menu',
 								'dashicons-menu-alt' => 'menu-alt',
 								'dashicons-menu-alt2' => 'menu-alt2',
