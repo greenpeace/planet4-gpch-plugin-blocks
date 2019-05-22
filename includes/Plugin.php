@@ -55,6 +55,7 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 				new Blocks\Planet4_GPCH_Block_Form_Progress_Bar(),
 				new Blocks\Planet4_GPCH_Block_Form_Counter_Text(),
 				new Blocks\Planet4_GPCH_Action_Divider(),
+				new Blocks\Planet4_GPCH_Block_Accordion(),
 			];
 		}
 
@@ -130,6 +131,14 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 				null,
 				filemtime( P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . $file )
 			);
+
+			$js = 'assets/js/blocks.js';
+
+			wp_enqueue_script( 'planet4-gpch-blocks-js',
+				P4_GPCH_PLUGIN_BLOCKS_BASE_URL . $js,
+				array( 'jquery' ),
+				filemtime( P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . $js ),
+				true );
 		}
 	}
 }
