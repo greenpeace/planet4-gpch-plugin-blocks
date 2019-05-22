@@ -2,7 +2,7 @@
 # General Imports
 --------------------------------------------------------------*/
 
-@import "variables";
+@import "variables/colors";
 @import "mixins";
 @import "vendor/includemedia";
 
@@ -11,4 +11,5 @@
 --------------------------------------------------------------*/
 
 @import "blocks/form-progress-bar";
-@import "blocks/donation-divider";
+@import "blocks/action-divider";
+@import "blocks/accordion";

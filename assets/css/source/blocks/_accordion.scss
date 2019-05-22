@@ -1,0 +1,40 @@
+dl.accordion {
+	dt,
+	dd {
+		border-bottom: solid 1px #cccccc;
+
+		a {
+			display: block;
+			width: 100%;
+			padding: .4em 0;
+
+			font-weight: 700;
+			text-decoration: none;
+			color: $color_gray_dark;
+
+			outline: 0;
+
+			&:after {
+				content: " \3e"
+			}
+
+			&:hover {
+				color: $color_standard_1;
+			}
+
+			&.active:after {
+				content: "";
+			}
+		}
+	}
+
+	dt {
+		&:first-of-type {
+			border-top: solid 1px #cccccc;
+		}
+	}
+
+	dd {
+		padding: .4em 0;
+	}
+}
