@@ -1,0 +1,88 @@
+.gpch-taskforce-banner {
+	margin-bottom: 1em;
+	padding: 40px 100px;
+
+	min-height: 350px;
+
+	-webkit-background-size: cover;
+	background-size: cover;
+	background-position: center center;
+
+	.gpch-taskforce-content {
+		margin-bottom: 1em;
+		padding: 1em;
+		max-width: 400px;
+
+		background-color: $color_standard_2;
+		color: $color_standard_2_font;
+
+		h2 {
+			margin-top: 0;
+			color: $color_standard_1;
+		}
+	}
+
+	.btn.btn-primary {
+		background-color: $color_standard_1;
+		color: $color_standard_1_font;
+
+		border: 0;
+
+		&:hover {
+			background-color: $color_standard_3;
+			color: $color_standard_3_font;
+		}
+	}
+}
+
+@include media('<=desktop') {
+	.gpch-taskforce-banner {
+		padding: 40px 40px;
+		min-height: 350px;
+
+		.gpch-taskforce-content {
+			max-width: 400px;
+
+		}
+	}
+}
+
+@include media('<=tablet') {
+	.gpch-taskforce-banner {
+		padding: 20px 20px;
+		min-height: 350px;
+
+		.gpch-taskforce-content {
+			max-width: 100%;
+
+		}
+	}
+}
+
+
+/* Color Schemes */
+@for $i from 1 through length($schema_names) {
+	#{nth($selectors, $i)} {
+		/*background-color: #{nth($colors_1, $i)};*/
+		.gpch-taskforce-banner {
+			h2 {
+				color: #{nth($colors_1, $i)};
+			}
+
+			.gpch-taskforce-content {
+				background-color: #{nth($colors_2, $i)};
+				color: #{nth($colors_2_font, $i)};
+			}
+
+			.btn.btn-primary {
+				background-color: #{nth($colors_1, $i)};
+				color: #{nth($colors_1_font, $i)};
+
+				&:hover {
+					background-color: #{nth($colors_3, $i)};
+					color: #{nth($colors_3_font, $i)};
+				}
+			}
+		}
+	}
+}
