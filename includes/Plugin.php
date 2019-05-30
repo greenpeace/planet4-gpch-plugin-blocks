@@ -56,6 +56,8 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 				new Blocks\Planet4_GPCH_Block_Form_Counter_Text(),
 				new Blocks\Planet4_GPCH_Action_Divider(),
 				new Blocks\Planet4_GPCH_Block_Accordion(),
+				new Blocks\Planet4_GPCH_Block_Taskforce(),
+				new Blocks\Planet4_GPCH_Block_GPCH_Jobs(),
 			];
 		}
 

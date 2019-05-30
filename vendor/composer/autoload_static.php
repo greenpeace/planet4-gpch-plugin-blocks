@@ -29,8 +29,11 @@ class ComposerStaticInit1f0a357e88357c4512048dc57e74c22c
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Action_Divider' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Action_Divider.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Base_Block' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Base_Block.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Base_Form_Block' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Base_Form_Block.php',
+        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Accordion' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Accordion.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Form_Counter_Text' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Form_Counter_Text.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Form_Progress_Bar' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Form_Progress_Bar.php',
+        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_GPCH_Jobs' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Jobs.php',
+        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Taskforce' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Taskforce.php',
         'Greenpeace\\Planet4GPCHBlocks\\Planet4_GPCH_Plugin_Blocks' => __DIR__ . '/../..' . '/includes/Plugin.php',
     );
 
