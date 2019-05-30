@@ -1,0 +1,48 @@
+<div class="gp-inxmail-signup-form">
+	<h3>{{ title }}</h3>
+
+	<form id="inxmail-nl-form" method="post"
+		  action="https://newsletter.greenpeace.ch/inxmail/anmeldung_newsletter_de.jsp" target="_blank" id="displayform"
+		  class="inxform"><input value="s" name="c" type="hidden"/>
+		<ul class="">
+			<li class="">
+				<label for="input_listfield_1" class="label">Anrede<span
+							class="required">*</span></label>
+
+				<div class="">
+					<select name="Anrede" id="input_listfield_1" class="large ">
+						<option value="2">Frau</option>
+						<option value="1">Herr</option>
+					</select>
+				</div>
+			</li>
+
+			<li class="">
+				<label for="input_textfield_2" class="label ">Vorname<span class="required">*</span></label>
+
+				<div class="">
+					<input class="text large" type="text" name="Vorname" id="input_textfield_2" value="" maxlength="254"
+						   Placeholder="Vorname*" required/>
+				</div>
+			</li>
+
+			<li class="">
+				<label for="input_textfield_3" class="label ">E-Mail<span class="required">*</span></label>
+
+				<div class="">
+					<input class="text large" type="email" name="email" id="input_textfield_3" value="" maxlength="254"
+						   placeholder="E-Mail*" required/>
+				</div>
+			</li>
+		</ul>
+
+		<div class="subscription" id="subscription_4">
+			<input value="true" name="list_Greenpeace_Master" type="hidden"/>
+		</div>
+
+		<input type="hidden" name="unsetLanguageCode" value="false"/>
+		<input type="hidden" name="LanguageCode" value="1" checked="checked"/>
+
+		<input type="submit" class="submit_button btn btn-accent btn-medium" value="Anmelden"/>
+	</form>
+</div>
