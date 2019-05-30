@@ -3,7 +3,7 @@
 namespace Greenpeace\Planet4GPCHBlocks\Blocks;
 
 if ( ! class_exists( 'Planet4_GPCH_Block_Accordion' ) ) {
-	class Planet4_GPCH_Block_Accordion extends Planet4_GPCH_Base_Form_Block {
+	class Planet4_GPCH_Block_Accordion extends Planet4_GPCH_Base_Block {
 		/**
 		 * @var string Template file path
 		 */
