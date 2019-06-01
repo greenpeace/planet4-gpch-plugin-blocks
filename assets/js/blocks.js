@@ -1,4 +1,5 @@
 jQuery(document).ready(function () {
+	// Accordion Block
 	(function (jQuery) {
 
 		var allPanels = jQuery('.accordion > dd').hide();

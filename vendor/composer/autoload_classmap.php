@@ -14,6 +14,7 @@ return array(
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Form_Progress_Bar' => $baseDir . '/includes/blocks/Planet4_GPCH_Block_Form_Progress_Bar.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_GPCH_Jobs' => $baseDir . '/includes/blocks/Planet4_GPCH_Block_Jobs.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Newsletter' => $baseDir . '/includes/blocks/Planet4_GPCH_Block_Newsletter.php',
+    'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Spacer' => $baseDir . '/includes/blocks/Planet4_GPCH_Block_Spacer.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Taskforce' => $baseDir . '/includes/blocks/Planet4_GPCH_Block_Taskforce.php',
     'Greenpeace\\Planet4GPCHBlocks\\Planet4_GPCH_Plugin_Blocks' => $baseDir . '/includes/Plugin.php',
 );
