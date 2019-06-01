@@ -1,0 +1,8 @@
+.gpch-block-spacer {
+	height: 2rem;
+}
+
+/* Prevent multiple spacer elements being used next to each other */
+.gpch-block-spacer + .gpch-block-spacer {
+	display: none;
+}
