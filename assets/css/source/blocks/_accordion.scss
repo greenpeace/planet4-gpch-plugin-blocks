@@ -21,7 +21,8 @@ dl.accordion {
 			outline: 0;
 
 			&:after {
-				content: " \3e"
+				content: " \3e";
+				color: $color_standard_1;
 			}
 
 			&:hover {
@@ -38,3 +39,25 @@ dl.accordion {
 		padding: .4em 0;
 	}
 }
+
+
+/* Color Schemes */
+@for $i from 1 through length($schema_names) {
+	#{nth($selectors, $i)} {
+		dl.accordion {
+			dt {
+				a {
+
+					&:after {
+						color: #{nth($colors_1, $i)};;
+					}
+
+					&:hover {
+						color: #{nth($colors_1, $i)};;
+					}
+				}
+			}
+		}
+	}
+}
+
