@@ -1,4 +1,5 @@
 .gpch-taskforce-banner {
+	width: 100%;
 	margin-bottom: 1em;
 	padding: 40px 100px;
 
@@ -32,6 +33,17 @@
 			background-color: $color_standard_3;
 			color: $color_standard_3_font;
 		}
+	}
+}
+
+
+/*
+	Move element into header width for larger screens
+*/
+@media screen and (min-width: $header_width) {
+	.gpch-taskforce-banner {
+		width: $header_width;
+		margin-left: calc((#{$header_width} - #{$content_width} - 30px) / -2); /* 30 is the combined padding left and right */
 	}
 }
 
