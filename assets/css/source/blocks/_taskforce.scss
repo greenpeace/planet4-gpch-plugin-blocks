@@ -14,7 +14,7 @@
 		padding: 1em;
 		max-width: 400px;
 
-		background-color: $color_standard_2;
+		background-color: #fff;
 		color: $color_standard_2_font;
 
 		h2 {
@@ -54,7 +54,6 @@
 
 		.gpch-taskforce-content {
 			max-width: 400px;
-
 		}
 	}
 }
@@ -66,7 +65,6 @@
 
 		.gpch-taskforce-content {
 			max-width: 100%;
-
 		}
 	}
 }
@@ -82,7 +80,6 @@
 			}
 
 			.gpch-taskforce-content {
-				background-color: #{nth($colors_2, $i)};
 				color: #{nth($colors_2_font, $i)};
 			}
 
