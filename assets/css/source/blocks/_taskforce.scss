@@ -42,8 +42,9 @@
 */
 @media screen and (min-width: $header_width) {
 	.gpch-taskforce-banner-wrapper {
+		/*
 		width: $header_width;
-		margin-left: calc((#{$header_width} - #{$content_width} + 30px) / -2); /* 30 is the combined padding left and right */
+		margin-left: calc((#{$header_width} - #{$content_width} + 30px) / -2); *//* 30 is the combined padding left and right */
 	}
 }
 
