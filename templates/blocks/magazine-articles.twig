@@ -1,0 +1,14 @@
+{% if ( recent_posts ) %}
+	<section class="block article-listing">
+
+		<div class="container">
+
+			<div class="article-list-section clearfix">
+				{% for key, recent_post in recent_posts %}
+					{% include ['teasers/tease-magazine-articles.twig'] %}
+				{% endfor %}
+			</div>
+
+		</div>
+	</section>
+{% endif %}
