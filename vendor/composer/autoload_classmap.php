@@ -13,6 +13,7 @@ return array(
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Form_Counter_Text' => $baseDir . '/includes/blocks/Planet4_GPCH_Block_Form_Counter_Text.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Form_Progress_Bar' => $baseDir . '/includes/blocks/Planet4_GPCH_Block_Form_Progress_Bar.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_GPCH_Jobs' => $baseDir . '/includes/blocks/Planet4_GPCH_Block_Jobs.php',
+    'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Magazine_Articles' => $baseDir . '/includes/blocks/Planet4_GPCH_Block_Magazine_Articles.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Newsletter' => $baseDir . '/includes/blocks/Planet4_GPCH_Block_Newsletter.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Spacer' => $baseDir . '/includes/blocks/Planet4_GPCH_Block_Spacer.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Taskforce' => $baseDir . '/includes/blocks/Planet4_GPCH_Block_Taskforce.php',
