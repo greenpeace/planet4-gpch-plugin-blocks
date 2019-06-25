@@ -18,7 +18,9 @@
 	<div class="article-list-item-body">
 		{% if ( recent_post.tags or recent_post.page_type or recent_post.page_types ) %}
 			<div class="article-list-item-tags top-page-tags">
-				{% if ( recent_post.page_type ) %}
+				{% if ( recent_post.post_type ) %}
+					<a class="tag-item tag-item--main page-type page-type-{{ recent_post.post_type|replace(' ', '_')|lower }}" href="{{ recent_post.magazine_link }}">{{ recent_post.post_type|e('wp_kses_post')|raw }}</a>
+				{% elseif ( recent_post.page_type ) %}
 					<a class="tag-item tag-item--main page-type page-type-{{ recent_post.page_type|replace(' ', '_')|lower }}" href="{{ fn( 'get_term_link', recent_post.page_type_id ) }}">{{ recent_post.page_type|e('wp_kses_post')|raw }}</a>
 				{% else %}
 					{% for page_type in recent_post.page_types %}
