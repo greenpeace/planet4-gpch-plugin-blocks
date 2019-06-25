@@ -2,13 +2,20 @@
 
 namespace Greenpeace\Planet4GPCHBlocks\Blocks;
 
+use Timber\Timber;
+
 if ( ! class_exists( 'Planet4_GPCH_Block_Magazine_Articles' ) ) {
 	class Planet4_GPCH_Block_Magazine_Articles extends Planet4_GPCH_Base_Block {
+
+		/**
+		 * @var string Template base path
+		 */
+		protected $template_path = P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'templates';
+
 		/**
 		 * @var string Template file path
 		 */
 		protected $template_file = P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'templates/blocks/magazine-articles.twig';
-
 
 		public function __construct() {
 			$this->register_acf_field_group();
@@ -28,7 +35,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Magazine_Articles' ) ) {
 					'fields'                => array(
 						array(
 							'key'               => 'field_p4_gpch_blocks_magazine_articles_tags',
-							'label'             => 'Tags',
+							'label'             => __( 'Tags', 'planet4-gpch-blocks' ),
 							'name'              => 'tags',
 							'type'              => 'taxonomy',
 							'instructions'      => '',
@@ -50,7 +57,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Magazine_Articles' ) ) {
 						),
 						array(
 							'key'               => 'field_p4_gpch_blocks_magazine_article_count',
-							'label'             => 'Article Count',
+							'label'             => __( 'Article Count', 'planet4-gpch-blocks' ),
 							'name'              => 'article_count',
 							'type'              => 'number',
 							'instructions'      => '',
@@ -71,7 +78,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Magazine_Articles' ) ) {
 						),
 						array(
 							'key'               => 'field_p4_gpch_blocks_magazine_articles_ignore_tags',
-							'label'             => 'Ignore Tags',
+							'label'             => __( 'Ignore Tags', 'planet4-gpch-blocks' ),
 							'name'              => 'ignore_tags',
 							'type'              => 'select',
 							'instructions'      => '',
@@ -191,6 +198,20 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Magazine_Articles' ) ) {
 					$recent['page_type_id'] = $page_type_id;
 					$recent['link']         = get_permalink( $recent['ID'] );
 
+					// add support for custom post type gpch_magredirect
+
+					$post_type_data = get_post_type_object( get_post_type( $recent['ID'] ) );
+					$post_type      = '';
+					$magazine_link  = '';
+
+					if ( $post_type_data && ( $post_type_data->name == 'gpch_magredirect' ) ) {
+						$post_type     = __( 'Magazine Articles', 'planet4-gpch-blocks' );
+						$magazine_link = 'https://www.greenpeace-magazin.ch';
+					}
+
+					$recent['post_type']     = $post_type;
+					$recent['magazine_link'] = $magazine_link;
+
 					$recent_posts[] = $recent;
 				}
 			}
@@ -231,13 +252,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Magazine_Articles' ) ) {
 
 			$posts = wp_get_recent_posts( $args );
 
-			// print_r('[$posts]');
-			// print_r($posts);
-
-			$recent_posts = $this->populate_post_items($posts);
-
-			// print_r('[$recent_posts]');
-			// print_r($recent_posts);
+			$recent_posts = $this->populate_post_items( $posts );
 
 			// Prepare the parameters for the template
 			$params = array(
@@ -245,7 +260,8 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Magazine_Articles' ) ) {
 			);
 
 			// Output template
-			\Timber::render( $this->template_file, $params );
+			Timber::$locations = $this->template_path;
+			Timber::render( $this->template_file, $params );
 		}
 	}
 }
