@@ -1,16 +1,56 @@
 # planet4-gpch-plugin-blocks
-Content Blocks specific to the GPCH install of Planet4
+Content Blocks, specific to the GPCH installation of Planet4.
 
 
 ## Blocks ##
+
+### Accordion
+
+...
+
+
+### Action Divider
+
+...
+
+
+### Form Counter Text
+
+...
+
 
 ### Form Progress Bar
 
 ![alt text](documentation/img/block_form_progress_bar.png "Form Progress Bar Block")
 
-Displays a progress bar based on form entries. Can be used for petitions or other forms done with Gravity Forms..
+Displays a progress bar based on form entries. Can be used for petitions or other forms built with Gravity Forms.
 
-Capability to also connect to an international counter (JSON value expected)
+Capability to also connect to an international counter (JSON value expected).
+
+
+### Jobs
+
+...
+
+
+### Magazine Articles
+
+...
+
+
+### Newsletter
+
+...
+
+
+### Spacer
+
+...
+
+
+### Taskforce
+
+...
 
 
 ## Technical overview ##
@@ -19,4 +59,3 @@ Uses:
 * Composer Autoload
 * SCSS
 * [Timber Wordpress Plugin](https://wordpress.org/plugins/timber-library/)
-
