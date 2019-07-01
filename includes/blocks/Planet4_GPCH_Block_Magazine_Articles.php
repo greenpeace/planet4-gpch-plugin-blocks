@@ -147,6 +147,10 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Magazine_Articles' ) ) {
 		/**
 		 * Populate selected posts for frontend template.
 		 *
+		 * This is a copy of the function in the "planet4-plugin_blocks" plugin.
+		 * The original is located in the "class-articles-controller.php" file.
+		 * The enhanced functionality is marked by comments in the code.
+		 *
 		 * @param array $posts Selected posts.
 		 *
 		 * @return array
@@ -198,7 +202,8 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Magazine_Articles' ) ) {
 					$recent['page_type_id'] = $page_type_id;
 					$recent['link']         = get_permalink( $recent['ID'] );
 
-					// add support for custom post type gpch_magredirect
+					// Added support for the custom post type gpch_magredirect.
+					// Therefore the correspondent twig file "tease-magazine-articles.twig" is an enhanced copy from "planet4-plugin_blocks" too.
 
 					$post_type_data = get_post_type_object( get_post_type( $recent['ID'] ) );
 					$post_type      = '';
