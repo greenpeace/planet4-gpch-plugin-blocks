@@ -3,17 +3,6 @@
 	border-bottom: 4px solid $color_standard_1;
 	margin: 2em 0;
 	padding: 1em 2em;
-
-	.btn-accent {
-		color: $color_standard_1_font;
-		background-color: $color_standard_1;
-		font-size: 0.875rem;
-		text-transform: uppercase;
-
-		&:hover {
-			background-color: $color_standard_3;
-		}
-	}
 }
 
 .action-divider-text {
@@ -33,24 +22,13 @@
 
 .action-divider-button {
 	text-align: center;
-	margin-top: 1rem;
 }
 
-
+/* Color Schemes */
 @for $i from 1 through length($schema_names) {
 	#{nth($selectors, $i)} {
 		.action-divider {
 			border-color: #{nth($colors_1, $i)};
-
-			.btn-accent {
-				background-color: #{nth($colors_3, $i)};
-				color: #{nth($colors_3_font, $i)};
-
-				&:hover {
-					background-color: #{nth($colors_1, $i)};
-					color: #{nth($colors_1_font, $i)};
-				}
-			}
 		}
 
 		.action-divider-text {
