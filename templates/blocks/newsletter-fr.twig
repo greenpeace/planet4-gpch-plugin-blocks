@@ -1,0 +1,43 @@
+<div class="gp-inxmail-signup-form">
+	<h3>{{ title }}</h3>
+
+	<form id="inxmail-nl-form" method="post"
+		  action="https://newsletter.greenpeace.ch/inxmail/inscription_infolettre_fr.jsp" target="_blank"
+		  class="inxform">
+		<input value="s" name="c" type="hidden">
+
+		<ul>
+			<li>
+				<label for="input_listfield_1" class="label">Titre*</label>
+
+				<select name="Anrede" id="input_listfield_1" size=" ">
+					<option value="2">Madame</option>
+					<option value="1">Monsieur</option>
+				</select>
+			</li>
+
+			<li><label for="input_textfield_2" class="label">Prénom*</label>
+
+				<input class="text" type="text" name="Anrede" id="input_textfield_2" value="" maxlength="254"
+					   placeholder="Prénom*" required="">
+			</li>
+
+			<li><label for="input_textfield_3" class="label">Courriel*</label>
+
+				<input class="text" type="text" name="email" id="input_textfield_3" value="" maxlength="254"
+					   placeholder="Courriel*" required="">
+			</li>
+		</ul>
+		<div class="subscription" id="subscription_4">
+			<input value="true" name="list_Greenpeace_Master" type="hidden">
+		</div>
+
+		<input type="hidden" name="unsetLanguageCode" value="false">
+
+		<input type="hidden" name="LanguageCode" value="2" checked="checked">
+
+		<div class="submit">
+			<input type="submit" class="submit_button btn btn-accent btn-medium" value="Inscription"/>
+		</div>
+	</form>
+</div>

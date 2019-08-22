@@ -7,7 +7,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Newsletter' ) ) {
 		/**
 		 * @var string Template file path
 		 */
-		protected $template_file = P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'templates/blocks/newsletter.twig';
+		protected $template_file = P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'templates/blocks/newsletter-de.twig';
 
 
 		public function __construct() {
@@ -27,7 +27,33 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Newsletter' ) ) {
 					'title'                 => 'Newsletter',
 					'fields'                => array(
 						array(
-							'key'               => 'field_p4_gpch_blocks_taskforce_title',
+							'key' => 'field_p4_gpch_blocks_newsletter_language',
+							'label' => __('Language', 'planet4-gpch-blocks' ),
+							'name' => 'language',
+							'type' => 'select',
+							'instructions' => '',
+							'required' => 0,
+							'conditional_logic' => 0,
+							'wrapper' => array(
+								'width' => '',
+								'class' => '',
+								'id' => '',
+							),
+							'choices' => array(
+								'de' => 'de',
+								'fr' => 'fr',
+							),
+							'default_value' => array(
+							),
+							'allow_null' => 0,
+							'multiple' => 0,
+							'ui' => 0,
+							'return_format' => 'value',
+							'ajax' => 0,
+							'placeholder' => '',
+						),
+						array(
+							'key'               => 'field_p4_gpch_blocks_newsletter_title',
 							'label'             => __( 'Title', 'planet4-gpch-blocks' ),
 							'name'              => 'title',
 							'type'              => 'text',
@@ -100,6 +126,12 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Newsletter' ) ) {
 			$params = array(
 				'title' => $fields['title'],
 			);
+
+			// Change the template file if not default (other languages than German)
+			if ($fields['language'] == 'fr') {
+				$this->template_file =  P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'templates/blocks/newsletter-fr.twig';
+
+			}
 
 			// Output template
 			\Timber::render( $this->template_file, $params );
