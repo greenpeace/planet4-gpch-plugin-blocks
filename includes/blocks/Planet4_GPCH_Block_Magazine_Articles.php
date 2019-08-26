@@ -249,10 +249,11 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Magazine_Articles' ) ) {
 
 			$args = array(
 				'post_type'      => $post_type,
+				'post_status' => array( 'publish' ),
 				'orderby'        => $orderby,
 				'order'          => $order,
 				'posts_per_page' => $posts_per_page,
-				'tags'           => $tags
+				'tag__in'        => $tags
 			);
 
 			$posts = wp_get_recent_posts( $args );
