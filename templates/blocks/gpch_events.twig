@@ -1,0 +1,51 @@
+{% if (events is iterable) and events|length > 0 %}
+	<h2>{{ title }}</h2>
+	<section class="block article-listing">
+		<div class="article-list-section clearfix">
+			{% for event in events %}
+				<article class="article-list-item tag-finanzplatz-schweiz tag-klima ">
+					<div class="article-list-item-image article-list-item-image-max-width">
+						<a href="{{ event.link }}">
+							<img class="d-flex topicwise-article-image"
+								 src=" {{ TimberImage(event.thumbnail_id).src('articles-medium-large') }}"
+								 alt="" title="">
+						</a>
+					</div>
+
+					<div class="article-list-item-body">
+						<div class="article-list-item-tags top-page-tags">
+							<a class="tag-item tag-item--main page-type page-type-story"
+							   href="">{{ __('Event', 'planet4-gpch-blocks') }}</a>
+
+							{% if event.tags is iterable %}
+								<div class="tag-wrap tags">
+									{% for tag in event.tags %}
+										<a class="tag-item tag"
+										   href="{{ function('get_tag_link', tag) }}">#{{ tag.name }}</a>
+									{% endfor %}
+								</div>
+							{% endif %}
+						</div>
+
+						<header>
+							<h4 class="article-list-item-headline">
+								<a href=" {{ event.link }}">
+									{{ event.post_title }}</a>
+							</h4>
+							<p class="article-list-item-meta">
+								<time class="article-list-item-date"
+									  datetime="">{{ event.date|date("l, d. F Y") }} {{ event.start_time|date("H:i") }}</time>
+							</p>
+						</header>
+
+						<p class="article-list-item-content">
+							{{ event.post_excerpt }}
+						</p>
+					</div>
+				</article>
+			{% endfor %}
+		</div>
+	</section>
+{% else %}
+	{{ no_events_text|e('wp_kses_post')|raw }}
+{% endif %}
