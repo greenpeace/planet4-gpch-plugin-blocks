@@ -320,7 +320,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_GPCH_Events' ) ) {
 
 				// Event date , time and place (from ACF field)
 				$event->date       = get_field( 'event_date', $event->ID );
-				$event->start_time = get_field( 'event_start_time', $event->ID );
+				$event->start_time = get_field( 'start_time', $event->ID );
 				$event->place      = get_field( 'place', $event->ID );
 
 				$events[] = $event;
