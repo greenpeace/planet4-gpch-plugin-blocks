@@ -315,6 +315,13 @@ if ( ! class_exists( 'Planet4_GPCH_Block_GPCH_Events' ) ) {
 				// Get tags
 				$event->tags = wp_get_post_tags( $event->ID );
 
+				// Class list for color schemes
+				$classes = '';
+				foreach ($event->tags as $tag) {
+					$classes .= 'tag-' . $tag->slug . " ";
+				}
+				$event->classes = $classes;
+
 				// Permalink
 				$event->link = get_post_permalink( $event );
 

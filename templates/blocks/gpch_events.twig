@@ -3,7 +3,7 @@
 	<section class="block article-listing">
 		<div class="article-list-section clearfix">
 			{% for event in events %}
-				<article class="article-list-item tag-finanzplatz-schweiz tag-klima ">
+				<article class="article-list-item {{ event.classes }} ">
 					<div class="article-list-item-image article-list-item-image-max-width">
 						<a href="{{ event.link }}">
 							<img class="d-flex topicwise-article-image"
@@ -17,7 +17,7 @@
 							<a class="tag-item tag-item--main page-type page-type-story"
 							   href="">{{ __('Event', 'planet4-gpch-blocks') }}</a>
 
-							{% if event.tags is iterable %}
+							{% if event.tags|length > 0 %}
 								<div class="tag-wrap tags">
 									{% for tag in event.tags %}
 										<a class="tag-item tag"
