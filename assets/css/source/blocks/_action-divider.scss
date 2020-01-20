@@ -3,25 +3,46 @@
 	border-bottom: 4px solid $color_standard_1;
 	margin: 2em 0;
 	padding: 1em 2em;
-}
 
-.action-divider-text {
-	font-weight: bold;
-	text-align: center;
-	margin-top: 1rem;
+	.action-divider-text,
+	.action-divider-question {
+		font-weight: bold;
+		text-align: center;
+		margin-top: 1rem;
 
-	.dashicons-before:before {
-		color: $color_standard_1;
-		font-size: 40px;
-		width: 40px;
-		height: 40px;
-		vertical-align: middle;
-		margin-right: 10px;
+		.dashicons-before:before {
+			color: $color_standard_1;
+			font-size: 40px;
+			width: 40px;
+			height: 40px;
+			vertical-align: middle;
+			margin-right: 10px;
+		}
 	}
-}
 
-.action-divider-button {
-	text-align: center;
+	.action-divider-buttons {
+		margin-top: 0;
+		text-align: center;
+
+		.wp-block-button {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+
+		.action-divider-question-button-no {
+			background-color: $color_standard_2;
+			color: $color_standard_2_font;
+		}
+
+		.action-divider-question-button-no:hover {
+			background-color: $color_standard_3;
+			color: $color_standard_3_font;
+		}
+	}
+
+	.action-divider-step2 {
+		display: none;
+	}
 }
 
 /* Color Schemes */
@@ -29,11 +50,23 @@
 	#{nth($selectors, $i)} {
 		.action-divider {
 			border-color: #{nth($colors_1, $i)};
-		}
 
-		.action-divider-text {
-			.dashicons-before:before {
-				color: #{nth($colors_1, $i)};
+			.action-divider-text {
+				.dashicons-before:before {
+					color: #{nth($colors_1, $i)};
+				}
+			}
+
+			.action-divider-buttons {
+				.action-divider-question-button-no {
+					background-color: #{nth($colors_2, $i)};
+					color: #{nth($colors_2_font, $i)};
+				}
+
+				.action-divider-question-button-no:hover {
+					background-color: #{nth($colors_3, $i)};
+					color: #{nth($colors_3_font, $i)};
+				}
 			}
 		}
 	}
