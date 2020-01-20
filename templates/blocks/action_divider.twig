@@ -1,6 +1,26 @@
 <div class="action-divider">
-	<p class="action-divider-text"><span class="dashicons-before {{ icon }}"></span> {{ text }}</p>
-	<div class="wp-block-button action-divider-button">
-		<a class="wp-block-button__link" href="{{ url }}" target="{{ target }}">{{ title }}</a>
-	</div>
+	{% if show_question %}
+		<div class="action-divider-question-wrapper">
+			<p class="action-divider-question"> {{ cta_question }}</p>
+
+			<div class="wp-block-button action-divider-buttons">
+				<a class="wp-block-button action-divider-question-button-yes">{{ button_yes_text }}</a>
+				<a class="wp-block-button action-divider-question-button-no">{{ button_no_text }}</a>
+			</div>
+		</div>
+		<div class="action-divider-step2 action-divider-step2-yes">
+			<p class="action-divider-text"><span class="dashicons-before {{ icon }}"></span> {{ text }}</p>
+			<div class="wp-block-button action-divider-buttons">
+				<a class="wp-block-button__link" href="{{ url }}" target="{{ target }}">{{ title }}</a>
+			</div>
+		</div>
+		<div class="action-divider-step2 action-divider-step2-no">
+			<p class="action-divider-text">{{ no_text }}</p>
+		</div>
+	{% else %}
+		<p class="action-divider-text"><span class="dashicons-before {{ icon }}"></span> {{ text }}</p>
+		<div class="wp-block-button action-divider-buttons">
+			<a class="wp-block-button__link" href="{{ url }}" target="{{ target }}">{{ title }}</a>
+		</div>
+	{% endif %}
 </div>
