@@ -63,7 +63,7 @@ if ( ! class_exists( 'Planet4_GPCH_Action_Divider' ) ) {
 							'label'             => __( 'Icon', 'planet4-gpch-blocks' ),
 							'name'              => 'icon',
 							'type'              => 'select',
-							'instructions'      => __( 'For a preview please visit https://developer.wordpress.org/resource/dashicons/', 'planet4-gpch-blocks' ),
+							'instructions'      => __( 'For a preview please visit <a href="https://developer.wordpress.org/resource/dashicons/" target="_blank">https://developer.wordpress.org/resource/dashicons/</a>', 'planet4-gpch-blocks' ),
 							'required'          => 0,
 							'conditional_logic' => 0,
 							'wrapper'           => array(
@@ -346,6 +346,129 @@ if ( ! class_exists( 'Planet4_GPCH_Action_Divider' ) ) {
 							'ajax'              => 0,
 							'placeholder'       => '',
 						),
+						array(
+							'key'               => 'field_p4_gpch_blocks_action_ask_question',
+							'label'             => 'Frage vor CTA stellen',
+							'name'              => 'cta_with_question',
+							'type'              => 'checkbox',
+							'instructions'      => 'Ask a yes/no question before showing the CTA. Pressing "yes" will take the person to the CTA, pressing "no" shows a customizable text.',
+							'required'          => 0,
+							'conditional_logic' => 0,
+							'wrapper'           => array(
+								'width' => '',
+								'class' => '',
+								'id'    => '',
+							),
+							'choices'           => array(
+								'Yes' => 'Yes',
+							),
+							'allow_custom'      => 0,
+							'default_value'     => array(),
+							'layout'            => 'vertical',
+							'toggle'            => 0,
+							'return_format'     => 'value',
+							'save_custom'       => 0,
+						),
+						array(
+							'key'               => 'field_p4_gpch_blocks_action_cta_question_group',
+							'label'             => 'CTA Question',
+							'name'              => 'cta_question_group',
+							'type'              => 'group',
+							'instructions'      => '',
+							'required'          => 0,
+							'conditional_logic' => array(
+								array(
+									array(
+										'field'    => 'field_p4_gpch_blocks_action_ask_question',
+										'operator' => '!=empty',
+									),
+								),
+							),
+							'wrapper'           => array(
+								'width' => '',
+								'class' => '',
+								'id'    => '',
+							),
+							'layout'            => 'block',
+							'sub_fields'        => array(
+								array(
+									'key'               => 'field_p4_gpch_blocks_action_cta_question',
+									'label'             => 'CTA Question',
+									'name'              => 'cta_question',
+									'type'              => 'text',
+									'instructions'      => '',
+									'required'          => 1,
+									'conditional_logic' => 0,
+									'wrapper'           => array(
+										'width' => '',
+										'class' => '',
+										'id'    => '',
+									),
+									'default_value'     => '',
+									'placeholder'       => '',
+									'prepend'           => '',
+									'append'            => '',
+									'maxlength'         => '',
+								),
+								array(
+									'key'               => 'field_p4_gpch_blocks_action_question_button_yes',
+									'label'             => 'Button "yes" Text',
+									'name'              => 'button_yes_text',
+									'type'              => 'text',
+									'instructions'      => 'Leave empty for "yes", but you can be more specific. Clicking this button opens the CTA.',
+									'required'          => 0,
+									'conditional_logic' => 0,
+									'wrapper'           => array(
+										'width' => '',
+										'class' => '',
+										'id'    => '',
+									),
+									'default_value'     => '',
+									'placeholder'       => '',
+									'prepend'           => '',
+									'append'            => '',
+									'maxlength'         => 20,
+								),
+								array(
+									'key'               => 'field_p4_gpch_blocks_action_question_button_no',
+									'label'             => 'Button "no" text',
+									'name'              => 'button_no_text',
+									'type'              => 'text',
+									'instructions'      => 'Leave empty for "no", but you can be more specific. Clicking this button shows the text you can specify below.',
+									'required'          => 0,
+									'conditional_logic' => 0,
+									'wrapper'           => array(
+										'width' => '',
+										'class' => '',
+										'id'    => '',
+									),
+									'default_value'     => '',
+									'placeholder'       => '',
+									'prepend'           => '',
+									'append'            => '',
+									'maxlength'         => '',
+								),
+								array(
+									'key'               => 'field_p4_gpch_blocks_action_question_no_text',
+									'label'             => '"No" text',
+									'name'              => 'no_text',
+									'type'              => 'textarea',
+									'instructions'      => 'Add a text that says something along the lines of "too bad we don\'t share the same opinion. Keep reading anyways."',
+									'required'          => 1,
+									'conditional_logic' => 0,
+									'wrapper'           => array(
+										'width' => '',
+										'class' => '',
+										'id'    => '',
+									),
+									'default_value'     => '',
+									'placeholder'       => '',
+									'maxlength'         => '',
+									'rows'              => '',
+									'new_lines'         => '',
+								),
+							),
+						),
 					),
 					'location'              => array(
 						array(
@@ -396,24 +519,33 @@ if ( ! class_exists( 'Planet4_GPCH_Action_Divider' ) ) {
 		public function render_block( $block ) {
 			$fields = get_fields();
 
-			$text  = $fields['text'];
-			$title = $fields['action_link']['title'];
-			$url   = $fields['action_link']['url'];
-			$icon  = $fields['icon'];
-
 			if ( $fields['action_link']['target'] != '' ) {
 				$target = $fields['action_link']['target'];
 			} else {
 				$target = '_self';
 			}
 
+			if ( is_array( $fields['cta_with_question'] ) && $fields['cta_with_question'][0] == 'Yes' ) {
+				$show_question = true;
+			} else {
+				$show_question = false;
+			}
+
 			$params = array(
-				'text'   => $text,
-				'title'  => $title,
-				'url'    => $url,
-				'target' => $target,
-				'icon'   => $icon,
+				'text'          => $fields['text'],
+				'title'         => $fields['action_link']['title'],
+				'url'           => $fields['action_link']['url'],
+				'target'        => $target,
+				'icon'          => $fields['icon'],
+				'show_question' => $show_question,
+
 			);
+			if ( $show_question ) {
+				$params['cta_question']    = $fields['cta_question_group']['cta_question'];
+				$params['button_yes_text'] = $fields['cta_question_group']['button_yes_text'];
+				$params['button_no_text']  = $fields['cta_question_group']['button_no_text'];
+				$params['no_text']         = $fields['cta_question_group']['no_text'];
+			}
 
 			// output template
 			\Timber::render( $this->template_file, $params );
