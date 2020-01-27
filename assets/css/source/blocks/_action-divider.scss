@@ -6,7 +6,6 @@
 
 	.action-divider-text,
 	.action-divider-question {
-		font-weight: bold;
 		text-align: center;
 		margin-top: 1rem;
 
@@ -20,6 +19,12 @@
 		}
 	}
 
+	.action-divider-step2-yes {
+		.action-divider-text {
+			font-weight: bold;
+		}
+	}
+
 	.action-divider-buttons {
 		margin-top: 0;
 		text-align: center;
@@ -27,16 +32,6 @@
 		.wp-block-button {
 			margin-top: 0;
 			margin-bottom: 0;
-		}
-
-		.action-divider-question-button-no {
-			background-color: $color_standard_2;
-			color: $color_standard_2_font;
-		}
-
-		.action-divider-question-button-no:hover {
-			background-color: $color_standard_3;
-			color: $color_standard_3_font;
 		}
 	}
 
@@ -54,18 +49,6 @@
 			.action-divider-text {
 				.dashicons-before:before {
 					color: #{nth($colors_1, $i)};
-				}
-			}
-
-			.action-divider-buttons {
-				.action-divider-question-button-no {
-					background-color: #{nth($colors_2, $i)};
-					color: #{nth($colors_2_font, $i)};
-				}
-
-				.action-divider-question-button-no:hover {
-					background-color: #{nth($colors_3, $i)};
-					color: #{nth($colors_3_font, $i)};
 				}
 			}
 		}
