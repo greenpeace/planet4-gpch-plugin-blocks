@@ -519,13 +519,13 @@ if ( ! class_exists( 'Planet4_GPCH_Action_Divider' ) ) {
 		public function render_block( $block ) {
 			$fields = get_fields();
 
-			if ( $fields['action_link']['target'] != '' ) {
+			if ( isset( $fields['action_link']['target'] ) && $fields['action_link']['target'] != '' ) {
 				$target = $fields['action_link']['target'];
 			} else {
 				$target = '_self';
 			}
 
-			if ( is_array( $fields['cta_with_question'] ) && $fields['cta_with_question'][0] == 'Yes' ) {
+			if ( isset( $fields['cta_with_question'][0] ) && $fields['cta_with_question'][0] == 'Yes' ) {
 				$show_question = true;
 			} else {
 				$show_question = false;
@@ -533,8 +533,8 @@ if ( ! class_exists( 'Planet4_GPCH_Action_Divider' ) ) {
 
 			$params = array(
 				'text'          => $fields['text'],
-				'title'         => $fields['action_link']['title'],
-				'url'           => $fields['action_link']['url'],
+				'title'         => isset( $fields['action_link']['title'] ) ? $fields['action_link']['title'] : null,
+				'url'           => isset( $fields['action_link']['url'] ) ? $fields['action_link']['url'] : null,
 				'target'        => $target,
 				'icon'          => $fields['icon'],
 				'show_question' => $show_question,
