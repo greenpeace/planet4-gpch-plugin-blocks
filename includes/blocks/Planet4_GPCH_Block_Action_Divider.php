@@ -570,7 +570,6 @@ if ( ! class_exists( 'Planet4_GPCH_Action_Divider' ) ) {
 				$target = '_self';
 			}
 
-
 			$params = array(
 				'text'          => $fields['text'],
 				'title'         => isset( $fields['action_link']['title'] ) ? $fields['action_link']['title'] : null,
