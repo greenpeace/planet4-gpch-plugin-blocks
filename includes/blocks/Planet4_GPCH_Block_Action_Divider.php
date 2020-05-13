@@ -564,16 +564,17 @@ if ( ! class_exists( 'Planet4_GPCH_Action_Divider' ) ) {
 		public function render_block( $block ) {
 			$fields = get_fields();
 
-			if ( $fields['action_link']['target'] != '' ) {
+			if ( isset( $fields['action_link']['target'] ) && $fields['action_link']['target'] != '' ) {
 				$target = $fields['action_link']['target'];
 			} else {
 				$target = '_self';
 			}
 
+
 			$params = array(
 				'text'          => $fields['text'],
-				'title'         => $fields['action_link']['title'],
-				'url'           => $fields['action_link']['url'],
+				'title'         => isset( $fields['action_link']['title'] ) ? $fields['action_link']['title'] : null,
+				'url'           => isset( $fields['action_link']['url'] ) ? $fields['action_link']['url'] : null,
 				'target'        => $target,
 				'icon'          => $fields['icon'],
 				'show_question' => $fields['cta_with_question'],
