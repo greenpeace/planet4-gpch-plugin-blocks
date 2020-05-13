@@ -348,9 +348,9 @@ if ( ! class_exists( 'Planet4_GPCH_Action_Divider' ) ) {
 						),
 						array(
 							'key'               => 'field_p4_gpch_blocks_action_ask_question',
-							'label'             => 'Frage vor CTA stellen',
+							'label'             => 'Ask a question before CTA',
 							'name'              => 'cta_with_question',
-							'type'              => 'checkbox',
+							'type'              => 'true_false',
 							'instructions'      => 'Ask a yes/no question before showing the CTA. Pressing "yes" will take the person to the CTA, pressing "no" shows a customizable text.',
 							'required'          => 0,
 							'conditional_logic' => 0,
@@ -359,15 +359,11 @@ if ( ! class_exists( 'Planet4_GPCH_Action_Divider' ) ) {
 								'class' => '',
 								'id'    => '',
 							),
-							'choices'           => array(
-								'Yes' => 'Yes',
-							),
-							'allow_custom'      => 0,
-							'default_value'     => array(),
-							'layout'            => 'vertical',
-							'toggle'            => 0,
-							'return_format'     => 'value',
-							'save_custom'       => 0,
+							'message'           => 'Would you like to show a feeback form when the user presses "no"?',
+							'default_value'     => 0,
+							'ui'                => 1,
+							'ui_on_text'        => 'Yes',
+							'ui_off_text'       => 'No',
 						),
 						array(
 							'key'               => 'field_p4_gpch_blocks_action_cta_question_group',
@@ -380,7 +376,8 @@ if ( ! class_exists( 'Planet4_GPCH_Action_Divider' ) ) {
 								array(
 									array(
 										'field'    => 'field_p4_gpch_blocks_action_ask_question',
-										'operator' => '!=empty',
+										'operator' => '==',
+										'value'    => '1',
 									),
 								),
 							),
@@ -467,6 +464,54 @@ if ( ! class_exists( 'Planet4_GPCH_Action_Divider' ) ) {
 									'media_upload'      => 0,
 									'delay'             => 0,
 								),
+								array(
+									'key'               => 'field_p4_gpch_blocks_action_question_show_feedback_form',
+									'label'             => 'Show Feedback Form',
+									'name'              => 'show_feedback_form',
+									'type'              => 'true_false',
+									'instructions'      => '',
+									'required'          => 0,
+									'conditional_logic' => 0,
+									'wrapper'           => array(
+										'width' => '',
+										'class' => '',
+										'id'    => '',
+									),
+									'message'           => 'Would you like to show a feeback form when the user presses "no"?',
+									'default_value'     => 0,
+									'ui'                => 1,
+									'ui_on_text'        => 'Yes',
+									'ui_off_text'       => 'No',
+								),
+								array(
+									'key'               => 'field_p4_gpch_blocks_action_question_n0_feedback_form_id',
+									'label'             => 'Gravity Forms ID',
+									'name'              => 'no_form_id',
+									'type'              => 'number',
+									'instructions'      => '',
+									'required'          => 0,
+									'conditional_logic' => array(
+										array(
+											array(
+												'field'    => 'field_p4_gpch_blocks_action_question_show_feedback_form',
+												'operator' => '==',
+												'value'    => '1',
+											),
+										),
+									),
+									'wrapper'           => array(
+										'width' => '',
+										'class' => '',
+										'id'    => '',
+									),
+									'default_value'     => '',
+									'placeholder'       => '',
+									'prepend'           => '',
+									'append'            => '',
+									'min'               => 1,
+									'max'               => 9999999,
+									'step'              => 1,
+								),
 							),
 						),
 					),
@@ -525,11 +570,6 @@ if ( ! class_exists( 'Planet4_GPCH_Action_Divider' ) ) {
 				$target = '_self';
 			}
 
-			if ( isset( $fields['cta_with_question'][0] ) && $fields['cta_with_question'][0] == 'Yes' ) {
-				$show_question = true;
-			} else {
-				$show_question = false;
-			}
 
 			$params = array(
 				'text'          => $fields['text'],
@@ -537,14 +577,20 @@ if ( ! class_exists( 'Planet4_GPCH_Action_Divider' ) ) {
 				'url'           => isset( $fields['action_link']['url'] ) ? $fields['action_link']['url'] : null,
 				'target'        => $target,
 				'icon'          => $fields['icon'],
-				'show_question' => $show_question,
+				'show_question' => $fields['cta_with_question'],
 
 			);
-			if ( $show_question ) {
+
+			if ( $fields['cta_with_question'] ) {
 				$params['cta_question']    = $fields['cta_question_group']['cta_question'];
 				$params['button_yes_text'] = $fields['cta_question_group']['button_yes_text'];
 				$params['button_no_text']  = $fields['cta_question_group']['button_no_text'];
 				$params['no_text']         = $fields['cta_question_group']['no_text'];
+
+				if ( $fields['cta_question_group']['show_feedback_form'] ) {
+					// Render the Gravity Form with the ID set in the block
+					$params['no_form'] = gravity_form( $fields['cta_question_group']['no_form_id'], false, false, false, null, true, 99, false );
+				}
 			}
 
 			// output template

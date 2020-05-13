@@ -16,6 +16,9 @@
 		</div>
 		<div class="action-divider-step2 action-divider-step2-no">
 			<div class="action-divider-text">{{ no_text| raw }}</div>
+			<div class="action-divider-feedback-form">
+				{{ no_form|raw }}
+			</div>
 		</div>
 	{% else %}
 		<p class="action-divider-text"><span class="dashicons-before {{ icon }}"></span> {{ text }}</p>
