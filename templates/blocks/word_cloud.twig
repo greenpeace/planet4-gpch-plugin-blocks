@@ -1,0 +1,56 @@
+<div class="word-cloud-wrapper">
+	{% if error_message is defined %}
+		<p class="error">{{ error_message }}</p>
+	{% endif %}
+	<div class="word-cloud" id="word-cloud" style="width:100%;height:400px;">
+	</div>
+</div>
+<script src="{{ script }}"></script>
+<script>
+	let wordList = {{ word_list|raw }};
+
+	var maxWordSize = {{ max_word_size }},
+	  minWordSize = {{ min_word_size }},
+	  maxScale = 100,
+	  {# Relative size between largest and smallest words
+	  	- default: 0.5
+	  	- larger numer => bigger difference
+	  	- smaller number => smaller difference
+	  #}
+	  relativeScale = 0.5,
+	  factor = minWordSize / maxWordSize,
+	  scaleUpFactor = maxScale / (Math.pow(maxWordSize, relativeScale) / (maxWordSize / maxScale));
+
+	WordCloud(document.getElementById('word-cloud'), {
+		list: wordList,
+		fontWeight: 600,
+		fontFamily: 'Roboto, sans-serif',
+		minRotation: -90,
+		maxRotation: 90,
+		gridSize: Math.round(24 * jQuery('#word-cloud').width() / 1024),
+		weightFactor: function (size) {
+			{# Formula to scale the words
+				- normalizes the size of the biggest number to maxScale
+				- changes the relative size of biggest to smallest word
+			#}
+			returnSize = Math.pow(size, relativeScale) / (maxWordSize / maxScale) * scaleUpFactor;
+
+			return Math.floor(returnSize);
+		},
+		{% if random_colors == 1 %}
+		color: 'random-dark',
+		{% else %}
+		color: function (word, weight) {
+			if (weight > {{ color_split_2 }}) {
+				return '{{ word_colors.0 }}';
+			}
+			else if (weight > {{ color_split_1 }}) {
+				return '{{ word_colors.1 }}';
+			}
+			else {
+				return '{{ word_colors.2 }}';
+			}
+		},
+		{% endif %}
+	} );
+</script>
