@@ -27,3 +27,35 @@ require P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'vendor/autoload.php';
 
 // Initialize the actual plugin
 $p4_gpch_plugin_blocks = Greenpeace\Planet4GPCHBlocks\Planet4_GPCH_Plugin_Blocks::get_instance();
+
+// Activation hooks
+register_activation_hook( __FILE__, 'gpch_plugin_blocks_db_install' );
+
+/**
+ * Installs the database tables needed
+ */
+function gpch_plugin_blocks_db_install() {
+	global $wpdb;
+	$gpchdict_db_version = '1.0';
+
+	// Schema used for the dictionary of the word cloud block
+	$table_name = $wpdb->prefix . "gpch_wordcloud_dictionary";
+
+	$charset_collate = $wpdb->get_charset_collate();
+
+	$sql = "CREATE TABLE $table_name (
+				language varchar(5) NOT NULL,
+				confirmed tinyint(1) NOT NULL DEFAULT 0,
+				blacklisted tinyint(1) NOT NULL DEFAULT 0,
+				word varchar(32) NOT NULL,
+				word_alt varchar(32) NOT NULL,
+				type varchar(8) NOT NULL,
+				value float NOT NULL
+			) $charset_collate;";
+
+	// Apply DB Schema
+	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+	dbDelta( $sql );
+
+	add_option( 'gpchdict_db_version', $gpchdict_db_version );
+}
