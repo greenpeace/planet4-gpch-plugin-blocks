@@ -29,7 +29,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Word_Cloud' ) ) {
 
 			add_action( 'acf/init', array( $this, 'register_acf_block' ) );
 
-			$this->words = array();
+			$this->words     = array();
 			$this->minWeight = 9999999;
 			$this->maxWeight = 0;
 		}
@@ -165,21 +165,21 @@ Amor 2',
 									'maxlength'         => '',
 								),
 								array(
-									'key' => 'field_p4_gpch_blocks_word_cloud_gravity_form_until',
-									'label' => 'show_entries_until',
-									'name' => 'show_entries_until',
-									'type' => 'date_time_picker',
-									'instructions' => 'The cloud will only use entries before this date/time. Please make sure all entries before this are moderated.',
-									'required' => 1,
+									'key'               => 'field_p4_gpch_blocks_word_cloud_gravity_form_until',
+									'label'             => 'show_entries_until',
+									'name'              => 'show_entries_until',
+									'type'              => 'date_time_picker',
+									'instructions'      => 'The cloud will only use entries before this date/time. Please make sure all entries before this are moderated.',
+									'required'          => 1,
 									'conditional_logic' => 0,
-									'wrapper' => array(
+									'wrapper'           => array(
 										'width' => '',
 										'class' => '',
-										'id' => '',
+										'id'    => '',
 									),
-									'display_format' => 'Y-m-d H:i:s',
-									'return_format' => 'Y-m-d H:i:s',
-									'first_day' => 1,
+									'display_format'    => 'Y-m-d H:i:s',
+									'return_format'     => 'Y-m-d H:i:s',
+									'first_day'         => 1,
 								),
 							),
 						),
@@ -306,29 +306,61 @@ https://wordcloud2-js.timdream.org/',
 				}
 
 				$this->words = $words;
-			}
-			elseif ( $fields['data_source'] == 'gravityform' ) {
+			} elseif ( $fields['data_source'] == 'gravityform' ) {
 				// Get field metadata. Most important is the type of field we're dealing with
-				// Should be either "text" or "list"
-				$field = \GFAPI::get_field($fields['gravtiy_form_settings']['gravity_form_id'], $fields['gravtiy_form_settings']['gravity_form_field_id']);
+				// Should be either "text" or "list" for simple clouds or "textarea" in conjunction with a dictionary
+				$field = \GFAPI::get_field( $fields['gravtiy_form_settings']['gravity_form_id'], $fields['gravtiy_form_settings']['gravity_form_field_id'] );
 
 				// Get form entries until the set time and date in the block settings
 				$search_criteria['end_date'] = $fields['gravtiy_form_settings']['show_entries_until'];
-				$entries = \GFAPI::get_entries($fields['gravtiy_form_settings']['gravity_form_id'], $search_criteria);
+				$entries                     = \GFAPI::get_entries( $fields['gravtiy_form_settings']['gravity_form_id'], $search_criteria );
 
 				// Find the words in entries
-				foreach ($entries as $entry) {
-					if ($field->type == "text") {
-						$this->addWord(rgar($entry, $fields['gravtiy_form_settings']['gravity_form_field_id']));
-					}
-					elseif ($field->type == 'list') {
-						$listFieldWords = unserialize(rgar($entry, $fields['gravtiy_form_settings']['gravity_form_field_id']));
+				foreach ( $entries as $entry ) {
+					if ( $field->type == "text" ) {
+						$this->addWord( rgar( $entry, $fields['gravtiy_form_settings']['gravity_form_field_id'] ) );
+					} elseif ( $field->type == 'list' ) {
+						$listFieldWords = unserialize( rgar( $entry, $fields['gravtiy_form_settings']['gravity_form_field_id'] ) );
 
-						foreach ($listFieldWords as $listFieldWord) {
-							$this->addWord($listFieldWord);
+						foreach ( $listFieldWords as $listFieldWord ) {
+							$this->addWord( $listFieldWord );
 						}
-					}
-					else {
+					} elseif ( $field->type == 'textarea' ) {
+						// Textareas can contain whole sentences and unstructered text. We use a dictionary to extract
+						// the words we want to display in the cloud.
+
+						// The POS (part of speech) of the words we'd like to use
+						$pos = array( 'NN', 'NE', 'ADJA' );
+						$pos = array( 'NN', 'NE' );
+
+						$text = rgar( $entry, $fields['gravtiy_form_settings']['gravity_form_field_id'] );
+
+						preg_match_all( '((\b[^\s]+\b)((?<=\.\w).)?)', $text, $matches );
+
+						global $wpdb;
+
+						$tableName = $wpdb->prefix . "gpch_wordcloud_dictionary";
+
+						foreach ( $matches[0] as $match ) {
+							$sql     = "SELECT type, blacklisted, confirmed FROM {$tableName} WHERE word = '{$match}' AND language = '" . ICL_LANGUAGE_CODE . "'";
+							$results = $wpdb->get_results( $sql, OBJECT );
+
+							if (count($results) > 0) {
+								foreach ( $results as $result ) {
+									if ($result->blacklisted == 0 && $result->confirmed == 1) {
+										if ( in_array( $result->type, $pos ) ) {
+											$this->addWord( $match );
+											break;
+										}
+									}
+								}
+							}
+							else {
+								$this->addWordToDictionary( $match );
+							}
+						}
+
+					} else {
 						// Error message if field type is not supported
 						$params['error_message'] = 'Error: No data for the word cloud. Please select a valid form field.';
 					}
@@ -336,8 +368,8 @@ https://wordcloud2-js.timdream.org/',
 			}
 
 			// The cloud looks best when the words with biggest weight are drawn first. Sorting for weight.
-			usort($this->words, array($this, "sortWords") );
-			$params['word_list']     = json_encode( $this->words );
+			usort( $this->words, array( $this, "sortWords" ) );
+			$params['word_list'] = json_encode( $this->words );
 
 			// We need to know the min max weight of words in the list to calulate their size in the map
 			$this->calculateMinMaxWeight();
@@ -345,28 +377,25 @@ https://wordcloud2-js.timdream.org/',
 			$params['min_word_size'] = $this->minWeight;
 
 			// Colors schemes
-			if ($fields['word_colors'] == 'random') {
+			if ( $fields['word_colors'] == 'random' ) {
 				$params['random_colors'] = 1;
-			}
-			else if ($fields['word_colors'] == 'greenpeace') {
+			} else if ( $fields['word_colors'] == 'greenpeace' ) {
 				$params['word_colors'][0] = '#73BE1E';
 				$params['word_colors'][1] = '#00573a';
 				$params['word_colors'][2] = '#dbebbe';
-			}
-			else if ($fields['word_colors'] == 'climate') {
+			} else if ( $fields['word_colors'] == 'climate' ) {
 				$params['word_colors'][0] = '#cd1719';
 				$params['word_colors'][1] = '#eaccbb';
 				$params['word_colors'][2] = '#cccccc';
-			}
-			else if ($fields['word_colors'] == 'plastics') {
+			} else if ( $fields['word_colors'] == 'plastics' ) {
 				$params['word_colors'][0] = '#e94e28';
 				$params['word_colors'][1] = '#69c2be';
 				$params['word_colors'][2] = '#c4e3e1';
 			}
 
 			// Find out where to split between colors in the cloud
-			$params['color_split_1'] = $this->findWeightAtPercentile(10);
-			$params['color_split_2'] = $this->findWeightAtPercentile(70);
+			$params['color_split_1'] = $this->findWeightAtPercentile( 10 );
+			$params['color_split_2'] = $this->findWeightAtPercentile( 70 );
 
 			// output template
 			\Timber::render( $this->template_file, $params );
@@ -374,48 +403,50 @@ https://wordcloud2-js.timdream.org/',
 
 		/**
 		 * Callback function for usort for sorting our words with the most mentioned word first
+		 *
 		 * @param $a
 		 * @param $b
 		 *
 		 * @return int
 		 */
-		public function sortWords($a, $b) {
-			if ($a[1] > $b[1]) {
-				return -1;
-			}
-			else {
+		public function sortWords( $a, $b ) {
+			if ( $a[1] > $b[1] ) {
+				return - 1;
+			} else {
 				return 1;
 			}
 		}
 
 		/**
 		 * Adds a word to the word cloud if it doesn't exist yet. If it does exist, it increases the weight of the word.
+		 *
 		 * @param $word
 		 */
-		protected function addWord($word) {
-			$word = ucfirst($word);
+		protected function addWord( $word ) {
+			$word = ucfirst( $word );
 
-			for ($i = 0; $i < count($this->words); $i++) {
-				if ($this->words[$i][0] == $word) {
+			for ( $i = 0; $i < count( $this->words ); $i ++ ) {
+				if ( $this->words[ $i ][0] == $word ) {
 					// Increment the counter for the word
-					$this->words[$i][1] = $this->words[$i][1] + 1;
+					$this->words[ $i ][1] = $this->words[ $i ][1] + 1;
+
 					return;
 				}
 			}
 
 			// If not found, add as new word
-			$this->words[] = array($word, 1);
+			$this->words[] = array( $word, 1 );
 		}
 
 		/**
 		 * Finds the min and max weight we use in our word cloud.
 		 */
 		protected function calculateMinMaxWeight() {
-			foreach ($this->words as $word) {
-				if ($word[1] < $this->minWeight) {
+			foreach ( $this->words as $word ) {
+				if ( $word[1] < $this->minWeight ) {
 					$this->minWeight = $word[1];
 				}
-				if ($word[1] > $this->maxWeight) {
+				if ( $word[1] > $this->maxWeight ) {
 					$this->maxWeight = $word[1];
 				}
 			}
@@ -428,26 +459,50 @@ https://wordcloud2-js.timdream.org/',
 		 *
 		 * @return int Index
 		 */
-		protected function findWeightAtPercentile($percentile) {
-			$factor =  1 / ($percentile / 100);
+		protected function findWeightAtPercentile( $percentile ) {
+			$factor = 1 / ( $percentile / 100 );
 
 			$weights = array();
-			foreach ($this->words as $word) {
+			foreach ( $this->words as $word ) {
 				$weights[] = $word[1];
 			}
 
-			sort($weights);
+			sort( $weights );
 
 			// The array index of the percentile we're looking for
-			$index = (floor(count($weights) / $factor)) - 1;
+			$index = ( floor( count( $weights ) / $factor ) ) - 1;
 
 			// index can't be below 0
-			if ($index < 0) {
+			if ( $index < 0 ) {
 				$index = 0;
 			}
 
-			return $weights[$index];
+			return $weights[ $index ];
 		}
 
+		/**
+		 * Adds a word to the dictionary
+		 *
+		 * @param $word
+		 */
+		protected function addWordToDictionary( $word ) {
+			global $wpdb;
+
+			$tableName = $wpdb->prefix . "gpch_wordcloud_dictionary";
+
+			$wpdb->insert( $tableName,
+				array(
+				'language' => ICL_LANGUAGE_CODE,
+				'confirmed' => 0,
+				'blacklisted' => 0,
+				'word' => $word
+			),
+				array(
+					'%s',
+					'%d',
+					'%d',
+					'%s'
+				) );
+		}
 	}
 }
