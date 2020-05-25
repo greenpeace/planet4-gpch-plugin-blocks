@@ -184,6 +184,100 @@ Amor 2',
 							),
 						),
 						array(
+							'key' => 'field_p4_gpch_blocks_word_cloud_use_dictionary',
+							'label' => 'Use the dictionary',
+							'name' => 'use_dictionary',
+							'type' => 'true_false',
+							'instructions' => 'Using the dictionary will
+- only show words in the dictionary
+- filter blacklisted words
+- allow you to select to show only certain POS (part of speech, e.g. nouns, adjectives)
+- add new words to the dictionary so they can bei either confirmed or blacklisted',
+							'required' => 0,
+							'conditional_logic' => 0,
+							'wrapper' => array(
+								'width' => '',
+								'class' => '',
+								'id' => '',
+							),
+							'message' => '',
+							'default_value' => 1,
+							'ui' => 1,
+							'ui_on_text' => 'Yes',
+							'ui_off_text' => 'No',
+						),
+						array(
+							'key' => 'field_p4_gpch_blocks_word_cloud_dictionary_settings',
+							'label' => 'Dictionary Settings',
+							'name' => 'dictionary_settings',
+							'type' => 'group',
+							'instructions' => '',
+							'required' => 0,
+							'conditional_logic' => array(
+								array(
+									array(
+										'field'    => 'field_p4_gpch_blocks_word_cloud_use_dictionary',
+										'operator' => '==',
+										'value'    => '1',
+									),
+								),
+							),
+							'wrapper' => array(
+								'width' => '',
+								'class' => '',
+								'id' => '',
+							),
+							'layout' => 'block',
+							'sub_fields' => array(
+								array(
+									'key' => 'field_p4_gpch_blocks_word_cloud_show_pos',
+									'label' => 'POS (part of speech) to show',
+									'name' => 'pos_to_show',
+									'type' => 'checkbox',
+									'instructions' => 'Usually you get the best results showing only nouns and names, but you can select other types of words.',
+									'required' => 0,
+									'conditional_logic' => 0,
+									'wrapper' => array(
+										'width' => '',
+										'class' => '',
+										'id' => '',
+									),
+									'choices' => array(
+										'NN' => 'Nouns',
+										'NE' => 'Names',
+										'ADJA' => 'Adjectives',
+										'VVINF,VVPP,VVFIN,VVIZU' => 'Verbs',
+									),
+									'allow_custom' => 0,
+									'default_value' => array(
+									),
+									'layout' => 'vertical',
+									'toggle' => 0,
+									'return_format' => 'value',
+									'save_custom' => 0,
+								),
+								array(
+									'key' => 'field_p4_gpch_blocks_word_cloud_dictionary_add_new_words',
+									'label' => 'Add new words to the dictionary',
+									'name' => 'new_words_dictionary',
+									'type' => 'true_false',
+									'instructions' => 'Add words that are not yet in the dictionary? They need to be moderated before they are shown in the word cloud.',
+									'required' => 0,
+									'conditional_logic' => 0,
+									'wrapper' => array(
+										'width' => '',
+										'class' => '',
+										'id' => '',
+									),
+									'message' => '',
+									'default_value' => 1,
+									'ui' => 1,
+									'ui_on_text' => 'Yes',
+									'ui_off_text' => 'No',
+								),
+							),
+						),
+						array(
 							'key'               => 'field_p4_gpch_blocks_word_cloud_word_colors',
 							'label'             => 'Word colors',
 							'name'              => 'word_colors',
@@ -310,7 +404,7 @@ https://wordcloud2-js.timdream.org/',
 				// Find the field IDs
 				$fieldIds = explode( ',', $fields['gravtiy_form_settings']['gravity_form_field_id'] );
 
-				// make sure there are no spaces
+				// Make sure there are no spaces
 				for ( $i = 0; $i < count( $fieldIds ); $i ++ ) {
 					$fieldIds[ $i ] = trim( $fieldIds[ $i ] );
 				}
@@ -326,55 +420,55 @@ https://wordcloud2-js.timdream.org/',
 
 					// Find the words in entries
 					foreach ( $entries as $entry ) {
+						$wordsToAdd = array();
+
 						if ( $field->type == "text" ) {
-							$this->addWord( rgar( $entry, $fieldId ) );
+							$wordsToAdd[] = rgar( $entry, $fieldId );
 						} elseif ( $field->type == 'list' ) {
 							$listFieldWords = unserialize( rgar( $entry, $fieldId ) );
 
 							// Field can be empty when the form field wasn't set to mandatory, skip those
 							if (!empty($listFieldWords)) {
 								foreach ( $listFieldWords as $listFieldWord ) {
-									$this->addWord( $listFieldWord );
+									$wordsToAdd[] = $listFieldWord;
 								}
 							}
 						} elseif ( $field->type == 'textarea' ) {
-							// Textareas can contain whole sentences and unstructered text. We use a dictionary to extract
-							// the words we want to display in the cloud.
-
-							// The POS (part of speech) of the words we'd like to use
-							$pos = array( 'NN', 'NE', 'ADJA' );
-							$pos = array( 'NN', 'NE' );
-
 							$text = rgar( $entry, $fieldId );
 
 							// Separate each word in the text
 							preg_match_all( '((\b[^\s]+\b)((?<=\.\w).)?)', $text, $matches );
 
-							global $wpdb;
-
-							$tableName = $wpdb->prefix . "gpch_wordcloud_dictionary";
-
 							foreach ( $matches[0] as $match ) {
-								$sql     = "SELECT type, blacklisted, confirmed FROM {$tableName} WHERE word = '{$match}' AND language = '" . ICL_LANGUAGE_CODE . "'";
-								$results = $wpdb->get_results( $sql, OBJECT );
-
-								if ( count( $results ) > 0 ) {
-									foreach ( $results as $result ) {
-										if ( $result->blacklisted == 0 && $result->confirmed == 1 ) {
-											if ( in_array( $result->type, $pos ) ) {
-												$this->addWord( $match );
-												break;
-											}
-										}
-									}
-								} else {
-									$this->addWordToDictionary( $match );
-								}
+								$wordsToAdd[] = $match;
 							}
-
 						} else {
 							// Error message if field type is not supported
-							$params['error_message'] = 'Error: No data for the word cloud. Please select a valid form field.';
+							$params['error_message'] = 'Error: At least one of your fields is not of the required type. Make sure to only add text, list or textarea fields.';
+						}
+
+						// Add the fields to the cloud, either using the dictionary or not
+						if ($fields['use_dictionary'] === true) {
+							// The POS (part of speech) of the words we'd like to use
+							// Array values might contain comma separated values. Imploding and exploding ensures all
+							// comma separated values are separated in the array
+							$pos = explode(',', implode(',',$fields['dictionary_settings']['pos_to_show']));
+
+							if ($fields['dictionary_settings']['new_words_dictionary']) {
+								$addNewWords = true;
+							}
+							else {
+								$addNewWords = false;
+							}
+
+							foreach ($wordsToAdd as $word) {
+								$this->addWord( $word, true, $pos, $addNewWords );
+							}
+						}
+						else {
+							foreach ($wordsToAdd as $word) {
+								$this->addWord( $word, false );
+							}
 						}
 					}
 				}
@@ -434,9 +528,22 @@ https://wordcloud2-js.timdream.org/',
 		 * Adds a word to the word cloud if it doesn't exist yet. If it does exist, it increases the weight of the word.
 		 *
 		 * @param $word
+		 * @param bool $useDictionary
+		 * @param array $pos
+		 * @param bool $addNewWords
 		 */
-		protected function addWord( $word ) {
+		protected function addWord( $word, $useDictionary = false, $pos = array(), $addNewWords = true) {
 			$word = ucfirst( $word );
+
+			// Check dictionary
+			if ($useDictionary) {
+				$dictionaryCheck = $this->checkDictionary($word, $pos, $addNewWords);
+
+				// Return when dictionary check fails
+				if ($dictionaryCheck === false) {
+					return;
+				}
+			}
 
 			for ( $i = 0; $i < count( $this->words ); $i ++ ) {
 				if ( $this->words[ $i ][0] == $word ) {
@@ -491,6 +598,39 @@ https://wordcloud2-js.timdream.org/',
 			}
 
 			return $weights[ $index ];
+		}
+
+		/**
+		 * Checks if a word is in the dictionary and the POS.
+		 *
+		 * @param $word
+		 * @param $pos POS, part of speech
+		 * @param bool $addNewWord
+		 *
+		 * @return bool True if word was found and belongs to the listed $pos
+		 */
+		protected function checkDictionary($word, $pos, $addNewWord = true) {
+			global $wpdb;
+
+			$tableName = $wpdb->prefix . "gpch_wordcloud_dictionary";
+
+			$sql     = "SELECT type, blacklisted, confirmed FROM {$tableName} WHERE word = '{$word}' AND language = '" . ICL_LANGUAGE_CODE . "'";
+			$results = $wpdb->get_results( $sql, OBJECT );
+
+			if ( count( $results ) > 0 ) {
+				foreach ( $results as $result ) {
+					if ( $result->blacklisted == 0 && $result->confirmed == 1 ) {
+						if ( in_array( $result->type, $pos ) ) {
+							return true;
+							break;
+						}
+					}
+				}
+			} else {
+				$this->addWordToDictionary( $word );
+			}
+
+			return false;
 		}
 
 		/**
