@@ -10,6 +10,11 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Word_Cloud' ) ) {
 		protected $template_file = P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'templates/blocks/word_cloud.twig';
 
 		/**
+		 * @var Block options set in the backend
+		 */
+		protected $options;
+
+		/**
 		 * @var array The list of words for the clouds including weights
 		 */
 		protected $words;
@@ -36,11 +41,11 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Word_Cloud' ) ) {
 
 			add_action( 'acf/init', array( $this, 'register_acf_block' ) );
 
-			$this->words     = array();
-			$this->minWeight = 9999999;
-			$this->maxWeight = 0;
-			$this->debugMessages = array();
-			$reindexCounter  = 0;
+			$this->words          = array();
+			$this->minWeight      = 9999999;
+			$this->maxWeight      = 0;
+			$this->debugMessages  = array();
+			$this->reindexCounter = 0;
 		}
 
 		/**
@@ -450,6 +455,35 @@ https://wordcloud2-js.timdream.org/',
 							'step'              => 1,
 						),
 						array(
+							'key'               => 'field_p4_gpch_blocks_word_cloud_max_index_words',
+							'label'             => 'Max number of words to index',
+							'name'              => 'max_index_words',
+							'type'              => 'number',
+							'instructions'      => 'The maximum number of words in each field that gets indexed',
+							'required'          => 0,
+							'conditional_logic' => array(
+								array(
+									array(
+										'field'    => 'field_p4_gpch_blocks_word_cloud_advanced_options',
+										'operator' => '==',
+										'value'    => '1',
+									),
+								),
+							),
+							'wrapper'           => array(
+								'width' => '',
+								'class' => '',
+								'id'    => '',
+							),
+							'default_value'     => 30,
+							'placeholder'       => '',
+							'prepend'           => '',
+							'append'            => '',
+							'min'               => 1,
+							'max'               => 9999999999,
+							'step'              => 1,
+						),
+						array(
 							'key'               => 'field_p4_gpch_blocks_word_cloud_debug_output',
 							'label'             => 'Debug Output',
 							'name'              => 'debug_output',
@@ -524,9 +558,9 @@ https://wordcloud2-js.timdream.org/',
 		 * @param $block
 		 */
 		public function render_block( $block ) {
-			$this->addDebugMessage('Rendering started');
+			$this->addDebugMessage( 'Rendering started' );
 
-			$fields = get_fields();
+			$this->options = get_fields();
 
 			// General parameters
 			$params = array(
@@ -535,8 +569,8 @@ https://wordcloud2-js.timdream.org/',
 			);
 
 			// Get a list of words, either from a list or a gravity form
-			if ( $fields['data_source'] == 'list' ) {
-				$words = explode( "\n", $fields['words_list'] );
+			if ( $this->options['data_source'] == 'list' ) {
+				$words = explode( "\n", $this->options['words_list'] );
 
 				for ( $i = 0; $i < count( $words ); $i ++ ) {
 					$words[ $i ] = trim( $words[ $i ] );
@@ -544,103 +578,43 @@ https://wordcloud2-js.timdream.org/',
 				}
 
 				$this->words = $words;
-			} elseif ( $fields['data_source'] == 'gravityform' ) {
+			} elseif ( $this->options['data_source'] == 'gravityform' ) {
 				// Find the field IDs
-				$fieldIds = explode( ',', $fields['gravtiy_form_settings']['gravity_form_field_id'] );
+				$fieldIds = explode( ',', $this->options['gravtiy_form_settings']['gravity_form_field_id'] );
 
-				// Make sure there are no spaces
+				// Make sure there are no spaces in field IDs
 				for ( $i = 0; $i < count( $fieldIds ); $i ++ ) {
 					$fieldIds[ $i ] = trim( $fieldIds[ $i ] );
 				}
 
-				foreach ( $fieldIds as $fieldId ) {
-					// Get field metadata. Most important is the type of field we're dealing with
-					// Should be either "text", "list" or textarea
-					$field = \GFAPI::get_field( $fields['gravtiy_form_settings']['gravity_form_id'], $fieldId );
+				// Get form entries until the set time and date in the block settings
+				$search_criteria['end_date'] = $this->options['gravtiy_form_settings']['show_entries_until'];
+				$entries                     = \GFAPI::get_entries( $this->options['gravtiy_form_settings']['gravity_form_id'], $search_criteria );
 
-					if ( $field === false ) {
-						$params['error_message'] = 'Error: At least one of your field IDs doesn\'t match a field.';
-						break;
-					}
+				foreach ( $entries as $entry ) {
+					// Add from index if it exists
+					$success = $this->addFromIndex( $entry );
 
-					// Get form entries until the set time and date in the block settings
-					$search_criteria['end_date'] = $fields['gravtiy_form_settings']['show_entries_until'];
-					$entries                     = \GFAPI::get_entries( $fields['gravtiy_form_settings']['gravity_form_id'], $search_criteria );
-
-					// Find the words in entries
-					foreach ( $entries as $entry ) {
+					// Index is either nonexistent or stale, we need to (re-)index
+					if ( ! $success ) {
+						// Try to index the entry, but only if we haven't hit the limit yet
 						$this->reindexCounter = $this->reindexCounter + 1;
-						var_dump($this->reindexCounter);
-						var_dump($fields['max_reindex_rate']);
-						if ( $this->reindexCounter <= $fields['max_reindex_rate'] ) {
-							var_dump('indexing entry');
-							$wordsToAdd = array();
-
-							if ( $field->type == "text" ) {
-								$word = rgar( $entry, $fieldId );
-
-								if ( ! empty( $word ) ) {
-									$wordsToAdd[] = $word;
-								}
-							} elseif ( $field->type == 'list' ) {
-								$listFieldWords = unserialize( rgar( $entry, $fieldId ) );
-
-								// Only add if there are words in the field
-								if ( $listFieldWords !== false ) {
-									foreach ( $listFieldWords as $listFieldWord ) {
-										// Some of the fields can be empty, we don't want those
-										if ( ! empty( $listFieldWord ) ) {
-											$wordsToAdd[] = $listFieldWord;
-										}
-									}
-								}
-							} elseif ( $field->type == 'textarea' ) {
-								$text = rgar( $entry, $fieldId );
-
-								// Separate each word in the text
-								preg_match_all( '((\b[^\s]+\b)((?<=\.\w).)?)', $text, $matches );
-
-								foreach ( $matches[0] as $match ) {
-									$wordsToAdd[] = $match;
-								}
-							} else {
-								// Error message if field type is not supported
-								$params['error_message'] = 'Error: At least one of your fields is not of the required type. Make sure to only add text, list or textarea fields.';
-							}
-
-							// Add the fields to the cloud, either using the dictionary or not
-							if ( $fields['use_dictionary'] === true ) {
-								// The POS (part of speech) of the words we'd like to use
-								// Array values might contain comma separated values. Imploding and exploding ensures all
-								// comma separated values are separated in the array
-								$pos = explode( ',', implode( ',', $fields['dictionary_settings']['pos_to_show'] ) );
-
-								if ( $fields['dictionary_settings']['new_words_dictionary'] ) {
-									$addNewWords = true;
-								} else {
-									$addNewWords = false;
-								}
-
-								foreach ( $wordsToAdd as $word ) {
-									$this->addWord( $word, true, $pos, $addNewWords );
-								}
-							} else {
-								foreach ( $wordsToAdd as $word ) {
-									$this->addWord( $word, false );
-								}
-							}
+						if ( $this->reindexCounter > $this->options['max_reindex_rate'] ) {
+							break;
 						}
+
+						$this->indexEntry( $entry, $fieldIds );
 					}
 				}
 			}
 
-			// The cloud looks best when the words with biggest weight are drawn first. Sorting for weight.
+			// The cloud looks best when the words with biggest weight are drawn first. Sort for weight.
 			usort( $this->words, array( $this, "sortWords" ) );
 
-			if (isset($fields['max_words_to_show'])) {
-				$params['word_list'] = json_encode( array_slice($this->words, 0, $fields['max_words_to_show']));
-			}
-			else {
+			// If we have a maximum number of word to show in the cloud, remove the rest
+			if ( isset( $this->options['max_words_to_show'] ) ) {
+				$params['word_list'] = json_encode( array_slice( $this->words, 0, $this->options['max_words_to_show'] ) );
+			} else {
 				$params['word_list'] = json_encode( $this->words );
 			}
 
@@ -650,17 +624,17 @@ https://wordcloud2-js.timdream.org/',
 			$params['min_word_size'] = $this->minWeight;
 
 			// Colors schemes
-			if ( $fields['word_colors'] == 'random' ) {
+			if ( $this->options['word_colors'] == 'random' ) {
 				$params['random_colors'] = 1;
-			} else if ( $fields['word_colors'] == 'greenpeace' ) {
+			} else if ( $this->options['word_colors'] == 'greenpeace' ) {
 				$params['word_colors'][0] = '#73BE1E';
 				$params['word_colors'][1] = '#00573a';
 				$params['word_colors'][2] = '#dbebbe';
-			} else if ( $fields['word_colors'] == 'climate' ) {
+			} else if ( $this->options['word_colors'] == 'climate' ) {
 				$params['word_colors'][0] = '#cd1719';
 				$params['word_colors'][1] = '#eaccbb';
 				$params['word_colors'][2] = '#cccccc';
-			} else if ( $fields['word_colors'] == 'plastics' ) {
+			} else if ( $this->options['word_colors'] == 'plastics' ) {
 				$params['word_colors'][0] = '#e94e28';
 				$params['word_colors'][1] = '#69c2be';
 				$params['word_colors'][2] = '#c4e3e1';
@@ -670,15 +644,16 @@ https://wordcloud2-js.timdream.org/',
 			$params['color_split_1'] = $this->findWeightAtPercentile( 10 );
 			$params['color_split_2'] = $this->findWeightAtPercentile( 70 );
 
-			$this->addDebugMessage('Output started');
+			$this->addDebugMessage( 'Output started' );
 
-			if ($fields['debug_output']) {
+			if ( $this->options['debug_output'] ) {
 				$params['debug_messages'] = $this->debugMessages;
 			}
 
 			// output template
 			\Timber::render( $this->template_file, $params );
 		}
+
 
 		/**
 		 * Callback function for usort for sorting our words with the most mentioned word first
@@ -696,6 +671,7 @@ https://wordcloud2-js.timdream.org/',
 			}
 		}
 
+
 		/**
 		 * Adds a word to the word cloud if it doesn't exist yet. If it does exist, it increases the weight of the word.
 		 *
@@ -704,7 +680,7 @@ https://wordcloud2-js.timdream.org/',
 		 * @param array $pos
 		 * @param bool $addNewWords
 		 */
-		protected function addWord( $word, $useDictionary = false, $pos = array(), $addNewWords = true ) {
+		protected function addWordToCloud( $word, $useDictionary = false, $pos = array(), $addNewWords = true ) {
 			$word = ucfirst( $word );
 
 			// Check dictionary
@@ -730,6 +706,7 @@ https://wordcloud2-js.timdream.org/',
 			$this->words[] = array( $word, 1 );
 		}
 
+
 		/**
 		 * Finds the min and max weight we use in our word cloud.
 		 */
@@ -743,6 +720,7 @@ https://wordcloud2-js.timdream.org/',
 				}
 			}
 		}
+
 
 		/**
 		 * Returns the weight of the word at a percentile of all weights in the words list
@@ -772,8 +750,9 @@ https://wordcloud2-js.timdream.org/',
 			return $weights[ $index ];
 		}
 
+
 		/**
-		 * Checks if a word is in the dictionary and the POS.
+		 * Checks if a word is in the dictionary and is the required POS (part of speech).
 		 *
 		 * @param $word
 		 * @param $pos POS, part of speech
@@ -785,8 +764,8 @@ https://wordcloud2-js.timdream.org/',
 			global $wpdb;
 
 			$tableName = $wpdb->prefix . "gpch_wordcloud_dictionary";
+			$sql       = "SELECT type, blacklisted, confirmed FROM {$tableName} WHERE word = '{$word}' AND language = '" . ICL_LANGUAGE_CODE . "'";
 
-			$sql     = "SELECT type, blacklisted, confirmed FROM {$tableName} WHERE word = '{$word}' AND language = '" . ICL_LANGUAGE_CODE . "'";
 			$results = $wpdb->get_results( $sql, OBJECT );
 
 			if ( count( $results ) > 0 ) {
@@ -830,12 +809,151 @@ https://wordcloud2-js.timdream.org/',
 				) );
 		}
 
-		protected function addDebugMessage($message) {
-			$t = microtime(true);
-			$micro = sprintf("%06d",($t - floor($t)) * 1000000);
-			$d = new \DateTime( date('Y-m-d H:i:s.'.$micro, $t) );
+		/**
+		 * Adds a debug message
+		 */
+		protected function addDebugMessage( $message ) {
+			$t     = microtime( true );
+			$micro = sprintf( "%06d", ( $t - floor( $t ) ) * 1000000 );
+			$d     = new \DateTime( date( 'Y-m-d H:i:s.' . $micro, $t ) );
 
-			$this->debugMessages[] = $d->format("H:i:s.u") . " " . $message;
+			$this->debugMessages[] = $d->format( "H:i:s.u" ) . " " . $message;
+		}
+
+		/**
+		 * Add to word cloud from index of a Gravity Form Entry.
+		 * The index is a meta field that contains a list of words extracted from the fields.
+		 *
+		 * @param $entry
+		 *
+		 * @return bool
+		 */
+		protected function addFromIndex( $entry ) {
+			$updated = gform_get_meta( $entry['id'], 'cloud_words_updated' );
+			$words   = gform_get_meta( $entry['id'], 'cloud_words' );
+
+			$thresold = time() - $this->options['cache_lifetime'];
+
+			if ( $updated === false or $updated < $thresold ) {
+				return false;
+			} else {
+				foreach ( $words as $word ) {
+					$this->addWordToCloud( $word );
+				}
+
+				return true;
+			}
+		}
+
+		/**
+		 * Index a Gravity Form entry and save the indexed words to a meta field.
+		 *
+		 * @param $entry
+		 * @param $fieldIds
+		 */
+		protected function indexEntry( $entry, $fieldIds ) {
+			$this->addDebugMessage( 'Indexing Entry #' . $entry['id'] );
+			$wordsToAdd = array();
+
+			foreach ( $fieldIds as $fieldId ) {
+				// Get field metadata. Most important is the type of field we're dealing with
+				// Should be either "text", "list" or textarea
+				$field = \GFAPI::get_field( $this->options['gravtiy_form_settings']['gravity_form_id'], $fieldId );
+
+				if ( $field === false ) {
+					$params['error_message'] = 'Error: At least one of your field IDs doesn\'t match a field.';
+					break;
+				}
+
+				if ( $field->type == "text" ) {
+					$word = rgar( $entry, $fieldId );
+
+					if ( ! empty( $word ) ) {
+						$wordsToAdd[] = $word;
+					}
+				} elseif ( $field->type == 'list' ) {
+					$listFieldWords = unserialize( rgar( $entry, $fieldId ) );
+
+					// Only add if there are words in the field
+					if ( $listFieldWords !== false ) {
+						foreach ( $listFieldWords as $listFieldWord ) {
+							// Some of the fields can be empty, we don't want those
+							if ( ! empty( $listFieldWord ) ) {
+								$wordsToAdd[] = $listFieldWord;
+							}
+						}
+					}
+				} elseif ( $field->type == 'textarea' ) {
+					$text = rgar( $entry, $fieldId );
+
+					// Separate each word in the text
+					preg_match_all( '((\b[^\s]+\b)((?<=\.\w).)?)', $text, $matches );
+
+					$wordsIndexedCount = 0;
+					foreach ( $matches[0] as $match ) {
+						// Stop indexing long entries after a certain amount of words
+						if ( $wordsIndexedCount < $this->options['max_index_words'] ) {
+							$wordsToAdd[] = $match;
+						} else {
+							break;
+						}
+						$wordsIndexedCount ++;
+					}
+				} else {
+					// Error message if field type is not supported
+					$params['error_message'] = 'Error: At least one of your fields is not of the required type. Make sure to only add text, list or textarea fields.';
+				}
+
+			}
+
+			// Dictionary check
+			if ( $this->options['use_dictionary'] === true ) {
+				// The POS (part of speech) of the words we'd like to use
+				// Array values might contain comma separated values. Imploding and exploding ensures all
+				// comma separated values are separated in the array
+				$pos = explode( ',', implode( ',', $this->options['dictionary_settings']['pos_to_show'] ) );
+
+				if ( $this->options['dictionary_settings']['new_words_dictionary'] ) {
+					$addNewWords = true;
+				} else {
+					$addNewWords = false;
+				}
+
+				// We're going to unset some values and confuse count() in this loop, better safe the count.
+				$count = count( $wordsToAdd );
+
+				// Check all the words against the dictionary
+				for ( $i = 0; $i < $count; $i ++ ) {
+					$isInDictionary = $this->checkDictionary( $wordsToAdd[ $i ], $pos, $addNewWords );
+
+					if ( ! $isInDictionary ) {
+						// Remove the word if it's not in the dictionary
+						unset( $wordsToAdd[ $i ] );
+					}
+				}
+
+				// Reindex the array
+				$wordsToAdd = array_values( $wordsToAdd );
+			}
+
+			// Write the words list to the form entry meta data
+			$this->saveFieldMetadata( $wordsToAdd, $entry );
+
+			// Now add all the words we found
+			foreach ( $wordsToAdd as $word ) {
+				$this->addWordToCloud( $word, false );
+			}
+		}
+
+		/**
+		 * Save the meta data
+		 *
+		 * @param $words
+		 * @param $entry
+		 */
+		protected function saveFieldMetadata( $words, $entry ) {
+			gform_update_meta( $entry['id'], 'cloud_words', $words );
+			gform_update_meta( $entry['id'], 'cloud_words_updated', time() );
 		}
 	}
 }
