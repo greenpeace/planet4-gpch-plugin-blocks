@@ -1,4 +1,11 @@
 <div class="word-cloud-wrapper">
+	{% if debug_messages is defined %}
+		<ul class="debug">
+			{% for message in debug_messages %}
+				<li>{{ message }}</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
 	{% if error_message is defined %}
 		<p class="error">{{ error_message }}</p>
 	{% endif %}

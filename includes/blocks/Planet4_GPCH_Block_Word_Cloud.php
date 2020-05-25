@@ -24,6 +24,13 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Word_Cloud' ) ) {
 		 */
 		protected $maxWeight;
 
+		/**
+		 * @var
+		 */
+		protected $debugMessages;
+
+		protected $reindexCounter;
+
 		public function __construct() {
 			$this->register_acf_field_group();
 
@@ -32,6 +39,8 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Word_Cloud' ) ) {
 			$this->words     = array();
 			$this->minWeight = 9999999;
 			$this->maxWeight = 0;
+			$this->debugMessages = array();
+			$reindexCounter  = 0;
 		}
 
 		/**
@@ -184,35 +193,35 @@ Amor 2',
 							),
 						),
 						array(
-							'key' => 'field_p4_gpch_blocks_word_cloud_use_dictionary',
-							'label' => 'Use the dictionary',
-							'name' => 'use_dictionary',
-							'type' => 'true_false',
-							'instructions' => 'Using the dictionary will
+							'key'               => 'field_p4_gpch_blocks_word_cloud_use_dictionary',
+							'label'             => 'Use the dictionary',
+							'name'              => 'use_dictionary',
+							'type'              => 'true_false',
+							'instructions'      => 'Using the dictionary will
 - only show words in the dictionary
 - filter blacklisted words
 - allow you to select to show only certain POS (part of speech, e.g. nouns, adjectives)
 - add new words to the dictionary so they can bei either confirmed or blacklisted',
-							'required' => 0,
+							'required'          => 0,
 							'conditional_logic' => 0,
-							'wrapper' => array(
+							'wrapper'           => array(
 								'width' => '',
 								'class' => '',
-								'id' => '',
+								'id'    => '',
 							),
-							'message' => '',
-							'default_value' => 1,
-							'ui' => 1,
-							'ui_on_text' => 'Yes',
-							'ui_off_text' => 'No',
+							'message'           => '',
+							'default_value'     => 1,
+							'ui'                => 1,
+							'ui_on_text'        => 'Yes',
+							'ui_off_text'       => 'No',
 						),
 						array(
-							'key' => 'field_p4_gpch_blocks_word_cloud_dictionary_settings',
-							'label' => 'Dictionary Settings',
-							'name' => 'dictionary_settings',
-							'type' => 'group',
-							'instructions' => '',
-							'required' => 0,
+							'key'               => 'field_p4_gpch_blocks_word_cloud_dictionary_settings',
+							'label'             => 'Dictionary Settings',
+							'name'              => 'dictionary_settings',
+							'type'              => 'group',
+							'instructions'      => '',
+							'required'          => 0,
 							'conditional_logic' => array(
 								array(
 									array(
@@ -222,58 +231,57 @@ Amor 2',
 									),
 								),
 							),
-							'wrapper' => array(
+							'wrapper'           => array(
 								'width' => '',
 								'class' => '',
-								'id' => '',
+								'id'    => '',
 							),
-							'layout' => 'block',
-							'sub_fields' => array(
+							'layout'            => 'block',
+							'sub_fields'        => array(
 								array(
-									'key' => 'field_p4_gpch_blocks_word_cloud_show_pos',
-									'label' => 'POS (part of speech) to show',
-									'name' => 'pos_to_show',
-									'type' => 'checkbox',
-									'instructions' => 'Usually you get the best results showing only nouns and names, but you can select other types of words.',
-									'required' => 0,
+									'key'               => 'field_p4_gpch_blocks_word_cloud_show_pos',
+									'label'             => 'POS (part of speech) to show',
+									'name'              => 'pos_to_show',
+									'type'              => 'checkbox',
+									'instructions'      => 'Usually you get the best results showing only nouns and names, but you can select other types of words.',
+									'required'          => 0,
 									'conditional_logic' => 0,
-									'wrapper' => array(
+									'wrapper'           => array(
 										'width' => '',
 										'class' => '',
-										'id' => '',
+										'id'    => '',
 									),
-									'choices' => array(
-										'NN' => 'Nouns',
-										'NE' => 'Names',
-										'ADJA' => 'Adjectives',
+									'choices'           => array(
+										'NN'                     => 'Nouns',
+										'NE'                     => 'Names',
+										'ADJA'                   => 'Adjectives',
 										'VVINF,VVPP,VVFIN,VVIZU' => 'Verbs',
 									),
-									'allow_custom' => 0,
-									'default_value' => array(
-									),
-									'layout' => 'vertical',
-									'toggle' => 0,
-									'return_format' => 'value',
-									'save_custom' => 0,
+									'allow_custom'      => 0,
+									'default_value'     => array(),
+									'layout'            => 'vertical',
+									'toggle'            => 0,
+									'return_format'     => 'value',
+									'save_custom'       => 0,
 								),
 								array(
-									'key' => 'field_p4_gpch_blocks_word_cloud_dictionary_add_new_words',
-									'label' => 'Add new words to the dictionary',
-									'name' => 'new_words_dictionary',
-									'type' => 'true_false',
-									'instructions' => 'Add words that are not yet in the dictionary? They need to be moderated before they are shown in the word cloud.',
-									'required' => 0,
+									'key'               => 'field_p4_gpch_blocks_word_cloud_dictionary_add_new_words',
+									'label'             => 'Add new words to the dictionary',
+									'name'              => 'new_words_dictionary',
+									'type'              => 'true_false',
+									'instructions'      => 'Add words that are not yet in the dictionary? They need to be moderated before they are shown in the word cloud.',
+									'required'          => 0,
 									'conditional_logic' => 0,
-									'wrapper' => array(
+									'wrapper'           => array(
 										'width' => '',
 										'class' => '',
-										'id' => '',
+										'id'    => '',
 									),
-									'message' => '',
-									'default_value' => 1,
-									'ui' => 1,
-									'ui_on_text' => 'Yes',
-									'ui_off_text' => 'No',
+									'message'           => '',
+									'default_value'     => 1,
+									'ui'                => 1,
+									'ui_on_text'        => 'Yes',
+									'ui_off_text'       => 'No',
 								),
 							),
 						),
@@ -335,6 +343,139 @@ https://wordcloud2-js.timdream.org/',
 							'rows'              => '',
 							'new_lines'         => '',
 						),
+						array(
+							'key'               => 'field_p4_gpch_blocks_word_cloud_advanced_options',
+							'label'             => 'Use advanced options',
+							'name'              => 'use_advanced_options',
+							'type'              => 'true_false',
+							'instructions'      => '',
+							'required'          => 0,
+							'conditional_logic' => 0,
+							'wrapper'           => array(
+								'width' => '',
+								'class' => '',
+								'id'    => '',
+							),
+							'message'           => '',
+							'default_value'     => 0,
+							'ui'                => 1,
+							'ui_on_text'        => '',
+							'ui_off_text'       => '',
+						),
+						array(
+							'key'               => 'field_p4_gpch_blocks_word_cloud_max_words',
+							'label'             => 'Max words to show',
+							'name'              => 'max_words_to_show',
+							'type'              => 'number',
+							'instructions'      => 'The maximum number of words shown in the cloud.',
+							'required'          => 0,
+							'conditional_logic' => array(
+								array(
+									array(
+										'field'    => 'field_p4_gpch_blocks_word_cloud_advanced_options',
+										'operator' => '==',
+										'value'    => '1',
+									),
+								),
+							),
+							'wrapper'           => array(
+								'width' => '',
+								'class' => '',
+								'id'    => '',
+							),
+							'default_value'     => 100,
+							'placeholder'       => '',
+							'prepend'           => '',
+							'append'            => '',
+							'min'               => 1,
+							'max'               => 10000,
+							'step'              => 0,
+						),
+						array(
+							'key'               => 'field_p4_gpch_blocks_word_cloud_cache_lifetime',
+							'label'             => 'Cache lifetime',
+							'name'              => 'cache_lifetime',
+							'type'              => 'number',
+							'instructions'      => 'Cache lifetime in seconds',
+							'required'          => 0,
+							'conditional_logic' => array(
+								array(
+									array(
+										'field'    => 'field_p4_gpch_blocks_word_cloud_advanced_options',
+										'operator' => '==',
+										'value'    => '1',
+									),
+								),
+							),
+							'wrapper'           => array(
+								'width' => '',
+								'class' => '',
+								'id'    => '',
+							),
+							'default_value'     => '',
+							'placeholder'       => '',
+							'prepend'           => '',
+							'append'            => '',
+							'min'               => 1,
+							'max'               => 9999999999,
+							'step'              => 1,
+						),
+						array(
+							'key'               => 'field_p4_gpch_blocks_word_cloud_reindex_rate',
+							'label'             => 'Max reindex rate',
+							'name'              => 'max_reindex_rate',
+							'type'              => 'number',
+							'instructions'      => 'The rate at which entries are re-indexed.',
+							'required'          => 0,
+							'conditional_logic' => array(
+								array(
+									array(
+										'field'    => 'field_p4_gpch_blocks_word_cloud_advanced_options',
+										'operator' => '==',
+										'value'    => '1',
+									),
+								),
+							),
+							'wrapper'           => array(
+								'width' => '',
+								'class' => '',
+								'id'    => '',
+							),
+							'default_value'     => 10,
+							'placeholder'       => '',
+							'prepend'           => '',
+							'append'            => '',
+							'min'               => 1,
+							'max'               => 9999999999,
+							'step'              => 1,
+						),
+						array(
+							'key'               => 'field_p4_gpch_blocks_word_cloud_debug_output',
+							'label'             => 'Debug Output',
+							'name'              => 'debug_output',
+							'type'              => 'true_false',
+							'instructions'      => '',
+							'required'          => 0,
+							'conditional_logic' => array(
+								array(
+									array(
+										'field'    => 'field_p4_gpch_blocks_word_cloud_advanced_options',
+										'operator' => '==',
+										'value'    => '1',
+									),
+								),
+							),
+							'wrapper'           => array(
+								'width' => '',
+								'class' => '',
+								'id'    => '',
+							),
+							'message'           => '',
+							'default_value'     => 0,
+							'ui'                => 1,
+							'ui_on_text'        => '',
+							'ui_off_text'       => '',
+						),
 					),
 					'location'              => array(
 						array(
@@ -383,12 +524,14 @@ https://wordcloud2-js.timdream.org/',
 		 * @param $block
 		 */
 		public function render_block( $block ) {
+			$this->addDebugMessage('Rendering started');
+
 			$fields = get_fields();
 
 			// General parameters
 			$params = array(
 				'script' => P4_GPCH_PLUGIN_BLOCKS_BASE_URL . 'assets/js/wordcloud2.js',
-				'dom_id' => uniqid('word-cloud-')
+				'dom_id' => uniqid( 'word-cloud-' )
 			);
 
 			// Get a list of words, either from a list or a gravity form
@@ -415,72 +558,76 @@ https://wordcloud2-js.timdream.org/',
 					// Should be either "text", "list" or textarea
 					$field = \GFAPI::get_field( $fields['gravtiy_form_settings']['gravity_form_id'], $fieldId );
 
-					if ($field === false) {
+					if ( $field === false ) {
 						$params['error_message'] = 'Error: At least one of your field IDs doesn\'t match a field.';
 						break;
 					}
 
 					// Get form entries until the set time and date in the block settings
 					$search_criteria['end_date'] = $fields['gravtiy_form_settings']['show_entries_until'];
-					$entries = \GFAPI::get_entries( $fields['gravtiy_form_settings']['gravity_form_id'], $search_criteria );
+					$entries                     = \GFAPI::get_entries( $fields['gravtiy_form_settings']['gravity_form_id'], $search_criteria );
 
 					// Find the words in entries
 					foreach ( $entries as $entry ) {
-						$wordsToAdd = array();
+						$this->reindexCounter = $this->reindexCounter + 1;
+						var_dump($this->reindexCounter);
+						var_dump($fields['max_reindex_rate']);
+						if ( $this->reindexCounter <= $fields['max_reindex_rate'] ) {
+							var_dump('indexing entry');
+							$wordsToAdd = array();
 
-						if ( $field->type == "text" ) {
-							$word = rgar( $entry, $fieldId );
+							if ( $field->type == "text" ) {
+								$word = rgar( $entry, $fieldId );
 
-							if (!empty($word)) {
-								$wordsToAdd[] = $word;
-							}
-						} elseif ( $field->type == 'list' ) {
-							$listFieldWords = unserialize( rgar( $entry, $fieldId ) );
+								if ( ! empty( $word ) ) {
+									$wordsToAdd[] = $word;
+								}
+							} elseif ( $field->type == 'list' ) {
+								$listFieldWords = unserialize( rgar( $entry, $fieldId ) );
 
-							// Only add if there are words in the field
-							if ($listFieldWords !== false) {
-								foreach ( $listFieldWords as $listFieldWord ) {
-									// Some of the fields can be empty, we don't want those
-									if (!empty($listFieldWord)) {
-										$wordsToAdd[] = $listFieldWord;
+								// Only add if there are words in the field
+								if ( $listFieldWords !== false ) {
+									foreach ( $listFieldWords as $listFieldWord ) {
+										// Some of the fields can be empty, we don't want those
+										if ( ! empty( $listFieldWord ) ) {
+											$wordsToAdd[] = $listFieldWord;
+										}
 									}
 								}
-							}
-						} elseif ( $field->type == 'textarea' ) {
-							$text = rgar( $entry, $fieldId );
+							} elseif ( $field->type == 'textarea' ) {
+								$text = rgar( $entry, $fieldId );
 
-							// Separate each word in the text
-							preg_match_all( '((\b[^\s]+\b)((?<=\.\w).)?)', $text, $matches );
+								// Separate each word in the text
+								preg_match_all( '((\b[^\s]+\b)((?<=\.\w).)?)', $text, $matches );
 
-							foreach ( $matches[0] as $match ) {
-								$wordsToAdd[] = $match;
-							}
-						} else {
-							// Error message if field type is not supported
-							$params['error_message'] = 'Error: At least one of your fields is not of the required type. Make sure to only add text, list or textarea fields.';
-						}
-
-						// Add the fields to the cloud, either using the dictionary or not
-						if ($fields['use_dictionary'] === true) {
-							// The POS (part of speech) of the words we'd like to use
-							// Array values might contain comma separated values. Imploding and exploding ensures all
-							// comma separated values are separated in the array
-							$pos = explode(',', implode(',',$fields['dictionary_settings']['pos_to_show']));
-
-							if ($fields['dictionary_settings']['new_words_dictionary']) {
-								$addNewWords = true;
-							}
-							else {
-								$addNewWords = false;
+								foreach ( $matches[0] as $match ) {
+									$wordsToAdd[] = $match;
+								}
+							} else {
+								// Error message if field type is not supported
+								$params['error_message'] = 'Error: At least one of your fields is not of the required type. Make sure to only add text, list or textarea fields.';
 							}
 
-							foreach ($wordsToAdd as $word) {
-								$this->addWord( $word, true, $pos, $addNewWords );
-							}
-						}
-						else {
-							foreach ($wordsToAdd as $word) {
-								$this->addWord( $word, false );
+							// Add the fields to the cloud, either using the dictionary or not
+							if ( $fields['use_dictionary'] === true ) {
+								// The POS (part of speech) of the words we'd like to use
+								// Array values might contain comma separated values. Imploding and exploding ensures all
+								// comma separated values are separated in the array
+								$pos = explode( ',', implode( ',', $fields['dictionary_settings']['pos_to_show'] ) );
+
+								if ( $fields['dictionary_settings']['new_words_dictionary'] ) {
+									$addNewWords = true;
+								} else {
+									$addNewWords = false;
+								}
+
+								foreach ( $wordsToAdd as $word ) {
+									$this->addWord( $word, true, $pos, $addNewWords );
+								}
+							} else {
+								foreach ( $wordsToAdd as $word ) {
+									$this->addWord( $word, false );
+								}
 							}
 						}
 					}
@@ -489,8 +636,14 @@ https://wordcloud2-js.timdream.org/',
 
 			// The cloud looks best when the words with biggest weight are drawn first. Sorting for weight.
 			usort( $this->words, array( $this, "sortWords" ) );
-			$params['word_list'] = json_encode( $this->words );
-			
+
+			if (isset($fields['max_words_to_show'])) {
+				$params['word_list'] = json_encode( array_slice($this->words, 0, $fields['max_words_to_show']));
+			}
+			else {
+				$params['word_list'] = json_encode( $this->words );
+			}
+
 			// We need to know the min max weight of words in the list to calulate their size in the map
 			$this->calculateMinMaxWeight();
 			$params['max_word_size'] = $this->maxWeight;
@@ -516,6 +669,12 @@ https://wordcloud2-js.timdream.org/',
 			// Find out where to split between colors in the cloud
 			$params['color_split_1'] = $this->findWeightAtPercentile( 10 );
 			$params['color_split_2'] = $this->findWeightAtPercentile( 70 );
+
+			$this->addDebugMessage('Output started');
+
+			if ($fields['debug_output']) {
+				$params['debug_messages'] = $this->debugMessages;
+			}
 
 			// output template
 			\Timber::render( $this->template_file, $params );
@@ -545,15 +704,15 @@ https://wordcloud2-js.timdream.org/',
 		 * @param array $pos
 		 * @param bool $addNewWords
 		 */
-		protected function addWord( $word, $useDictionary = false, $pos = array(), $addNewWords = true) {
+		protected function addWord( $word, $useDictionary = false, $pos = array(), $addNewWords = true ) {
 			$word = ucfirst( $word );
 
 			// Check dictionary
-			if ($useDictionary) {
-				$dictionaryCheck = $this->checkDictionary($word, $pos, $addNewWords);
+			if ( $useDictionary ) {
+				$dictionaryCheck = $this->checkDictionary( $word, $pos, $addNewWords );
 
 				// Return when dictionary check fails
-				if ($dictionaryCheck === false) {
+				if ( $dictionaryCheck === false ) {
 					return;
 				}
 			}
@@ -622,7 +781,7 @@ https://wordcloud2-js.timdream.org/',
 		 *
 		 * @return bool True if word was found and belongs to the listed $pos
 		 */
-		protected function checkDictionary($word, $pos, $addNewWord = true) {
+		protected function checkDictionary( $word, $pos, $addNewWord = true ) {
 			global $wpdb;
 
 			$tableName = $wpdb->prefix . "gpch_wordcloud_dictionary";
@@ -669,6 +828,14 @@ https://wordcloud2-js.timdream.org/',
 					'%d',
 					'%s'
 				) );
+		}
+
+		protected function addDebugMessage($message) {
+			$t = microtime(true);
+			$micro = sprintf("%06d",($t - floor($t)) * 1000000);
+			$d = new \DateTime( date('Y-m-d H:i:s.'.$micro, $t) );
+
+			$this->debugMessages[] = $d->format("H:i:s.u") . " " . $message;
 		}
 	}
 }
