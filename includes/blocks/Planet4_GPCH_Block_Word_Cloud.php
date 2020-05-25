@@ -150,7 +150,7 @@ Amor 2',
 									'label'             => 'Gravity Form Field ID',
 									'name'              => 'gravity_form_field_id',
 									'type'              => 'text',
-									'instructions'      => 'Which field of your form would you like to use for the word cloud? Enter the field ID (when you edit your form, each field has the ID in the title line). The cloud only works with fields of type "text" (for one word) or "list" (miltiple words)',
+									'instructions'      => 'Which field(s) of your form would you like to use for the word cloud? Enter the field IDs (when you edit your form, each field has the ID in the title line). The cloud only works with fields of type "text" (for one word), "list" (multiple words), or "textarea" (multiline text). To use multiple fields in one form, enter multiple IDs separated by commas.',
 									'required'          => 1,
 									'conditional_logic' => 0,
 									'wrapper'           => array(
@@ -307,62 +307,75 @@ https://wordcloud2-js.timdream.org/',
 
 				$this->words = $words;
 			} elseif ( $fields['data_source'] == 'gravityform' ) {
-				// Get field metadata. Most important is the type of field we're dealing with
-				// Should be either "text" or "list" for simple clouds or "textarea" in conjunction with a dictionary
-				$field = \GFAPI::get_field( $fields['gravtiy_form_settings']['gravity_form_id'], $fields['gravtiy_form_settings']['gravity_form_field_id'] );
+				// Find the field IDs
+				$fieldIds = explode( ',', $fields['gravtiy_form_settings']['gravity_form_field_id'] );
 
-				// Get form entries until the set time and date in the block settings
-				$search_criteria['end_date'] = $fields['gravtiy_form_settings']['show_entries_until'];
-				$entries                     = \GFAPI::get_entries( $fields['gravtiy_form_settings']['gravity_form_id'], $search_criteria );
+				// make sure there are no spaces
+				for ( $i = 0; $i < count( $fieldIds ); $i ++ ) {
+					$fieldIds[ $i ] = trim( $fieldIds[ $i ] );
+				}
 
-				// Find the words in entries
-				foreach ( $entries as $entry ) {
-					if ( $field->type == "text" ) {
-						$this->addWord( rgar( $entry, $fields['gravtiy_form_settings']['gravity_form_field_id'] ) );
-					} elseif ( $field->type == 'list' ) {
-						$listFieldWords = unserialize( rgar( $entry, $fields['gravtiy_form_settings']['gravity_form_field_id'] ) );
+				foreach ( $fieldIds as $fieldId ) {
+					// Get field metadata. Most important is the type of field we're dealing with
+					// Should be either "text", "list" or textarea
+					$field = \GFAPI::get_field( $fields['gravtiy_form_settings']['gravity_form_id'], $fieldId );
 
-						foreach ( $listFieldWords as $listFieldWord ) {
-							$this->addWord( $listFieldWord );
-						}
-					} elseif ( $field->type == 'textarea' ) {
-						// Textareas can contain whole sentences and unstructered text. We use a dictionary to extract
-						// the words we want to display in the cloud.
+					// Get form entries until the set time and date in the block settings
+					$search_criteria['end_date'] = $fields['gravtiy_form_settings']['show_entries_until'];
+					$entries = \GFAPI::get_entries( $fields['gravtiy_form_settings']['gravity_form_id'], $search_criteria );
 
-						// The POS (part of speech) of the words we'd like to use
-						$pos = array( 'NN', 'NE', 'ADJA' );
-						$pos = array( 'NN', 'NE' );
+					// Find the words in entries
+					foreach ( $entries as $entry ) {
+						if ( $field->type == "text" ) {
+							$this->addWord( rgar( $entry, $fieldId ) );
+						} elseif ( $field->type == 'list' ) {
+							$listFieldWords = unserialize( rgar( $entry, $fieldId ) );
 
-						$text = rgar( $entry, $fields['gravtiy_form_settings']['gravity_form_field_id'] );
-
-						preg_match_all( '((\b[^\s]+\b)((?<=\.\w).)?)', $text, $matches );
-
-						global $wpdb;
-
-						$tableName = $wpdb->prefix . "gpch_wordcloud_dictionary";
-
-						foreach ( $matches[0] as $match ) {
-							$sql     = "SELECT type, blacklisted, confirmed FROM {$tableName} WHERE word = '{$match}' AND language = '" . ICL_LANGUAGE_CODE . "'";
-							$results = $wpdb->get_results( $sql, OBJECT );
-
-							if (count($results) > 0) {
-								foreach ( $results as $result ) {
-									if ($result->blacklisted == 0 && $result->confirmed == 1) {
-										if ( in_array( $result->type, $pos ) ) {
-											$this->addWord( $match );
-											break;
-										}
-									}
+							// Field can be empty when the form field wasn't set to mandatory, skip those
+							if (!empty($listFieldWords)) {
+								foreach ( $listFieldWords as $listFieldWord ) {
+									$this->addWord( $listFieldWord );
 								}
 							}
-							else {
-								$this->addWordToDictionary( $match );
-							}
-						}
+						} elseif ( $field->type == 'textarea' ) {
+							// Textareas can contain whole sentences and unstructered text. We use a dictionary to extract
+							// the words we want to display in the cloud.
 
-					} else {
-						// Error message if field type is not supported
-						$params['error_message'] = 'Error: No data for the word cloud. Please select a valid form field.';
+							// The POS (part of speech) of the words we'd like to use
+							$pos = array( 'NN', 'NE', 'ADJA' );
+							$pos = array( 'NN', 'NE' );
+
+							$text = rgar( $entry, $fieldId );
+
+							// Separate each word in the text
+							preg_match_all( '((\b[^\s]+\b)((?<=\.\w).)?)', $text, $matches );
+
+							global $wpdb;
+
+							$tableName = $wpdb->prefix . "gpch_wordcloud_dictionary";
+
+							foreach ( $matches[0] as $match ) {
+								$sql     = "SELECT type, blacklisted, confirmed FROM {$tableName} WHERE word = '{$match}' AND language = '" . ICL_LANGUAGE_CODE . "'";
+								$results = $wpdb->get_results( $sql, OBJECT );
+
+								if ( count( $results ) > 0 ) {
+									foreach ( $results as $result ) {
+										if ( $result->blacklisted == 0 && $result->confirmed == 1 ) {
+											if ( in_array( $result->type, $pos ) ) {
+												$this->addWord( $match );
+												break;
+											}
+										}
+									}
+								} else {
+									$this->addWordToDictionary( $match );
+								}
+							}
+
+						} else {
+							// Error message if field type is not supported
+							$params['error_message'] = 'Error: No data for the word cloud. Please select a valid form field.';
+						}
 					}
 				}
 			}
@@ -492,11 +505,11 @@ https://wordcloud2-js.timdream.org/',
 
 			$wpdb->insert( $tableName,
 				array(
-				'language' => ICL_LANGUAGE_CODE,
-				'confirmed' => 0,
-				'blacklisted' => 0,
-				'word' => $word
-			),
+					'language'    => ICL_LANGUAGE_CODE,
+					'confirmed'   => 0,
+					'blacklisted' => 0,
+					'word'        => $word
+				),
 				array(
 					'%s',
 					'%d',
