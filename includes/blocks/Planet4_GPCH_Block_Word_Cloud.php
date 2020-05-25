@@ -387,7 +387,8 @@ https://wordcloud2-js.timdream.org/',
 
 			// General parameters
 			$params = array(
-				'script' => P4_GPCH_PLUGIN_BLOCKS_BASE_URL . 'assets/js/wordcloud2.js'
+				'script' => P4_GPCH_PLUGIN_BLOCKS_BASE_URL . 'assets/js/wordcloud2.js',
+				'dom_id' => uniqid('word-cloud-')
 			);
 
 			// Get a list of words, either from a list or a gravity form
@@ -414,6 +415,11 @@ https://wordcloud2-js.timdream.org/',
 					// Should be either "text", "list" or textarea
 					$field = \GFAPI::get_field( $fields['gravtiy_form_settings']['gravity_form_id'], $fieldId );
 
+					if ($field === false) {
+						$params['error_message'] = 'Error: At least one of your field IDs doesn\'t match a field.';
+						break;
+					}
+
 					// Get form entries until the set time and date in the block settings
 					$search_criteria['end_date'] = $fields['gravtiy_form_settings']['show_entries_until'];
 					$entries = \GFAPI::get_entries( $fields['gravtiy_form_settings']['gravity_form_id'], $search_criteria );
@@ -423,14 +429,21 @@ https://wordcloud2-js.timdream.org/',
 						$wordsToAdd = array();
 
 						if ( $field->type == "text" ) {
-							$wordsToAdd[] = rgar( $entry, $fieldId );
+							$word = rgar( $entry, $fieldId );
+
+							if (!empty($word)) {
+								$wordsToAdd[] = $word;
+							}
 						} elseif ( $field->type == 'list' ) {
 							$listFieldWords = unserialize( rgar( $entry, $fieldId ) );
 
-							// Field can be empty when the form field wasn't set to mandatory, skip those
-							if (!empty($listFieldWords)) {
+							// Only add if there are words in the field
+							if ($listFieldWords !== false) {
 								foreach ( $listFieldWords as $listFieldWord ) {
-									$wordsToAdd[] = $listFieldWord;
+									// Some of the fields can be empty, we don't want those
+									if (!empty($listFieldWord)) {
+										$wordsToAdd[] = $listFieldWord;
+									}
 								}
 							}
 						} elseif ( $field->type == 'textarea' ) {
@@ -477,7 +490,7 @@ https://wordcloud2-js.timdream.org/',
 			// The cloud looks best when the words with biggest weight are drawn first. Sorting for weight.
 			usort( $this->words, array( $this, "sortWords" ) );
 			$params['word_list'] = json_encode( $this->words );
-
+			
 			// We need to know the min max weight of words in the list to calulate their size in the map
 			$this->calculateMinMaxWeight();
 			$params['max_word_size'] = $this->maxWeight;
