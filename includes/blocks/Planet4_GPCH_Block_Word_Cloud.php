@@ -257,10 +257,11 @@ Amor 2',
 										'id'    => '',
 									),
 									'choices'           => array(
-										'NN'                     => 'Nouns',
-										'NE'                     => 'Names',
-										'ADJA'                   => 'Adjectives',
-										'VVINF,VVPP,VVFIN,VVIZU' => 'Verbs',
+										'NN'   => 'Nouns',
+										'NE'   => 'Names',
+										'ADJ'  => 'Adjectives',
+										'VERB' => 'Verbs',
+										'DEV'  => 'Other',
 									),
 									'allow_custom'      => 0,
 									'default_value'     => array(),
@@ -509,6 +510,33 @@ https://wordcloud2-js.timdream.org/',
 							'ui'                => 1,
 							'ui_on_text'        => '',
 							'ui_off_text'       => '',
+						),
+						array(
+							'key'               => 'field_p4_gpch_blocks_word_cloud_unique_identifier',
+							'label'             => 'Unique Identifier',
+							'name'              => 'unique_identifier',
+							'type'              => 'text',
+							'instructions'      => 'The unique identifier for this cloud. Used in caching.',
+							'required'          => 0,
+							'conditional_logic' => array(
+								array(
+									array(
+										'field'    => 'field_p4_gpch_blocks_word_cloud_advanced_options',
+										'operator' => '==',
+										'value'    => '1',
+									),
+								),
+							),
+							'wrapper'           => array(
+								'width' => '',
+								'class' => '',
+								'id'    => '',
+							),
+							'default_value'     => '',
+							'placeholder'       => '',
+							'prepend'           => '',
+							'append'            => '',
+							'maxlength'         => '',
 						),
 					),
 					'location'              => array(
@@ -829,8 +857,8 @@ https://wordcloud2-js.timdream.org/',
 		 * @return bool
 		 */
 		protected function addFromIndex( $entry ) {
-			$updated = gform_get_meta( $entry['id'], 'cloud_words_updated' );
-			$words   = gform_get_meta( $entry['id'], 'cloud_words' );
+			$updated = gform_get_meta( $entry['id'], $this->options['unique_identifier'] . 'cloud_words_updated' );
+			$words   = gform_get_meta( $entry['id'], $this->options['unique_identifier'] . 'cloud_words' );
 
 			$thresold = time() - $this->options['cache_lifetime'];
 
@@ -952,8 +980,8 @@ https://wordcloud2-js.timdream.org/',
 		 * @param $entry
 		 */
 		protected function saveFieldMetadata( $words, $entry ) {
-			gform_update_meta( $entry['id'], 'cloud_words', $words );
-			gform_update_meta( $entry['id'], 'cloud_words_updated', time() );
+			gform_update_meta( $entry['id'], $this->options['unique_identifier'] . 'cloud_words', $words );
+			gform_update_meta( $entry['id'], $this->options['unique_identifier'] . 'cloud_words_updated', time() );
 		}
 	}
 }
