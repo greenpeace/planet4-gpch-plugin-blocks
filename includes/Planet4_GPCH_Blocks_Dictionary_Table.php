@@ -68,7 +68,7 @@ class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
 		$start = ( $limit * $page ) - $limit;
 
 		if ( ! empty( $search ) ) {
-			$where = 'WHERE word LIKE \'%' . $search . '%\'';
+			$where = 'WHERE word LIKE \'' . $search . '\'';
 		} else {
 			$where = '';
 		}

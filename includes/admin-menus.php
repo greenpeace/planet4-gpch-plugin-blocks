@@ -4,7 +4,7 @@ require P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'includes/Planet4_GPCH_Blocks_Dictiona
 
 
 function gpch_cloud_block_admin_menu() {
-	add_menu_page( 'Cloud Block Dictionary', 'Cloud Block Dictionary', 'manage_options', 'gpch-cloud-block-dictionary', 'gpch_cloud_block_render_dictionary_list' );
+	add_menu_page( 'Cloud Block Dictionary', 'Cloud Block Dictionary', 'edit_pages', 'gpch-cloud-block-dictionary', 'gpch_cloud_block_render_dictionary_list' );
 }
 
 function gpch_cloud_block_render_dictionary_list() {
