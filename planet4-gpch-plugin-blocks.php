@@ -51,18 +51,15 @@ function gpch_plugin_blocks_db_install() {
 	$charset_collate = $wpdb->get_charset_collate();
 
 	$sql = "CREATE TABLE $table_name (
-				id int(11) NOT NULL,
+				id int(11) NOT NULL auto_increment,
 				language varchar(5) NOT NULL,
 				confirmed tinyint(1) NOT NULL DEFAULT 0,
 				blacklisted tinyint(1) NOT NULL DEFAULT 0,
 				word varchar(32) NOT NULL,
-				type varchar(8) NOT NULL
-			) $charset_collate;
-			ALTER TABLE $table_name
-				ADD PRIMARY KEY (id),
-				ADD KEY word (word);
-			ALTER TABLE $table_name
-				MODIFY id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;";
+				type varchar(8) NOT NULL,
+				PRIMARY KEY  (id),
+				KEY word  (word)
+			) $charset_collate;";
 
 	// Apply DB Schema
 	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
