@@ -57,7 +57,7 @@ class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
 
 		$columns               = $this->get_columns();
 		$hidden                = array();
-		$sortable              = array( 'id', 'word', 'type', 'confirmed', 'blacklisted' );
+		$sortable              = $this->get_sortable_columns();
 		$this->_column_headers = array( $columns, $hidden, $sortable );
 		$this->items           = $this->get_table_data( $words_per_page, $user_search_key );
 	}
@@ -222,9 +222,9 @@ class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
 	public function column_default( $item, $column_name ) {
 		switch ( $column_name ) {
 			case 'id':
-			case 'word':
 			case 'type':
-				return $item[ $column_name ];
+				return $item[ $column_name ];case 'word';
+			return '<strong>' . $item[ $column_name ] . '</strong>';
 			default:
 				return print_r( $item, true ); //Show the whole array for troubleshooting purposes
 		}
@@ -232,17 +232,17 @@ class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
 
 	public function column_blacklisted( $item ) {
 		if ( $item['blacklisted'] === '1' ) {
-			return 'Yes';
+			return '<span style="background-color:#000000;color: #fff;padding: 0 .5em;font-weight:bold;<">Yes</span>';
 		} else {
-			return "No";
+			return '<span style="background-color:#bfe7bf;padding: 0 .5em;">No</span>';
 		}
 	}
 
 	public function column_confirmed( $item ) {
 		if ( $item['confirmed'] === '1' ) {
-			return 'Yes';
+			return '<span style="background-color:#bfe7bf;padding: 0 .5em;">Yes</span>';
 		} else {
-			return "No";
+			return '<span style="background-color:#E5B0B0;padding: 0 .5em;">No</span>';
 		}
 	}
 
@@ -272,12 +272,15 @@ class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
 	 * @return array[]
 	 */
 	public function get_sortable_columns() {
-		return $sortable = array(
-			'id'          => array( 'id', false ),
+		$sortable_columns = array(
+			'id'          => array( 'id', true ),
 			'word'        => array( 'word', true ),
-			'type'        => array( 'type', false ),
-			'confirmed'   => array( 'confirmed', false ),
-			'blacklisted' => array( 'blacklisted', false ),
+			'type'        => array( 'type', true ),
+			'blacklisted' => array( 'blacklisted', true ),
+			'confirmed'   => array( 'confirmed', true ),
 		);
+
+		return $sortable_columns;
 	}
+
 }
