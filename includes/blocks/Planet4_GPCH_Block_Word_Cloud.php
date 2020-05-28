@@ -15,9 +15,46 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Word_Cloud' ) ) {
 		protected $options;
 
 		/**
+		 * Default options for the block
+		 *
+		 * @var array
+		 */
+		protected $default_options = array(
+			'data_source'                          => 'list',
+			'words_list'                           => 'No_Words 1',
+			'gravtiy_form_settings'                => array(
+				'gravity_form_id'       => '',
+				'gravity_form_field_id' => '',
+				'show_entries_until'    => '2099-01-02 00:00:00',
+				'use_dictionary'        => true,
+				'dictionary_settings'   => array(
+					'pos_to_show'          => array( [ 'NN' ] ),
+					'new_words_dictionary' => true,
+				),
+			),
+			'word_colors'                          => 'greenpeace',
+			'use_detailed_cloud_rendering_options' => false,
+			'cloud_rendering_options'              => array(
+				'relative_scale' => '0.6',
+				'color_split_1'  => '80',
+				'color_split_1'  => '90',
+				'grid_size'      => '18',
+			),
+			'use_advanced_options'                 => false,
+			'advanced_options'                     => array(
+				'max_words_to_show' => 100,
+				'cache_lifetime'    => 864000,
+				'max_reindex_rate'  => 10,
+				'max_index_words'   => 30,
+				'debug_output'      => false,
+				'unique_identifier' => 'default',
+			),
+		);
+
+		/**
 		 * @var array The list of words for the clouds including weights
 		 */
-		protected $words;
+		protected $words = array();
 
 		/**
 		 * @var int Minimum weight of a word in the list
@@ -32,7 +69,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Word_Cloud' ) ) {
 		/**
 		 * @var
 		 */
-		protected $debugMessages;
+		protected $debugMessages = array();
 
 		protected $reindexCounter;
 
@@ -41,10 +78,9 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Word_Cloud' ) ) {
 
 			add_action( 'acf/init', array( $this, 'register_acf_block' ) );
 
-			$this->words          = array();
+			// Some starter values
 			$this->minWeight      = 9999999;
 			$this->maxWeight      = 0;
-			$this->debugMessages  = array();
 			$this->reindexCounter = 0;
 		}
 
@@ -195,87 +231,16 @@ Amor 2',
 									'return_format'     => 'Y-m-d H:i:s',
 									'first_day'         => 1,
 								),
-							),
-						),
-						array(
-							'key'               => 'field_p4_gpch_blocks_word_cloud_use_dictionary',
-							'label'             => 'Use the dictionary',
-							'name'              => 'use_dictionary',
-							'type'              => 'true_false',
-							'instructions'      => 'Using the dictionary will
+								array(
+									'key'               => 'field_p4_gpch_blocks_word_cloud_use_dictionary',
+									'label'             => 'Use the dictionary',
+									'name'              => 'use_dictionary',
+									'type'              => 'true_false',
+									'instructions'      => 'Using the dictionary will
 - only show words in the dictionary
 - filter blacklisted words
 - allow you to select to show only certain POS (part of speech, e.g. nouns, adjectives)
 - add new words to the dictionary so they can bei either confirmed or blacklisted',
-							'required'          => 0,
-							'conditional_logic' => 0,
-							'wrapper'           => array(
-								'width' => '',
-								'class' => '',
-								'id'    => '',
-							),
-							'message'           => '',
-							'default_value'     => 1,
-							'ui'                => 1,
-							'ui_on_text'        => 'Yes',
-							'ui_off_text'       => 'No',
-						),
-						array(
-							'key'               => 'field_p4_gpch_blocks_word_cloud_dictionary_settings',
-							'label'             => 'Dictionary Settings',
-							'name'              => 'dictionary_settings',
-							'type'              => 'group',
-							'instructions'      => '',
-							'required'          => 0,
-							'conditional_logic' => array(
-								array(
-									array(
-										'field'    => 'field_p4_gpch_blocks_word_cloud_use_dictionary',
-										'operator' => '==',
-										'value'    => '1',
-									),
-								),
-							),
-							'wrapper'           => array(
-								'width' => '',
-								'class' => '',
-								'id'    => '',
-							),
-							'layout'            => 'block',
-							'sub_fields'        => array(
-								array(
-									'key'               => 'field_p4_gpch_blocks_word_cloud_show_pos',
-									'label'             => 'POS (part of speech) to show',
-									'name'              => 'pos_to_show',
-									'type'              => 'checkbox',
-									'instructions'      => 'Usually you get the best results showing only nouns and names, but you can select other types of words.',
-									'required'          => 0,
-									'conditional_logic' => 0,
-									'wrapper'           => array(
-										'width' => '',
-										'class' => '',
-										'id'    => '',
-									),
-									'choices'           => array(
-										'NN'   => 'Nouns',
-										'NE'   => 'Names',
-										'ADJ'  => 'Adjectives',
-										'VERB' => 'Verbs',
-										'DEV'  => 'Other',
-									),
-									'allow_custom'      => 0,
-									'default_value'     => array(),
-									'layout'            => 'vertical',
-									'toggle'            => 0,
-									'return_format'     => 'value',
-									'save_custom'       => 0,
-								),
-								array(
-									'key'               => 'field_p4_gpch_blocks_word_cloud_dictionary_add_new_words',
-									'label'             => 'Add new words to the dictionary',
-									'name'              => 'new_words_dictionary',
-									'type'              => 'true_false',
-									'instructions'      => 'Add words that are not yet in the dictionary? They need to be moderated before they are shown in the word cloud.',
 									'required'          => 0,
 									'conditional_logic' => 0,
 									'wrapper'           => array(
@@ -289,11 +254,82 @@ Amor 2',
 									'ui_on_text'        => 'Yes',
 									'ui_off_text'       => 'No',
 								),
+								array(
+									'key'               => 'field_p4_gpch_blocks_word_cloud_dictionary_settings',
+									'label'             => 'Dictionary Settings',
+									'name'              => 'dictionary_settings',
+									'type'              => 'group',
+									'instructions'      => '',
+									'required'          => 0,
+									'conditional_logic' => array(
+										array(
+											array(
+												'field'    => 'field_p4_gpch_blocks_word_cloud_use_dictionary',
+												'operator' => '==',
+												'value'    => '1',
+											),
+										),
+									),
+									'wrapper'           => array(
+										'width' => '',
+										'class' => '',
+										'id'    => '',
+									),
+									'layout'            => 'block',
+									'sub_fields'        => array(
+										array(
+											'key'               => 'field_p4_gpch_blocks_word_cloud_show_pos',
+											'label'             => 'POS (part of speech) to show',
+											'name'              => 'pos_to_show',
+											'type'              => 'checkbox',
+											'instructions'      => 'Usually you get the best results showing only nouns and names, but you can select other types of words.',
+											'required'          => 0,
+											'conditional_logic' => 0,
+											'wrapper'           => array(
+												'width' => '',
+												'class' => '',
+												'id'    => '',
+											),
+											'choices'           => array(
+												'NN'   => 'Nouns',
+												'NE'   => 'Names',
+												'ADJ'  => 'Adjectives',
+												'VERB' => 'Verbs',
+												'DEV'  => 'Other',
+											),
+											'allow_custom'      => 0,
+											'default_value'     => array(),
+											'layout'            => 'vertical',
+											'toggle'            => 0,
+											'return_format'     => 'value',
+											'save_custom'       => 0,
+										),
+										array(
+											'key'               => 'field_p4_gpch_blocks_word_cloud_dictionary_add_new_words',
+											'label'             => 'Add new words to the dictionary',
+											'name'              => 'new_words_dictionary',
+											'type'              => 'true_false',
+											'instructions'      => 'Add words that are not yet in the dictionary? They need to be moderated before they are shown in the word cloud.',
+											'required'          => 0,
+											'conditional_logic' => 0,
+											'wrapper'           => array(
+												'width' => '',
+												'class' => '',
+												'id'    => '',
+											),
+											'message'           => '',
+											'default_value'     => 1,
+											'ui'                => 1,
+											'ui_on_text'        => 'Yes',
+											'ui_off_text'       => 'No',
+										),
+									),
+								),
 							),
 						),
 						array(
 							'key'               => 'field_p4_gpch_blocks_word_cloud_word_colors',
-							'label'             => 'Word colors',
+							'label'             => 'Word cloud color scheme',
 							'name'              => 'word_colors',
 							'type'              => 'select',
 							'instructions'      => '',
@@ -309,7 +345,6 @@ Amor 2',
 								'climate'    => 'Climate',
 								'plastics'   => 'Plastics',
 								'random'     => 'Random',
-								'function'   => 'Use your own function',
 							),
 							'default_value'     => array(
 								0 => 'greenpeace',
@@ -322,19 +357,37 @@ Amor 2',
 							'placeholder'       => '',
 						),
 						array(
-							'key'               => 'field_p4_gpch_blocks_word_cloud_word_colors_function',
-							'label'             => 'word_colors_function',
-							'name'              => 'word_colors_function',
-							'type'              => 'textarea',
-							'instructions'      => 'You can create your own color function and paste it into this field. See the examples here:
-https://wordcloud2-js.timdream.org/',
+							'key'               => 'field_p4_gpch_blocks_word_cloud_use_detailed_rendering_options',
+							'label'             => 'Use detailed cloud rendering options',
+							'name'              => 'use_detailed_cloud_rendering_options',
+							'type'              => 'true_false',
+							'instructions'      => 'Change some of the preset word cloud options to change its looks.',
+							'required'          => 0,
+							'conditional_logic' => 0,
+							'wrapper'           => array(
+								'width' => '',
+								'class' => '',
+								'id'    => '',
+							),
+							'message'           => '',
+							'default_value'     => 0,
+							'ui'                => 1,
+							'ui_on_text'        => '',
+							'ui_off_text'       => '',
+						),
+						array(
+							'key'               => 'field_p4_gpch_blocks_word_cloud_rendering_options',
+							'label'             => 'Cloud rendering options',
+							'name'              => 'cloud_rendering_options',
+							'type'              => 'group',
+							'instructions'      => '',
 							'required'          => 0,
 							'conditional_logic' => array(
 								array(
 									array(
-										'field'    => 'field_p4_gpch_blocks_word_cloud_word_colors',
+										'field'    => 'field_p4_gpch_blocks_word_cloud_use_detailed_rendering_options',
 										'operator' => '==',
-										'value'    => 'function',
+										'value'    => '1',
 									),
 								),
 							),
@@ -343,14 +396,92 @@ https://wordcloud2-js.timdream.org/',
 								'class' => '',
 								'id'    => '',
 							),
-							'default_value'     => '',
-							'placeholder'       => '',
-							'maxlength'         => '',
-							'rows'              => '',
-							'new_lines'         => '',
+							'layout'            => 'block',
+							'sub_fields'        => array(
+								array(
+									'key'               => 'field_p4_gpch_blocks_word_cloud_relative_scale',
+									'label'             => 'Relative scale',
+									'name'              => 'relative_scale',
+									'type'              => 'range',
+									'instructions'      => 'Changes the size difference between the largest and smallest word in the cloud. Values between 0.1 and 3 allowed, larger number means bigger difference. Default is 0.6.',
+									'required'          => 0,
+									'conditional_logic' => 0,
+									'wrapper'           => array(
+										'width' => '',
+										'class' => '',
+										'id'    => '',
+									),
+									'default_value'     => '0.6',
+									'min'               => '0.1',
+									'max'               => 2,
+									'step'              => '0.1',
+									'prepend'           => '',
+									'append'            => '',
+								),
+								array(
+									'key'               => 'field_p4_gpch_blocks_word_cloud_color_split_1',
+									'label'             => 'Color split 1',
+									'name'              => 'color_split_1',
+									'type'              => 'range',
+									'instructions'      => 'Change this value to change how many words are color 1.',
+									'required'          => 0,
+									'conditional_logic' => 0,
+									'wrapper'           => array(
+										'width' => '',
+										'class' => '',
+										'id'    => '',
+									),
+									'default_value'     => 80,
+									'min'               => 1,
+									'max'               => 100,
+									'step'              => '',
+									'prepend'           => '',
+									'append'            => '',
+								),
+								array(
+									'key'               => 'field_p4_gpch_blocks_word_cloud_color_split_2',
+									'label'             => 'Color split 2',
+									'name'              => 'color_split_2',
+									'type'              => 'range',
+									'instructions'      => 'Change this value to change how many words are color 2.',
+									'required'          => 0,
+									'conditional_logic' => 0,
+									'wrapper'           => array(
+										'width' => '',
+										'class' => '',
+										'id'    => '',
+									),
+									'default_value'     => 90,
+									'min'               => 1,
+									'max'               => 100,
+									'step'              => 1,
+									'prepend'           => '',
+									'append'            => '',
+								),
+								array(
+									'key'               => 'field_p4_gpch_blocks_word_cloud_grid_size',
+									'label'             => 'Grid size',
+									'name'              => 'grid_size',
+									'type'              => 'range',
+									'instructions'      => 'Grid size determines how far apart words are from each other, but also how many fit into the cloud. Default is 18.',
+									'required'          => 0,
+									'conditional_logic' => 0,
+									'wrapper'           => array(
+										'width' => '',
+										'class' => '',
+										'id'    => '',
+									),
+									'default_value'     => 18,
+									'min'               => 1,
+									'max'               => 100,
+									'step'              => 1,
+									'prepend'           => '',
+									'append'            => '',
+								),
+							),
 						),
 						array(
-							'key'               => 'field_p4_gpch_blocks_word_cloud_advanced_options',
+							'key'               => 'field_p4_gpch_blocks_word_cloud_use_advanced_options',
 							'label'             => 'Use advanced options',
 							'name'              => 'use_advanced_options',
 							'type'              => 'true_false',
@@ -369,132 +500,16 @@ https://wordcloud2-js.timdream.org/',
 							'ui_off_text'       => '',
 						),
 						array(
-							'key'               => 'field_p4_gpch_blocks_word_cloud_max_words',
-							'label'             => 'Max words to show',
-							'name'              => 'max_words_to_show',
-							'type'              => 'number',
-							'instructions'      => 'The maximum number of words shown in the cloud.',
-							'required'          => 0,
-							'conditional_logic' => array(
-								array(
-									array(
-										'field'    => 'field_p4_gpch_blocks_word_cloud_advanced_options',
-										'operator' => '==',
-										'value'    => '1',
-									),
-								),
-							),
-							'wrapper'           => array(
-								'width' => '',
-								'class' => '',
-								'id'    => '',
-							),
-							'default_value'     => 100,
-							'placeholder'       => '',
-							'prepend'           => '',
-							'append'            => '',
-							'min'               => 1,
-							'max'               => 10000,
-							'step'              => 0,
-						),
-						array(
-							'key'               => 'field_p4_gpch_blocks_word_cloud_cache_lifetime',
-							'label'             => 'Cache lifetime',
-							'name'              => 'cache_lifetime',
-							'type'              => 'number',
-							'instructions'      => 'Cache lifetime in seconds',
-							'required'          => 0,
-							'conditional_logic' => array(
-								array(
-									array(
-										'field'    => 'field_p4_gpch_blocks_word_cloud_advanced_options',
-										'operator' => '==',
-										'value'    => '1',
-									),
-								),
-							),
-							'wrapper'           => array(
-								'width' => '',
-								'class' => '',
-								'id'    => '',
-							),
-							'default_value'     => '',
-							'placeholder'       => '',
-							'prepend'           => '',
-							'append'            => '',
-							'min'               => 1,
-							'max'               => 9999999999,
-							'step'              => 1,
-						),
-						array(
-							'key'               => 'field_p4_gpch_blocks_word_cloud_reindex_rate',
-							'label'             => 'Max reindex rate',
-							'name'              => 'max_reindex_rate',
-							'type'              => 'number',
-							'instructions'      => 'The rate at which entries are re-indexed.',
-							'required'          => 0,
-							'conditional_logic' => array(
-								array(
-									array(
-										'field'    => 'field_p4_gpch_blocks_word_cloud_advanced_options',
-										'operator' => '==',
-										'value'    => '1',
-									),
-								),
-							),
-							'wrapper'           => array(
-								'width' => '',
-								'class' => '',
-								'id'    => '',
-							),
-							'default_value'     => 10,
-							'placeholder'       => '',
-							'prepend'           => '',
-							'append'            => '',
-							'min'               => 1,
-							'max'               => 9999999999,
-							'step'              => 1,
-						),
-						array(
-							'key'               => 'field_p4_gpch_blocks_word_cloud_max_index_words',
-							'label'             => 'Max number of words to index',
-							'name'              => 'max_index_words',
-							'type'              => 'number',
-							'instructions'      => 'The maximum number of words in each field that gets indexed',
-							'required'          => 0,
-							'conditional_logic' => array(
-								array(
-									array(
-										'field'    => 'field_p4_gpch_blocks_word_cloud_advanced_options',
-										'operator' => '==',
-										'value'    => '1',
-									),
-								),
-							),
-							'wrapper'           => array(
-								'width' => '',
-								'class' => '',
-								'id'    => '',
-							),
-							'default_value'     => 30,
-							'placeholder'       => '',
-							'prepend'           => '',
-							'append'            => '',
-							'min'               => 1,
-							'max'               => 9999999999,
-							'step'              => 1,
-						),
-						array(
-							'key'               => 'field_p4_gpch_blocks_word_cloud_debug_output',
-							'label'             => 'Debug Output',
-							'name'              => 'debug_output',
-							'type'              => 'true_false',
+							'key'               => 'field_p4_gpch_blocks_word_cloud_advanced_options',
+							'label'             => 'Advanced Options',
+							'name'              => 'advanced_options',
+							'type'              => 'group',
 							'instructions'      => '',
 							'required'          => 0,
 							'conditional_logic' => array(
 								array(
 									array(
-										'field'    => 'field_p4_gpch_blocks_word_cloud_advanced_options',
+										'field'    => 'field_p4_gpch_blocks_word_cloud_use_advanced_options',
 										'operator' => '==',
 										'value'    => '1',
 									),
@@ -505,39 +520,133 @@ https://wordcloud2-js.timdream.org/',
 								'class' => '',
 								'id'    => '',
 							),
-							'message'           => '',
-							'default_value'     => 0,
-							'ui'                => 1,
-							'ui_on_text'        => '',
-							'ui_off_text'       => '',
-						),
-						array(
-							'key'               => 'field_p4_gpch_blocks_word_cloud_unique_identifier',
-							'label'             => 'Unique Identifier',
-							'name'              => 'unique_identifier',
-							'type'              => 'text',
-							'instructions'      => 'The unique identifier for this cloud. Used in caching.',
-							'required'          => 0,
-							'conditional_logic' => array(
+							'layout'            => 'block',
+							'sub_fields'        => array(
 								array(
-									array(
-										'field'    => 'field_p4_gpch_blocks_word_cloud_advanced_options',
-										'operator' => '==',
-										'value'    => '1',
+									'key'               => 'field_p4_gpch_blocks_word_cloud_max_words',
+									'label'             => 'Max words to show',
+									'name'              => 'max_words_to_show',
+									'type'              => 'number',
+									'instructions'      => 'The maximum number of words shown in the cloud.',
+									'required'          => 0,
+									'conditional_logic' => '',
+									'wrapper'           => array(
+										'width' => '',
+										'class' => '',
+										'id'    => '',
 									),
+									'default_value'     => 100,
+									'placeholder'       => '',
+									'prepend'           => '',
+									'append'            => '',
+									'min'               => 1,
+									'max'               => 10000,
+									'step'              => 0,
+								),
+								array(
+									'key'               => 'field_p4_gpch_blocks_word_cloud_cache_lifetime',
+									'label'             => 'Cache lifetime',
+									'name'              => 'cache_lifetime',
+									'type'              => 'number',
+									'instructions'      => 'Cache lifetime in seconds',
+									'required'          => 0,
+									'conditional_logic' => '',
+									'wrapper'           => array(
+										'width' => '',
+										'class' => '',
+										'id'    => '',
+									),
+									'default_value'     => '',
+									'placeholder'       => '',
+									'prepend'           => '',
+									'append'            => '',
+									'min'               => 1,
+									'max'               => 9999999999,
+									'step'              => 1,
+								),
+								array(
+									'key'               => 'field_p4_gpch_blocks_word_cloud_reindex_rate',
+									'label'             => 'Max reindex rate',
+									'name'              => 'max_reindex_rate',
+									'type'              => 'number',
+									'instructions'      => 'The rate at which entries are re-indexed.',
+									'required'          => 0,
+									'conditional_logic' => '',
+									'wrapper'           => array(
+										'width' => '',
+										'class' => '',
+										'id'    => '',
+									),
+									'default_value'     => 10,
+									'placeholder'       => '',
+									'prepend'           => '',
+									'append'            => '',
+									'min'               => 1,
+									'max'               => 9999999999,
+									'step'              => 1,
+								),
+								array(
+									'key'               => 'field_p4_gpch_blocks_word_cloud_max_index_words',
+									'label'             => 'Max number of words to index',
+									'name'              => 'max_index_words',
+									'type'              => 'number',
+									'instructions'      => 'The maximum number of words in each field that gets indexed',
+									'required'          => 0,
+									'conditional_logic' => '',
+									'wrapper'           => array(
+										'width' => '',
+										'class' => '',
+										'id'    => '',
+									),
+									'default_value'     => 30,
+									'placeholder'       => '',
+									'prepend'           => '',
+									'append'            => '',
+									'min'               => 1,
+									'max'               => 9999999999,
+									'step'              => 1,
+								),
+								array(
+									'key'               => 'field_p4_gpch_blocks_word_cloud_debug_output',
+									'label'             => 'Debug Output',
+									'name'              => 'debug_output',
+									'type'              => 'true_false',
+									'instructions'      => '',
+									'required'          => 0,
+									'conditional_logic' => '',
+									'wrapper'           => array(
+										'width' => '',
+										'class' => '',
+										'id'    => '',
+									),
+									'message'           => '',
+									'default_value'     => 0,
+									'ui'                => 1,
+									'ui_on_text'        => '',
+									'ui_off_text'       => '',
+								),
+								array(
+									'key'               => 'field_p4_gpch_blocks_word_cloud_unique_identifier',
+									'label'             => 'Unique Identifier',
+									'name'              => 'unique_identifier',
+									'type'              => 'text',
+									'instructions'      => 'The unique identifier for this cloud. Used in caching.',
+									'required'          => 0,
+									'conditional_logic' => '',
+									'wrapper'           => array(
+										'width' => '',
+										'class' => '',
+										'id'    => '',
+									),
+									'default_value'     => '',
+									'placeholder'       => '',
+									'prepend'           => '',
+									'append'            => '',
+									'maxlength'         => '',
 								),
 							),
-							'wrapper'           => array(
-								'width' => '',
-								'class' => '',
-								'id'    => '',
-							),
-							'default_value'     => '',
-							'placeholder'       => '',
-							'prepend'           => '',
-							'append'            => '',
-							'maxlength'         => '',
 						),
+
 					),
 					'location'              => array(
 						array(
@@ -588,63 +697,30 @@ https://wordcloud2-js.timdream.org/',
 		public function render_block( $block ) {
 			$this->addDebugMessage( 'Rendering started' );
 
-			$this->options = get_fields();
+			// Get options and merge with defaults
+			$this->options = array_replace_recursive( $this->default_options, get_fields() );
 
-			// General parameters
+			// Parameters for the template that don't need any further work
 			$params = array(
-				'script' => P4_GPCH_PLUGIN_BLOCKS_BASE_URL . 'assets/js/wordcloud2.js',
-				'dom_id' => uniqid( 'word-cloud-' )
+				'script'         => P4_GPCH_PLUGIN_BLOCKS_BASE_URL . 'assets/js/wordcloud2.js',
+				'dom_id'         => uniqid( 'word-cloud-' ),
+				'relative_scale' => $this->options['cloud_rendering_options']['relative_scale'],
+				'grid_size'      => $this->options['cloud_rendering_options']['grid_size'],
 			);
 
 			// Get a list of words, either from a list or a gravity form
 			if ( $this->options['data_source'] == 'list' ) {
-				$words = explode( "\n", $this->options['words_list'] );
-
-				for ( $i = 0; $i < count( $words ); $i ++ ) {
-					$words[ $i ] = trim( $words[ $i ] );
-					$words[ $i ] = explode( ' ', $words[ $i ] );
-				}
-
-				$this->words = $words;
+				$this->getWordsFromList();
 			} elseif ( $this->options['data_source'] == 'gravityform' ) {
-				// Find the field IDs
-				$fieldIds = explode( ',', $this->options['gravtiy_form_settings']['gravity_form_field_id'] );
-
-				// Make sure there are no spaces in field IDs
-				for ( $i = 0; $i < count( $fieldIds ); $i ++ ) {
-					$fieldIds[ $i ] = trim( $fieldIds[ $i ] );
-				}
-
-				// Get form entries until the set time and date in the block settings
-				$search_criteria['end_date'] = $this->options['gravtiy_form_settings']['show_entries_until'];
-				$entries                     = \GFAPI::get_entries( $this->options['gravtiy_form_settings']['gravity_form_id'], $search_criteria );
-
-				foreach ( $entries as $entry ) {
-					// Add from index if it exists
-					$success = $this->addFromIndex( $entry );
-
-					// Index is either nonexistent or stale, we need to (re-)index
-					if ( ! $success ) {
-						// Try to index the entry, but only if we haven't hit the limit yet
-						$this->reindexCounter = $this->reindexCounter + 1;
-						if ( $this->reindexCounter > $this->options['max_reindex_rate'] ) {
-							break;
-						}
-
-						$this->indexEntry( $entry, $fieldIds );
-					}
-				}
+				$this->getWordsFromGravityForm();
 			}
 
-			// The cloud looks best when the words with biggest weight are drawn first. Sort for weight.
+			// The cloud looks best when the words with biggest weight are drawn first, so it's best to sort.
 			usort( $this->words, array( $this, "sortWords" ) );
 
-			// If we have a maximum number of word to show in the cloud, remove the rest
-			if ( isset( $this->options['max_words_to_show'] ) ) {
-				$params['word_list'] = json_encode( array_slice( $this->words, 0, $this->options['max_words_to_show'] ) );
-			} else {
-				$params['word_list'] = json_encode( $this->words );
-			}
+			// There's a limit on how many words we want to show in the cloud. Remove the words from the end of the
+			// array (those with least weight)
+			$params['word_list'] = json_encode( array_slice( $this->words, 0, $this->options['advanced_options']['max_words_to_show'] ) );
 
 			// We need to know the min max weight of words in the list to calulate their size in the map
 			$this->calculateMinMaxWeight();
@@ -668,20 +744,75 @@ https://wordcloud2-js.timdream.org/',
 				$params['word_colors'][2] = '#c4e3e1';
 			}
 
-			// Find out where to split between colors in the cloud
-			$params['color_split_1'] = $this->findWeightAtPercentile( 10 );
-			$params['color_split_2'] = $this->findWeightAtPercentile( 70 );
+			// Some color schemes rely on a value where to split between colors
+			$params['color_split_1'] = $this->findWeightAtPercentile( $this->options['cloud_rendering_options']['color_split_1'] );
+			$params['color_split_2'] = $this->findWeightAtPercentile( $this->options['cloud_rendering_options']['color_split_2'] );
 
+			// Some help debugging
+			$this->addDebugMessage( 'min_word_size: ' . $params['min_word_size'] );
+			$this->addDebugMessage( 'max_word_size: ' . $params['max_word_size'] );
+			$this->addDebugMessage( 'Color Split 1: ' . $params['color_split_1'] );
+			$this->addDebugMessage( 'Color Split 2: ' . $params['color_split_2'] );
 			$this->addDebugMessage( 'Output started' );
 
-			if ( $this->options['debug_output'] ) {
+			if ( $this->options['advanced_options']['debug_output'] ) {
 				$params['debug_messages'] = $this->debugMessages;
 			}
 
-			// output template
+			// Output template
 			\Timber::render( $this->template_file, $params );
 		}
 
+		/**
+		 * Retrieves a list of words and their weight from a text
+		 */
+		protected function getWordsFromList() {
+			if (!empty($this->options['words_list'])) {
+				$words = explode( "\n", $this->options['words_list'] );
+
+				for ( $i = 0; $i < count( $words ); $i ++ ) {
+					$words[ $i ] = trim( $words[ $i ] );
+					$words[ $i ] = explode( ' ', $words[ $i ] );
+				}
+
+				$this->words = $words;
+			}
+		}
+
+		/**
+		 * Retrieves a list of words from a Gravity Form
+		 */
+		protected function getWordsFromGravityForm() {
+			// Find the field IDs
+			$fieldIds = explode( ',', $this->options['gravtiy_form_settings']['gravity_form_field_id'] );
+
+			// Make sure there are no spaces in field IDs
+			for ( $i = 0; $i < count( $fieldIds ); $i ++ ) {
+				$fieldIds[ $i ] = trim( $fieldIds[ $i ] );
+			}
+
+			// Get form entries until the set time and date in the block settings
+			$search_criteria['end_date'] = $this->options['gravtiy_form_settings']['show_entries_until'];
+			$entries                     = \GFAPI::get_entries( $this->options['gravtiy_form_settings']['gravity_form_id'], $search_criteria );
+
+			foreach ( $entries as $entry ) {
+				// If the words are already indexed, we can get them from the index
+				$success = $this->addFromIndex( $entry );
+
+				// If the index is either nonexistent or stale, we need to (re-)index
+				if ( ! $success ) {
+					$this->reindexCounter = $this->reindexCounter + 1;
+
+					// Check if we've hit the limit of entries to limit this run yet
+					if ( $this->reindexCounter > $this->options['advanced_options']['max_reindex_rate'] ) {
+						break;
+					}
+
+					// Index the words in this entry
+					$this->indexEntry( $entry, $fieldIds );
+				}
+			}
+		}
 
 		/**
 		 * Callback function for usort for sorting our words with the most mentioned word first
@@ -704,22 +835,9 @@ https://wordcloud2-js.timdream.org/',
 		 * Adds a word to the word cloud if it doesn't exist yet. If it does exist, it increases the weight of the word.
 		 *
 		 * @param $word
-		 * @param bool $useDictionary
-		 * @param array $pos
-		 * @param bool $addNewWords
 		 */
-		protected function addWordToCloud( $word, $useDictionary = false, $pos = array(), $addNewWords = true ) {
+		protected function addWordToCloud( $word ) {
 			$word = ucfirst( $word );
-
-			// Check dictionary
-			if ( $useDictionary ) {
-				$dictionaryCheck = $this->checkDictionary( $word, $pos, $addNewWords );
-
-				// Return when dictionary check fails
-				if ( $dictionaryCheck === false ) {
-					return;
-				}
-			}
 
 			for ( $i = 0; $i < count( $this->words ); $i ++ ) {
 				if ( $this->words[ $i ][0] == $word ) {
@@ -739,12 +857,14 @@ https://wordcloud2-js.timdream.org/',
 		 * Finds the min and max weight we use in our word cloud.
 		 */
 		protected function calculateMinMaxWeight() {
-			foreach ( $this->words as $word ) {
-				if ( $word[1] < $this->minWeight ) {
-					$this->minWeight = $word[1];
-				}
-				if ( $word[1] > $this->maxWeight ) {
-					$this->maxWeight = $word[1];
+			if ( count( $this->words ) > 0 ) {
+				foreach ( $this->words as $word ) {
+					if ( $word[1] < $this->minWeight ) {
+						$this->minWeight = $word[1];
+					}
+					if ( $word[1] > $this->maxWeight ) {
+						$this->maxWeight = $word[1];
+					}
 				}
 			}
 		}
@@ -758,24 +878,28 @@ https://wordcloud2-js.timdream.org/',
 		 * @return int Index
 		 */
 		protected function findWeightAtPercentile( $percentile ) {
-			$factor = 1 / ( $percentile / 100 );
+			if ( count( $this->words ) > 0 ) {
+				$factor = 1 / ( $percentile / 100 );
 
-			$weights = array();
-			foreach ( $this->words as $word ) {
-				$weights[] = $word[1];
+				$weights = array();
+				foreach ( $this->words as $word ) {
+					$weights[] = $word[1];
+				}
+
+				sort( $weights );
+
+				// The array index of the percentile we're looking for
+				$index = ( floor( count( $weights ) / $factor ) ) - 1;
+
+				// index can't be below 0
+				if ( $index < 0 ) {
+					$index = 0;
+				}
+
+				return $weights[ $index ];
+			} else {
+				return 0;
 			}
-
-			sort( $weights );
-
-			// The array index of the percentile we're looking for
-			$index = ( floor( count( $weights ) / $factor ) ) - 1;
-
-			// index can't be below 0
-			if ( $index < 0 ) {
-				$index = 0;
-			}
-
-			return $weights[ $index ];
 		}
 
 
@@ -791,7 +915,7 @@ https://wordcloud2-js.timdream.org/',
 		protected function checkDictionary( $word, $pos, $addNewWord = true ) {
 			global $wpdb;
 
-			$tableName = $wpdb->prefix . "gpch_wordcloud_dictionary";
+			$tableName = $wpdb->prefix . P4_GPCH_PLUGIN_WORD_DICT_TABLE_NAME;
 			$sql       = "SELECT type, blacklisted, confirmed FROM {$tableName} WHERE word = '{$word}' AND language = '" . ICL_LANGUAGE_CODE . "'";
 
 			$results = $wpdb->get_results( $sql, OBJECT );
@@ -820,7 +944,7 @@ https://wordcloud2-js.timdream.org/',
 		protected function addWordToDictionary( $word ) {
 			global $wpdb;
 
-			$tableName = $wpdb->prefix . "gpch_wordcloud_dictionary";
+			$tableName = $wpdb->prefix . P4_GPCH_PLUGIN_WORD_DICT_TABLE_NAME;
 
 			$wpdb->insert( $tableName,
 				array(
@@ -857,12 +981,21 @@ https://wordcloud2-js.timdream.org/',
 		 * @return bool
 		 */
 		protected function addFromIndex( $entry ) {
-			$updated = gform_get_meta( $entry['id'], $this->options['unique_identifier'] . 'cloud_words_updated' );
-			$words   = gform_get_meta( $entry['id'], $this->options['unique_identifier'] . 'cloud_words' );
+			// Get entry metadata
+			$updated = gform_get_meta( $entry['id'], $this->options['advanced_options']['unique_identifier'] . '-cloud_words_updated' );
+			$options_hash = gform_get_meta( $entry['id'], $this->options['advanced_options']['unique_identifier'] . '-cloud_words_options_hash' );
+			$words   = gform_get_meta( $entry['id'], $this->options['advanced_options']['unique_identifier'] . '-cloud_words' );
 
-			$thresold = time() - $this->options['cache_lifetime'];
 
-			if ( $updated === false or $updated < $thresold ) {
+			$thresold = time() - $this->options['advanced_options']['cache_lifetime'];
+			$current_options_hash = $this->getCurrentOptionsHash();
+
+
+			// There are multiple reasons why a cached index shouldn't be loaded:
+			// - Index doesn't exist
+			// - Index is too old
+			// - Word cloud options have changed in the meantime (using $options_hash)
+			if ( $updated === false || $updated < $thresold || $options_hash != $current_options_hash ) {
 				return false;
 			} else {
 				foreach ( $words as $word ) {
@@ -871,6 +1004,23 @@ https://wordcloud2-js.timdream.org/',
 
 				return true;
 			}
+		}
+
+		/**
+		 * Returns a hash value of all the options that affect the cloud content
+		 *
+		 * @return Block
+		 */
+		protected function getCurrentOptionsHash() {
+			// All the options that have an effect on what words are shown in the cloud
+			$relevantOptions = array(
+				$this->options['gravtiy_form_settings']['gravity_form_field_id'],
+				$this->options['gravtiy_form_settings']['use_dictionary'],
+				$this->options['gravtiy_form_settings']['dictionary_settings']['pos_to_show'],
+				$this->options['advanced_options']['max_index_words'],
+			);
+
+			return md5(serialize($relevantOptions));
 		}
 
 		/**
@@ -920,28 +1070,28 @@ https://wordcloud2-js.timdream.org/',
 					$wordsIndexedCount = 0;
 					foreach ( $matches[0] as $match ) {
 						// Stop indexing long entries after a certain amount of words
-						if ( $wordsIndexedCount < $this->options['max_index_words'] ) {
+						if ( $wordsIndexedCount < $this->options['advanced_options']['max_index_words'] ) {
 							$wordsToAdd[] = $match;
 						} else {
 							break;
 						}
+
 						$wordsIndexedCount ++;
 					}
 				} else {
 					// Error message if field type is not supported
 					$params['error_message'] = 'Error: At least one of your fields is not of the required type. Make sure to only add text, list or textarea fields.';
 				}
-
 			}
 
 			// Dictionary check
-			if ( $this->options['use_dictionary'] === true ) {
+			if ( $this->options['gravtiy_form_settings']['use_dictionary'] === true ) {
 				// The POS (part of speech) of the words we'd like to use
 				// Array values might contain comma separated values. Imploding and exploding ensures all
 				// comma separated values are separated in the array
-				$pos = explode( ',', implode( ',', $this->options['dictionary_settings']['pos_to_show'] ) );
+				$pos = explode( ',', implode( ',', $this->options['gravtiy_form_settings']['dictionary_settings']['pos_to_show'] ) );
 
-				if ( $this->options['dictionary_settings']['new_words_dictionary'] ) {
+				if ( $this->options['gravtiy_form_settings']['dictionary_settings']['new_words_dictionary'] ) {
 					$addNewWords = true;
 				} else {
 					$addNewWords = false;
@@ -969,7 +1119,7 @@ https://wordcloud2-js.timdream.org/',
 
 			// Now add all the words we found
 			foreach ( $wordsToAdd as $word ) {
-				$this->addWordToCloud( $word, false );
+				$this->addWordToCloud( $word );
 			}
 		}
 
@@ -980,8 +1130,9 @@ https://wordcloud2-js.timdream.org/',
 		 * @param $entry
 		 */
 		protected function saveFieldMetadata( $words, $entry ) {
-			gform_update_meta( $entry['id'], $this->options['unique_identifier'] . 'cloud_words', $words );
-			gform_update_meta( $entry['id'], $this->options['unique_identifier'] . 'cloud_words_updated', time() );
+			gform_update_meta( $entry['id'], $this->options['advanced_options']['unique_identifier'] . '-cloud_words', $words );
+			gform_update_meta( $entry['id'], $this->options['advanced_options']['unique_identifier'] . '-cloud_words_updated', time() );
+			gform_update_meta( $entry['id'], $this->options['advanced_options']['unique_identifier'] . '-cloud_words_options_hash', $this->getCurrentOptionsHash() );
 		}
 	}
 }

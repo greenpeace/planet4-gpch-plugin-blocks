@@ -16,12 +16,15 @@ class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
 		$this->prepare_items();
 
 		// render the List Table
-		include_once( 'views/partials-wp-admin-cloud-block-dictionary-table.php' );
+		include_once( P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'includes/views/partials-wp-admin-cloud-block-dictionary-table.php' );
 	}
 
-	function get_columns() {
+	/**
+	 * Getter for table columns
+	 */
+	public function get_columns() {
 		$columns = array(
-			'cb' => '<input type="checkbox" />', // Checkbox for bulk actions
+			'cb'          => '<input type="checkbox" />', // Checkbox for bulk actions
 			'id'          => 'ID',
 			'word'        => 'Word',
 			'type'        => 'POS',
@@ -32,7 +35,10 @@ class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
 		return $columns;
 	}
 
-	function prepare_items() {
+	/**
+	 * Prepare the items for the table
+	 */
+	public function prepare_items() {
 		// Check for search string
 		$user_search_key = isset( $_REQUEST['s'] ) ? wp_unslash( trim( $_REQUEST['s'] ) ) : '';
 
@@ -40,7 +46,6 @@ class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
 
 		$words_per_page = 20;
 		$table_page     = $this->get_pagenum();
-
 
 		// set the pagination arguments
 		$total_words = $this->get_table_data( $words_per_page, $user_search_key, true );
@@ -50,7 +55,6 @@ class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
 			'per_page'    => $words_per_page,
 		) );
 
-
 		$columns               = $this->get_columns();
 		$hidden                = array();
 		$sortable              = array( 'id', 'word', 'type', 'confirmed', 'blacklisted' );
@@ -58,15 +62,25 @@ class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
 		$this->items           = $this->get_table_data( $words_per_page, $user_search_key );
 	}
 
-	function get_table_data( $limit, $search, $count = false ) {
+	/**
+	 * Retrieve the table data from our custom DB table
+	 *
+	 * @param $limit
+	 * @param $search
+	 * @param bool $count
+	 *
+	 * @return mixed
+	 */
+	protected function get_table_data( $limit, $search, $count = false ) {
 		global $wpdb;
-		$wpdb_table = $wpdb->prefix . "gpch_wordcloud_dictionary";
+		$wpdb_table = $wpdb->prefix . P4_GPCH_PLUGIN_WORD_DICT_TABLE_NAME;
 		$orderby    = ( isset( $_GET['orderby'] ) ) ? esc_sql( $_GET['orderby'] ) : 'id';
 		$order      = ( isset( $_GET['order'] ) ) ? esc_sql( $_GET['order'] ) : 'ASC';
 		$page       = ( isset( $_REQUEST['paged'] ) ) ? esc_sql( $_REQUEST['paged'] ) : '1';
 
 		$start = ( $limit * $page ) - $limit;
 
+		// Search
 		if ( ! empty( $search ) ) {
 			$where = 'WHERE word LIKE \'' . $search . '\'';
 		} else {
@@ -74,6 +88,7 @@ class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
 		}
 
 		if ( $count ) {
+			// Count only
 			$query = "SELECT COUNT(*)
                       FROM 
                         $wpdb_table 
@@ -97,6 +112,9 @@ class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
 		return $query_results;
 	}
 
+	/**
+	 * Getter for bulk actions
+	 */
 	public function get_bulk_actions() {
 		/*
 		 * on hitting apply in bulk actions the url paramas are set as
@@ -118,6 +136,9 @@ class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
 		return $actions;
 	}
 
+	/**
+	 * Handler for bulk actions
+	 */
 	public function handle_bulk_actions() {
 		/*
 		 * So, we have two dropdowns in the table where actions can be selected, but Wordpress doesn't seem to think
@@ -129,8 +150,9 @@ class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
 		} elseif ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] != '-1' ) {
 			$action = $_REQUEST['action'];
 		}
+
 		global $wpdb;
-		$table_name = $wpdb->prefix . "gpch_wordcloud_dictionary";
+		$table_name = $wpdb->prefix . P4_GPCH_PLUGIN_WORD_DICT_TABLE_NAME;
 
 		if ( isset( $action ) ) {
 			$nonce = wp_unslash( $_REQUEST['_wpnonce'] );
@@ -197,20 +219,18 @@ class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
 	 *
 	 * @return string|true
 	 */
-	function column_default( $item, $column_name ) {
+	public function column_default( $item, $column_name ) {
 		switch ( $column_name ) {
 			case 'id':
 			case 'word':
 			case 'type':
-			case 'confirmed':
-			case 'blacklisted':
 				return $item[ $column_name ];
 			default:
 				return print_r( $item, true ); //Show the whole array for troubleshooting purposes
 		}
 	}
 
-	function column_blacklisted( $item ) {
+	public function column_blacklisted( $item ) {
 		if ( $item['blacklisted'] === '1' ) {
 			return 'Yes';
 		} else {
@@ -218,7 +238,7 @@ class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
 		}
 	}
 
-	function column_confirmed( $item ) {
+	public function column_confirmed( $item ) {
 		if ( $item['confirmed'] === '1' ) {
 			return 'Yes';
 		} else {
@@ -226,7 +246,7 @@ class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
 		}
 	}
 
-	function column_type( $item ) {
+	public function column_type( $item ) {
 		if ( $item['type'] === 'NN' ) {
 			return 'Noun';
 		} elseif ( $item['type'] === 'NE' ) {
@@ -242,17 +262,22 @@ class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
 		}
 	}
 
-	function column_cb( $item ) {
+	public function column_cb( $item ) {
 		return '<input type="checkbox" name="ba[' . $item['id'] . ']">';
 	}
 
+	/**
+	 * Getter for sortable columns
+	 *
+	 * @return array[]
+	 */
 	public function get_sortable_columns() {
 		return $sortable = array(
 			'id'          => array( 'id', false ),
-			'word'    => array( 'word', true ),
-			'type' => array( 'type', false ),
-			'confirmed'           => array( 'confirmed', false ),
-			'blacklisted'          => array( 'blacklisted', false ),
+			'word'        => array( 'word', true ),
+			'type'        => array( 'type', false ),
+			'confirmed'   => array( 'confirmed', false ),
+			'blacklisted' => array( 'blacklisted', false ),
 		);
 	}
 }

@@ -20,11 +20,11 @@
 	  minWordSize = {{ min_word_size }},
 	  maxScale = 100,
 	  {# Relative size between largest and smallest words
-	  	- default: 0.5
+	  	- default: 0.6
 	  	- larger numer => bigger difference
 	  	- smaller number => smaller difference
 	  #}
-	  relativeScale = 0.6,
+	  relativeScale = {{ relative_scale }},
 	  factor = minWordSize / maxWordSize,
 	  scaleUpFactor = maxScale / (Math.pow(maxWordSize, relativeScale) / (maxWordSize / maxScale));
 
@@ -34,7 +34,7 @@
 		fontFamily: 'Roboto, sans-serif',
 		minRotation: 0,
 		maxRotation: 0,
-		gridSize: Math.round(24 * jQuery('#word-cloud').width() / 1024),
+		gridSize: Math.round( {{ grid_size }} * jQuery('#{{ dom_id }}').width() / 1024),
 		weightFactor: function (size) {
 			{# Formula to scale the words
 				- normalizes the size of the biggest number to maxScale
