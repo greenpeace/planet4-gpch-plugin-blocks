@@ -100,6 +100,8 @@ function gpch_plugin_blocks_db_insert_data() {
 			// cleanup trailing comma
 			$sql = rtrim( $sql, ", " ) . ';';
 
+			$sql = $wpdb->prepare($sql);
+
 			$wpdb->query( $sql );
 		}
 
