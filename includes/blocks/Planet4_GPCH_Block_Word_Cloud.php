@@ -42,12 +42,13 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Word_Cloud' ) ) {
 			),
 			'use_advanced_options'                 => false,
 			'advanced_options'                     => array(
-				'max_words_to_show' => 100,
-				'cache_lifetime'    => 864000,
-				'max_reindex_rate'  => 10,
-				'max_index_words'   => 30,
-				'debug_output'      => false,
-				'unique_identifier' => 'default',
+				'max_words_to_show'    => 100,
+				'max_use_form_entries' => 1000,
+				'cache_lifetime'       => 864000,
+				'max_reindex_rate'     => 10,
+				'max_index_words'      => 30,
+				'debug_output'         => false,
+				'unique_identifier'    => 'default',
 			),
 		);
 
@@ -607,6 +608,27 @@ Amor 2',
 									'step'              => 1,
 								),
 								array(
+									'key'               => 'field_p4_gpch_blocks_word_cloud_max_use_formn_entries',
+									'label'             => 'Max number of form entries to use in the cloud',
+									'name'              => 'max_use_form_entries',
+									'type'              => 'number',
+									'instructions'      => 'The maximum number of form entries to be used in the word cloud.',
+									'required'          => 0,
+									'conditional_logic' => '',
+									'wrapper'           => array(
+										'width' => '',
+										'class' => '',
+										'id'    => '',
+									),
+									'default_value'     => 1000,
+									'placeholder'       => '',
+									'prepend'           => '',
+									'append'            => '',
+									'min'               => 1,
+									'max'               => 9999999999,
+									'step'              => 1,
+								),
+								array(
 									'key'               => 'field_p4_gpch_blocks_word_cloud_debug_output',
 									'label'             => 'Debug Output',
 									'name'              => 'debug_output',
@@ -700,12 +722,21 @@ Amor 2',
 			// Get options and merge with defaults
 			$this->options = array_replace_recursive( $this->default_options, get_fields() );
 
+			// Even if debug is on, we only show debug messages for certain user roles
+			$user = \wp_get_current_user();
+			if ( in_array( 'administrator', $user->roles ) || in_array( 'editor', $user->roles ) ) {
+				$showDebugMessages = true;
+			} else {
+				$showDebugMessages = false;
+			}
+
 			// Parameters for the template that don't need any further work
 			$params = array(
-				'script'         => P4_GPCH_PLUGIN_BLOCKS_BASE_URL . 'assets/js/wordcloud2.js',
-				'dom_id'         => uniqid( 'word-cloud-' ),
-				'relative_scale' => $this->options['cloud_rendering_options']['relative_scale'],
-				'grid_size'      => $this->options['cloud_rendering_options']['grid_size'],
+				'script'              => P4_GPCH_PLUGIN_BLOCKS_BASE_URL . 'assets/js/wordcloud2.js',
+				'dom_id'              => uniqid( 'word-cloud-' ),
+				'relative_scale'      => $this->options['cloud_rendering_options']['relative_scale'],
+				'grid_size'           => $this->options['cloud_rendering_options']['grid_size'],
+				'show_debug_messages' => $showDebugMessages,
 			);
 
 			// Get a list of words, either from a list or a gravity form
@@ -767,7 +798,7 @@ Amor 2',
 		 * Retrieves a list of words and their weight from a text
 		 */
 		protected function getWordsFromList() {
-			if (!empty($this->options['words_list'])) {
+			if ( ! empty( $this->options['words_list'] ) ) {
 				$words = explode( "\n", $this->options['words_list'] );
 
 				for ( $i = 0; $i < count( $words ); $i ++ ) {
@@ -795,6 +826,9 @@ Amor 2',
 			$search_criteria['end_date'] = $this->options['gravtiy_form_settings']['show_entries_until'];
 			$entries                     = \GFAPI::get_entries( $this->options['gravtiy_form_settings']['gravity_form_id'], $search_criteria );
 
+			$limitCountdown        = $this->options['advanced_options']['max_use_form_entries'];
+			$this->debugMessages[] = 'Form entries limited to ' . $limitCountdown;
+
 			foreach ( $entries as $entry ) {
 				// If the words are already indexed, we can get them from the index
 				$success = $this->addFromIndex( $entry );
@@ -810,6 +844,13 @@ Amor 2',
 
 					// Index the words in this entry
 					$this->indexEntry( $entry, $fieldIds );
+				}
+
+				// When we hit the limit, stop indexing entries
+				$limitCountdown --;
+
+				if ( $limitCountdown < 0 ) {
+					break;
 				}
 			}
 		}
@@ -982,12 +1023,12 @@ Amor 2',
 		 */
 		protected function addFromIndex( $entry ) {
 			// Get entry metadata
-			$updated = gform_get_meta( $entry['id'], $this->options['advanced_options']['unique_identifier'] . '-cloud_words_updated' );
+			$updated      = gform_get_meta( $entry['id'], $this->options['advanced_options']['unique_identifier'] . '-cloud_words_updated' );
 			$options_hash = gform_get_meta( $entry['id'], $this->options['advanced_options']['unique_identifier'] . '-cloud_words_options_hash' );
-			$words   = gform_get_meta( $entry['id'], $this->options['advanced_options']['unique_identifier'] . '-cloud_words' );
+			$words        = gform_get_meta( $entry['id'], $this->options['advanced_options']['unique_identifier'] . '-cloud_words' );
 
 
-			$thresold = time() - $this->options['advanced_options']['cache_lifetime'];
+			$thresold             = time() - $this->options['advanced_options']['cache_lifetime'];
 			$current_options_hash = $this->getCurrentOptionsHash();
 
 
@@ -1020,7 +1061,7 @@ Amor 2',
 				$this->options['advanced_options']['max_index_words'],
 			);
 
-			return md5(serialize($relevantOptions));
+			return md5( serialize( $relevantOptions ) );
 		}
 
 		/**
