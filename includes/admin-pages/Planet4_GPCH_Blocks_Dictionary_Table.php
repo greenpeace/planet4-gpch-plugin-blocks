@@ -130,6 +130,7 @@ class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
 			'set-adjective'   => 'Set as ADJECTIVE',
 			'set-verb'        => 'Set as VERB',
 			'set-diverse'     => 'Set as DIVERSE',
+			'set-misspelling'     => 'Set as MISSPELLING',
 			'delete'          => 'delete',
 		);
 
@@ -201,6 +202,12 @@ class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
 				foreach ( $ids as $id => $value ) {
 					$wpdb->update( $table_name, array( 'confirmed' => 1, 'type' => 'DIV' ), array( 'id' => $id ) );
 				}
+			}elseif ( $action == 'set-misspelling' ) {
+				$ids = $_REQUEST['ba'];
+
+				foreach ( $ids as $id => $value ) {
+					$wpdb->update( $table_name, array( 'confirmed' => 1, 'type' => 'SPELL' ), array( 'id' => $id ) );
+				}
 			} elseif ( $action == 'delete' ) {
 				$ids = $_REQUEST['ba'];
 
@@ -257,6 +264,8 @@ class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
 			return 'Adjective';
 		} elseif ( $item['type'] === 'DIV' ) {
 			return 'Other';
+		} elseif ( $item['type'] === 'SPELL' ) {
+			return 'Misspelling';
 		} else {
 			return $item['type'];
 		}
