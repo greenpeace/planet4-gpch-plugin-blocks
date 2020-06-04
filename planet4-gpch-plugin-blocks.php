@@ -94,13 +94,19 @@ function gpch_plugin_blocks_db_insert_data() {
 			for ( $i = 0; $i < 1000 && ! feof( $file_handler ); $i ++ ) {
 				$entry = fgetcsv( $file_handler );
 
-				$sql .= sprintf( $format, addslashes( $entry[0] ), addslashes( $entry[1] ), addslashes( $entry[2] ), addslashes( $entry[3] ), addslashes( $entry[4] ) ) . ", ";
+				$sql .= $wpdb->prepare( $format, array(
+						$entry[0],
+						$entry[1],
+						$entry[2],
+						$entry[3],
+						$entry[4]
+					) ) . ", ";
 			}
 
 			// cleanup trailing comma
 			$sql = rtrim( $sql, ", " ) . ';';
 
-			$sql = $wpdb->prepare($sql);
+			$sql = $wpdb->prepare( $sql );
 
 			$wpdb->query( $sql );
 		}
