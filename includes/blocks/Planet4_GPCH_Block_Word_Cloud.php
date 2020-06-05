@@ -37,7 +37,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Word_Cloud' ) ) {
 			'cloud_rendering_options'              => array(
 				'relative_scale' => '0.6',
 				'color_split_1'  => '80',
-				'color_split_1'  => '90',
+				'color_split_2'  => '90',
 				'grid_size'      => '18',
 			),
 			'use_advanced_options'                 => false,
