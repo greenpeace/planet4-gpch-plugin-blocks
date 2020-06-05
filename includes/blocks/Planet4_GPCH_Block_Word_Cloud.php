@@ -37,7 +37,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Word_Cloud' ) ) {
 			'cloud_rendering_options'              => array(
 				'relative_scale' => '0.6',
 				'color_split_1'  => '80',
-				'color_split_1'  => '90',
+				'color_split_2'  => '90',
 				'grid_size'      => '18',
 			),
 			'use_advanced_options'                 => false,
@@ -720,7 +720,13 @@ Amor 2',
 			$this->addDebugMessage( 'Rendering started' );
 
 			// Get options and merge with defaults
-			$this->options = array_replace_recursive( $this->default_options, get_fields() );
+			$options_fields = get_fields();
+			if (is_array($options_fields)) {
+				$this->options = array_replace_recursive( $this->default_options, $options_fields );
+			}
+			else {
+				$this->options = $this->default_options;
+			}
 
 			// Even if debug is on, we only show debug messages for certain user roles
 			$user = \wp_get_current_user();
@@ -1027,8 +1033,13 @@ Amor 2',
 			$options_hash = gform_get_meta( $entry['id'], $this->options['advanced_options']['unique_identifier'] . '-cloud_words_options_hash' );
 			$words        = gform_get_meta( $entry['id'], $this->options['advanced_options']['unique_identifier'] . '-cloud_words' );
 
+			if (is_numeric($this->options['advanced_options']['cache_lifetime'])) {
+				$thresold = time() - $this->options['advanced_options']['cache_lifetime'];
+			}
+			else {
+				$thresold = time() - $this->default_options['advanced_options']['cache_lifetime'];
+			}
 
-			$thresold             = time() - $this->options['advanced_options']['cache_lifetime'];
 			$current_options_hash = $this->getCurrentOptionsHash();
 
 
