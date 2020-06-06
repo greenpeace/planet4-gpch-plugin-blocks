@@ -721,10 +721,9 @@ Amor 2',
 
 			// Get options and merge with defaults
 			$options_fields = get_fields();
-			if (is_array($options_fields)) {
+			if ( is_array( $options_fields ) ) {
 				$this->options = array_replace_recursive( $this->default_options, $options_fields );
-			}
-			else {
+			} else {
 				$this->options = $this->default_options;
 			}
 
@@ -830,10 +829,11 @@ Amor 2',
 
 			// Get form entries until the set time and date in the block settings
 			$search_criteria['end_date'] = $this->options['gravtiy_form_settings']['show_entries_until'];
-			$entries                     = \GFAPI::get_entries( $this->options['gravtiy_form_settings']['gravity_form_id'], $search_criteria );
+			$paging                      = array( 'offset' => 0, 'page_size' => $this->options['advanced_options']['max_use_form_entries'] );
+			$entries                     = \GFAPI::get_entries( $this->options['gravtiy_form_settings']['gravity_form_id'], $search_criteria, null, $paging );
 
-			$limitCountdown        = $this->options['advanced_options']['max_use_form_entries'];
-			$this->debugMessages[] = 'Form entries limited to ' . $limitCountdown;
+			$this->debugMessages[] = 'Form entries limited to ' . $this->options['advanced_options']['max_use_form_entries'];
+			$this->debugMessages[] = 'Found ' . count( $entries ) . ' entries';
 
 			foreach ( $entries as $entry ) {
 				// If the words are already indexed, we can get them from the index
@@ -850,13 +850,6 @@ Amor 2',
 
 					// Index the words in this entry
 					$this->indexEntry( $entry, $fieldIds );
-				}
-
-				// When we hit the limit, stop indexing entries
-				$limitCountdown --;
-
-				if ( $limitCountdown < 0 ) {
-					break;
 				}
 			}
 		}
@@ -1033,10 +1026,9 @@ Amor 2',
 			$options_hash = gform_get_meta( $entry['id'], $this->options['advanced_options']['unique_identifier'] . '-cloud_words_options_hash' );
 			$words        = gform_get_meta( $entry['id'], $this->options['advanced_options']['unique_identifier'] . '-cloud_words' );
 
-			if (is_numeric($this->options['advanced_options']['cache_lifetime'])) {
+			if ( is_numeric( $this->options['advanced_options']['cache_lifetime'] ) ) {
 				$thresold = time() - $this->options['advanced_options']['cache_lifetime'];
-			}
-			else {
+			} else {
 				$thresold = time() - $this->default_options['advanced_options']['cache_lifetime'];
 			}
 
