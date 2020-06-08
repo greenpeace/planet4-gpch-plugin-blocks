@@ -82,9 +82,9 @@ class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
 
 		// Search
 		if ( ! empty( $search ) ) {
-			$where = 'WHERE word LIKE \'' . $search . '\'';
+			$where = 'WHERE language = \'' . ICL_LANGUAGE_CODE . '\' AND word LIKE \'' . $search . '\'';
 		} else {
-			$where = '';
+			$where = 'WHERE language = \'' . ICL_LANGUAGE_CODE . '\'';
 		}
 
 		if ( $count ) {
