@@ -1144,7 +1144,7 @@ Amor 2',
 					$text = rgar( $entry, $fieldId );
 
 					// Separate each word in the text
-					preg_match_all( '((\b[^\s]+\b)((?<=\.\w).)?)', $text, $matches );
+					preg_match_all( '([^\s,.\"\/\(\)\+]+\b)', $text, $matches );
 
 					$wordsIndexedCount = 0;
 					foreach ( $matches[0] as $match ) {
