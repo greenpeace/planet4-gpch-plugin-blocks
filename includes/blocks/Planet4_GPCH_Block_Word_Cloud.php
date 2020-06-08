@@ -39,6 +39,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Word_Cloud' ) ) {
 				'color_split_1'  => '80',
 				'color_split_2'  => '90',
 				'grid_size'      => '18',
+				'max_scale'      => '80',
 			),
 			'use_advanced_options'                 => false,
 			'advanced_options'                     => array(
@@ -415,7 +416,7 @@ Amor 2',
 									'default_value'     => '0.6',
 									'min'               => '0.1',
 									'max'               => 2,
-									'step'              => '0.1',
+									'step'              => '0.01',
 									'prepend'           => '',
 									'append'            => '',
 								),
@@ -435,7 +436,7 @@ Amor 2',
 									'default_value'     => 80,
 									'min'               => 1,
 									'max'               => 100,
-									'step'              => '',
+									'step'              => 0.1,
 									'prepend'           => '',
 									'append'            => '',
 								),
@@ -455,7 +456,7 @@ Amor 2',
 									'default_value'     => 90,
 									'min'               => 1,
 									'max'               => 100,
-									'step'              => 1,
+									'step'              => 0.1,
 									'prepend'           => '',
 									'append'            => '',
 								),
@@ -475,6 +476,26 @@ Amor 2',
 									'default_value'     => 18,
 									'min'               => 1,
 									'max'               => 100,
+									'step'              => 1,
+									'prepend'           => '',
+									'append'            => '',
+								),
+								array(
+									'key'               => 'field_p4_gpch_blocks_word_cloud_max_scale',
+									'label'             => 'Max Scale ',
+									'name'              => 'max_scale',
+									'type'              => 'range',
+									'instructions'      => 'The size of the largest word in the cloud.',
+									'required'          => 0,
+									'conditional_logic' => 0,
+									'wrapper'           => array(
+										'width' => '',
+										'class' => '',
+										'id'    => '',
+									),
+									'default_value'     => 80,
+									'min'               => 30,
+									'max'               => 150,
 									'step'              => 1,
 									'prepend'           => '',
 									'append'            => '',
@@ -717,6 +738,13 @@ Amor 2',
 		 * @param $block
 		 */
 		public function render_block( $block ) {
+			// Reset properties
+			// Note that multiple blocks are generated using the same block object. As long as it's done in sequence, this approach works.
+			$this->words         = array();
+			$this->debugMessages = array();
+			$this->maxWeight     = 0;
+			$this->minWeight     = 99999999;
+
 			$this->addDebugMessage( 'Rendering started' );
 
 			// Get options and merge with defaults
@@ -741,9 +769,10 @@ Amor 2',
 			$params = array(
 				'script'              => P4_GPCH_PLUGIN_BLOCKS_BASE_URL . 'assets/js/wordcloud2.js',
 				'dom_id'              => 'word-cloud-' . $unique_id,
-				'unique_id' => $unique_id,
+				'unique_id'           => $unique_id,
 				'relative_scale'      => $this->options['cloud_rendering_options']['relative_scale'],
 				'grid_size'           => $this->options['cloud_rendering_options']['grid_size'],
+				'max_scale'           => $this->options['cloud_rendering_options']['max_scale'],
 				'show_debug_messages' => $showDebugMessages,
 			);
 
@@ -759,7 +788,8 @@ Amor 2',
 
 			// There's a limit on how many words we want to show in the cloud. Remove the words from the end of the
 			// array (those with least weight)
-			$params['word_list'] = json_encode( array_slice( $this->words, 0, $this->options['advanced_options']['max_words_to_show'] ) );
+			$this->words         = array_slice( $this->words, 0, $this->options['advanced_options']['max_words_to_show']);
+			$params['word_list'] = json_encode( $this->words );
 
 			// We need to know the min max weight of words in the list to calulate their size in the map
 			$this->calculateMinMaxWeight();
@@ -832,7 +862,9 @@ Amor 2',
 
 			// Get form entries until the set time and date in the block settings
 			$search_criteria['end_date'] = $this->options['gravtiy_form_settings']['show_entries_until'];
-			$paging                      = array( 'offset' => 0, 'page_size' => $this->options['advanced_options']['max_use_form_entries'] );
+			$paging                      = array( 'offset'    => 0,
+			                                      'page_size' => $this->options['advanced_options']['max_use_form_entries']
+			);
 			$entries                     = \GFAPI::get_entries( $this->options['gravtiy_form_settings']['gravity_form_id'], $search_criteria, null, $paging );
 
 			$this->debugMessages[] = 'Form entries limited to ' . $this->options['advanced_options']['max_use_form_entries'];
