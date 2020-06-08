@@ -16,61 +16,53 @@
 </div>
 <script src="{{ script }}"></script>
 <script>
-	let wordList = {{ word_list|raw }};
+	let wordList_{{ unique_id }} = {{ word_list|raw }};
 
 	var maxWordSize = {{ max_word_size }},
-	  minWordSize = {{ min_word_size }},
-	  maxScale = 100,
-			{# Relative size between largest and smallest words
-				- default: 0.6
-				- larger numer => bigger difference
-				- smaller number => smaller difference
-			#}
-	  relativeScale = {{ relative_scale }},
-	  factor = minWordSize / maxWordSize,
-	  scaleUpFactor = maxScale / ( Math.pow( maxWordSize, relativeScale ) / ( maxWordSize / maxScale ) )
-
-	WordCloud( document.getElementById( '{{ dom_id }}' ), {
-		list: wordList,
-		fontWeight: 600,
-		fontFamily: 'Roboto, sans-serif',
-		minRotation: 0,
-		maxRotation: 0,
-		gridSize: Math.round( {{ grid_size }} * jQuery( '#{{ dom_id }}' ).width() / 1024 ),
-	  weightFactor
-	:
-
-	function( size ) {
-		{# Formula to scale the words
-			- normalizes the size of the biggest number to maxScale
-			- changes the relative size of biggest to smallest word
+		minWordSize = {{ min_word_size }},
+		maxScale = 100,
+		{# Relative size between largest and smallest words
+			- default: 0.6
+			- larger numer => bigger difference
+			- smaller number => smaller difference
 		#}
-		returnSize = Math.pow( size, relativeScale ) / ( maxWordSize / maxScale ) * scaleUpFactor
+		relativeScale = {{ relative_scale }},
+		factor = minWordSize / maxWordSize,
+  		scaleUpFactor = maxScale / ( Math.pow( maxWordSize, relativeScale ) / ( maxWordSize / maxScale ) )
 
-		return Math.floor( returnSize )
-	}
+	jQuery(document).ready(function(){
+		WordCloud( document.getElementById( '{{ dom_id }}' ), {
+			list: wordList_{{ unique_id }},
+			fontWeight: 600,
+			fontFamily: 'Roboto, sans-serif',
+			minRotation: 0,
+			maxRotation: 0,
+			gridSize: Math.round( {{ grid_size }} * jQuery( '#{{ dom_id }}' ).width() / 1024 ),
+			weightFactor: function( size ) {
+			{# Formula to scale the words
+				- normalizes the size of the biggest number to maxScale
+				- changes the relative size of biggest to smallest word
+			#}
+				returnSize = Math.pow( size, relativeScale ) / ( maxWordSize / maxScale ) * scaleUpFactor
 
-	,
-	{% if random_colors == 1 %}
-	color: 'random-dark',
+				return Math.floor( returnSize )
+			},
+			{% if random_colors == 1 %}
+			color: 'random-dark',
 			{% else %}
-	  color
-	:
-
-	function( word, weight ) {
-		if( weight > {{ color_split_2 }}) {
-			return '{{ word_colors.0 }}'
-		}
-		else if( weight > {{ color_split_1 }}) {
-			return '{{ word_colors.1 }}'
-		}
-		else {
-			return '{{ word_colors.2 }}'
-		}
-	}
-
-	,
-	{% endif %}
-	} )
+			color: function( word, weight ) {
+				if( weight > {{ color_split_2 }}) {
+					return '{{ word_colors.0 }}'
+				}
+				else if( weight > {{ color_split_1 }}) {
+					return '{{ word_colors.1 }}'
+				}
+				else {
+					return '{{ word_colors.2 }}'
+				}
+			},
+			{% endif %}
+		} );
+	});
 
 </script>

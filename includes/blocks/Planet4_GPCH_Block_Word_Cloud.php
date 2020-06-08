@@ -735,10 +735,13 @@ Amor 2',
 				$showDebugMessages = false;
 			}
 
+			$unique_id = uniqid();
+
 			// Parameters for the template that don't need any further work
 			$params = array(
 				'script'              => P4_GPCH_PLUGIN_BLOCKS_BASE_URL . 'assets/js/wordcloud2.js',
-				'dom_id'              => uniqid( 'word-cloud-' ),
+				'dom_id'              => 'word-cloud-' . $unique_id,
+				'unique_id' => $unique_id,
 				'relative_scale'      => $this->options['cloud_rendering_options']['relative_scale'],
 				'grid_size'           => $this->options['cloud_rendering_options']['grid_size'],
 				'show_debug_messages' => $showDebugMessages,
