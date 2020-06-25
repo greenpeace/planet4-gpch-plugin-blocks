@@ -788,7 +788,7 @@ Amor 2',
 
 			// There's a limit on how many words we want to show in the cloud. Remove the words from the end of the
 			// array (those with least weight)
-			$this->words         = array_slice( $this->words, 0, $this->options['advanced_options']['max_words_to_show']);
+			$this->words         = array_slice( $this->words, 0, $this->options['advanced_options']['max_words_to_show'] );
 			$params['word_list'] = json_encode( $this->words );
 
 			// We need to know the min max weight of words in the list to calulate their size in the map
@@ -862,8 +862,9 @@ Amor 2',
 
 			// Get form entries until the set time and date in the block settings
 			$search_criteria['end_date'] = $this->options['gravtiy_form_settings']['show_entries_until'];
-			$paging                      = array( 'offset'    => 0,
-			                                      'page_size' => $this->options['advanced_options']['max_use_form_entries']
+			$paging                      = array(
+				'offset'    => 0,
+				'page_size' => $this->options['advanced_options']['max_use_form_entries']
 			);
 			$entries                     = \GFAPI::get_entries( $this->options['gravtiy_form_settings']['gravity_form_id'], $search_criteria, null, $paging );
 
@@ -991,9 +992,9 @@ Amor 2',
 			global $wpdb;
 
 			$tableName = $wpdb->prefix . P4_GPCH_PLUGIN_WORD_DICT_TABLE_NAME;
-			$sql       = "SELECT type, blacklisted, confirmed FROM {$tableName} WHERE word = '{$word}' AND language = '" . ICL_LANGUAGE_CODE . "'";
-
-			$results = $wpdb->get_results( $sql, OBJECT );
+			$sql       = "SELECT type, blacklisted, confirmed FROM {$tableName} WHERE UPPER(word) = '%s' AND language = '%s' ;";
+			$sql       = $wpdb->prepare( $sql, array( strtoupper( $word ), ICL_LANGUAGE_CODE ) );
+			$results   = $wpdb->get_results( $sql, OBJECT );
 
 			if ( count( $results ) > 0 ) {
 				foreach ( $results as $result ) {
