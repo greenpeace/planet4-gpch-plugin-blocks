@@ -10,6 +10,7 @@ return array(
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Base_Block' => $baseDir . '/includes/blocks/Planet4_GPCH_Base_Block.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Base_Form_Block' => $baseDir . '/includes/blocks/Planet4_GPCH_Base_Form_Block.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Accordion' => $baseDir . '/includes/blocks/Planet4_GPCH_Block_Accordion.php',
+    'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Banner_Tool' => $baseDir . '/includes/blocks/Planet4_GPCH_Banner_Tool.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Form_Counter_Text' => $baseDir . '/includes/blocks/Planet4_GPCH_Block_Form_Counter_Text.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Form_Progress_Bar' => $baseDir . '/includes/blocks/Planet4_GPCH_Block_Form_Progress_Bar.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_GPCH_Events' => $baseDir . '/includes/blocks/Planet4_GPCH_Block_Events.php',
@@ -19,5 +20,6 @@ return array(
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Spacer' => $baseDir . '/includes/blocks/Planet4_GPCH_Block_Spacer.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Taskforce' => $baseDir . '/includes/blocks/Planet4_GPCH_Block_Taskforce.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Word_Cloud' => $baseDir . '/includes/blocks/Planet4_GPCH_Block_Word_Cloud.php',
+    'Greenpeace\\Planet4GPCHBlocks\\Planet4_GPCH_Blocks_Dictionary_Table' => $baseDir . '/includes/admin-pages/Planet4_GPCH_Blocks_Dictionary_Table.php',
     'Greenpeace\\Planet4GPCHBlocks\\Planet4_GPCH_Plugin_Blocks' => $baseDir . '/includes/Plugin.php',
 );

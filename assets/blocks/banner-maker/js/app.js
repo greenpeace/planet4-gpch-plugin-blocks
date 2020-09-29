@@ -7,12 +7,12 @@ function appRun(mode) {
     catch (e) {
         console.log(e)
         appGui.webGl = false
-        $('body').addClass('no-webgl')
-        $('#bm-gui-preview-info').addClass('is-active')
+        jQuery('body').addClass('no-webgl')
+        jQuery('#bm-gui-preview-info').addClass('is-active')
         return;
     } 
     //
-    $('#banner_maker-component').removeClass('loop-mode').removeClass('static-mode').addClass(`${mode}-mode`);
+    jQuery('#banner_maker-component').removeClass('loop-mode').removeClass('static-mode').addClass(`${mode}-mode`);
     appGui.mode = mode;    
     // Reset scene
     appRefresh = false;
@@ -43,7 +43,7 @@ function appRun(mode) {
         loadedScene = new BABYLON.Scene(engine);
         camera = new BABYLON.ArcRotateCamera("default camera", 0, 0, 0, new BABYLON.Vector3(0, 0, 0), loadedScene);
 
-        BABYLON.SceneLoader.ImportMesh("", "scenes/", `${sceneOptions.mode}.glb`, loadedScene, function (meshes) {          
+        BABYLON.SceneLoader.ImportMesh("", gpchBlocksAssetsURL + "blocks/banner-maker/scenes/", `${sceneOptions.mode}.glb`, loadedScene, function (meshes) {
             //scene.createDefaultCameraOrLight(true, true, true);
             loadedScene.createDefaultEnvironment({createSkybox: false});
             camera.setPosition(new BABYLON.Vector3(0, 0, 1.65));
@@ -134,7 +134,7 @@ function appRun(mode) {
                     } else if (appGui.videoExport.frameCnt == 14) {
                         tm1 = performance.now();
                         estimateTime = (recordFrames*(tm1-tm0))/15;
-                        $('#bm-generate-video-message span').text(sec2time(estimateTime/1000));
+                        jQuery('#bm-generate-video-message span').text(sec2time(estimateTime/1000));
                     }*/
 
                     appGui.videoExport.frameCnt ++;                    

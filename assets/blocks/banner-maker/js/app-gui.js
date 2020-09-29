@@ -26,24 +26,27 @@ var appDel = false;
 var performanceLimit = .6; //6
 
 // DOCUMENT READY
+var bannerAssetsURL = '';
 
-$(document).on('ready', function() {
+jQuery(document).on('ready', function() {
 
     // App Start
-    $('#bm-step_start').on('click', function() {        
+    jQuery('#bm-step_start').on('click', function() {        
         // App layout
         appInitialize();        
     });
     
     // App close
-    $('#bm-gui-app_close-btn, #bm-gui-app_close_mobile-btn').on('click', function(e){
+    jQuery('#bm-gui-app_close-btn, #bm-gui-app_close_mobile-btn').on('click', function(e){
         appDelete();       
-    })
+    });
+    
+    bannerAssetsURL = gpchBlocksAssetsURL + 'blocks/banner-maker/';
 });
 
 // WINDOW SCROLL
 
-$(window).scroll(function(){
+jQuery(window).scroll(function(){
     // App functionalities
     if (appInitialized) {
         // Snap App steps            
@@ -63,8 +66,8 @@ $(window).scroll(function(){
 var appGui = function() {
     var THIS = this;
 
-    var svgPreview = $('#svgPreview');
-    var svgHelp = $('#svgHelp');
+    var svgPreview = jQuery('#svgPreview');
+    var svgHelp = jQuery('#svgHelp');
 
     var textureWidth = 1400;
     var textureHeight = 700;
@@ -97,14 +100,14 @@ var appGui = function() {
     this.generateDownloads = false;
     this.allowGenerateDownloads = false;
     
-    this.$loader = $('#bm-app-loader');
+    this.$loader = jQuery('#bm-app-loader');
 
     this.videoExport = {
         allowGenerate: false,
         generate: false,
         fps: 30,
-        $btn: $('#bm-generate-video'),
-        $loader: $('#bm-generate-video-loader'),
+        $btn: jQuery('#bm-generate-video'),
+        $loader: jQuery('#bm-generate-video-loader'),
         capturer: undefined,
         frameCnt: 0,
         stopGenerate: function(state) {
@@ -112,7 +115,7 @@ var appGui = function() {
             this.$loader.css({width:'0%'})
             this.$loader.text('');
 
-            $('#bm-generate-video-fps').removeClass('is-disabled');
+            jQuery('#bm-generate-video-fps').removeClass('is-disabled');
             this.$btn.find('#bm-generate-video-title').text('Download Video');
             this.$btn.attr('data-action', 'download');
 
@@ -125,7 +128,7 @@ var appGui = function() {
             this.generate = true;
             this.$loader.text('');  
 
-            $('#bm-generate-video-fps').addClass('is-disabled');
+            jQuery('#bm-generate-video-fps').addClass('is-disabled');
             this.$btn.find('#bm-generate-video-title').text('Cancel');
             this.$btn.attr('data-action', 'cancel');
 
@@ -137,7 +140,7 @@ var appGui = function() {
         // Get initial positions
         //if (!this.innerColorsPos.length) {
             this.innerColorsPos = [];
-            var $wrappers = $('[data-bm_gui_icontype]');
+            var $wrappers = jQuery('[data-bm_gui_icontype]');
             var padding = 0;
             if ($wrappers.length) {
                 for (var i = 0; i < $wrappers.length; i++) {
@@ -153,7 +156,7 @@ var appGui = function() {
             var pos = $selected.position();
 
             //if (THIS.view == 'default') {
-                //$('#bm-gui-colors-icons').css({left: parseInt(pos.left - (($('#bm-gui-colors-icons').width() - $selected.width())/2)), top: pos.top}).addClass('is-active');
+                //jQuery('#bm-gui-colors-icons').css({left: parseInt(pos.left - ((jQuery('#bm-gui-colors-icons').width() - $selected.width())/2)), top: pos.top}).addClass('is-active');
             //} else { // if (THIS.view == 'mobile')
                 THIS.getInnerColorsPositions();
                 //
@@ -166,10 +169,10 @@ var appGui = function() {
                     top += THIS.innerColorsPos[1]
                 }       
                 // Snap
-                $('[data-bm_gui_icontype]').removeClass('is-active');
+                jQuery('[data-bm_gui_icontype]').removeClass('is-active');
                 $selectedWrap.addClass('is-active');
-                $('#bm-gui-colors-icons').css({top: top});
-                $('#bm-gui-colors-icons').addClass('is-active');        
+                jQuery('#bm-gui-colors-icons').css({top: top});
+                jQuery('#bm-gui-colors-icons').addClass('is-active');        
             //}            
         }
     }
@@ -179,16 +182,16 @@ var appGui = function() {
         var $theStep = undefined;
         var height = undefined;
 
-        $.each($('.bm-step-JS'), function(){
-            if ($(this).isInViewport(.1)) {
-                stepsInView.push($(this));
-                $(this).addClass('was-active')
+        jQuery.each(jQuery('.bm-step-JS'), function(){
+            if (jQuery(this).isInViewport(.1)) {
+                stepsInView.push(jQuery(this));
+                jQuery(this).addClass('was-active')
             } else {
-                $(this).removeClass('was-active')
+                jQuery(this).removeClass('was-active')
             }
         });
         
-        $('.bm-step-JS').removeClass('is-active');
+        jQuery('.bm-step-JS').removeClass('is-active');
         $theStep = stepsInView[stepsInView.length-1];
 
         if ($theStep) {
@@ -198,24 +201,24 @@ var appGui = function() {
 
     this.createDownloads = function(data) {
         if (this.webGl) {
-            $('#bm-img_preview').html('').append('<img src="' + data + '">');
-            $('#bm-download_image').attr('href', data);
+            jQuery('#bm-img_preview').html('').append('<img src="' + data + '">');
+            jQuery('#bm-download_image').attr('href', data);
         } else {
-            $('#bm-img_preview').html('').append($('#svgPreview').html());  
+            jQuery('#bm-img_preview').html('').append(jQuery('#svgPreview').html());  
 
         }
-        $('#bm-download_vector').attr('href', exportSVG(document.getElementById('texture')));
-        $('#bm-img_preview-loader').removeClass('is-active');      
+        jQuery('#bm-download_vector').attr('href', exportSVG(document.getElementById('texture')));
+        jQuery('#bm-img_preview-loader').removeClass('is-active');      
         console.log('!')
     }
 
     this.reset = function() {
         
-        $('[data-bm_gui_pattern], [data-bm_gui_icon], [data-bm_gui_type]').removeClass('is-selected');
-        $('[data-bm_gui_pattern="null"]').addClass('is-selected');
-        $('[data-bm_gui_icontype], #bm-gui-colors-icons').removeClass('is-active');
-        $('[data-bm_gui_color]').removeClass('shapeColor-is-selected').removeClass('bgColor-is-selected').removeClass('iconColor-is-selected').removeClass('typeColor-is-selected').removeClass('is-disabled');
-        $('.bm-info').removeClass('is-active');
+        jQuery('[data-bm_gui_pattern], [data-bm_gui_icon], [data-bm_gui_type]').removeClass('is-selected');
+        jQuery('[data-bm_gui_pattern="null"]').addClass('is-selected');
+        jQuery('[data-bm_gui_icontype], #bm-gui-colors-icons').removeClass('is-active');
+        jQuery('[data-bm_gui_color]').removeClass('shapeColor-is-selected').removeClass('bgColor-is-selected').removeClass('iconColor-is-selected').removeClass('typeColor-is-selected').removeClass('is-disabled');
+        jQuery('.bm-info').removeClass('is-active');
 
         this.selections = {
             lastPattern: null,
@@ -249,53 +252,53 @@ var appGui = function() {
     // EVENTS ////////////////////////////////////////////////////////////////////////////////
 
     // 3d mode toggle
-    $('#bm-gui-app_toggle-btn').on('click', function() {
-        $(this).closest('#bm-gui-app_toggle').toggleClass('is-open');
+    jQuery('#bm-gui-app_toggle-btn').on('click', function() {
+        jQuery(this).closest('#bm-gui-app_toggle').toggleClass('is-open');
     });
 
-    /*$(document).on('click', function(e){
-        if ((!$('#bm-gui-app_toggle').is(e.target) && $('#bm-gui-app_toggle').has(e.target).length === 0)) {
-            $('#bm-gui-app_toggle').removeClass('is-open');
+    /*jQuery(document).on('click', function(e){
+        if ((!jQuery('#bm-gui-app_toggle').is(e.target) && jQuery('#bm-gui-app_toggle').has(e.target).length === 0)) {
+            jQuery('#bm-gui-app_toggle').removeClass('is-open');
         }
     });*/
 
-    $('#bm-gui-app_toggle-confirm').on('click', function() {
-        $('#bm-gui-app_toggle').removeClass('is-open').addClass('is-dismissed');
-        $('#bm-gui-modal').removeClass('is-open');
+    jQuery('#bm-gui-app_toggle-confirm').on('click', function() {
+        jQuery('#bm-gui-app_toggle').removeClass('is-open').addClass('is-dismissed');
+        jQuery('#bm-gui-modal').removeClass('is-open');
         setTimeout(function(){
             appRefresh = 'loop';
         }, theme.times.most)
     });
 
-    $('#bm-gui-app_toggle-dismiss').on('click', function() {
-        $('#bm-gui-app_toggle').removeClass('is-open').addClass('is-dismissed');
-        $('#bm-gui-modal').removeClass('is-open');
+    jQuery('#bm-gui-app_toggle-dismiss').on('click', function() {
+        jQuery('#bm-gui-app_toggle').removeClass('is-open').addClass('is-dismissed');
+        jQuery('#bm-gui-modal').removeClass('is-open');
     });
 
     // Disabled step
 
-    $('#bm-step_4').on('click', function () {
-        $(document).off('click.tooltip');
-        var $this = $(this);
+    jQuery('#bm-step_4').on('click', function () {
+        jQuery(document).off('click.tooltip');
+        var $this = jQuery(this);
         if ($this.hasClass('is-disabled')) {
             $this.find('.accordion-item-title').tooltip('show');
             return false;
         }
     });
 
-    $('#bm-step_4').on('shown.bs.tooltip', function () {
-        $(document).on('click.tooltip', function(e){
-            $('#bm-step_4 .accordion-item-title').tooltip('hide')
+    jQuery('#bm-step_4').on('shown.bs.tooltip', function () {
+        jQuery(document).on('click.tooltip', function(e){
+            jQuery('#bm-step_4 .accordion-item-title').tooltip('hide')
         });        
     });
 
     // Pattern select
-    $('#bm-gui-patterns').on('click', 'button', function() {
+    jQuery('#bm-gui-patterns').on('click', 'button', function() {
         // Reset selected pattern
-        $('#bm-gui-patterns button').removeClass('is-selected');
+        jQuery('#bm-gui-patterns button').removeClass('is-selected');
         // Set selected pattern
-        THIS.selections.pattern = $(this).data('bm_gui_pattern');
-        $(this).addClass('is-selected');
+        THIS.selections.pattern = jQuery(this).data('bm_gui_pattern');
+        jQuery(this).addClass('is-selected');
         // If pattern is null, don't display selection number
         setColorsUI();
         // Draw banner
@@ -303,30 +306,30 @@ var appGui = function() {
     });
     
     // Colors select
-    $('#bm-gui-colors-pattern').on('click', 'button', function() {
-        var $base = $(this).closest('#bm-gui-colors-pattern');
-        $('#bm-step_2-info').removeClass('is-active')
+    jQuery('#bm-gui-colors-pattern').on('click', 'button', function() {
+        var $base = jQuery(this).closest('#bm-gui-colors-pattern');
+        jQuery('#bm-step_2-info').removeClass('is-active')
         // Set section as visited
         $base.addClass('is-visited');
 
 
         // Reset selected pattern color
-        if ($(this).hasClass('bgColor-is-selected')) {
+        if (jQuery(this).hasClass('bgColor-is-selected')) {
             resetSelectedColor('pattern', 'bg', 0);
             // Draw banner
             draw();
             return false;
-        } else if ($(this).hasClass('shapeColor-is-selected')) {
+        } else if (jQuery(this).hasClass('shapeColor-is-selected')) {
             resetSelectedColor('pattern', 'shape', 1);
             // Draw banner
             draw();
             return false;
         }
 
-        if ($(this).hasClass('is-disabled')) return false;
+        if (jQuery(this).hasClass('is-disabled')) return false;
 
         if ($base.find('.bgColor-is-selected').length && $base.find('.shapeColor-is-selected').length) {
-            $('#bm-step_2-info').addClass('is-active');
+            jQuery('#bm-step_2-info').addClass('is-active');
             return false;
         }
 
@@ -338,11 +341,11 @@ var appGui = function() {
             }            
         }
         // Reset selected colors
-        $('#bm-gui-colors-pattern [data-bm_gui_color]').removeClass(`${currentSelect}-is-selected`);
+        jQuery('#bm-gui-colors-pattern [data-bm_gui_color]').removeClass(`${currentSelect}-is-selected`);
         // Set selected color
-        var color = $(this).data('bm_gui_color');
+        var color = jQuery(this).data('bm_gui_color');
         THIS.selections[currentSelect] = color;
-        $(this).addClass(`${currentSelect}-is-selected`);
+        jQuery(this).addClass(`${currentSelect}-is-selected`);
         // Disable / enable colors
         var index = currentSelect == 'shapeColor' ? 1 : 0;
         disableEnableColors('pattern', color, index);
@@ -351,62 +354,62 @@ var appGui = function() {
     });
 
     // Icon select
-    $('#bm-gui-icons').on('click', '[data-bm_gui_icon]', function() {
-        var $base = $(this).closest('#bm-gui-icons');
+    jQuery('#bm-gui-icons').on('click', '[data-bm_gui_icon]', function() {
+        var $base = jQuery(this).closest('#bm-gui-icons');
         // Set section as visited
         $base.addClass('is-visited');
 
-        if (!$('.iconColor-is-selected').length) {
+        if (!jQuery('.iconColor-is-selected').length) {
             THIS.selections.iconColor = null;
         }
 
         // Reset selected icon
-        if ($(this).hasClass('is-selected')) {
+        if (jQuery(this).hasClass('is-selected')) {
             THIS.selections.icon = null;
             THIS.selections.iconType = null;
-            $(this).removeClass('is-selected');
-            $(this).closest('[data-bm_gui_icontype]').removeClass('is-active');
+            jQuery(this).removeClass('is-selected');
+            jQuery(this).closest('[data-bm_gui_icontype]').removeClass('is-active');
             // Reset selected color
             resetSelectedColor('icon');
             // Disable Colors UI
-            $('#bm-gui-colors-icons').removeClass('is-active');
+            jQuery('#bm-gui-colors-icons').removeClass('is-active');
             // Disable step 4
             if (THIS.selections.iconType == "feeling") {
-                $('#bm-step_4').addClass('is-disabled');
-                $('#bm-step_4-info_2').addClass('is-active');
+                jQuery('#bm-step_4').addClass('is-disabled');
+                jQuery('#bm-step_4-info_2').addClass('is-active');
             } else {
-                $('#bm-step_4').removeClass('is-disabled').find('.accordion-item-title').tooltip('hide');
-                $('#bm-step_4-info_2').removeClass('is-active');
+                jQuery('#bm-step_4').removeClass('is-disabled').find('.accordion-item-title').tooltip('hide');
+                jQuery('#bm-step_4-info_2').removeClass('is-active');
             }
             // Draw banner
             draw();
             return false;
         }
 
-        $('#bm-gui-icons [data-bm_gui_icon]').removeClass('is-selected');
-        $(this).addClass('is-selected');
-        THIS.selections.icon = $(this).data('bm_gui_icon');
-        THIS.selections.iconType = $(this).closest('[data-bm_gui_icontype]').data('bm_gui_icontype');
+        jQuery('#bm-gui-icons [data-bm_gui_icon]').removeClass('is-selected');
+        jQuery(this).addClass('is-selected');
+        THIS.selections.icon = jQuery(this).data('bm_gui_icon');
+        THIS.selections.iconType = jQuery(this).closest('[data-bm_gui_icontype]').data('bm_gui_icontype');
         // Set button icon color
         if (false && THIS.selections.iconColor) {
-            $('[data-bm_gui_icon] svg path').attr({'style':'fill:#A7A7A7'});        
-            $('[data-bm_gui_icon].is-selected svg path').attr({'style':`fill:${THIS.selections.iconColor};`}); 
+            jQuery('[data-bm_gui_icon] svg path').attr({'style':'fill:#A7A7A7'});        
+            jQuery('[data-bm_gui_icon].is-selected svg path').attr({'style':`fill:${THIS.selections.iconColor};`}); 
         }
         //
-        $('[data-bm_gui_icontype]').removeClass('is-active')
-        $(this).closest('[data-bm_gui_icontype]').addClass('is-active')
+        jQuery('[data-bm_gui_icontype]').removeClass('is-active')
+        jQuery(this).closest('[data-bm_gui_icontype]').addClass('is-active')
         
         // Disable step 4
         if (THIS.selections.iconType == "feeling") {
-            $('#bm-step_4').addClass('is-disabled');
-            $('#bm-step_4-info_2').addClass('is-active');
+            jQuery('#bm-step_4').addClass('is-disabled');
+            jQuery('#bm-step_4-info_2').addClass('is-active');
         } else {
-            $('#bm-step_4').removeClass('is-disabled').find('.accordion-item-title').tooltip('hide');
-            $('#bm-step_4-info_2').removeClass('is-active');
+            jQuery('#bm-step_4').removeClass('is-disabled').find('.accordion-item-title').tooltip('hide');
+            jQuery('#bm-step_4-info_2').removeClass('is-active');
         }
 
         // Set colors UI position
-        THIS.snapInnerColors($(this));
+        THIS.snapInnerColors(jQuery(this));
         // Wait inner colors animation to finish
         setTimeout(function(){
             // Draw banner
@@ -415,28 +418,28 @@ var appGui = function() {
     });   
     
     // Icon color select
-    $('#bm-gui-colors-icons').on('click', 'button', function() {
+    jQuery('#bm-gui-colors-icons').on('click', 'button', function() {
 
         // Reset selected icon color
-        if ($(this).hasClass('iconColor-is-selected')) {
+        if (jQuery(this).hasClass('iconColor-is-selected')) {
             resetSelectedColor('icon');
             // Draw banner
             draw();
             return false;
         }
 
-        if ($(this).hasClass('is-disabled')) return false;
+        if (jQuery(this).hasClass('is-disabled')) return false;
 
         // Reset selected colors
-        $('#bm-gui-colors-icons button').removeClass('iconColor-is-selected');
+        jQuery('#bm-gui-colors-icons button').removeClass('iconColor-is-selected');
         // Set selected color
-        var color = $(this).data('bm_gui_color');
+        var color = jQuery(this).data('bm_gui_color');
         THIS.selections.iconColor = color;        
-        $(this).addClass('iconColor-is-selected')
+        jQuery(this).addClass('iconColor-is-selected')
         // Set button icon color
         if (false) {
-            $('[data-bm_gui_icon] svg path').attr({'style':'fill:#A7A7A7'});
-            $('[data-bm_gui_icon].is-selected svg path').attr({'style':`fill:${THIS.selections.iconColor};`});                    
+            jQuery('[data-bm_gui_icon] svg path').attr({'style':'fill:#A7A7A7'});
+            jQuery('[data-bm_gui_icon].is-selected svg path').attr({'style':`fill:${THIS.selections.iconColor};`});                    
         }
         // Disable / enable colors
         disableEnableColors('icon', color);
@@ -446,29 +449,29 @@ var appGui = function() {
     });    
     
     // Type
-    $('#bm-gui-textarea-submit').on('click', function() {
-        var $base = $(this).closest('#bm-gui-type');
+    jQuery('#bm-gui-textarea-submit').on('click', function() {
+        var $base = jQuery(this).closest('#bm-gui-type');
         // Set section as visited
         $base.addClass('is-visited');
         // Deselect any preselected text
-        $('[data-bm_gui_type]').removeClass('is-selected');
+        jQuery('[data-bm_gui_type]').removeClass('is-selected');
         if (THIS.selections.icon == 'logo') {
             THIS.selections.icon = null;
             THIS.selections.iconColor = null;            
         }
 
-        THIS.selections.type = $('#bm-gui-textarea').val();
+        THIS.selections.type = jQuery('#bm-gui-textarea').val();
         // Draw banner
         draw();
     });
 
-    $('#bm-gui-textarea-delete').on('click', function() {
-        var $base = $(this).closest('#bm-gui-type');
-        $('#bm-gui-textarea').val('');
-        $('#bm-gui-textarea-submit, #bm-gui-textarea-delete').addClass('is-inactive');
-        $('[data-bm_gui_type]').removeClass('is-selected');
+    jQuery('#bm-gui-textarea-delete').on('click', function() {
+        var $base = jQuery(this).closest('#bm-gui-type');
+        jQuery('#bm-gui-textarea').val('');
+        jQuery('#bm-gui-textarea-submit, #bm-gui-textarea-delete').addClass('is-inactive');
+        jQuery('[data-bm_gui_type]').removeClass('is-selected');
         // Deselect any preselected text
-        $('[data-bm_gui_type]').removeClass('is-selected');
+        jQuery('[data-bm_gui_type]').removeClass('is-selected');
         if (THIS.selections.icon == 'logo') {
             THIS.selections.icon = null;
             THIS.selections.iconColor = null;            
@@ -479,41 +482,41 @@ var appGui = function() {
         draw();
     });
 
-    $('#bm-gui-textarea').on('click', function() {
+    jQuery('#bm-gui-textarea').on('click', function() {
         if (THIS.view == 'mobile') {
-            $('body').addClass('textarea-is-focused');
+            jQuery('body').addClass('textarea-is-focused');
         }
     });
 
-    $('#bm-gui-textarea').on('keyup', function() {
-        if ($(this).val()) {
-            $('#bm-gui-textarea-submit, #bm-gui-textarea-delete').removeClass('is-inactive');
+    jQuery('#bm-gui-textarea').on('keyup', function() {
+        if (jQuery(this).val()) {
+            jQuery('#bm-gui-textarea-submit, #bm-gui-textarea-delete').removeClass('is-inactive');
         } else {
-            $('#bm-gui-textarea-submit, #bm-gui-textarea-delete').addClass('is-inactive');
+            jQuery('#bm-gui-textarea-submit, #bm-gui-textarea-delete').addClass('is-inactive');
         }
     });
 
-    $(document).on('click', function(e){
-        if ((!$('#bm-gui-textarea').is(e.target) && $('#bm-gui-textarea').has(e.target).length === 0)) {
-            $('body').removeClass('textarea-is-focused')
+    jQuery(document).on('click', function(e){
+        if ((!jQuery('#bm-gui-textarea').is(e.target) && jQuery('#bm-gui-textarea').has(e.target).length === 0)) {
+            jQuery('body').removeClass('textarea-is-focused')
         }
     });
 
     // Default type
-    $('#bm-gui-type').on('click', '[data-bm_gui_type]', function(){
-        var $base = $(this).closest('#bm-gui-type');
+    jQuery('#bm-gui-type').on('click', '[data-bm_gui_type]', function(){
+        var $base = jQuery(this).closest('#bm-gui-type');
         // Set section as visited
         $base.addClass('is-visited');
 
          // Reset selected icon
-        if ($(this).hasClass('is-selected')) {
+        if (jQuery(this).hasClass('is-selected')) {
             THIS.selections.type = null;
             THIS.selections.typeColor = null;
-            $(this).removeClass('is-selected');
-            $('#bm-gui-textarea').val("")
+            jQuery(this).removeClass('is-selected');
+            jQuery('#bm-gui-textarea').val("")
             // Reset selected color
             resetSelectedColor('type');
-            $('#bm-gui-colors-type button').removeClass('is-active');
+            jQuery('#bm-gui-colors-type button').removeClass('is-active');
             if (THIS.selections.icon == 'logo') {
                 // Reset selected color
                 THIS.selections.icon = null;
@@ -526,41 +529,41 @@ var appGui = function() {
         }
 
         //
-        $('#bm-gui-textarea-delete').removeClass('is-inactive');
+        jQuery('#bm-gui-textarea-delete').removeClass('is-inactive');
         // Reset selected pattern
-        $('#bm-gui-type button').removeClass('is-selected');
+        jQuery('#bm-gui-type button').removeClass('is-selected');
         // Set selected type
-        $(this).addClass('is-selected')
-        $('#bm-gui-textarea').val($(this).data('bm_gui_type'));
-        THIS.selections.type = $('#bm-gui-textarea').val();
+        jQuery(this).addClass('is-selected')
+        jQuery('#bm-gui-textarea').val(jQuery(this).data('bm_gui_type'));
+        THIS.selections.type = jQuery('#bm-gui-textarea').val();
         THIS.selections.icon = 'logo';
-        $('[data-bm_gui_icon]').removeClass('is-selected');
+        jQuery('[data-bm_gui_icon]').removeClass('is-selected');
         resetSelectedColor('icon');
         THIS.selections.iconColor = THIS.selections.typeColor;
         THIS.selections.iconType = null;
-        $('[data-bm_gui_icontype]').removeClass('is-active');
-        $('#bm-gui-colors-icons').removeClass('is-active');
+        jQuery('[data-bm_gui_icontype]').removeClass('is-active');
+        jQuery('#bm-gui-colors-icons').removeClass('is-active');
         //
-        $('#bm-step_4-info').removeClass('is-active');        
+        jQuery('#bm-step_4-info').removeClass('is-active');        
         // Draw banner
         draw();
     });
 
     // Type color select
-    $('#bm-gui-colors-type').on('click', 'button', function() {
+    jQuery('#bm-gui-colors-type').on('click', 'button', function() {
 
-        var $base = $(this).closest('#bm-gui-type');
+        var $base = jQuery(this).closest('#bm-gui-type');
         // Set section as visited
         $base.addClass('is-visited');
 
         
-        if (!THIS.selections.type && !$(this).hasClass('is-disabled')) {
-            $('#bm-step_4-info').addClass('is-active');
+        if (!THIS.selections.type && !jQuery(this).hasClass('is-disabled')) {
+            jQuery('#bm-step_4-info').addClass('is-active');
             return false;
         }
 
         // Reset selected type color
-        if ($(this).hasClass('typeColor-is-selected')) {
+        if (jQuery(this).hasClass('typeColor-is-selected')) {
             resetSelectedColor('type');
             if (THIS.selections.icon == 'logo') {
                 resetSelectedColor('icon');
@@ -570,17 +573,17 @@ var appGui = function() {
             return false;
         }
 
-        if ($(this).hasClass('is-disabled')) return false;
+        if (jQuery(this).hasClass('is-disabled')) return false;
 
         // Reset selected colors
-        $('#bm-gui-colors-type button').removeClass('typeColor-is-selected');
+        jQuery('#bm-gui-colors-type button').removeClass('typeColor-is-selected');
         // Set selected color
-        var color = $(this).data('bm_gui_color');
+        var color = jQuery(this).data('bm_gui_color');
         THIS.selections.typeColor = color;    
         if (THIS.selections.icon == 'logo') {
             THIS.selections.iconColor = color;
         }  
-        $(this).addClass('typeColor-is-selected');
+        jQuery(this).addClass('typeColor-is-selected');
         // Disable / enable colors
         disableEnableColors('type', color);
 
@@ -589,26 +592,26 @@ var appGui = function() {
     });    
 
     //
-    $('.bm-step-JS').on('click', '[data-toggle]', function() {
-        $('.bm-step-JS').removeClass('is-open');
-        $(this).closest('.bm-step-JS').addClass('is-open');
+    jQuery('.bm-step-JS').on('click', '[data-toggle]', function() {
+        jQuery('.bm-step-JS').removeClass('is-open');
+        jQuery(this).closest('.bm-step-JS').addClass('is-open');
 
-        /*if ($(this).hasClass('is-open')) {
-            $(this).nextAll().removeClass('is-open');
+        /*if (jQuery(this).hasClass('is-open')) {
+            jQuery(this).nextAll().removeClass('is-open');
         } else {
-            if ($(this).prev().hasClass('is-open')) {
-                $(this).addClass('is-open');
+            if (jQuery(this).prev().hasClass('is-open')) {
+                jQuery(this).addClass('is-open');
             }
         }*/
     });
 
     // Generate
 
-    $('#bm-step_generate').on('click', function(){
+    jQuery('#bm-step_generate').on('click', function(){
         if (THIS.allowGenerateDownloads) {
-            $('body').addClass('downloads-is-open');
-            $('#bm-app_downloads-loader').addClass('is-active');
-            $('#bm-img_preview-loader').addClass('is-active');
+            jQuery('body').addClass('downloads-is-open');
+            jQuery('#bm-app_downloads-loader').addClass('is-active');
+            jQuery('#bm-img_preview-loader').addClass('is-active');
             THIS.generateDownloads = true;
 
             if (!THIS.webGl) {
@@ -619,14 +622,14 @@ var appGui = function() {
 
     // Downloads
 
-    $('#bm-downloads-button').on('click', function(){
-        $('body').removeClass('downloads-is-open');
-        $('#bm-app_downloads-loader').removeClass('is-active');        
+    jQuery('#bm-downloads-button').on('click', function(){
+        jQuery('body').removeClass('downloads-is-open');
+        jQuery('#bm-app_downloads-loader').removeClass('is-active');        
         appGui.videoExport.stopGenerate();
     });
 
     this.videoExport.$btn.on('click', function(){
-        if ($(this).attr('data-action') == 'cancel') {
+        if (jQuery(this).attr('data-action') == 'cancel') {
             THIS.videoExport.stopGenerate();
         } else {            
             if (THIS.videoExport.allowGenerate) {
@@ -636,16 +639,16 @@ var appGui = function() {
 
     });
 
-    $('input[type=radio][name="fps"]').on('change', function(){
+    jQuery('input[type=radio][name="fps"]').on('change', function(){
         if (THIS.videoExport.allowGenerate) {
-            THIS.videoExport.fps = $(this).val();
+            THIS.videoExport.fps = jQuery(this).val();
         } else {
             return false;
         }
     });
 
     // Reset
-    $('#bm-gui-reset-btn').on('click', function(){        
+    jQuery('#bm-gui-reset-btn').on('click', function(){        
         THIS.reset();
     });
 
@@ -654,7 +657,7 @@ var appGui = function() {
     async function draw(options) {
         options = options !== undefined ? options : null;
 
-        $('#bm-step_generate').addClass('is-hidden');
+        jQuery('#bm-step_generate').addClass('is-hidden');
         THIS.$loader.addClass('is-active');
 
         var svgStart = `<svg id="texture" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${textureWidth}" height="${textureHeight}" x="0px" y="0px" viewBox="0 0 ${textureWidth} ${textureHeight}" style="enable-background:new 0 0 ${textureWidth} ${textureHeight};" xml:space="preserve">`;
@@ -667,10 +670,10 @@ var appGui = function() {
         svg += `<rect id="background" width="${textureWidth}" height="${textureHeight}" fill="${tmpColor}"></rect>`;
         // Insert SVG into DOM
         svgPreview.html(svg + '</svg>');
-
+        
         if (THIS.selections.pattern !== null) {
             // Set pattern
-            src = `img/flag/backgrounds/${THIS.selections.pattern}.svg`;
+            src = `${bannerAssetsURL}img/flag/backgrounds/${THIS.selections.pattern}.svg`;
             svg += stripSvgTag(await readTextFile(src));
             // Set pattern color
             svg = setPatternColor(svg);
@@ -680,7 +683,7 @@ var appGui = function() {
 
         if (THIS.selections.icon !== null) {
             // Set Icon
-            src = `img/flag/icons/${THIS.selections.icon}.svg`;
+            src = `${bannerAssetsURL}img/flag/icons/${THIS.selections.icon}.svg`;
             svg += stripSvgTag(await readTextFile(src));
             // Set Icon color
             svg = setIconColor(svg);
@@ -689,7 +692,7 @@ var appGui = function() {
             // Animate Icon
             if (iconHasChanged())
             setTimeout(function(){
-                $('#icon').attr('class', '');
+                jQuery('#icon').attr('class', '');
             }, 10)
             //
             THIS.selections.lastIcon = THIS.selections.icon
@@ -697,7 +700,7 @@ var appGui = function() {
 
         if (THIS.selections.type !== null && THIS.selections.iconType !== "feeling") {
             //var fontsize = options && options.fontsize ? options.fontsize : 155;{fontsize: 87.231});data-bm_gui_type
-            var fontsize = $('[data-bm_gui_type].is-selected').length ? 95.5 : 155;
+            var fontsize = jQuery('[data-bm_gui_type].is-selected').length ? 95.5 : 155;
             // Type
             svg += await handleFontsize(svgHelp, svgStart, fontsize);
             // Set Type color
@@ -730,30 +733,30 @@ var appGui = function() {
         if (condition2 && condition3 && condition4) {
             THIS.allowGenerateDownloads = true;
             THIS.videoExport.allowGenerate = true;
-            $('#bm-step_generate').removeClass('is-hidden');
-            //$('#bm-validation-msg').removeClass('is-active');
-            $('.accordion-item-title .validation-icon').removeClass('is-visible');            
+            jQuery('#bm-step_generate').removeClass('is-hidden');
+            //jQuery('#bm-validation-msg').removeClass('is-active');
+            jQuery('.accordion-item-title .validation-icon').removeClass('is-visible');            
         } else {
             THIS.allowGenerateDownloads = false;
             THIS.videoExport.allowGenerate = false;
-            $('#bm-step_generate').addClass('is-hidden');
-            $('.accordion-item-title .validation-icon').removeClass('is-visible');  
+            jQuery('#bm-step_generate').addClass('is-hidden');
+            jQuery('.accordion-item-title .validation-icon').removeClass('is-visible');  
             
-            if (!condition2 && ($('#bm-gui-icons').hasClass('is-visited') || $('#bm-gui-type').hasClass('is-visited'))) {
-                $('#bm-step_2 .accordion-item-title .validation-icon').addClass('is-visible');
-                //$('#bm-validation-msg').addClass('is-active');                  
+            if (!condition2 && (jQuery('#bm-gui-icons').hasClass('is-visited') || jQuery('#bm-gui-type').hasClass('is-visited'))) {
+                jQuery('#bm-step_2 .accordion-item-title .validation-icon').addClass('is-visible');
+                //jQuery('#bm-validation-msg').addClass('is-active');                  
                 
             }
 
-            if (!condition3 && $('#bm-gui-type').hasClass('is-visited'))  {
-                $('#bm-step_3 .accordion-item-title .validation-icon').addClass('is-visible');
-                $('#bm-validation-msg').addClass('is-active');                
+            if (!condition3 && jQuery('#bm-gui-type').hasClass('is-visited'))  {
+                jQuery('#bm-step_3 .accordion-item-title .validation-icon').addClass('is-visible');
+                jQuery('#bm-validation-msg').addClass('is-active');                
             }
 
-            if (!condition4 && $('#bm-gui-type').hasClass('is-visited') && true)  { // true was !$('#bm-step_4').hasClass('is-open')
+            if (!condition4 && jQuery('#bm-gui-type').hasClass('is-visited') && true)  { // true was !jQuery('#bm-step_4').hasClass('is-open')
                 if (THIS.selections.iconType == 'problem' || THIS.selections.iconType == null) {
-                    $('#bm-step_4 .accordion-item-title .validation-icon').addClass('is-visible');
-                    //$('#bm-validation-msg').addClass('is-active');
+                    jQuery('#bm-step_4 .accordion-item-title .validation-icon').addClass('is-visible');
+                    //jQuery('#bm-validation-msg').addClass('is-active');
                 }
             }
         }        
@@ -774,7 +777,7 @@ var appGui = function() {
             var margin = 20/c;
             var height = linesNum*lineheight + (linesNum-1)*margin;           
 
-            opentype.load('fonts/Formanova/Formanova-Black.woff', function (err, font) {
+            opentype.load(bannerAssetsURL + 'fonts/Formanova/Formanova-Black.woff', function (err, font) {
                 if (err) {
                      reject('Font could not be loaded: ' + err);
                 } else {
@@ -869,13 +872,13 @@ var appGui = function() {
     }
 
     function updateDisabledColors(key) {
-        $('[data-bm_gui_color]').removeClass('is-disabled');
+        jQuery('[data-bm_gui_color]').removeClass('is-disabled');
 
         //console.log(THIS.disabledColors)
 
         for (var key in THIS.disabledColors) {
             for (var i = 0; i < THIS.disabledColors[key].length; i++) {
-                $(`[data-bm_gui_color="${THIS.disabledColors[key][i]}"]`).addClass('is-disabled')
+                jQuery(`[data-bm_gui_color="${THIS.disabledColors[key][i]}"]`).addClass('is-disabled')
             }
         }
     }
@@ -922,9 +925,9 @@ var appGui = function() {
 
     function setColorsUI() {
         if (THIS.selections.pattern) {
-            $('#bm-gui-colors-pattern').removeClass('single-color').attr('data-pattern', THIS.selections.pattern);
+            jQuery('#bm-gui-colors-pattern').removeClass('single-color').attr('data-pattern', THIS.selections.pattern);
         } else {
-            $('#bm-gui-colors-pattern').addClass('single-color').attr('data-pattern', null);
+            jQuery('#bm-gui-colors-pattern').addClass('single-color').attr('data-pattern', null);
             resetSelectedColor('pattern', 'shape', 1);
         }        
     }
@@ -935,11 +938,11 @@ var appGui = function() {
 
         // Because pattern has 2 colors to disable
         if (key !== undefined && index !== undefined) {
-            $(`.${key}Color-is-selected`).removeClass(`${key}Color-is-selected`).removeClass('is-disabled');
+            jQuery(`.${key}Color-is-selected`).removeClass(`${key}Color-is-selected`).removeClass('is-disabled');
             THIS.selections[`${key}Color`] = null;
             THIS.disabledColors[value][index] = null;            
         } else {
-            $(`.${value}Color-is-selected`).removeClass(`${value}Color-is-selected`).removeClass('is-disabled');
+            jQuery(`.${value}Color-is-selected`).removeClass(`${value}Color-is-selected`).removeClass('is-disabled');
             THIS.selections[`${value}Color`] = null;
             THIS.disabledColors[value] = [];
         }

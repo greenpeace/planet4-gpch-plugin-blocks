@@ -24,10 +24,9 @@ theme.$videos = undefined;
 
 var lastVideoSize = undefined;
 
-
 // DOCUMENT READY
 
-$(document).on('ready', function() {
+jQuery(document).on('ready', function() {
     // Initialize videos & load proper size file
     videoSrcset();
     // Play video when is in viewport and pause it when its not
@@ -40,28 +39,30 @@ $(document).on('ready', function() {
  */
 
 function videoSrcset() {
-    //var src = $(window).width() > theme.breakpoints.md ? 'desktop' : 'mobile';
+    //var src = jQuery(window).width() > theme.breakpoints.md ? 'desktop' : 'mobile';
     var size = 'sm';
 
-    if ($(window).width() >= theme.breakpoints.md) {
+    if (jQuery(window).width() >= theme.breakpoints.md) {
         size = 'md';
     }
 
-    if ($(window).width() >= theme.breakpoints.lg) {
+    if (jQuery(window).width() >= theme.breakpoints.lg) {
         size = 'lg';
     } 
 
-    if ($(window).width() >= theme.breakpoints.laptop) {
+    if (jQuery(window).width() >= theme.breakpoints.laptop) {
         size = 'xl';
     }  
 
     if (lastVideoSize !== size) {
         var rand = Math.floor(Math.random()*3)+1;
-        $('#intro-video-wrap').html(`<video src="videos/intro_${size}_${rand}.mp4" id="intro-video" poster="videos/poster_intro_xl_${rand}.jpg" loop muted playsinline></video>`);
-        $('#bm-video-wrap').html(`<video src="videos/app_${size}.mp4" id="app-video" poster="videos/poster_app_${size}.jpg" loop muted playsinline></video>`);
+        var assetsURL = gpchBlocksAssetsURL + 'blocks/banner-maker/'
+        
+        jQuery('#intro-video-wrap').html(`<video src="${assetsURL}videos/intro_${size}_${rand}.mp4" id="intro-video" poster="${assetsURL}videos/poster_intro_xl_${rand}.jpg" loop muted playsinline></video>`);
+        jQuery('#bm-video-wrap').html(`<video src="${assetsURL}videos/app_${size}.mp4" id="app-video" poster="${assetsURL}videos/poster_app_${size}.jpg" loop muted playsinline></video>`);
     }
     // Initialize videos
-    theme.$videos = $('#app-video, #intro-video-trigger, #person_1-video, #person_2-video, #colours-video');
+    theme.$videos = jQuery('#app-video, #intro-video-trigger, #person_1-video, #person_2-video, #colours-video');
     lastVideoSize = size;
 }
 
@@ -71,9 +72,9 @@ function videoSrcset() {
  */
 
 function videoControl() {
-    $.each(theme.$videos, function(video) {
-        var video = document.getElementById($(this).attr('id').replace("-trigger", ""));
-        var $trigger = $(`#${$(this).attr('id')}`);
+    jQuery.each(theme.$videos, function(video) {
+        var video = document.getElementById(jQuery(this).attr('id').replace("-trigger", ""));
+        var $trigger = jQuery(`#${jQuery(this).attr('id')}`);
 
         if ($trigger.isInViewport(0)) {
             video.play();
@@ -89,8 +90,8 @@ function videoControl() {
  */
 
 function videosPause() {
-    $.each(theme.$videos, function(video) {
-        var video = document.getElementById($(this).attr('id').replace("-trigger", ""));
+    jQuery.each(theme.$videos, function(video) {
+        var video = document.getElementById(jQuery(this).attr('id').replace("-trigger", ""));
         video.pause();
     })
 }
@@ -108,7 +109,7 @@ function clientPerformance(limit) {
     var t1 = performance.now();
     var score = t1 - t0;
 
-    $('#debugg').html(score.toFixed(3));
+    jQuery('#debugg').html(score.toFixed(3));
 
     if (score >= limit) {  //.5
         return 0; // low
@@ -125,18 +126,18 @@ function appInitialize() {
     appInitialized = true;
     appDel = false;
     //
-    var height = $('#banner_maker-component').outerHeight();
+    var height = jQuery('#banner_maker-component').outerHeight();
     // Bannermaker App view toggle
     setAppView();
     // Todo easing
-    $('#banner_maker-component').scrollToEl(theme.times.time);
-    $('body').addClass('app-is-oppening');
-    $( "#banner_maker-component-wrap" ).animate({
+    jQuery('#banner_maker-component').scrollToEl(theme.times.time);
+    jQuery('body').addClass('app-is-oppening');
+    jQuery( "#banner_maker-component-wrap" ).animate({
         height: height,
         }, theme.times.time, function() {
         // Layout
-        $(this).attr("style", "");
-        $('body').addClass('app-is-open');
+        //jQuery(this).attr("style", "");
+        jQuery('body').addClass('app-is-open');
         // Snap App preview
         //snapAppPreview();
         // Check client performance and select between App and App's fallback
@@ -144,11 +145,14 @@ function appInitialize() {
             appRun('loop');               
         } else {
             appRun('static');
-            $('#bm-gui-modal').addClass('is-open');
-            //$('#bm-gui-app_toggle').removeClass('is-dismissed');
+            jQuery('#bm-gui-modal').addClass('is-open');
+            //jQuery('#bm-gui-app_toggle').removeClass('is-dismissed');
         }
-
+        
+        jQuery( "#banner_maker-component-wrap" ).css('height', 'auto');
     });
+    
+    
 }
 
 /*
@@ -161,14 +165,14 @@ function appDelete() {
     appInitialized = false;
     appDel = true;
     //
-    $('#banner_maker_intro-component').scrollToEl($('#banner_maker-component').hasClass('mobile-view') ? 0 : 0);
-    $('body').removeClass('app-is-oppening');//.removeClass('preview-is-fixed');
-    $( "#banner_maker-component-wrap" ).animate({
+    jQuery('#banner_maker_intro-component').scrollToEl(jQuery('#banner_maker-component').hasClass('mobile-view') ? 0 : 0);
+    jQuery('body').removeClass('app-is-oppening');//.removeClass('preview-is-fixed');
+    jQuery( "#banner_maker-component-wrap" ).animate({
         height: 0,
-        }, ($('#banner_maker-component').hasClass('mobile-view') ? 0 : 0), function() {
+        }, (jQuery('#banner_maker-component').hasClass('mobile-view') ? 0 : 0), function() {
         // Layout
-        $(this).attr("style", "");
-        $('body').removeClass('app-is-open');
+        jQuery(this).attr("style", "");
+        jQuery('body').removeClass('app-is-open');
     });
 }
 
@@ -177,17 +181,17 @@ function appDelete() {
  *
  */
 
-$.fn.isInViewport = function(offset) {
+jQuery.fn.isInViewport = function(offset) {
     offset = offset !== undefined ? offset : 0;
     var headerOffset = 0;
 
-    var elementTop = $(this).offset().top;
-    var elementBottom = elementTop + $(this).outerHeight();
-    var viewportTop = $(window).scrollTop();
-    var viewportBottom = viewportTop + $(window).height()-($(window).height()*offset);
+    var elementTop = jQuery(this).offset().top;
+    var elementBottom = elementTop + jQuery(this).outerHeight();
+    var viewportTop = jQuery(window).scrollTop();
+    var viewportBottom = viewportTop + jQuery(window).height()-(jQuery(window).height()*offset);
 
-    return elementBottom > (viewportTop + headerOffset + $(window).height()/3) && (elementTop + 5) < viewportBottom;
-    // + $(window).height()/3)
+    return elementBottom > (viewportTop + headerOffset + jQuery(window).height()/3) && (elementTop + 5) < viewportBottom;
+    // + jQuery(window).height()/3)
 };
 
 /*
@@ -196,12 +200,12 @@ $.fn.isInViewport = function(offset) {
  */
 
 function setAppView() {
-    if ($(window).width() <= theme.breakpoints.md) {
+    if (jQuery(window).width() <= theme.breakpoints.md) {
         toggleAppView('mobile');
     } else {
         toggleAppView('default');
     }        
-    //if ($('#banner_maker-component').hasClass('is-open')) {}
+    //if (jQuery('#banner_maker-component').hasClass('is-open')) {}
 }
 
 /*
@@ -211,18 +215,18 @@ function setAppView() {
 
 function toggleAppView(view) {
     if (view == 'default' && appGui.view == undefined || view == 'default' && appGui.view !== 'default') {
-        $('#banner_maker-component [aria-expanded]').attr('aria-expanded', 'false');
-        $('#banner_maker-component .accordion-item-content').attr('data-parent', '#accordion-bm').removeClass('show');
+        jQuery('#banner_maker-component [aria-expanded]').attr('aria-expanded', 'false');
+        jQuery('#banner_maker-component .accordion-item-content').attr('data-parent', '#accordion-bm').removeClass('show');
         // Open first item
-        $('#banner_maker-component [aria-expanded]').eq(0).attr('aria-expanded', 'true');
-        $('#banner_maker-component .accordion-item-content').eq(0).attr('data-parent', '#accordion-bm').addClass('show');
+        jQuery('#banner_maker-component [aria-expanded]').eq(0).attr('aria-expanded', 'true');
+        jQuery('#banner_maker-component .accordion-item-content').eq(0).attr('data-parent', '#accordion-bm').addClass('show');
         // Enable click
-        $('#banner_maker-component').removeClass('mobile-view');
+        jQuery('#banner_maker-component').removeClass('mobile-view');
     } else if (view == 'mobile' && appGui.view == undefined || view == 'mobile' && appGui.view !== 'mobile') {
-        $('#banner_maker-component [aria-expanded]').attr('aria-expanded', 'true')
-        $('#banner_maker-component .accordion-item-content').removeAttr('data-parent').addClass('show');
+        jQuery('#banner_maker-component [aria-expanded]').attr('aria-expanded', 'true')
+        jQuery('#banner_maker-component .accordion-item-content').removeAttr('data-parent').addClass('show');
         // Disable click
-        $('#banner_maker-component').addClass('mobile-view');
+        jQuery('#banner_maker-component').addClass('mobile-view');
     }
     
     appGui.view = view;
@@ -234,15 +238,15 @@ function toggleAppView(view) {
  *
  */
 
- $.fn.scrollToEl = function(duration) {
+ jQuery.fn.scrollToEl = function(duration) {
     duration = duration !== undefined ? duration : 1000;
-    if ($(this).length) {
+    if (jQuery(this).length) {
         var offset = 0;
-        $('body').addClass('is-scrolling');
-        $('html, body').animate({
-            scrollTop: $(this).offset().top - offset
+        jQuery('body').addClass('is-scrolling');
+        jQuery('html, body').animate({
+            scrollTop: jQuery(this).offset().top - offset
         }, duration, function(){
-            $('body').removeClass('is-scrolling')
+            jQuery('body').removeClass('is-scrolling')
         });        
     }
 }
