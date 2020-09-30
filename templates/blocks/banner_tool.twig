@@ -8,7 +8,7 @@
 					</div>
 
 					<div class="col-12 d-flex justify-content-center wp-block-button">
-						<button id="bm-step_start" class="mybtn margin-t">Create</button>
+						<button id="bm-step_start" class="mybtn margin-t">{{ lang_create }}</button>
 					</div>
 				</div>
 			</div>
@@ -23,10 +23,10 @@
 								<div id="bm-step_1" class="accordion-item bm-step bm-step-JS">
 									<div id="heading-0" class="accordion-item-header" data-toggle="collapse"
 										 data-target="#collapse-0" aria-expanded="true" aria-controls="collapse-0">
-										<div class="accordion-item-title"><span>Step&nbsp;1<span
+										<div class="accordion-item-title"><span>{{ lang_step }}&nbsp;1<span
 														class="validation-icon">*</span></span></div>
-										<div class="accordion-item-subtitle"><span class="text-sm">Background</span><br>Choose
-											your preferred background between solid or pattern
+										<div class="accordion-item-subtitle"><span class="text-sm">{{ lang_background }}</span><br>
+											{{ lang_background_desc }}
 										</div>
 									</div>
 
@@ -62,11 +62,10 @@
 								<div id="bm-step_2" class="accordion-item bm-step bm-step-JS">
 									<div id="heading-1" class="accordion-item-header" data-toggle="collapse"
 										 data-target="#collapse-1" aria-expanded="false" aria-controls="collapse-1">
-										<div class="accordion-item-title"><span>Step&nbsp;2<span
+										<div class="accordion-item-title"><span>{{ lang_step }}&nbsp;2<span
 														class="validation-icon">*</span></span></div>
 										<div class="accordion-item-subtitle"><span
-													class="text-sm">Background Colour</span><br>Then choose
-											background/pattern colour(s) based on the campaign’s colour palette
+													class="text-sm">{{ lang_background_color }}</span><br>{{ lang_background_color_desc }}
 										</div>
 									</div>
 
@@ -97,18 +96,16 @@
 
 										<div id="bm-step_2-info" class="bm-info __warning"><span
 													class="bm-info-content"><span class='info-icon'>!</span><span
-														class="bm-info-text">Deselect a colour first!</span></span></div>
+														class="bm-info-text">{{ lang_error_deselect }}</span></span></div>
 									</div>
 								</div>
 
 								<div id="bm-step_3" class="accordion-item bm-step bm-step-JS">
 									<div id="heading-2" class="accordion-item-header" data-toggle="collapse"
 										 data-target="#collapse-2" aria-expanded="false" aria-controls="collapse-2">
-										<div class="accordion-item-title"><span>Step&nbsp;3<span
+										<div class="accordion-item-title"><span>{{ lang_step }}&nbsp;3<span
 														class="validation-icon">*</span></span></div>
-										<div class="accordion-item-subtitle"><span class="text-sm">Icons</span><br>Now
-											choose your preferred icon between problems or feelings. Don't forget to chose a
-											colour
+										<div class="accordion-item-subtitle"><span class="text-sm">{{ lang_icons }}</span><br>{{ lang_icons_desc }}
 										</div>
 									</div>
 
@@ -117,7 +114,7 @@
 										<div id="bm-gui-icons" class="bm-gui-icons bm-gui">
 											<div class="bm-gui-container">
 												<div class="bm-gui-inner">
-													<div class="bm-gui-inner-title">Problems</div>
+													<div class="bm-gui-inner-title">{{ lang_problems }}</div>
 
 													<div data-bm_gui_icontype="problem">
 
@@ -125,72 +122,72 @@
 															<i class="svg-icon">
 																{{ function('file_get_contents',  assets_url ~ "img/flag/icons/problem_1.svg")|raw }}
 															</i>
-															<span>Wildfires</span>
+															<span>{{ lang_wildfires }}</span>
 														</button>
 
 														<button data-bm_gui_icon="problem_2">
 															<i class="svg-icon">
 																{{ function('file_get_contents',  assets_url ~ "img/flag/icons/problem_2.svg")|raw }}
 															</i>
-															<span>Floods</span>
+															<span>{{ lang_floods }}</span>
 														</button>
 
 														<button data-bm_gui_icon="problem_3">
 															<i class="svg-icon">
 																{{ function('file_get_contents',  assets_url ~ "img/flag/icons/problem_3.svg")|raw }}
 															</i>
-															<span>Tropical cyclones</span>
+															<span>{{ lang_tropical_cyclones }}</span>
 														</button>
 
 														<button data-bm_gui_icon="problem_4">
 															<i class="svg-icon">
 																{{ function('file_get_contents',  assets_url ~ "img/flag/icons/problem_4.svg")|raw }}
-															</i><span>Rising sea levels</span>
+															</i><span>{{ lang_rising_sea }}</span>
 														</button>
 
 														<button data-bm_gui_icon="problem_5">
 															<i class="svg-icon">
 																{{ function('file_get_contents',  assets_url ~ "img/flag/icons/problem_5.svg")|raw }}
-															</i><span>Droughts</span>
+															</i><span>{{ lang_droughts }}</span>
 														</button>
 
 														<button data-bm_gui_icon="problem_6">
 															<i class="svg-icon">
 																{{ function('file_get_contents',  assets_url ~ "img/flag/icons/problem_6.svg")|raw }}
 															</i>
-															<span>Heatwaves</span>
+															<span>{{ lang_heatwaves }}</span>
 														</button>
 													</div>
 
 													<div class="column-break"></div>
 
-													<div class="bm-gui-inner-title">Feelings</div>
+													<div class="bm-gui-inner-title">{{ lang_feelings }}</div>
 
 													<div data-bm_gui_icontype="feeling">
 														<button data-bm_gui_icon="feeling_3">
 															<i class="svg-icon">
 																{{ function('file_get_contents',  assets_url ~ "img/flag/icons/feeling_3.svg")|raw }}
 															</i>
-															<span>Empowered</span>
+															<span>{{ lang_empowered }}</span>
 														</button>
 
 														<button data-bm_gui_icon="feeling_7">
 															<i class="svg-icon">
 																{{ function('file_get_contents',  assets_url ~ "img/flag/icons/feeling_7.svg")|raw }}
 															</i>
-															<span>Empathy</span>
+															<span>{{ lang_empathy }}</span>
 														</button>
 
 														<button data-bm_gui_icon="feeling_5">
 															<i class="svg-icon">
 																{{ function('file_get_contents',  assets_url ~ "img/flag/icons/feeling_5.svg")|raw }}
-															</i><span>Encouraged/Inspired</span>
+															</i><span>{{ lang_encouraged }}</span>
 														</button>
 
 														<button data-bm_gui_icon="feeling_6">
 															<i class="svg-icon">
 																{{ function('file_get_contents',  assets_url ~ "img/flag/icons/feeling_6.svg")|raw }}
-															</i><span>Belonging</span>
+															</i><span>{{ lang_belonging }}</span>
 														</button>
 													</div>
 
@@ -231,10 +228,9 @@
 								<div id="bm-step_4" class="accordion-item bm-step bm-step-JS"><!-- is-disabled -->
 									<div id="heading-3" class="accordion-item-header" data-toggle="collapse"
 										 data-target="#collapse-3" aria-expanded="false" aria-controls="collapse-3">
-										<div class="accordion-item-title"><span>Step&nbsp;4<span
+										<div class="accordion-item-title"><span>{{ lang_step }}&nbsp;4<span
 														class="validation-icon">*</span></span></div>
-										<div class="accordion-item-subtitle"><span class="text-sm">Message</span><br>Finally
-											choose from existing messages or type your own. Don't forget to chose a colour
+										<div class="accordion-item-subtitle"><span class="text-sm">{{ lang_message }}</span><br>{{ lang_message_desc }}
 										</div>
 									</div>
 
@@ -246,17 +242,17 @@
 													<div class="buttons-wrap">
 														<div class="button-wrap">
 															<button data-bm_gui_type="VOICES FOR&#10;CLIMATE&#10;ACTION.&#10;JUSTICE FOR&#10;THE PEOPLE">
-																<span>VOICES FOR<br>CLIMATE<br>ACTION.<br>JUSTICE FOR<br>THE PEOPLE</span>
+																<span>{{ lang_slogan1|raw }}</span>
 															</button>
 														</div>
 														<div class="button-wrap">
 															<button data-bm_gui_type="RAISE YOUR&#10;VOICE FOR&#10;CLIMATE&#10;JUSTICE">
-																<span>RAISE YOUR<br>VOICE FOR<br>CLIMATE<br>JUSTICE</span>
+																<span>{{ lang_slogan2|raw }}</span>
 															</button>
 														</div>
 														<div class="button-wrap">
 															<button data-bm_gui_type="THE CLIMATE&#10;CRISIS IS A&#10;HUMAN RIGHTS&#10;CRISIS">
-																<span>THE CLIMATE<br>CRISIS IS A<br>HUMAN RIGHTS<br>CRISIS</span>
+																<span>{{ lang_slogan3|raw }}</span>
 															</button>
 														</div>
 													</div>
@@ -264,21 +260,21 @@
 
 													<div class="bm-gui-textarea-wrap">
 														<textarea id="bm-gui-textarea" class="text-xs"
-																  placeholder="TYPE YOUR OWN&#10;MESSAGE"
+																  placeholder="{{ lang_own_message }}"
 																  rows="5"></textarea>
 
 														<div class="bm-gui-textarea-options">
 															<div class="button-wrap">
 																<button id="bm-gui-textarea-submit"
 																		class="mybtn __full-width __outline __bg-transparent bm-gui-textarea-submit margin-t-10 text-xs is-inactive">
-																	Submit
+																	{{ lang_submit }}
 																</button>
 															</div>
 
 															<div class="button-wrap">
 																<button id="bm-gui-textarea-delete"
 																		class="mybtn __full-width __outline __bg-transparent bm-gui-textarea-submit margin-t-10 text-xs is-inactive">
-																	Delete
+																	{{ lang_delete }}
 																</button>
 															</div>
 														</div>
@@ -315,11 +311,11 @@
 										</div>
 										<div id="bm-step_4-info" class="bm-info __warning"><span
 													class="bm-info-content"><span class='info-icon'>!</span><span
-														class="bm-info-text">Select or submit a message first!</span></span>
+														class="bm-info-text">{{ lang_err_submit_message }}</span></span>
 										</div>
 									</div>
 									<div id="bm-step_4-info_2" class="bm-info __simply"><span class="bm-info-content"><span
-													class="bm-info-text">Feelings need no words</span></span></div>
+													class="bm-info-text">{{ lang_no_words }}</span></span></div>
 								</div>
 							</div>
 						</div>
@@ -358,12 +354,12 @@
 								<div class="buttons-wrap">
 									<div class="button-wrap">
 										<button id="bm-gui-reset-btn" class="mybtn __bg-transparent __outline __size-sm">
-											Reset
+											{{ lang_reset }}
 										</button>
 									</div>
 
 									<div class="button-wrap">
-										<button id="bm-step_generate" class="mybtn __size-sm is-hidden">Generate</button>
+										<button id="bm-step_generate" class="mybtn __size-sm is-hidden">{{ lang_generate }}</button>
 									</div>
 								</div>
 							</div>
@@ -437,20 +433,19 @@
 					<button id="bm-gui-app_toggle-btn" class="bm-gui-app_toggle-btn info-icon">!</button>
 					<div class="bm-gui-app_toggle-content-wrap">
 						<div class="bm-gui-app_toggle-content">
-							<h3 class="bm-gui-app_toggle-title">Video mode</h3>
+							<h3 class="bm-gui-app_toggle-title">{{ lang_video_mode }}</h3>
 							<div class="bm-gui-app_toggle-text">
-								<p>Confirm video mode for full Experience. This may couse performance issues to your
-									device.</p>
+								<p>{{ lang_video_mode_desc }}</p>
 							</div>
 							<div class="bm-gui-app_toggle-ui">
 								<div class="button-wrap">
 									<button id="bm-gui-app_toggle-dismiss"
-											class="mybtn __size-sm __full-width __bg-light_blue">Dismiss
+											class="mybtn __size-sm __full-width __bg-light_blue">{{ lang_dismiss }}
 									</button>
 								</div>
 								<div class="button-wrap">
 									<button id="bm-gui-app_toggle-confirm" class="mybtn __size-sm __full-width __bg-red">
-										Confirm
+										{{ lang_confirm }}
 									</button>
 								</div>
 							</div>
