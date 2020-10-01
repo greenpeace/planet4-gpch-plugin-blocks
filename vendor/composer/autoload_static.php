@@ -30,6 +30,7 @@ class ComposerStaticInit1f0a357e88357c4512048dc57e74c22c
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Base_Block' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Base_Block.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Base_Form_Block' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Base_Form_Block.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Accordion' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Accordion.php',
+        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Banner_Tool' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Banner_Tool.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Form_Counter_Text' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Form_Counter_Text.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Form_Progress_Bar' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Form_Progress_Bar.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_GPCH_Events' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Events.php',
@@ -39,6 +40,7 @@ class ComposerStaticInit1f0a357e88357c4512048dc57e74c22c
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Spacer' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Spacer.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Taskforce' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Taskforce.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Word_Cloud' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Word_Cloud.php',
+        'Greenpeace\\Planet4GPCHBlocks\\Planet4_GPCH_Blocks_Dictionary_Table' => __DIR__ . '/../..' . '/includes/admin-pages/Planet4_GPCH_Blocks_Dictionary_Table.php',
         'Greenpeace\\Planet4GPCHBlocks\\Planet4_GPCH_Plugin_Blocks' => __DIR__ . '/../..' . '/includes/Plugin.php',
     );
 
