@@ -140,6 +140,10 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Banner_Tool' ) ) {
 				'lang_slogan1' => __('VOICES FOR<br>CLIMATE<br>ACTION.<br>JUSTICE FOR<br>THE PEOPLE', 'planet4-gpch-blocks'),
 				'lang_slogan2' => __('RAISE YOUR<br>VOICE FOR<br>CLIMATE<br>JUSTICE', 'planet4-gpch-blocks'),
 				'lang_slogan3' => __('THE CLIMATE<br>CRISIS IS A<br>HUMAN RIGHTS<br>CRISIS', 'planet4-gpch-blocks'),
+				'lang_slogan1_c' => str_replace('<br>', '&#10;', __('VOICES FOR<br>CLIMATE<br>ACTION.<br>JUSTICE FOR<br>THE PEOPLE', 'planet4-gpch-blocks')),
+				'lang_slogan2_c' => str_replace('<br>', '&#10;',__('RAISE YOUR<br>VOICE FOR<br>CLIMATE<br>JUSTICE', 'planet4-gpch-blocks')),
+				'lang_slogan3_c' => str_replace('<br>', '&#10;',__('THE CLIMATE<br>CRISIS IS A<br>HUMAN RIGHTS<br>CRISIS', 'planet4-gpch-blocks')),
+
 				'lang_err_submit_message' => __('Select or submit a message first!', 'planet4-gpch-blocks'),
 				'lang_no_words' => __('Feelings need no words', 'planet4-gpch-blocks'),
 				'lang_reset' => __('Reset', 'planet4-gpch-blocks'),
