@@ -3787,6 +3787,22 @@
 	}
 }
 
+/* Hide form until needed */
+.gpch-block-banner-tool .gform_wrapper {
+	display: none;
+}
+
+/* Hide step 4 content when not needed (feeling icon selected) */
+#bm-step_4.is-disabled {
+	.accordion-item-subtitle,
+	.accordion-item-content {
+		display: none;
+	}
+}
+.gpch-block-banner-tool .mobile-view #bm-step_4-info_2 {
+	order: 1;
+}
+
 /*
 body.app-is-open {
 	overflow: hidden
