@@ -51,7 +51,7 @@ jQuery(document).ready(function () {
 	
 	// Hide the form until needed
 	var bannerField = jQuery('input[value="banner"]');
-	var formWrapper = jQuery('.gpch-block-banner-tool .gform_wrapper');
+	var formWrapper = jQuery('.gpch-block-banner-tool .banner-submit-form');
 	formWrapper.hide();
 	
 	// Hide step 1
