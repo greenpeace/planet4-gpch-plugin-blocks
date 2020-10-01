@@ -1023,7 +1023,8 @@
 
 	.bm-app .text-sm {
 		/*font-size:  calc(24px * .625) */
-		line-height: 1.16em
+		font-size: 1.2rem;
+		line-height: 1.5rem
 	}
 
 	@media (min-width: 1200px) {
@@ -1867,7 +1868,7 @@
 		-webkit-transition: opacity .25s cubic-bezier(0.2, 1, 0.2, 1);
 		transition: opacity .25s cubic-bezier(0.2, 1, 0.2, 1);
 		margin-left: calc(34px * .625);
-		font-size: .777rem
+		font-size: .75rem;
 	}
 
 	@media (min-width: 1200px) {
@@ -1956,18 +1957,18 @@
 	}
 
 	.accordion-item-subtitle {
-		font-size: calc(14px * .625)
+		/*font-size: calc(14px * .625)*/
 	}
 
 	@media (min-width: 1200px) {
 		.accordion-item-subtitle {
-			font-size: 0.7294vw
+			/*font-size: 0.7294vw*/
 		}
 	}
 
 	@media (min-width: 1920px) {
 		.accordion-item-subtitle {
-			font-size: 14px
+			/*font-size: 14px*/
 		}
 	}
 
@@ -2490,6 +2491,25 @@
 
 	.bm-gui button[class*="is-disabled"]:not([class*="is-selected"]) .disabled-icon {
 		opacity: 1
+	}
+
+	.disabled-icon::before {
+		transform: translate(-50%) rotate(45deg);
+	}
+	.disabled-icon::after {
+		transform: translate(-50%) rotate(-45deg);
+	}
+
+	.disabled-icon::before, .disabled-icon::after {
+		content: '';
+		display: block;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 57%;
+		height: 1px;
+		background-color: #707070;
+		transform-origin: center center;
 	}
 
 	.bm-gui button[class*=is-selected] {
