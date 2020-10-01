@@ -20,7 +20,7 @@ define( 'P4_GPCH_PLUGIN_WORD_DICT_TABLE_NAME', 'gpch_wordcloud_dictionary' );
 add_action( 'plugins_loaded', 'planet4_gpch_plugin_blocks_load_textdomain' );
 
 function planet4_gpch_plugin_blocks_load_textdomain() {
-	load_plugin_textdomain( 'planet4-gutenberg-blocks', false, basename( dirname( __FILE__ ) ) . '/languages' );
+	load_plugin_textdomain( 'planet4-gpch-blocks', false, basename( dirname( __FILE__ ) ) . '/languages' );
 }
 
 // include the Composer autoload file

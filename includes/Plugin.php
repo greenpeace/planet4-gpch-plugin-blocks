@@ -63,6 +63,7 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 				new Blocks\Planet4_GPCH_Block_Spacer(),
 				new Blocks\Planet4_GPCH_Block_Magazine_Articles(),
 				new Blocks\Planet4_GPCH_Block_Word_Cloud(),
+				new Blocks\Planet4_GPCH_Block_Banner_Tool(),
 			];
 		}
 
@@ -146,6 +147,11 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 				array( 'jquery' ),
 				filemtime( P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . $js ),
 				true );
+
+			// Make the assets URL availabel in JS
+			$script = 'var gpchBlocksAssetsURL = "' . P4_GPCH_PLUGIN_BLOCKS_BASE_URL . 'assets/"';
+
+			wp_add_inline_script('planet4-gpch-blocks-js', $script, 'before');
 		}
 	}
 }
