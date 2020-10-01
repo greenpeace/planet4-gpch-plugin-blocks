@@ -1552,18 +1552,18 @@
 	}
 
 	.bm-app .mybtn.__size-sm {
-		height: calc(50px * .625)
+		height: 4.8vw;
 	}
 
 	@media (min-width: 1200px) {
 		.bm-app .mybtn.__size-sm {
-			height: 2.605vw
+			height: 3.8vw
 		}
 	}
 
 	@media (min-width: 1920px) {
 		.bm-app .mybtn.__size-sm {
-			height: 50px
+			height: 70px
 		}
 	}
 
@@ -3788,7 +3788,7 @@
 }
 
 /* Hide form until needed */
-.gpch-block-banner-tool .gform_wrapper {
+.gpch-block-banner-tool .banner-submit-form {
 	display: none;
 }
 
