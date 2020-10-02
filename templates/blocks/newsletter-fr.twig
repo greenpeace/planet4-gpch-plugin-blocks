@@ -1,43 +1,49 @@
 <div class="gp-inxmail-signup-form">
 	<h3>{{ title }}</h3>
 
-	<form id="inxmail-nl-form" method="post"
-		  action="https://mailing.greenpeace.ch/inxmail/inscription_infolettre_fr.jsp" target="_blank"
-		  class="inxform">
-		<input value="s" name="c" type="hidden">
+	<form id="inxmail-nl-form" method="post" action="https://mailing.greenpeace.ch/inxmail/inscription_infolettre_fr.jsp" target="_blank" class="inxform">
+
+		<input value="s" name="c" type="hidden"/>
 
 		<ul>
+
 			<li>
-				<label for="input_listfield_1" class="label">Titre*</label>
-
-				<select name="Anrede" id="input_listfield_1" size=" ">
-					<option value="2">Madame</option>
-					<option value="1">Monsieur</option>
-				</select>
+				<label for="input_listfield_1" class="label">Titre<span class="required">*</span></label>
+				<div>
+					<select name="Anrede" id="input_listfield_1" class="large">
+						<option value="2">Madame</option>
+						<option value="1">Monsieur</option>
+					</select>
+				</div>
 			</li>
 
-			<li><label for="input_textfield_2" class="label">Prénom*</label>
-
-				<input class="text" type="text" name="Anrede" id="input_textfield_2" value="" maxlength="254"
-					   placeholder="Prénom*" required="">
+			<li>
+				<label for="input_textfield_2" class="label">Prénom<span class="required">*</span></label>
+				<div>
+					<input class="text large" type="text" name="Vorname" id="input_textfield_2" value="" maxlength="254" placeholder="Prénom*" required/>
+				</div>
 			</li>
 
-			<li><label for="input_textfield_3" class="label">Courriel*</label>
-
-				<input class="text" type="text" name="email" id="input_textfield_3" value="" maxlength="254"
-					   placeholder="Courriel*" required="">
+			<li>
+				<label for="input_textfield_3" class="label">Courriel<span class="required">*</span></label>
+				<div>
+					<input class="text large" type="email" name="email" id="input_textfield_3" value="" maxlength="254" placeholder="Courriel*" required/>
+				</div>
 			</li>
+
 		</ul>
+
 		<div class="subscription" id="subscription_4">
-			<input value="true" name="list_Greenpeace_Master" type="hidden">
+			<input value="true" name="list_Greenpeace_Master" type="hidden"/>
 		</div>
 
-		<input type="hidden" name="unsetLanguageCode" value="false">
+		<input type="hidden" name="unsetLanguageCode" value="false"/>
+		<input type="hidden" name="LanguageCode" value="2" checked="checked"/>
 
-		<input type="hidden" name="LanguageCode" value="2" checked="checked">
+		<input type="hidden" name="unsetflag_allgemein" value="false"/>
+		<input type="hidden" name="flag_allgemein" value="true" checked="checked"/>
 
-		<div class="submit">
-			<input type="submit" class="submit_button btn btn-accent btn-medium" value="Inscription"/>
-		</div>
+		<input type="submit" class="submit_button btn btn-accent btn-medium" value="Inscription"/>
+
 	</form>
 </div>
