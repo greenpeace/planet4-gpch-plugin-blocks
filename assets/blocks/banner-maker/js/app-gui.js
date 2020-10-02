@@ -536,6 +536,7 @@ var appGui = function() {
         jQuery(this).addClass('is-selected')
         jQuery('#bm-gui-textarea').val(jQuery(this).data('bm_gui_type'));
         THIS.selections.type = jQuery('#bm-gui-textarea').val();
+        /*
         THIS.selections.icon = 'logo';
         jQuery('[data-bm_gui_icon]').removeClass('is-selected');
         resetSelectedColor('icon');
@@ -543,6 +544,7 @@ var appGui = function() {
         THIS.selections.iconType = null;
         jQuery('[data-bm_gui_icontype]').removeClass('is-active');
         jQuery('#bm-gui-colors-icons').removeClass('is-active');
+        */
         //
         jQuery('#bm-step_4-info').removeClass('is-active');        
         // Draw banner
