@@ -45,10 +45,6 @@ jQuery(document).ready(function () {
 		});
 	})(jQuery);
 	
-	
-	// Banner Tool
-	var bannerInserted = false;
-	
 	// Hide the form until needed
 	var bannerField = jQuery('input[value="banner"]');
 	var formWrapper = jQuery('.gpch-block-banner-tool .banner-submit-form');
@@ -81,15 +77,14 @@ jQuery(document).ready(function () {
 	
 	// Get resulting banner and insert it into a form field
 	function getBanner() {
-		if (bannerInserted === false) {
-			var banner = jQuery( '#bm-download_vector' ).attr( 'href' );
-			var svg = document.getElementById('texture');
-			console.log(banner);
-			var bannerField = jQuery( 'input[value="banner"]' );
-			
-			bannerField.val( banner );
-			bannerInserted = true;
-		}
+		var banner = jQuery( '#bm-download_vector' ).attr( 'href' );
+		
+		// Base64 encode the banner
+		banner = btoa(banner);
+		
+		// Insert banner into the hidden field with the default value "banner"
+		var bannerField = jQuery( 'input[value="banner"]' ).val( banner );
+	
 	}
 	
 });

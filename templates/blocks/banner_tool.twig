@@ -456,7 +456,8 @@
 		</div>
 	</section>
 	<section class="banner-submit-form">
-		{{  function('gravity_form', gravity_form_id, 0, 0) }}
+		{# gravity_form( $id_or_title, $display_title = true, $display_description = true, $display_inactive = false, $field_values = null, $ajax = false, $tabindex, $echo = true ); #}
+		{{  function('gravity_form', gravity_form_id, false, false, false, false, true) }}
 	</section>
 </div>
 <script src="{{ assets_url }}js/app.concat.js"></script>
