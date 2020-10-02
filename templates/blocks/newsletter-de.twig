@@ -1,40 +1,36 @@
 <div class="gp-inxmail-signup-form">
 	<h3>{{ title }}</h3>
 
-	<form id="inxmail-nl-form" method="post"
-		  action="https://mailing.greenpeace.ch/inxmail/anmeldung_newsletter_de.jsp" target="_blank" id="displayform"
-		  class="inxform"><input value="s" name="c" type="hidden"/>
+	<form id="inxmail-nl-form" method="post" action="https://mailing.greenpeace.ch/inxmail/anmeldung_newsletter_de.jsp" target="_blank" class="inxform">
+
+		<input value="s" name="c" type="hidden"/>
 
 		<ul>
-			<li>
-				<label for="input_listfield_1" class="label">Anrede<span
-							class="required">*</span></label>
 
-				<div class="">
-					<select name="Anrede" id="input_listfield_1" class="large ">
+			<li>
+				<label for="input_listfield_1" class="label">Anrede<span class="required">*</span></label>
+				<div>
+					<select name="Anrede" id="input_listfield_1" class="large">
 						<option value="2">Frau</option>
 						<option value="1">Herr</option>
 					</select>
 				</div>
 			</li>
 
-			<li class="">
-				<label for="input_textfield_2" class="label ">Vorname<span class="required">*</span></label>
-
-				<div class="">
-					<input class="text large" type="text" name="Vorname" id="input_textfield_2" value="" maxlength="254"
-						   Placeholder="Vorname*" required/>
+			<li>
+				<label for="input_textfield_2" class="label">Vorname<span class="required">*</span></label>
+				<div>
+					<input class="text large" type="text" name="Vorname" id="input_textfield_2" value="" maxlength="254" placeholder="Vorname*" required/>
 				</div>
 			</li>
 
-			<li class="">
-				<label for="input_textfield_3" class="label ">E-Mail<span class="required">*</span></label>
-
-				<div class="">
-					<input class="text large" type="email" name="email" id="input_textfield_3" value="" maxlength="254"
-						   placeholder="E-Mail*" required/>
+			<li>
+				<label for="input_textfield_3" class="label">E-Mail<span class="required">*</span></label>
+				<div>
+					<input class="text large" type="email" name="email" id="input_textfield_3" value="" maxlength="254" placeholder="E-Mail*" required/>
 				</div>
 			</li>
+
 		</ul>
 
 		<div class="subscription" id="subscription_4">
@@ -44,6 +40,10 @@
 		<input type="hidden" name="unsetLanguageCode" value="false"/>
 		<input type="hidden" name="LanguageCode" value="1" checked="checked"/>
 
+		<input type="hidden" name="unsetflag_allgemein" value="false"/>
+		<input type="hidden" name="flag_allgemein" value="true" checked="checked"/>
+
 		<input type="submit" class="submit_button btn btn-accent btn-medium" value="Anmelden"/>
+
 	</form>
 </div>
