@@ -697,8 +697,12 @@ var appGui = function() {
             //
             THIS.selections.lastIcon = THIS.selections.icon
         }
-
+        
+        // German umlauts and French accents aren't supported by the font, we need to convert them
+        replaceSpecialCharacters();
+        
         if (THIS.selections.type !== null && THIS.selections.iconType !== "feeling") {
+            console.log(THIS.selections.type);
             //var fontsize = options && options.fontsize ? options.fontsize : 155;{fontsize: 87.231});data-bm_gui_type
             var fontsize = jQuery('[data-bm_gui_type].is-selected').length ? 95.5 : 155;
             // Type
@@ -722,6 +726,91 @@ var appGui = function() {
 
         // Is generate ready?
         validate();
+    }
+    
+    function replaceSpecialCharacters() {
+        if (THIS.selections.type !== null && THIS.selections.type !== undefined) {
+            // ÄÖüäöü
+            // ÈèÀÀÙùÉé
+            // ÂâÊêÎîÔô
+            // ÛûçËëÏï
+            // Ü, ü     \u00dc, \u00fc
+            // Ä, ä     \u00c4, \u00e4
+            // Ö, ö     \u00d6, \u00f6
+            // ß        \u00df
+            THIS.selections.type = THIS.selections.type.replace( /\u00dc/g,
+              'UE' );
+            THIS.selections.type = THIS.selections.type.replace( /\u00fc/g,
+              'ue' );
+            THIS.selections.type = THIS.selections.type.replace( /\u00c4/g,
+              'AE' );
+            THIS.selections.type = THIS.selections.type.replace( /\u00e4/g,
+              'ae' );
+            THIS.selections.type = THIS.selections.type.replace( /\u00d6/g,
+              'OE' );
+            THIS.selections.type = THIS.selections.type.replace( /\u00f6/g,
+              'oe' );
+            THIS.selections.type = THIS.selections.type.replace( /\u00df/g,
+              'ss' );
+            // È, è     \u00C8 , \u00E8
+            // À, À     \u00C0 , \u00C0
+            // Ù, ù     \u00D9 , \u00F9
+            // É, é     \u00C9 , \\00E9
+            THIS.selections.type = THIS.selections.type.replace( /\u00C8/g,
+              'E' );
+            THIS.selections.type = THIS.selections.type.replace( /\u00E8/g,
+              'e' );
+            THIS.selections.type = THIS.selections.type.replace( /\u00C0/g,
+              'A' );
+            THIS.selections.type = THIS.selections.type.replace( /\u00C0/g,
+              'a' );
+            THIS.selections.type = THIS.selections.type.replace( /\u00D9/g,
+              'U' );
+            THIS.selections.type = THIS.selections.type.replace( /\u00F9/g,
+              'u' );
+            THIS.selections.type = THIS.selections.type.replace( /\u00D9/g,
+              'E' );
+            THIS.selections.type = THIS.selections.type.replace( /\u00E9/g,
+              'e' );
+            // Â, â     \u00C2 , \u00E2
+            // Ê, ê     \u00CA , \u00EA
+            // Î, î     \u00CE , \u00EE
+            // Ô, ô     \u00D4 , \u00F4
+            THIS.selections.type = THIS.selections.type.replace( /\u00C2/g,
+              'A' );
+            THIS.selections.type = THIS.selections.type.replace( /\u00E2/g,
+              'a' );
+            THIS.selections.type = THIS.selections.type.replace( /\u00CA/g,
+              'E' );
+            THIS.selections.type = THIS.selections.type.replace( /\u00EA/g,
+              'e' );
+            THIS.selections.type = THIS.selections.type.replace( /\u00CE/g,
+              'I' );
+            THIS.selections.type = THIS.selections.type.replace( /\u00EE/g,
+              'i' );
+            THIS.selections.type = THIS.selections.type.replace( /\u00D4/g,
+              'O' );
+            THIS.selections.type = THIS.selections.type.replace( /\u00F4/g,
+              'o' );
+            // Û, û     \u00DB , \u00FB
+            // ç        \u00E7
+            // Ë, ë     \u00CB , \u00EB
+            // Ï, ï     \u00CF , \u00EF
+            THIS.selections.type = THIS.selections.type.replace( /\u00DB/g,
+              'U' );
+            THIS.selections.type = THIS.selections.type.replace( /\u00FB/g,
+              'u' );
+            THIS.selections.type = THIS.selections.type.replace( /\u00E7/g,
+              'c' );
+            THIS.selections.type = THIS.selections.type.replace( /\u00CB/g,
+              'E' );
+            THIS.selections.type = THIS.selections.type.replace( /\u00EB/g,
+              'e' );
+            THIS.selections.type = THIS.selections.type.replace( /\u00CF/g,
+              'I' );
+            THIS.selections.type = THIS.selections.type.replace( /\u00EF/g,
+              'i' );
+        }
     }
 
     function validate() {
