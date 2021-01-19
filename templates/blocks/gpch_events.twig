@@ -1,6 +1,6 @@
 {% if (events is iterable) and events|length > 0 %}
 	<h2>{{ title }}</h2>
-	<section class="block article-listing">
+	<section class="block articles-block">
 		<div class="article-list-section clearfix">
 			{% for event in events %}
 				<article class="article-list-item {{ event.classes }} ">
