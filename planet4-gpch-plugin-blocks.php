@@ -4,6 +4,7 @@
  * Plugin URI: https://github.com/greenpeace/planet4-gpch-plugin-blocks
  * Description: Provides Planet4 content blocks specific to Greenpeace Switzerland
  * Version: 0.1.40
+ * Requires at least: 5.6
  * License: MIT
  * Text Domain: planet4-gpch-blocks
  */
