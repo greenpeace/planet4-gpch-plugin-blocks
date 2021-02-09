@@ -1,0 +1,14 @@
+
+.wp-block-planet4-gpch-plugin-blocks-bs-bingo {
+	.grid {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-evenly;
+
+		.box {
+			background-color: #900;
+			color: #fff;
+			padding: 20px;
+		}
+	}
+}
