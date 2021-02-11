@@ -1,0 +1,23 @@
+{
+  "name": "planet4-gpch-plugin-blocks",
+  "version": "1.0.0",
+  "description": "Content Blocks for Greenpeace Switzerland",
+  "main": "build/index.js",
+  "scripts": {
+    "start": "wp-scripts start",
+    "build": "wp-scripts build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/greenpeace/planet4-gpch-plugin-blocks.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/greenpeace/planet4-gpch-plugin-blocks/issues"
+  },
+  "homepage": "https://github.com/greenpeace/planet4-gpch-plugin-blocks#readme",
+  "devDependencies": {
+    "@wordpress/scripts": "13.0.2"
+  }
+}
