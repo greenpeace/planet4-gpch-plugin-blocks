@@ -3,12 +3,15 @@
 	.grid {
 		display: flex;
 		flex-direction: row;
+		flex-wrap: wrap;
 		justify-content: space-evenly;
 
 		.box {
 			background-color: #900;
 			color: #fff;
 			padding: 20px;
+			margin: 10px;
+			width: calc(20% - 20px);
 		}
 	}
 }
