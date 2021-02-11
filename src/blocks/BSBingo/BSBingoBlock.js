@@ -83,7 +83,7 @@ export class BSBingoBlock {
 				
 				const boxes = []
 				for( var i = 0; i < 25; i++ ) {
-					boxes.push( <div className="box">{props.attributes.bsTerms[i]}</div>)
+					boxes.push( <div className="box off" data-index={i}><div class="box-content">{props.attributes.bsTerms[i]}</div></div>)
 				}
 				
 				return (
@@ -91,6 +91,7 @@ export class BSBingoBlock {
 					  <div class="grid">
 						  {boxes}
 					  </div>
+					  <button class="bsbingo-reset">Reset</button>
 				  </div>
 				)
 			},
