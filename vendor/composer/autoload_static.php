@@ -26,6 +26,7 @@ class ComposerStaticInit1f0a357e88357c4512048dc57e74c22c
     );
 
     public static $classMap = array (
+        'Greenpeace\\Planet4GPCHBlocks\\AssetEnqueuer' => __DIR__ . '/../..' . '/includes/AssetEnqueuer.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\BS_Bingo_Block' => __DIR__ . '/../..' . '/includes/blocks/BS_Bingo.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Action_Divider' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Action_Divider.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Base_Block' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Base_Block.php',

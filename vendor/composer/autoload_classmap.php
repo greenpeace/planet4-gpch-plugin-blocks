@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Greenpeace\\Planet4GPCHBlocks\\AssetEnqueuer' => $baseDir . '/includes/AssetEnqueuer.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\BS_Bingo_Block' => $baseDir . '/includes/blocks/BS_Bingo.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Action_Divider' => $baseDir . '/includes/blocks/Planet4_GPCH_Block_Action_Divider.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Base_Block' => $baseDir . '/includes/blocks/Planet4_GPCH_Base_Block.php',

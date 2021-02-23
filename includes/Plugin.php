@@ -152,7 +152,7 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 				filemtime( P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . $js ),
 				true );
 
-			// Make the assets URL availabel in JS
+			// Make the assets URL available in JS
 			$script = 'var gpchBlocksAssetsURL = "' . P4_GPCH_PLUGIN_BLOCKS_BASE_URL . 'assets/"';
 
 			wp_add_inline_script('planet4-gpch-blocks-js', $script, 'before');

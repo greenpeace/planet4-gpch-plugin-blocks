@@ -2,6 +2,8 @@
 
 namespace Greenpeace\Planet4GPCHBlocks\Blocks;
 
+use Greenpeace\Planet4GPCHBlocks\AssetEnqueuer;
+
 /**
  * BS Bingo Block Class.
  *
@@ -22,6 +24,8 @@ class BS_Bingo_Block extends Planet4_GPCH_Base_Block {
 	 */
 	public function __construct() {
 		$this->register_block();
+
+		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_if_block_is_present' ] );
 	}
 
 	/**
@@ -32,6 +36,19 @@ class BS_Bingo_Block extends Planet4_GPCH_Base_Block {
 			'apiVersion'    => 2,
 			'editor_script' => 'planet4-gpch-plugin-blocks',
 		] );
+	}
 
+	/**
+	 * Enqueue assets
+	 */
+	public function enqueue_if_block_is_present() {
+		if ( has_block( 'planet4-gpch-plugin-blocks/bs-bingo' ) ) {
+			AssetEnqueuer::enqueue_js(
+				'planet4-gpch-blocks-bs-bingo',
+				'blocks/bs-bingo.js',
+				array(),
+				true
+			);
+		}
 	}
 }
