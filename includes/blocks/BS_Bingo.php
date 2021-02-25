@@ -45,7 +45,7 @@ class BS_Bingo_Block extends Planet4_GPCH_Base_Block {
 		if ( has_block( 'planet4-gpch-plugin-blocks/bs-bingo' ) ) {
 			AssetEnqueuer::enqueue_js(
 				'planet4-gpch-blocks-bs-bingo',
-				'blocks/bs-bingo.js',
+				'blocks/bsBingo.js',
 				array(),
 				true
 			);

@@ -1,6 +1,25 @@
 # planet4-gpch-plugin-blocks
 Content Blocks, specific to the GPCH installation of Planet4.
 
+## Development
+
+### Install
+
+`npm install --save-dev`
+
+### Build
+Build files for production:
+`npm run build`
+
+Live building for development
+`npm run start`
+
+Styles
+`sass assets/css/source/style.scss assets/css/style.css`
+
+### Autoloader
+To generate autoload files, run 
+`composer dump-autoload` 
 
 ## Blocks ##
 

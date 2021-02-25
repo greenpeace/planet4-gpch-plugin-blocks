@@ -9,7 +9,7 @@ namespace Greenpeace\Planet4GPCHBlocks;
  */
 class AssetEnqueuer {
 	public static function enqueue_js( $handle, $filename, $dependencies = [], $in_footer = false ) {
-		$js = 'assets/js/' . $filename;
+		$js = 'build/js/' . $filename;
 
 		wp_enqueue_script( $handle,
 			P4_GPCH_PLUGIN_BLOCKS_BASE_URL . $js,

@@ -163,12 +163,12 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
          */
 		function register_scripts() {
 			// automatically load dependencies and version
-			$asset_file = include( P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'build/index.asset.php' );
+			$asset_file = include( P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'build/js/admin/index.asset.php' );
 
 			// Register Gutenberg blocks script
 			wp_register_script(
 				'planet4-gpch-plugin-blocks',
-				P4_GPCH_PLUGIN_BLOCKS_BASE_URL . 'build/index.js',
+				P4_GPCH_PLUGIN_BLOCKS_BASE_URL . 'build/js/admin/index.js',
 				$asset_file['dependencies'],
 				$asset_file['version']
 			);
