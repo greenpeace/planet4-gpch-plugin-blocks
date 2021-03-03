@@ -91,7 +91,12 @@ export class BSBingoBlock {
 					  <div class="grid">
 						  {boxes}
 					  </div>
-					  <button class="bsbingo-reset">Reset</button>
+
+					  <div className="wp-block-buttons">
+						  <div className="wp-block-button"><a
+						    className="wp-block-button__link bsbingo-reset">Reset</a>
+						  </div>
+					  </div>
 				  </div>
 				)
 			},

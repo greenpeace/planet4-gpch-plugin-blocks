@@ -17,7 +17,8 @@
 			width: calc(20% - 4px);
 
 			cursor: pointer;
-			border: solid 1px #aaa;
+			/*border: solid 1px #aaa;*/
+			box-shadow: 0 0 6px #aaa;
 
 			&:after {
 				content: "";
@@ -28,6 +29,17 @@
 			.box-content {
 				position: absolute;
 				padding: 4px;
+
+				font-size: 18px;
+				line-height: 1.2em;
+				text-align: center;
+			}
+
+			&.text-long .box-content {
+				font-size: 14px;
+			}
+			&.text-short .box-content {
+				font-size: 20px;
 			}
 
 			&.off {
@@ -42,6 +54,46 @@
 			&.won {
 				background-color: #206a0c;
 				color: #fff;
+			}
+		}
+	}
+}
+
+
+/* Color Schemes */
+@for $i from 1 through length($schema_names) {
+	#{nth($selectors, $i)} {
+		.wp-block-planet4-gpch-plugin-blocks-bs-bingo {
+			.grid {
+				.box {
+					background-color: #{nth($colors_2, $i)};
+
+					&.on {
+						background-color: #{nth($colors_1, $i)};
+					}
+
+					&.won {
+						background-color: #{nth($colors_3, $i)};
+					}
+				}
+			}
+		}
+	}
+}
+
+#{$selector_colorscheme_climate} {
+	.wp-block-planet4-gpch-plugin-blocks-bs-bingo {
+		.grid {
+			.box {
+				background-color: $color_plastic_3;
+
+				&.on {
+					background-color: $color_plastic_2;
+				}
+
+				&.won {
+					background-color: $color_plastic_1;
+				}
 			}
 		}
 	}

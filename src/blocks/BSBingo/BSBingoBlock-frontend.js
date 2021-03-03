@@ -5,6 +5,19 @@ var blockStorage = window.localStorage
 
 // Load stored game
 var gpch_bs_bingo_load = function() {
+	for (var i = 0; i < bs_boxes_elements.length; i++) {
+		console.log (bs_boxes_elements[i].textContent)
+		console.log (bs_boxes_elements[i].textContent.length)
+		
+		if (bs_boxes_elements[i].textContent.length > 30) {
+			bs_boxes_elements[ i ].classList.add( 'text-long' )
+		}
+		else if (bs_boxes_elements[i].textContent.length < 12) {
+			bs_boxes_elements[ i ].classList.add( 'text-short' )
+		}
+	}
+	
+	
 	var stored_bingo_boxes = blockStorage.getItem( 'bsbingo' )
 	
 	if( typeof stored_bingo_boxes == 'string' ) {
@@ -111,11 +124,11 @@ var gpch_bs_bingo_highlight = function(line) {
 	for (var i = start; i < start + 5; i++) {
 		console.log("remove " + i)
 		bs_boxes_elements[i].classList.remove('won');
-		sleep(300);
+		sleep(800);
 	}
 	for (var i = start; i < start + 5; i++) {
 		bs_boxes_elements[i].classList.add('won');
-		sleep(300);
+		sleep(800);
 	}
 }
 
