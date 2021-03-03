@@ -29,5 +29,8 @@
     "@babel/preset-env": "^7.13.9",
     "@wordpress/scripts": "^13.0.2",
     "babel-loader": "^8.2.2"
+  },
+  "dependencies": {
+    "animejs": "^3.2.1"
   }
 }

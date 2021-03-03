@@ -1,3 +1,5 @@
+import anime from 'animejs/lib/anime.es.js';
+
 var bs_boxes_elements = document.getElementsByClassName( 'box' )
 var bs_boxes = Array( 25 ).fill( false )
 
@@ -6,9 +8,6 @@ var blockStorage = window.localStorage
 // Load stored game
 var gpch_bs_bingo_load = function() {
 	for (var i = 0; i < bs_boxes_elements.length; i++) {
-		console.log (bs_boxes_elements[i].textContent)
-		console.log (bs_boxes_elements[i].textContent.length)
-		
 		if (bs_boxes_elements[i].textContent.length > 30) {
 			bs_boxes_elements[ i ].classList.add( 'text-long' )
 		}
@@ -22,8 +21,6 @@ var gpch_bs_bingo_load = function() {
 	
 	if( typeof stored_bingo_boxes == 'string' ) {
 		stored_bingo_boxes = stored_bingo_boxes.split( ',' )
-		
-		console.log( stored_bingo_boxes )
 		
 		for( var i = 0; i < stored_bingo_boxes.length; i++ ) {
 			stored_bingo_boxes[i] = (stored_bingo_boxes[i] == 'true');
@@ -65,6 +62,8 @@ var gpch_bs_bingo_switch_boxes = function() {
 }
 
 var gpch_bs_bingo_check_wins = function () {
+	var full_rows = 0;
+	
 	// check for completed rows
 	for( var i = 0; i < 5; i++ ) {
 		var is_full = true
@@ -76,9 +75,19 @@ var gpch_bs_bingo_check_wins = function () {
 		}
 		
 		if( is_full ) {
+			full_rows += 1;
+			
+			var is_newly_won = false;
+			
 			for( var j = 0; j < 5; j++ ) {
+				if ( !bs_boxes_elements[ i * 5 + j ].classList.contains('won')) {
+					is_newly_won = true;
+				}
 				bs_boxes_elements[ i * 5 + j ].classList.add( 'won' )
-				gpch_bs_bingo_highlight(i)
+			}
+			
+			if(is_newly_won) {
+				gpch_bs_bingo_highlight_row(i);
 			}
 		}
 	}
@@ -94,10 +103,25 @@ var gpch_bs_bingo_check_wins = function () {
 		}
 		
 		if( is_full ) {
+			var is_newly_won = false;
+			
 			for( var j = 0; j < 5; j++ ) {
+				if ( !bs_boxes_elements[ j * 5 + i ].classList.contains('won')) {
+					is_newly_won = true;
+				}
 				bs_boxes_elements[ j * 5 + i ].classList.add( 'won' )
 			}
+			
+			if(is_newly_won) {
+				gpch_bs_bingo_highlight_column(i);
+			}
 		}
+	}
+	
+	if (full_rows == 5) {
+		const bsBingoWinEvent = new CustomEvent('bsBingoWin', {
+			bubbles: true,
+		});
 	}
 }
 
@@ -119,20 +143,44 @@ var gpch_bs_bingo_reset = function() {
 var resetButton = document.getElementsByClassName( 'bsbingo-reset' )
 resetButton[0].addEventListener( 'click', gpch_bs_bingo_reset, false )
 
-var gpch_bs_bingo_highlight = function(line) {
+var gpch_bs_bingo_highlight_row = function(line) {
 	var start = line * 5;
+	var el = []
+	
 	for (var i = start; i < start + 5; i++) {
-		console.log("remove " + i)
-		bs_boxes_elements[i].classList.remove('won');
-		sleep(800);
+		el.push(bs_boxes_elements[i]);
 	}
-	for (var i = start; i < start + 5; i++) {
-		bs_boxes_elements[i].classList.add('won');
-		sleep(800);
-	}
+	
+	anime({
+		targets: [el],
+		keyframes: [
+			{scale: 1.1},
+			{scale: 1},
+		],
+		duration: 200,
+		delay: anime.stagger(70),
+		loop: false
+	});
 }
 
-function sleep(ms) {
-	return new Promise(resolve => setTimeout(resolve, ms));
+var gpch_bs_bingo_highlight_column = function(col) {
+	var start = col;
+	var el = []
+	
+	
+	for (var i = start; i < 25; i += 5) {
+		el.push( bs_boxes_elements[ i ] );
+	}
+	
+	
+	anime({
+		targets: [el],
+		keyframes: [
+			{scale: 1.1},
+			{scale: 1},
+		],
+		duration: 200,
+		delay: anime.stagger(70),
+		loop: false
+	});
 }
-
