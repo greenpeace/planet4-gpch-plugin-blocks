@@ -7,16 +7,7 @@ var blockStorage = window.localStorage
 
 // Load stored game
 var gpch_bs_bingo_load = function() {
-	for (var i = 0; i < bs_boxes_elements.length; i++) {
-		if (bs_boxes_elements[i].textContent.length > 30) {
-			bs_boxes_elements[ i ].classList.add( 'text-long' )
-		}
-		else if (bs_boxes_elements[i].textContent.length < 12) {
-			bs_boxes_elements[ i ].classList.add( 'text-short' )
-		}
-	}
-	
-	
+	// Load state from local storage
 	var stored_bingo_boxes = blockStorage.getItem( 'bsbingo' )
 	
 	if( typeof stored_bingo_boxes == 'string' ) {
@@ -34,6 +25,17 @@ var gpch_bs_bingo_load = function() {
 		bs_boxes = stored_bingo_boxes;
 		
 		gpch_bs_bingo_check_wins();
+	}
+	
+	// Resize text to fit the boxes
+	for (var i = 0; i < bs_boxes_elements.length; i++) {
+		while (bs_boxes_elements[i].childNodes[0].offsetWidth > bs_boxes_elements[i].offsetWidth
+		  || bs_boxes_elements[i].childNodes[0].offsetHeight > bs_boxes_elements[i].offsetHeight) {
+			var style = window.getComputedStyle(bs_boxes_elements[i].childNodes[0], null).getPropertyValue('font-size');
+			var fontSize = parseFloat(style);
+			
+			bs_boxes_elements[i].childNodes[0].style.fontSize = (fontSize - 1) + 'px';
+		}
 	}
 }
 
@@ -138,6 +140,8 @@ var gpch_bs_bingo_reset = function() {
 	}
 	
 	bs_boxes = Array( 25 ).fill( false )
+	
+	blockStorage.setItem( 'bsbingo', bs_boxes )
 }
 
 var resetButton = document.getElementsByClassName( 'bsbingo-reset' )
@@ -171,7 +175,6 @@ var gpch_bs_bingo_highlight_column = function(col) {
 	for (var i = start; i < 25; i += 5) {
 		el.push( bs_boxes_elements[ i ] );
 	}
-	
 	
 	anime({
 		targets: [el],

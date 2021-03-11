@@ -1,4 +1,6 @@
 .wp-block-planet4-gpch-plugin-blocks-bs-bingo {
+	max-width: 80vh;
+
 	.grid {
 		display: flex;
 		flex-direction: row;
@@ -17,8 +19,7 @@
 			width: calc(20% - 4px);
 
 			cursor: pointer;
-			/*border: solid 1px #aaa;*/
-			box-shadow: 0 0 6px #aaa;
+			border: solid 1px #bbb;
 
 			&:after {
 				content: "";
@@ -30,16 +31,9 @@
 				position: absolute;
 				padding: 4px;
 
-				font-size: 18px;
+				font-size: 20px;
 				line-height: 1.2em;
 				text-align: center;
-			}
-
-			&.text-long .box-content {
-				font-size: 14px;
-			}
-			&.text-short .box-content {
-				font-size: 20px;
 			}
 
 			&.off {
@@ -67,13 +61,16 @@
 			.grid {
 				.box {
 					background-color: #{nth($colors_2, $i)};
+					color: #{nth($colors_2_font, $i)};
 
 					&.on {
 						background-color: #{nth($colors_1, $i)};
+						color: #{nth($colors_1_font, $i)};
 					}
 
 					&.won {
 						background-color: #{nth($colors_3, $i)};
+						color: #{nth($colors_3_font, $i)};
 					}
 				}
 			}
@@ -85,14 +82,17 @@
 	.wp-block-planet4-gpch-plugin-blocks-bs-bingo {
 		.grid {
 			.box {
-				background-color: $color_plastic_3;
+				background-color: $color_climate_3;
+				color: $color_climate_3_font;
 
 				&.on {
-					background-color: $color_plastic_2;
+					background-color: $color_climate_2;
+					color: $color_climate_2_font;
 				}
 
 				&.won {
-					background-color: $color_plastic_1;
+					background-color: $color_climate_1;
+					color: $color_climate_1_font;
 				}
 			}
 		}
