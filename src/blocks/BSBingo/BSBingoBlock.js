@@ -88,6 +88,7 @@ export class BSBingoBlock {
 				
 				return (
 				  <div {...blockProps}>
+					  <canvas className="fireworks"></canvas>
 					  <div class="grid">
 						  {boxes}
 					  </div>

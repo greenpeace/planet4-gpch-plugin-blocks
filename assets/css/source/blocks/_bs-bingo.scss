@@ -1,6 +1,15 @@
 .wp-block-planet4-gpch-plugin-blocks-bs-bingo {
 	max-width: 80vh;
 
+	.fireworks {
+		position: absolute;
+		z-index: 20;
+
+		height: 80vh ;
+		width: 80vh ;
+		max-width: 100%;
+	}
+
 	.grid {
 		display: flex;
 		flex-direction: row;

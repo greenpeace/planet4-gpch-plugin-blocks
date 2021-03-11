@@ -2,6 +2,7 @@ import anime from 'animejs/lib/anime.es.js';
 
 var bs_boxes_elements = document.getElementsByClassName( 'box' )
 var bs_boxes = Array( 25 ).fill( false )
+var bs_fireworks = document.querySelector( '.fireworks' )
 
 var blockStorage = window.localStorage
 
@@ -37,6 +38,8 @@ var gpch_bs_bingo_load = function() {
 			bs_boxes_elements[i].childNodes[0].style.fontSize = (fontSize - 1) + 'px';
 		}
 	}
+	
+	bs_fireworks.style.display = "none"
 }
 
 window.addEventListener( 'load', function() {
@@ -58,7 +61,6 @@ var gpch_bs_bingo_switch_boxes = function() {
 		}
 		
 		blockStorage.setItem( 'bsbingo', bs_boxes )
-		
 		gpch_bs_bingo_check_wins();
 	}
 }
@@ -120,10 +122,14 @@ var gpch_bs_bingo_check_wins = function () {
 		}
 	}
 	
+	// Overall win?
 	if (full_rows == 5) {
 		const bsBingoWinEvent = new CustomEvent('bsBingoWin', {
 			bubbles: true,
 		});
+		
+		bs_fireworks.style.display = "block"
+		gpch_bs_bingo_win_animation();
 	}
 }
 
@@ -186,4 +192,109 @@ var gpch_bs_bingo_highlight_column = function(col) {
 		delay: anime.stagger(70),
 		loop: false
 	});
+}
+
+var gpch_bs_bingo_win_animation = function() {
+	window.human = false;
+	
+	var canvasEl = document.querySelector( '.fireworks' );
+	var ctx = canvasEl.getContext( '2d' );
+	var numberOfParticules = 15;
+	var pointerX = 0;
+	var pointerY = 0;
+
+	var colors = ['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#2E2B5F', '#8B00FF'];
+	
+	function setCanvasSize() {
+		canvasEl.width = window.innerWidth * 2;
+		canvasEl.height = window.innerHeight * 2;
+		canvasEl.style.height = canvasEl.offsetWidth + "px";
+
+		canvasEl.getContext( '2d' ).scale( 2, 2 );
+	}
+	
+	function updateCoords( e ) {
+		pointerX = e.clientX || e.touches[ 0 ].clientX;
+		pointerY = e.clientY || e.touches[ 0 ].clientY;
+	}
+	
+	function setParticuleDirection( p ) {
+		var angle = anime.random( 0, 360 ) * Math.PI / 180;
+		var value = anime.random( canvasEl.offsetWidth / 6, canvasEl.offsetWidth / 2 );
+		var radius = [-1, 1][ anime.random( 0, 1 ) ] * value;
+		return {
+			x: p.x + radius * Math.cos( angle ),
+			y: p.y + radius * Math.sin( angle )
+		}
+	}
+	
+	function createParticule( x, y ) {
+		var p = {};
+		p.x = x;
+		p.y = y;
+		p.color = colors[ anime.random( 0, colors.length - 1 ) ];
+		p.radius = anime.random( 16, 32 );
+		p.endPos = setParticuleDirection( p );
+		p.draw = function() {
+			ctx.beginPath();
+			ctx.arc( p.x, p.y, p.radius, 0, 2 * Math.PI, true );
+			ctx.fillStyle = p.color;
+			ctx.fill();
+		}
+		return p;
+	}
+	
+	function renderParticule( anim ) {
+		for( var i = 0; i < anim.animatables.length; i++ ) {
+			anim.animatables[ i ].target.draw();
+		}
+	}
+	
+	function animateParticules( x, y ) {
+		var particules = [];
+		for( var i = 0; i < numberOfParticules; i++ ) {
+			particules.push( createParticule( x, y ) );
+		}
+		anime.timeline().add( {
+			targets: particules,
+			x: function( p ) { return p.endPos.x; },
+			y: function( p ) { return p.endPos.y; },
+			radius: 0.1,
+			duration: anime.random( 1200, 1800 ),
+			easing: 'easeOutExpo',
+			update: renderParticule
+		} )
+	}
+	
+	var render = anime( {
+		duration: Infinity,
+		update: function() {
+			ctx.clearRect( 0, 0, canvasEl.width, canvasEl.height );
+		}
+	} );
+	
+	var centerX = window.innerWidth / 2;
+	var centerY = window.innerHeight / 2;
+	
+	var repeatFor = 20;
+	
+	function autoClick() {
+		if( window.human ) return;
+		animateParticules(
+		  anime.random( centerX - 50, centerX + 50 ),
+		  anime.random( centerY - 50, centerY + 50 )
+		);
+		
+		repeatFor--;
+		if (repeatFor > 0) {
+			anime( { duration: 200 } ).finished.then( autoClick );
+		}
+		else {
+			canvasEl.style.display = "none"
+		}
+	}
+	
+	autoClick();
+	setCanvasSize();
+	window.addEventListener( 'resize', setCanvasSize, false );
 }
