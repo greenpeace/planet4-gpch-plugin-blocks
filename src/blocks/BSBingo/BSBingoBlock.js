@@ -55,7 +55,6 @@ export class BSBingoBlock {
 					blocks.push( <RichText
 					  tagName="div"
 					  className="box"
-					  placeholder={'Term ' + i}
 					  value={props.attributes.bsTerms[ i ]}
 					  onChange={function( value ) {
 						  onChangeTerms( j, value )
