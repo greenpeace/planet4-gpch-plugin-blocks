@@ -31,6 +31,9 @@ var gpch_bs_bingo_load = function() {
 	
 	// Resize text to fit the boxes
 	for (var i = 0; i < bs_boxes_elements.length; i++) {
+		// Initiall set a large font size, then decrease until text fits the box.
+		bs_boxes_elements[i].childNodes[0].style.fontSize = '22px';
+		
 		while (bs_boxes_elements[i].childNodes[0].offsetWidth > bs_boxes_elements[i].offsetWidth
 		  || bs_boxes_elements[i].childNodes[0].offsetHeight > bs_boxes_elements[i].offsetHeight) {
 			var style = window.getComputedStyle(bs_boxes_elements[i].childNodes[0], null).getPropertyValue('font-size');
@@ -43,9 +46,9 @@ var gpch_bs_bingo_load = function() {
 	bs_fireworks.style.display = "none"
 }
 
-window.addEventListener( 'load', function() {
-	gpch_bs_bingo_load()
-} )
+window.addEventListener( 'load', gpch_bs_bingo_load )
+
+window.addEventListener( 'resize', gpch_bs_bingo_load)
 
 var gpch_bs_bingo_switch_boxes = function() {
 	if( !this.classList.contains( 'won' ) ) {
