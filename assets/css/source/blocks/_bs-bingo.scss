@@ -38,7 +38,7 @@
 
 			.box-content {
 				position: absolute;
-				padding: 4px;
+				padding: 7%;
 
 				font-size: 20px;
 				line-height: 1.2em;
@@ -58,6 +58,31 @@
 				background-color: #206a0c;
 				color: #fff;
 			}
+		}
+	}
+
+	.controls {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		justify-content: space-evenly;
+
+		.wp-block-buttons,
+		.bingo-score {
+			display: flex;
+		}
+
+		.wp-block-buttons {
+			flex-grow: 1;
+
+			.wp-block-button {
+				margin-top: 1em;
+			}
+		}
+
+		.bingo-score {
+			margin-top: .58em;
+			font-size: 28px;
 		}
 	}
 }

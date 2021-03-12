@@ -3,6 +3,7 @@ import anime from 'animejs/lib/anime.es.js';
 var bs_boxes_elements = document.getElementsByClassName( 'box' )
 var bs_boxes = Array( 25 ).fill( false )
 var bs_fireworks = document.querySelector( '.fireworks' )
+var bs_score = 0;
 
 var blockStorage = window.localStorage
 
@@ -67,6 +68,7 @@ var gpch_bs_bingo_switch_boxes = function() {
 
 var gpch_bs_bingo_check_wins = function () {
 	var full_rows = 0;
+	bs_score = 0;
 	
 	// check for completed rows
 	for( var i = 0; i < 5; i++ ) {
@@ -76,9 +78,16 @@ var gpch_bs_bingo_check_wins = function () {
 			if( bs_boxes[ i * 5 + j ] == false ) {
 				is_full = false
 			}
+			else {
+				// a field is worth 1 point
+				bs_score = bs_score + 1;
+			}
 		}
 		
 		if( is_full ) {
+			// a full row is worth 10 points
+			bs_score = bs_score + 10;
+			
 			full_rows += 1;
 			
 			var is_newly_won = false;
@@ -107,6 +116,9 @@ var gpch_bs_bingo_check_wins = function () {
 		}
 		
 		if( is_full ) {
+			// a full column is worth 10 points
+			bs_score = bs_score + 10;
+			
 			var is_newly_won = false;
 			
 			for( var j = 0; j < 5; j++ ) {
@@ -124,6 +136,9 @@ var gpch_bs_bingo_check_wins = function () {
 	
 	// Overall win?
 	if (full_rows == 5) {
+		// a win is worth 100 points
+		bs_score = bs_score + 100;
+		
 		const bsBingoWinEvent = new CustomEvent('bsBingoWin', {
 			bubbles: true,
 		});
@@ -131,6 +146,9 @@ var gpch_bs_bingo_check_wins = function () {
 		bs_fireworks.style.display = "block"
 		gpch_bs_bingo_win_animation();
 	}
+	
+	// Update score
+	document.getElementById("bs-bingo-score").innerText = bs_score;
 }
 
 for( var i = 0; i < bs_boxes_elements.length; i++ ) {
