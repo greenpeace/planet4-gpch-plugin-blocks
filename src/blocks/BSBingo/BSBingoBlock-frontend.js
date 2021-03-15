@@ -1,229 +1,232 @@
-import anime from 'animejs/lib/anime.es.js'
+import anime from 'animejs/lib/anime.es.js';
 
-const bs_boxes_elements = document.getElementsByClassName( 'box' )
-let bs_boxes = Array( 25 ).fill( false )
-const bs_fireworks = document.querySelector( '.fireworks' )
-let bs_score = 0
+/* global CustomEvent */
 
-const blockStorage = window.localStorage
+const bsBoxesElements = document.getElementsByClassName( 'box' );
+let bsBoxes = Array( 25 ).fill( false );
+const bsFirewoks = document.querySelector( '.fireworks' );
+let bsScore = 0;
+
+const blockStorage = window.localStorage;
 
 // Load stored game
-const gpch_bs_bingo_load = function() {
+const gpchBsBingoLoad = function () {
 	// Load state from local storage
-	let stored_bingo_boxes = blockStorage.getItem( 'bsbingo' )
-	
-	if( typeof stored_bingo_boxes == 'string' ) {
-		stored_bingo_boxes = stored_bingo_boxes.split( ',' )
-		
-		for( let i = 0; i < stored_bingo_boxes.length; i++ ) {
-			stored_bingo_boxes[ i ] = stored_bingo_boxes[ i ] === 'true'
-			
-			if( stored_bingo_boxes[ i ] === true ) {
-				bs_boxes_elements[ i ].classList.add( 'on' )
-				bs_boxes_elements[ i ].classList.remove( 'off' )
+	let storedBingoBoxes = blockStorage.getItem( 'bsbingo' );
+
+	if ( typeof storedBingoBoxes === 'string' ) {
+		storedBingoBoxes = storedBingoBoxes.split( ',' );
+
+		for ( let i = 0; i < storedBingoBoxes.length; i++ ) {
+			storedBingoBoxes[ i ] = storedBingoBoxes[ i ] === 'true';
+
+			if ( storedBingoBoxes[ i ] === true ) {
+				bsBoxesElements[ i ].classList.add( 'on' );
+				bsBoxesElements[ i ].classList.remove( 'off' );
 			}
 		}
-		
-		bs_boxes = stored_bingo_boxes
-		
-		gpch_bs_bingo_check_wins()
+
+		bsBoxes = storedBingoBoxes;
+
+		gpchBsBingoCheckWins();
 	}
-	
+
 	// Resize text to fit the boxes
-	for( let i = 0; i < bs_boxes_elements.length; i++ ) {
+	for ( let i = 0; i < bsBoxesElements.length; i++ ) {
 		// Initiall set a large font size, then decrease until text fits the
 		// box.
-		bs_boxes_elements[ i ].childNodes[ 0 ].style.fontSize = '22px'
-		let fontSize = 22
-		
-		while(
-		  bs_boxes_elements[ i ].childNodes[ 0 ].offsetWidth >
-		  bs_boxes_elements[ i ].offsetWidth ||
-		  bs_boxes_elements[ i ].childNodes[ 0 ].offsetHeight >
-		  bs_boxes_elements[ i ].offsetHeight
-		  ) {
-			let style = window.getComputedStyle(
-			  bs_boxes_elements[ i ].childNodes[ 0 ] ).
-			  getPropertyValue( 'font-size' )
-			fontSize = parseFloat( style )
-			
-			bs_boxes_elements[ i ].childNodes[ 0 ].style.fontSize = fontSize -
-			  1 + 'px'
+		bsBoxesElements[ i ].childNodes[ 0 ].style.fontSize = '22px';
+		let fontSize = 22;
+
+		while (
+			bsBoxesElements[ i ].childNodes[ 0 ].offsetWidth >
+				bsBoxesElements[ i ].offsetWidth ||
+			bsBoxesElements[ i ].childNodes[ 0 ].offsetHeight >
+				bsBoxesElements[ i ].offsetHeight
+		) {
+			const style = window
+				.getComputedStyle( bsBoxesElements[ i ].childNodes[ 0 ] )
+				.getPropertyValue( 'font-size' );
+			fontSize = parseFloat( style );
+
+			bsBoxesElements[ i ].childNodes[ 0 ].style.fontSize =
+				fontSize - 1 + 'px';
 		}
 	}
-	
-	bs_fireworks.style.display = 'none'
-}
 
-window.addEventListener( 'load', gpch_bs_bingo_load )
+	bsFirewoks.style.display = 'none';
+};
 
-window.addEventListener( 'resize', gpch_bs_bingo_load )
+window.addEventListener( 'load', gpchBsBingoLoad );
 
-const gpch_bs_bingo_switch_boxes = function() {
-	if( !this.classList.contains( 'won' ) ) {
-		this.classList.toggle( 'off' )
-		this.classList.toggle( 'on' )
-		
-		let index = this.getAttribute( 'data-index' )
-		
-		bs_boxes[ index ] = this.classList.contains( 'on' )
-		
-		blockStorage.setItem( 'bsbingo', bs_boxes )
-		gpch_bs_bingo_check_wins()
+window.addEventListener( 'resize', gpchBsBingoLoad );
+
+const gpchBsBingoSwitchBoxes = function () {
+	if ( ! this.classList.contains( 'won' ) ) {
+		this.classList.toggle( 'off' );
+		this.classList.toggle( 'on' );
+
+		const index = this.getAttribute( 'data-index' );
+
+		bsBoxes[ index ] = this.classList.contains( 'on' );
+
+		blockStorage.setItem( 'bsbingo', bsBoxes );
+		gpchBsBingoCheckWins();
 	}
-}
+};
 
-const gpch_bs_bingo_check_wins = function() {
-	let full_rows = 0
-	bs_score = 0
-	
+const gpchBsBingoCheckWins = function () {
+	let fullRows = 0;
+	bsScore = 0;
+
 	// check for completed rows
-	for( let i = 0; i < 5; i++ ) {
-		let is_full = true
-		
-		for( let j = 0; j < 5; j++ ) {
-			if( bs_boxes[ i * 5 + j ] === false ) {
-				is_full = false
-			}
-			else {
+	for ( let i = 0; i < 5; i++ ) {
+		let isFull = true;
+
+		for ( let j = 0; j < 5; j++ ) {
+			if ( bsBoxes[ i * 5 + j ] === false ) {
+				isFull = false;
+			} else {
 				// a field is worth 1 point
-				bs_score = bs_score + 1
+				bsScore = bsScore + 1;
 			}
 		}
-		
-		if( is_full ) {
+
+		if ( isFull ) {
 			// a full row is worth 10 points
-			bs_score = bs_score + 10
-			
-			full_rows += 1
-			
-			let is_newly_won = false
-			
-			for( let j = 0; j < 5; j++ ) {
-				if( !bs_boxes_elements[ i * 5 + j ].classList.contains(
-				  'won' ) ) {
-					is_newly_won = true
+			bsScore = bsScore + 10;
+
+			fullRows += 1;
+
+			let isNewlyWon = false;
+
+			for ( let j = 0; j < 5; j++ ) {
+				if (
+					! bsBoxesElements[ i * 5 + j ].classList.contains( 'won' )
+				) {
+					isNewlyWon = true;
 				}
-				bs_boxes_elements[ i * 5 + j ].classList.add( 'won' )
+				bsBoxesElements[ i * 5 + j ].classList.add( 'won' );
 			}
-			
-			if( is_newly_won ) {
-				gpch_bs_bingo_highlight_row( i )
+
+			if ( isNewlyWon ) {
+				gpchBsBingoHighlightRow( i );
 			}
 		}
 	}
-	
+
 	// check for completed columns
-	for( let i = 0; i < 5; i++ ) {
-		let is_full = true
-		
-		for( let j = 0; j < 5; j++ ) {
-			if( bs_boxes[ j * 5 + i ] === false ) {
-				is_full = false
+	for ( let i = 0; i < 5; i++ ) {
+		let isFull = true;
+
+		for ( let j = 0; j < 5; j++ ) {
+			if ( bsBoxes[ j * 5 + i ] === false ) {
+				isFull = false;
 			}
 		}
-		
-		if( is_full ) {
+
+		if ( isFull ) {
 			// a full column is worth 10 points
-			bs_score = bs_score + 10
-			
-			let is_newly_won = false
-			
-			for( let j = 0; j < 5; j++ ) {
-				if( !bs_boxes_elements[ j * 5 + i ].classList.contains(
-				  'won' ) ) {
-					is_newly_won = true
+			bsScore = bsScore + 10;
+
+			let isNewlyWon = false;
+
+			for ( let j = 0; j < 5; j++ ) {
+				if (
+					! bsBoxesElements[ j * 5 + i ].classList.contains( 'won' )
+				) {
+					isNewlyWon = true;
 				}
-				bs_boxes_elements[ j * 5 + i ].classList.add( 'won' )
+				bsBoxesElements[ j * 5 + i ].classList.add( 'won' );
 			}
-			
-			if( is_newly_won ) {
-				gpch_bs_bingo_highlight_column( i )
+
+			if ( isNewlyWon ) {
+				gpchBsBingoHighlightColumn( i );
 			}
 		}
 	}
-	
+
 	// Overall win?
-	if( full_rows === 5 ) {
+	if ( fullRows === 5 ) {
 		// a win is worth 100 points
-		bs_score = bs_score + 100
-		
+		bsScore = bsScore + 100;
+
 		new CustomEvent( 'bsBingoWin', {
 			bubbles: true,
-		} )
-		
-		bs_fireworks.style.display = 'block'
-		gpch_bs_bingo_win_animation()
+		} );
+
+		bsFirewoks.style.display = 'block';
+		gpchBsBingoWinAnimation();
 	}
-	
+
 	// Update score
-	document.getElementById( 'bs-bingo-score' ).innerText = bs_score
+	document.getElementById( 'bs-bingo-score' ).innerText = bsScore;
+};
+
+for ( let i = 0; i < bsBoxesElements.length; i++ ) {
+	bsBoxesElements[ i ].addEventListener(
+		'click',
+		gpchBsBingoSwitchBoxes,
+		false
+	);
 }
 
-for( let i = 0; i < bs_boxes_elements.length; i++ ) {
-	bs_boxes_elements[ i ].addEventListener(
-	  'click',
-	  gpch_bs_bingo_switch_boxes,
-	  false,
-	)
-}
-
-const gpch_bs_bingo_reset = function() {
-	for( let i = 0; i < 25; i++ ) {
-		bs_boxes_elements[ i ].classList.remove( 'won' )
-		bs_boxes_elements[ i ].classList.remove( 'on' )
-		bs_boxes_elements[ i ].classList.add( 'off' )
+const gpchBsBingoReset = function () {
+	for ( let i = 0; i < 25; i++ ) {
+		bsBoxesElements[ i ].classList.remove( 'won' );
+		bsBoxesElements[ i ].classList.remove( 'on' );
+		bsBoxesElements[ i ].classList.add( 'off' );
 	}
-	
-	bs_boxes = Array( 25 ).fill( false )
-	
-	blockStorage.setItem( 'bsbingo', bs_boxes )
-}
 
-const resetButton = document.getElementsByClassName( 'bsbingo-reset' )
-resetButton[ 0 ].addEventListener( 'click', gpch_bs_bingo_reset, false )
+	bsBoxes = Array( 25 ).fill( false );
 
-const gpch_bs_bingo_highlight_row = function( line ) {
-	const start = line * 5
-	const el = []
-	
-	for( let i = start; i < start + 5; i++ ) {
-		el.push( bs_boxes_elements[ i ] )
+	blockStorage.setItem( 'bsbingo', bsBoxes );
+};
+
+const resetButton = document.getElementsByClassName( 'bsbingo-reset' );
+resetButton[ 0 ].addEventListener( 'click', gpchBsBingoReset, false );
+
+const gpchBsBingoHighlightRow = function ( line ) {
+	const start = line * 5;
+	const el = [];
+
+	for ( let i = start; i < start + 5; i++ ) {
+		el.push( bsBoxesElements[ i ] );
 	}
-	
+
 	anime( {
-		targets: [el],
-		keyframes: [{ scale: 1.1 }, { scale: 1 }],
+		targets: [ el ],
+		keyframes: [ { scale: 1.1 }, { scale: 1 } ],
 		duration: 200,
 		delay: anime.stagger( 70 ),
 		loop: false,
-	} )
-}
+	} );
+};
 
-const gpch_bs_bingo_highlight_column = function( col ) {
-	const start = col
-	const el = []
-	
-	for( let i = start; i < 25; i += 5 ) {
-		el.push( bs_boxes_elements[ i ] )
+const gpchBsBingoHighlightColumn = function ( col ) {
+	const start = col;
+	const el = [];
+
+	for ( let i = start; i < 25; i += 5 ) {
+		el.push( bsBoxesElements[ i ] );
 	}
-	
+
 	anime( {
-		targets: [el],
-		keyframes: [{ scale: 1.1 }, { scale: 1 }],
+		targets: [ el ],
+		keyframes: [ { scale: 1.1 }, { scale: 1 } ],
 		duration: 200,
 		delay: anime.stagger( 70 ),
 		loop: false,
-	} )
-}
+	} );
+};
 
-const gpch_bs_bingo_win_animation = function() {
-	window.human = false
-	
-	const canvasEl = document.querySelector( '.fireworks' )
-	const ctx = canvasEl.getContext( '2d' )
-	const numberOfParticules = 15
-	
+const gpchBsBingoWinAnimation = function () {
+	window.human = false;
+
+	const canvasEl = document.querySelector( '.fireworks' );
+	const ctx = canvasEl.getContext( '2d' );
+	const numberOfParticules = 15;
+
 	const colors = [
 		'#FF0000',
 		'#FF7F00',
@@ -231,96 +234,104 @@ const gpch_bs_bingo_win_animation = function() {
 		'#00FF00',
 		'#0000FF',
 		'#2E2B5F',
-		'#8B00FF']
-	
+		'#8B00FF',
+	];
+
 	function setCanvasSize() {
-		canvasEl.width = window.innerWidth * 2
-		canvasEl.height = window.innerHeight * 2
-		canvasEl.style.height = canvasEl.offsetWidth + 'px'
-		
-		canvasEl.getContext( '2d' ).scale( 2, 2 )
+		canvasEl.width = window.innerWidth * 2;
+		canvasEl.height = window.innerHeight * 2;
+		canvasEl.style.height = canvasEl.offsetWidth + 'px';
+
+		canvasEl.getContext( '2d' ).scale( 2, 2 );
 	}
-	
+
 	function setParticuleDirection( p ) {
-		const angle = anime.random( 0, 360 ) * Math.PI / 180
-		const value = anime.random( canvasEl.offsetWidth / 6,
-		  canvasEl.offsetWidth / 2 )
-		const radius = [-1, 1][ anime.random( 0, 1 ) ] * value
+		const angle = ( anime.random( 0, 360 ) * Math.PI ) / 180;
+		const value = anime.random(
+			canvasEl.offsetWidth / 6,
+			canvasEl.offsetWidth / 2
+		);
+		const radius = [ -1, 1 ][ anime.random( 0, 1 ) ] * value;
 		return {
 			x: p.x + radius * Math.cos( angle ),
 			y: p.y + radius * Math.sin( angle ),
-		}
+		};
 	}
-	
+
 	function createParticule( x, y ) {
-		const p = {}
-		p.x = x
-		p.y = y
-		p.color = colors[ anime.random( 0, colors.length - 1 ) ]
-		p.radius = anime.random( 16, 32 )
-		p.endPos = setParticuleDirection( p )
-		p.draw = function() {
-			ctx.beginPath()
-			ctx.arc( p.x, p.y, p.radius, 0, 2 * Math.PI, true )
-			ctx.fillStyle = p.color
-			ctx.fill()
-		}
-		return p
+		const p = {};
+		p.x = x;
+		p.y = y;
+		p.color = colors[ anime.random( 0, colors.length - 1 ) ];
+		p.radius = anime.random( 16, 32 );
+		p.endPos = setParticuleDirection( p );
+		p.draw = function () {
+			ctx.beginPath();
+			ctx.arc( p.x, p.y, p.radius, 0, 2 * Math.PI, true );
+			ctx.fillStyle = p.color;
+			ctx.fill();
+		};
+		return p;
 	}
-	
+
 	function renderParticule( anim ) {
-		for( let i = 0; i < anim.animatables.length; i++ ) {
-			anim.animatables[ i ].target.draw()
+		for ( let i = 0; i < anim.animatables.length; i++ ) {
+			anim.animatables[ i ].target.draw();
 		}
 	}
-	
+
 	function animateParticules( x, y ) {
-		const particules = []
-		for( let i = 0; i < numberOfParticules; i++ ) {
-			particules.push( createParticule( x, y ) )
+		const particules = [];
+		for ( let i = 0; i < numberOfParticules; i++ ) {
+			particules.push( createParticule( x, y ) );
 		}
 		anime.timeline().add( {
 			targets: particules,
-			x: function( p ) { return p.endPos.x },
-			y: function( p ) { return p.endPos.y },
+			x( p ) {
+				return p.endPos.x;
+			},
+			y( p ) {
+				return p.endPos.y;
+			},
 			radius: 0.1,
 			duration: anime.random( 1200, 1800 ),
 			easing: 'easeOutExpo',
 			update: renderParticule,
-		} )
+		} );
 	}
-	
+
+	// render is used by anime.js
+	// eslint-disable-next-line no-unused-vars
 	const render = anime( {
 		duration: Infinity,
-		update: function() {
-			ctx.clearRect( 0, 0, canvasEl.width, canvasEl.height )
+		update() {
+			ctx.clearRect( 0, 0, canvasEl.width, canvasEl.height );
 		},
-	} )
-	
-	const centerX = window.innerWidth / 2
-	const centerY = window.innerHeight / 2
-	
-	let repeatFor = 20
-	
+	} );
+
+	const centerX = window.innerWidth / 2;
+	const centerY = window.innerHeight / 2;
+
+	let repeatFor = 20;
+
 	function autoClick() {
-		if( window.human ) {
-			return
+		if ( window.human ) {
+			return;
 		}
 		animateParticules(
-		  anime.random( centerX - 50, centerX + 50 ),
-		  anime.random( centerY - 50, centerY + 50 ),
-		)
-		
-		repeatFor--
-		if( repeatFor > 0 ) {
-			anime( { duration: 200 } ).finished.then( autoClick )
-		}
-		else {
-			canvasEl.style.display = 'none'
+			anime.random( centerX - 50, centerX + 50 ),
+			anime.random( centerY - 50, centerY + 50 )
+		);
+
+		repeatFor--;
+		if ( repeatFor > 0 ) {
+			anime( { duration: 200 } ).finished.then( autoClick );
+		} else {
+			canvasEl.style.display = 'none';
 		}
 	}
-	
-	autoClick()
-	setCanvasSize()
-	window.addEventListener( 'resize', setCanvasSize, false )
-}
+
+	autoClick();
+	setCanvasSize();
+	window.addEventListener( 'resize', setCanvasSize, false );
+};
