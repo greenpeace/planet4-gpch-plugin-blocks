@@ -1,24 +1,24 @@
 import anime from 'animejs/lib/anime.es.js';
 
-var bs_boxes_elements = document.getElementsByClassName( 'box' )
-var bs_boxes = Array( 25 ).fill( false )
-var bs_fireworks = document.querySelector( '.fireworks' )
-var bs_score = 0;
+const bs_boxes_elements = document.getElementsByClassName( 'box' )
+let bs_boxes = Array( 25 ).fill( false )
+const bs_fireworks = document.querySelector( '.fireworks' )
+let bs_score = 0;
 
-var blockStorage = window.localStorage
+const blockStorage = window.localStorage
 
 // Load stored game
-var gpch_bs_bingo_load = function() {
+const gpch_bs_bingo_load = function() {
 	// Load state from local storage
-	var stored_bingo_boxes = blockStorage.getItem( 'bsbingo' )
+	let stored_bingo_boxes = blockStorage.getItem( 'bsbingo' )
 	
 	if( typeof stored_bingo_boxes == 'string' ) {
 		stored_bingo_boxes = stored_bingo_boxes.split( ',' )
 		
-		for( var i = 0; i < stored_bingo_boxes.length; i++ ) {
-			stored_bingo_boxes[i] = (stored_bingo_boxes[i] == 'true');
+		for( let i = 0; i < stored_bingo_boxes.length; i++ ) {
+			stored_bingo_boxes[i] = (stored_bingo_boxes[i] === 'true');
 			
-			if( stored_bingo_boxes[ i ] == true ) {
+			if( stored_bingo_boxes[ i ] === true ) {
 				bs_boxes_elements[ i ].classList.add( 'on' )
 				bs_boxes_elements[ i ].classList.remove( 'off' )
 			}
@@ -30,16 +30,17 @@ var gpch_bs_bingo_load = function() {
 	}
 	
 	// Resize text to fit the boxes
-	for (var i = 0; i < bs_boxes_elements.length; i++) {
+	for (let i = 0; i < bs_boxes_elements.length; i++) {
 		// Initiall set a large font size, then decrease until text fits the box.
-		bs_boxes_elements[i].childNodes[0].style.fontSize = '22px';
+		bs_boxes_elements[i].childNodes[0].style.fontSize = '22px'
+		let fontSize = 22
 		
 		while (bs_boxes_elements[i].childNodes[0].offsetWidth > bs_boxes_elements[i].offsetWidth
 		  || bs_boxes_elements[i].childNodes[0].offsetHeight > bs_boxes_elements[i].offsetHeight) {
-			var style = window.getComputedStyle(bs_boxes_elements[i].childNodes[0], null).getPropertyValue('font-size');
-			var fontSize = parseFloat(style);
+			let style = window.getComputedStyle(bs_boxes_elements[i].childNodes[0], null).getPropertyValue('font-size');
+			fontSize = parseFloat(style);
 			
-			bs_boxes_elements[i].childNodes[0].style.fontSize = (fontSize - 1) + 'px';
+			bs_boxes_elements[i].childNodes[0].style.fontSize = (fontSize - 1) + 'px'
 		}
 	}
 	
@@ -50,12 +51,12 @@ window.addEventListener( 'load', gpch_bs_bingo_load )
 
 window.addEventListener( 'resize', gpch_bs_bingo_load)
 
-var gpch_bs_bingo_switch_boxes = function() {
+const gpch_bs_bingo_switch_boxes = function() {
 	if( !this.classList.contains( 'won' ) ) {
 		this.classList.toggle( 'off' )
 		this.classList.toggle( 'on' )
 		
-		var index = this.getAttribute( 'data-index' )
+		let index = this.getAttribute( 'data-index' )
 		
 		if( this.classList.contains( 'on' ) ) {
 			bs_boxes[ index ] = true
@@ -69,15 +70,15 @@ var gpch_bs_bingo_switch_boxes = function() {
 	}
 }
 
-var gpch_bs_bingo_check_wins = function () {
-	var full_rows = 0;
+const gpch_bs_bingo_check_wins = function () {
+	let full_rows = 0;
 	bs_score = 0;
 	
 	// check for completed rows
-	for( var i = 0; i < 5; i++ ) {
-		var is_full = true
+	for( let i = 0; i < 5; i++ ) {
+		let is_full = true
 		
-		for( var j = 0; j < 5; j++ ) {
+		for( let j = 0; j < 5; j++ ) {
 			if( bs_boxes[ i * 5 + j ] == false ) {
 				is_full = false
 			}
@@ -93,9 +94,9 @@ var gpch_bs_bingo_check_wins = function () {
 			
 			full_rows += 1;
 			
-			var is_newly_won = false;
+			let is_newly_won = false;
 			
-			for( var j = 0; j < 5; j++ ) {
+			for( let j = 0; j < 5; j++ ) {
 				if ( !bs_boxes_elements[ i * 5 + j ].classList.contains('won')) {
 					is_newly_won = true;
 				}
@@ -109,10 +110,10 @@ var gpch_bs_bingo_check_wins = function () {
 	}
 	
 	// check for completed columns
-	for( var i = 0; i < 5; i++ ) {
-		var is_full = true
+	for( let i = 0; i < 5; i++ ) {
+		let is_full = true
 		
-		for( var j = 0; j < 5; j++ ) {
+		for( let j = 0; j < 5; j++ ) {
 			if( bs_boxes[ j * 5 + i ] == false ) {
 				is_full = false
 			}
@@ -122,9 +123,9 @@ var gpch_bs_bingo_check_wins = function () {
 			// a full column is worth 10 points
 			bs_score = bs_score + 10;
 			
-			var is_newly_won = false;
+			let is_newly_won = false;
 			
-			for( var j = 0; j < 5; j++ ) {
+			for( let j = 0; j < 5; j++ ) {
 				if ( !bs_boxes_elements[ j * 5 + i ].classList.contains('won')) {
 					is_newly_won = true;
 				}
@@ -154,13 +155,13 @@ var gpch_bs_bingo_check_wins = function () {
 	document.getElementById("bs-bingo-score").innerText = bs_score;
 }
 
-for( var i = 0; i < bs_boxes_elements.length; i++ ) {
+for( let i = 0; i < bs_boxes_elements.length; i++ ) {
 	bs_boxes_elements[ i ].addEventListener( 'click',
 	  gpch_bs_bingo_switch_boxes, false )
 }
 
-var gpch_bs_bingo_reset = function() {
-	for (var i = 0; i < 25; i++) {
+const gpch_bs_bingo_reset = function() {
+	for (let i = 0; i < 25; i++) {
 		bs_boxes_elements[ i ].classList.remove('won')
 		bs_boxes_elements[ i ].classList.remove('on')
 		bs_boxes_elements[ i ].classList.add('off')
@@ -171,14 +172,14 @@ var gpch_bs_bingo_reset = function() {
 	blockStorage.setItem( 'bsbingo', bs_boxes )
 }
 
-var resetButton = document.getElementsByClassName( 'bsbingo-reset' )
+const resetButton = document.getElementsByClassName( 'bsbingo-reset' )
 resetButton[0].addEventListener( 'click', gpch_bs_bingo_reset, false )
 
-var gpch_bs_bingo_highlight_row = function(line) {
-	var start = line * 5;
-	var el = []
+const gpch_bs_bingo_highlight_row = function(line) {
+	const start = line * 5;
+	const el = []
 	
-	for (var i = start; i < start + 5; i++) {
+	for (let i = start; i < start + 5; i++) {
 		el.push(bs_boxes_elements[i]);
 	}
 	
@@ -194,12 +195,12 @@ var gpch_bs_bingo_highlight_row = function(line) {
 	});
 }
 
-var gpch_bs_bingo_highlight_column = function(col) {
-	var start = col;
-	var el = []
+const gpch_bs_bingo_highlight_column = function(col) {
+	const start = col;
+	const el = []
 	
 	
-	for (var i = start; i < 25; i += 5) {
+	for (let i = start; i < 25; i += 5) {
 		el.push( bs_boxes_elements[ i ] );
 	}
 	
@@ -215,16 +216,16 @@ var gpch_bs_bingo_highlight_column = function(col) {
 	});
 }
 
-var gpch_bs_bingo_win_animation = function() {
+const gpch_bs_bingo_win_animation = function() {
 	window.human = false;
 	
-	var canvasEl = document.querySelector( '.fireworks' );
-	var ctx = canvasEl.getContext( '2d' );
-	var numberOfParticules = 15;
-	var pointerX = 0;
-	var pointerY = 0;
+	const canvasEl = document.querySelector( '.fireworks' );
+	const ctx = canvasEl.getContext( '2d' );
+	const numberOfParticules = 15;
+	let pointerX = 0;
+	let pointerY = 0;
 
-	var colors = ['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#2E2B5F', '#8B00FF'];
+	const colors = ['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#2E2B5F', '#8B00FF'];
 	
 	function setCanvasSize() {
 		canvasEl.width = window.innerWidth * 2;
@@ -240,9 +241,9 @@ var gpch_bs_bingo_win_animation = function() {
 	}
 	
 	function setParticuleDirection( p ) {
-		var angle = anime.random( 0, 360 ) * Math.PI / 180;
-		var value = anime.random( canvasEl.offsetWidth / 6, canvasEl.offsetWidth / 2 );
-		var radius = [-1, 1][ anime.random( 0, 1 ) ] * value;
+		let angle = anime.random( 0, 360 ) * Math.PI / 180;
+		let value = anime.random( canvasEl.offsetWidth / 6, canvasEl.offsetWidth / 2 );
+		let radius = [-1, 1][ anime.random( 0, 1 ) ] * value;
 		return {
 			x: p.x + radius * Math.cos( angle ),
 			y: p.y + radius * Math.sin( angle )
@@ -250,7 +251,7 @@ var gpch_bs_bingo_win_animation = function() {
 	}
 	
 	function createParticule( x, y ) {
-		var p = {};
+		const p = {};
 		p.x = x;
 		p.y = y;
 		p.color = colors[ anime.random( 0, colors.length - 1 ) ];
@@ -266,14 +267,14 @@ var gpch_bs_bingo_win_animation = function() {
 	}
 	
 	function renderParticule( anim ) {
-		for( var i = 0; i < anim.animatables.length; i++ ) {
+		for( let i = 0; i < anim.animatables.length; i++ ) {
 			anim.animatables[ i ].target.draw();
 		}
 	}
 	
 	function animateParticules( x, y ) {
-		var particules = [];
-		for( var i = 0; i < numberOfParticules; i++ ) {
+		const particules = [];
+		for( let i = 0; i < numberOfParticules; i++ ) {
 			particules.push( createParticule( x, y ) );
 		}
 		anime.timeline().add( {
@@ -287,17 +288,17 @@ var gpch_bs_bingo_win_animation = function() {
 		} )
 	}
 	
-	var render = anime( {
+	const render = anime( {
 		duration: Infinity,
 		update: function() {
 			ctx.clearRect( 0, 0, canvasEl.width, canvasEl.height );
 		}
 	} );
 	
-	var centerX = window.innerWidth / 2;
-	var centerY = window.innerHeight / 2;
+	const centerX = window.innerWidth / 2;
+	const centerY = window.innerHeight / 2;
 	
-	var repeatFor = 20;
+	let repeatFor = 20;
 	
 	function autoClick() {
 		if( window.human ) return;
