@@ -1,3 +1,4 @@
 .idea
 assets/css/source/.sass-cache
 node_modules
+vendor

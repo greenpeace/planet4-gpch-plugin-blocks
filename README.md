@@ -2,7 +2,11 @@
 Content Blocks, specific to the GPCH installation of Planet4.
 
 ## Install
+Install dependencies:
+
 `npm install --save-dev`
+
+`composer install`
 
 ## Coding Standards
 

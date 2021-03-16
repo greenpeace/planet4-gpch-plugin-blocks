@@ -4,6 +4,8 @@
     "type": "wordpress-plugin",
     "license": "MIT",
     "require": {
+        "twilio/sdk": "^6.19",
+        "guzzlehttp/guzzle": "^7.2"
     },
     "config": {
         "optimize-autoloader": true
