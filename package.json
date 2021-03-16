@@ -1,0 +1,41 @@
+{
+  "name": "planet4-gpch-plugin-blocks",
+  "version": "1.0.0",
+  "description": "Content Blocks for Greenpeace Switzerland",
+  "main": "build/js/admin/index.js",
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "scripts": {
+    "start": "wp-scripts start --config webpack-config.js",
+    "build": "wp-scripts build --config webpack-config.js",
+    "format:js:src": "wp-scripts format-js ./src",
+    "lint:js:src": "wp-scripts lint-js ./src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/greenpeace/planet4-gpch-plugin-blocks.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/greenpeace/planet4-gpch-plugin-blocks/issues"
+  },
+  "homepage": "https://github.com/greenpeace/planet4-gpch-plugin-blocks#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.13.0",
+    "@babel/core": "^7.13.8",
+    "@babel/preset-env": "^7.13.9",
+    "@wordpress/block-editor": "^5.2.10",
+    "@wordpress/blocks": "^7.0.6",
+    "@wordpress/scripts": "^13.0.2",
+    "babel-loader": "^8.2.2"
+  },
+  "dependencies": {
+    "@wordpress/element": "^2.19.1",
+    "animejs": "^3.2.1"
+  }
+}
