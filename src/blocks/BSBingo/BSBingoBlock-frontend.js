@@ -1,7 +1,6 @@
 import anime from 'animejs/lib/anime.es.js';
 
-/* global CustomEvent */
-
+/* global Event */
 const bsBoxesElements = document.getElementsByClassName( 'box' );
 let bsBoxes = Array( 25 ).fill( false );
 const bsFirewoks = document.querySelector( '.fireworks' );
@@ -151,10 +150,20 @@ const gpchBsBingoCheckWins = function () {
 		// a win is worth 100 points
 		bsScore = bsScore + 100;
 
-		new CustomEvent( 'bsBingoWin', {
+		// Dispatch ein event that can be used to extend funcitonality
+		const bsBingoWinEvent = new Event( 'bsBingoWin', {
 			bubbles: true,
+			cancelable: true,
+			composed: false,
 		} );
 
+		const bsBingoBlock = document.querySelector(
+			'.wp-block-planet4-gpch-plugin-blocks-bs-bingo'
+		);
+
+		bsBingoBlock.dispatchEvent( bsBingoWinEvent );
+
+		// Show win animation
 		bsFirewoks.style.display = 'block';
 		gpchBsBingoWinAnimation();
 	}
