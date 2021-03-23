@@ -13,6 +13,12 @@ use Greenpeace\Planet4GPCHBlocks\AssetEnqueuer;
 class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 
 	/**
+	 * @var string Template file path
+	 */
+	protected $template_file = P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'templates/blocks/p2p-share.twig';
+
+
+	/**
 	 * Block name.
 	 *
 	 * @const string BLOCK_NAME.
@@ -35,7 +41,24 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 		register_block_type( 'planet4-gpch-plugin-blocks/p2p-share', [
 			'apiVersion'    => 2,
 			'editor_script' => 'planet4-gpch-plugin-blocks',
+			'render_callback' => [$this, 'dynamic_render_callback'],
 		] );
+	}
+
+	function dynamic_render_callback( $block_attributes, $content ) {
+		// Prepare parameters for template
+		$params = array(
+			'base_url' => P4_GPCH_PLUGIN_BLOCKS_BASE_URL,
+		);
+
+		// Output template
+		return \Timber::fetch( $this->template_file, $params );
+
+
+		return sprintf(
+			'<div class="wp-block-planet4-gpch-plugin-blocks-p2p-share">%1$s</div>',
+			esc_html( get_the_title( ) )
+		);
 	}
 
 	/**
@@ -46,7 +69,7 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 			AssetEnqueuer::enqueue_js(
 				'planet4-gpch-blocks-p2p-share',
 				'blocks/p2pShare.js',
-				array(),
+				[ 'wp-element'],
 				true
 			);
 		}

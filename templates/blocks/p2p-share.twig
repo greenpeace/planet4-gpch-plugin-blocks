@@ -1,0 +1,163 @@
+<div class="wp-block-planet4-gpch-plugin-blocks-p2p-share">
+	<form class="p2p-share-form">
+		<fieldset class="p2p-share-step p2p-share-step-1">
+			<legend>
+				How many people can you motivate to sign the petition?
+			</legend>
+			<ul class="select">
+				<li>
+					<input id="n1" type="radio" name="number_of_people" value="1-5" data-next-element=".p2p-share-step-2"/>
+					<label for="n1"><img class="social-icon" src="{{ base_url }}assets/img/icon/people-1.svg"> 1 - 5 People</label>
+				</li>
+				<li>
+					<input id="n6" type="radio" name="number_of_people" value="6-10" data-next-element=".p2p-share-step-2"/>
+					<label for="n6"><img class="social-icon" src="{{ base_url }}assets/img/icon/people-2.svg"> 6 - 10 People</label>
+				</li>
+				<li>
+					<input id="n10" type="radio" name="number_of_people" value="10-20" data-next-element=".p2p-share-step-2"/>
+					<label for="n10"><img class="social-icon" src="{{ base_url }}assets/img/icon/people-3.svg"> 10 - 20 People</label>
+				</li>
+				<li>
+					<input id="n20" type="radio" name="number_of_people" value="20+" data-next-element=".p2p-share-step-2"/>
+					<label for="n20"><img class="social-icon" src="{{ base_url }}assets/img/icon/people-3.svg"><img class="social-icon" src="{{ base_url }}assets/img/icon/people-3.svg"> 20+ People</label>
+				</li>
+			</ul>
+			<div class="controls form-section wp-block-button">
+				<button class="button next dark" data-next-step-field="number_of_people">Next</button>
+			</div>
+		</fieldset>
+		<fieldset class="p2p-share-step p2p-share-step-2">
+			<legend>How will you be able to reach your friends?</legend>
+			<ul class="select">
+				<li>
+					<input id="channel-whatsapp" type="radio" name="channel" value="whatsapp" data-next-element=".p2p-share-step-3.whatsapp"/>
+					<label for="channel-whatsapp" class="channel whatsapp">
+						<img class="social-icon" src="{{ base_url }}assets/img/social/whatsapp.svg"> WhatsApp
+					</label>
+				</li>
+				<li>
+					<input id="channel-email" type="radio" name="channel" value="email"  data-next-element=".p2p-share-step-3.email"/>
+					<label for="channel-email" class="channel email">
+						<img class="social-icon" src="{{ base_url }}assets/img/social/email.svg"> Email
+					</label>
+				</li>
+				<li>
+					<input id="channel-sms" type="radio" name="channel" value="sms" data-next-element=".p2p-share-step-3.sms"/>
+					<label for="channel-sms" class="channel sms">
+						<img class="social-icon" src="{{ base_url }}assets/img/social/sms.svg"> SMS
+					</label>
+				</li>
+				<li>
+					<input id="channel-signal" type="radio" name="channel" value="signal" data-next-element=".p2p-share-step-3.signal"/>
+					<label for="channel-signal" class="channel signal">
+						<img class="social-icon" src="{{ base_url }}assets/img/social/signal.svg"> Signal
+					</label>
+				</li>
+				<li>
+					<input id="channel-threema" type="radio" name="channel" value="threema" data-next-element=".p2p-share-step-3.threema"/>
+					<label for="channel-threema" class="channel threema">
+						<img class="social-icon" src="{{ base_url }}assets/img/social/threema.svg"> Threema
+					</label>
+				</li>
+			</ul>
+			<div class="controls form-section wp-block-button">
+				<button class="button previous stealth" data-previous-element=".p2p-share-step-1">Back</button>
+				<button class="button next dark" data-next-step-field="channel">Next</button>
+			</div>
+		</fieldset>
+		<fieldset class="p2p-share-step p2p-share-step-3 whatsapp">
+			<legend>Share on WhatsApp</legend>
+			<p>Thanks for sharing!</p>
+			<div class="action-controls">
+				<p class="description">Click the button to open WhatsApp. You can edit the message before sending.</p>
+				<div class="controls wp-block-button">
+					<a class="" target="_blank">Open WhatsApp</a>
+					<a class="dark" target="_blank">Send link by SMS</a>
+				</div>
+			</div>
+			<div class="sms-box">
+				<label for="mobile">Mobile number:</label><br>
+				<input type="text" name="mobile" placeholder="07_ ___ __ __">
+				<div class="controls wp-block-button">
+					<button class="dark">Send SMS</button>
+				</div>
+				<p class="description">Your mobile number will only be used to send this message.</p>
+			</div>
+			<div class="controls form-section wp-block-button">
+				<button class="button previous stealth" data-previous-element=".p2p-share-step-2">Back</button>
+			</div>
+		</fieldset>
+		<fieldset class="p2p-share-step p2p-share-step-3 email">
+			<legend>Share by Email</legend>
+			<div class="share-options">
+				<div class="option">
+					<p class="description"><strong>Option 1:</strong> <br>Copy/Paste this text:</p>
+					<textarea id="clipboard-copy-text-email" rows="5">SEND THIS TEXT</textarea><br>
+					<div class="controls wp-block-button">
+						<button class="dark">Copy to clipboard</button>
+					</div>
+				</div>
+				<div class="option">
+					<p class="description"><strong>Option 2:</strong> <br>Let us send you an email you can forward:</p>
+					<label for="mobile">Your Email:</label><br>
+					<input type="text" name="email"><br>
+					<div class="controls wp-block-button">
+						<button class="dark">Send email</button>
+					</div>
+					<p class="description">Your email address will only be used to send this message.</p>
+				</div>
+			</div>
+			<div class="controls form-section wp-block-button">
+				<button class="button previous stealth" data-previous-element=".p2p-share-step-2">Back</button>
+			</div>
+		</fieldset>
+		<fieldset class="p2p-share-step p2p-share-step-3 sms">
+			<legend>Share by SMS</legend>
+			<div class="share-options">
+				<div class="option">
+					<p class="description"><strong>Option 1:</strong> <br>Copy/Paste this text:</p>
+					<textarea id="clipboard-copy-text-email" rows="5">SEND THIS TEXT</textarea><br>
+					<div class="controls wp-block-button">
+						<button class="dark">Copy to clipboard</button>
+					</div>
+				</div>
+				<div class="option">
+					<p class="description"><strong>Option 2:</strong> <br>Let us send you an SMS you can forward:</p>
+					<label for="mobile">Your mobile number:</label><br>
+					<input type="text" name="mobile" placeholder="07_ ___ __ __"><br>
+					<div class="controls wp-block-button">
+						<button class="dark">Send SMS</button>
+					</div>
+					<p class="description">Your phone number will only be used to send this message.</p>
+				</div>
+			</div>
+			<div class="controls form-section wp-block-button">
+				<button class="button previous stealth" data-previous-element=".p2p-share-step-2">Back</button>
+			</div>
+		</fieldset>
+		<fieldset class="p2p-share-step p2p-share-step-3 signal">
+			<legend>Share on Signal</legend>
+			<div class="share-options">
+				<div class="option">
+					<p class="description"><strong>Option 1:</strong> <br>Copy/Paste this text:</p>
+					<textarea id="clipboard-copy-text-email" rows="5">SEND THIS TEXT</textarea><br>
+					<div class="controls wp-block-button">
+						<button class="dark">Copy to clipboard</button>
+					</div>
+				</div>
+				<div class="option">
+					<p class="description"><strong>Option 2:</strong> <br>Let us send you an SMS you can copy:</p>
+					<label for="mobile">Your mobile number:</label><br>
+					<input type="text" name="mobile" placeholder="07_ ___ __ __"><br>
+					<div class="controls wp-block-button">
+						<button class="dark">Send SMS</button>
+					</div>
+					<p class="description">Your phone number will only be used to send this message.</p>
+				</div>
+			</div>
+			<div class="controls form-section wp-block-button">
+				<button class="button previous stealth" data-previous-element=".p2p-share-step-2">Back</button>
+			</div>
+		</fieldset>
+	</form>
+</div>

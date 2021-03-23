@@ -1,0 +1,134 @@
+.wp-block-planet4-gpch-plugin-blocks-p2p-share {
+	.p2p-share-step {
+		background-color: $color_standard_2;
+		padding: 1rem;
+		padding-top: 2rem;
+		margin-bottom: 1em;
+
+		&.hidden {
+			display: none;
+		}
+
+		legend {
+			float: left;
+			width: 100%;
+			font-weight: bold;
+		}
+
+		label {
+			font-weight: 600;
+		}
+
+		ul.select {
+			list-style-type: none;
+
+			display: inline-flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+
+			padding: 0;
+
+			li {
+				flex-grow: 1;
+				flex-basis: 40%;
+				margin-right: 1em;
+
+
+				input[type="radio"] {
+					opacity: 0.011;
+					position: absolute;
+					z-index: 100;
+				}
+
+				label {
+					padding: .6rem 1rem;
+					border: 3px solid rgba(0,0,0,0);
+					cursor: pointer;
+					z-index: 90;
+					width: 100%;
+					min-width: 200px;
+					text-align: center;
+					font-weight: normal;
+					white-space: nowrap;
+
+					background-color: $color_white;
+
+					box-shadow: 2px 2px 2px #ddd;
+
+					.social-icon {
+						height: 1.6rem;
+						margin-right: .5rem;
+					}
+				}
+
+				input[type="radio"]:checked + label {
+					border-color: $color_standard_1;
+					font-weight: 600;
+				}
+
+				label:hover {
+					border-color: $color_standard_3;
+				}
+
+				/*
+				&:before {
+					content: "\2192 \0020";
+					font-size: 24px;
+				}
+				 */
+			}
+/*
+			label.channel.signal {
+				background: url("../img/social/signal.svg")
+			}
+
+ */
+
+
+		}
+
+		.share-options {
+			display: inline-flex;
+			flex-wrap: wrap;
+
+			.option {
+				flex-basis: 40%;
+				flex-grow: 1;
+			}
+
+			.option:nth-child(1) {
+				padding-right: 1em;
+				border-right: solid 1px #999;
+			}
+
+			.option:nth-child(2) {
+				padding-left: 1em;
+			}
+
+			textarea {
+				width: 100%;
+			}
+		}
+
+		.controls.form-section {
+			border-top: 1px solid #999;
+			padding-top: 1rem;
+		}
+	}
+
+
+
+	.wp-block-button {
+		margin-top: 0;
+	}
+
+	input[type=text],
+	textarea {
+		margin-bottom: 1em;
+	}
+
+	.description {
+		font-style: italic;
+		font-size: 1rem;
+	}
+}

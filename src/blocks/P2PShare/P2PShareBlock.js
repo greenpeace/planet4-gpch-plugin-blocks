@@ -1,7 +1,5 @@
-import { Fragment } from '@wordpress/element';
 import { registerBlockType } from '@wordpress/blocks';
 import { RichText, useBlockProps } from '@wordpress/block-editor';
-
 const { __ } = wp.i18n;
 
 export class P2PShareBlock {
@@ -28,23 +26,34 @@ export class P2PShareBlock {
 				},
 			},
 			edit: ( props ) => {
-				const { attributes: { content }, setAttributes, className } = props;
+				const {
+					attributes: { content },
+					setAttributes,
+					className,
+				} = props;
 				const blockProps = useBlockProps();
 				const onChangeContent = ( newContent ) => {
 					setAttributes( { content: newContent } );
 				};
+
 				return (
-					<RichText
-						{ ...blockProps }
-						tagName="p"
-						onChange={ onChangeContent }
-						value={ content }
-					/>
+					<div { ...blockProps }>
+						<RichText
+							{ ...blockProps }
+							tagName="p"
+							onChange={ onChangeContent }
+							value={ content }
+						/>
+					</div>
 				);
 			},
-			save: ( props ) => {
+
+			save: () => {
+				return null;
+				/*
 				const blockProps = useBlockProps.save();
-				return <RichText.Content { ...blockProps } tagName="p" value={ props.attributes.content } />;
+				return <div { ...blockProps }></div>;
+				 */
 			},
 		} );
 	}
