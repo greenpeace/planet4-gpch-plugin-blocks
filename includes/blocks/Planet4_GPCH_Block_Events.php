@@ -338,6 +338,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_GPCH_Events' ) ) {
 				'events'         => $events,
 				'title'          => $fields['title'],
 				'no_events_text' => $fields['no_events_text'],
+				'archive_link' => get_post_type_archive_link('gpch_event'),
 			);
 
 			// Output template
