@@ -1,4 +1,4 @@
-const validate = require( 'validate.js' );
+//const validate = require( 'validate.js' );
 
 const constraints = {};
 
@@ -74,6 +74,30 @@ backButtons.forEach( ( item ) => {
 
 		event.target.closest( '.p2p-share-step' ).classList.add( 'hidden' );
 		prevStep[ 0 ].classList.remove( 'hidden' );
+	} );
+} );
+
+// Copy to clipboard buttons
+const clipboardButtons = p2pShareElement.querySelectorAll(
+	':scope .controls .copy-to-clipboard'
+);
+
+clipboardButtons.forEach( ( item ) => {
+	item.addEventListener( 'click', ( event ) => {
+		event.preventDefault();
+
+		const textField = document.getElementById(
+			event.target.dataset.copyField
+		);
+
+		textField.select();
+		const result = document.execCommand( 'copy' );
+
+		console.log( result );
+
+		if ( result !== false ) {
+			event.target.innerText = '👍 Copied!';
+		}
 	} );
 } );
 

@@ -66,7 +66,9 @@
 			</div>
 		</fieldset>
 		<fieldset class="p2p-share-step p2p-share-step-3 whatsapp">
-			<legend>Share on WhatsApp</legend>
+			<legend>
+				Share on WhatsApp <img class="social-icon" src="{{ base_url }}assets/img/social/whatsapp.svg">
+			</legend>
 			<p>Thanks for sharing!</p>
 			<div class="action-controls">
 				<p class="description">Click the button to open WhatsApp. You can edit the message before sending.</p>
@@ -88,13 +90,15 @@
 			</div>
 		</fieldset>
 		<fieldset class="p2p-share-step p2p-share-step-3 email">
-			<legend>Share by Email</legend>
+			<legend>
+				Share by Email <img class="social-icon" src="{{ base_url }}assets/img/social/email.svg">
+			</legend>
 			<div class="share-options">
 				<div class="option">
 					<p class="description"><strong>Option 1:</strong> <br>Copy/Paste this text:</p>
 					<textarea id="clipboard-copy-text-email" rows="5">SEND THIS TEXT</textarea><br>
 					<div class="controls wp-block-button">
-						<button class="dark">Copy to clipboard</button>
+						<button class="dark copy-to-clipboard" data-copy-field="clipboard-copy-text-email">Copy to clipboard</button>
 					</div>
 				</div>
 				<div class="option">
@@ -112,13 +116,15 @@
 			</div>
 		</fieldset>
 		<fieldset class="p2p-share-step p2p-share-step-3 sms">
-			<legend>Share by SMS</legend>
+			<legend>
+				Share by SMS <img class="social-icon" src="{{ base_url }}assets/img/social/sms.svg">
+			</legend>
 			<div class="share-options">
 				<div class="option">
 					<p class="description"><strong>Option 1:</strong> <br>Copy/Paste this text:</p>
-					<textarea id="clipboard-copy-text-email" rows="5">SEND THIS TEXT</textarea><br>
+					<textarea id="clipboard-copy-text-sms" rows="5">SEND THIS TEXT</textarea><br>
 					<div class="controls wp-block-button">
-						<button class="dark">Copy to clipboard</button>
+						<button class="dark copy-to-clipboard" data-copy-field="clipboard-copy-text-sms">Copy to clipboard</button>
 					</div>
 				</div>
 				<div class="option">
@@ -136,13 +142,15 @@
 			</div>
 		</fieldset>
 		<fieldset class="p2p-share-step p2p-share-step-3 signal">
-			<legend>Share on Signal</legend>
+			<legend>
+				Share on Signal <img class="social-icon" src="{{ base_url }}assets/img/social/signal.svg">
+			</legend>
 			<div class="share-options">
 				<div class="option">
 					<p class="description"><strong>Option 1:</strong> <br>Copy/Paste this text:</p>
-					<textarea id="clipboard-copy-text-email" rows="5">SEND THIS TEXT</textarea><br>
+					<textarea id="clipboard-copy-text-signal" rows="5">SEND THIS TEXT</textarea><br>
 					<div class="controls wp-block-button">
-						<button class="dark">Copy to clipboard</button>
+						<button class="dark copy-to-clipboard" data-copy-field="clipboard-copy-text-signal">Copy to clipboard</button>
 					</div>
 				</div>
 				<div class="option">
