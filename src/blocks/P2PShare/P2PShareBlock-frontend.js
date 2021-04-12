@@ -1,4 +1,11 @@
 //const validate = require( 'validate.js' );
+import {
+	parsePhoneNumber,
+	AsYouType,
+	isPossiblePhoneNumber,
+	isValidPhoneNumber,
+} from 'libphonenumber-js/mobile';
+import apiFetch from '@wordpress/api-fetch';
 
 const constraints = {};
 
@@ -93,28 +100,60 @@ clipboardButtons.forEach( ( item ) => {
 		textField.select();
 		const result = document.execCommand( 'copy' );
 
-		console.log( result );
-
 		if ( result !== false ) {
 			event.target.innerText = '👍 Copied!';
 		}
 	} );
 } );
 
-/*
-import { P2PShare } from './P2PShareComponent';
-
-const { render } = wp.element;
-
-const p2pElements = document.querySelectorAll(
-	'.wp-block-planet4-gpch-plugin-blocks-p2p-share'
+// Send by SMS
+const smsButtons = p2pShareElement.querySelectorAll(
+	':scope .controls .send-sms'
 );
 
-p2pElements.forEach( ( p2pElement ) => {
-	const texts = {
-		text1: 'This is text 1',
-	};
+smsButtons.forEach( ( item ) => {
+	item.addEventListener( 'click', ( event ) => {
+		event.preventDefault();
 
-	render( <P2PShare attributes={ texts } />, p2pElement );
+		const numberField = document.getElementById(
+			event.target.dataset.mobileNumberField
+		);
+
+		let phoneNumber;
+
+		try {
+			phoneNumber = parsePhoneNumber( numberField.value, 'CH' );
+
+			if ( phoneNumber === undefined || ! phoneNumber.isValid() ) {
+				throw 'Invalid phone number.';
+			}
+		} catch ( e ) {
+			event.target
+				.closest( '.option' )
+				.querySelector( ':scope .status.error' )
+				.classList.remove( 'hidden' );
+
+			return;
+		}
+
+		console.log( phoneNumber.number );
+
+		// Hide error message
+		event.target
+			.closest( '.option' )
+			.querySelector( ':scope .status.error' )
+			.classList.add( 'hidden' );
+
+		// Send SMS
+		apiFetch.use( apiFetch.createNonceMiddleware( gpchBlocks.restNonce ) );
+		apiFetch( {
+			path: gpchBlocks.restURL + 'gpchblockP2p/v1/sendSMS',
+			method: 'POST',
+			data: {
+				phone: phoneNumber.number,
+			},
+		} ).then( ( res ) => {
+			console.log( res );
+		} );
+	} );
 } );
-*/

@@ -117,6 +117,32 @@
 			.social-icon {
 				max-height: 1em;
 			}
+
+			.phone-number-field {
+
+			}
+
+			.status {
+				font-size: 1rem;
+				font-style: italic;
+
+				&.error {
+					color: red;
+				}
+
+				&.success {
+					color: green;
+				}
+
+				&.hidden {
+					display: none;
+				}
+			}
+
+			.send-sms {
+
+			}
+
 		}
 	}
 

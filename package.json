@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "@wordpress/element": "^2.19.1",
-    "animejs": "^3.2.1"
+    "animejs": "^3.2.1",
+    "libphonenumber-js": "^1.9.16"
   }
 }

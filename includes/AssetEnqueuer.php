@@ -3,7 +3,7 @@
 namespace Greenpeace\Planet4GPCHBlocks;
 
 /**
- * BS Bingo Block Class.
+ * Asset Enqueuer.
  *
  * @package Greenpeace\Planet4GPCHBlocks
  */

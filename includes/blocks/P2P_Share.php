@@ -32,6 +32,15 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 		$this->register_block();
 
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_if_block_is_present' ] );
+
+		add_action( 'rest_api_init', function () {
+			register_rest_route( 'gpchblockP2p/v1', '/sendSms', array(
+				'methods'             => 'POST',
+				'callback'            => [ $this, 'restAPI_send_sms' ],
+				'permission_callback' => '__return_true',
+			) );
+		} );
+
 	}
 
 	/**
@@ -39,9 +48,9 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 	 */
 	function register_block() {
 		register_block_type( 'planet4-gpch-plugin-blocks/p2p-share', [
-			'apiVersion'    => 2,
-			'editor_script' => 'planet4-gpch-plugin-blocks',
-			'render_callback' => [$this, 'dynamic_render_callback'],
+			'apiVersion'      => 2,
+			'editor_script'   => 'planet4-gpch-plugin-blocks',
+			'render_callback' => [ $this, 'dynamic_render_callback' ],
 		] );
 	}
 
@@ -57,7 +66,7 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 
 		return sprintf(
 			'<div class="wp-block-planet4-gpch-plugin-blocks-p2p-share">%1$s</div>',
-			esc_html( get_the_title( ) )
+			esc_html( get_the_title() )
 		);
 	}
 
@@ -69,9 +78,21 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 			AssetEnqueuer::enqueue_js(
 				'planet4-gpch-blocks-p2p-share',
 				'blocks/p2pShare.js',
-				[ 'wp-element'],
+				[ 'wp-element' ],
 				true
 			);
 		}
+	}
+
+	public function restAPI_send_sms() {
+		$response = array(
+			'status' => 'success',
+			'data' => array(
+				'test'
+			)
+		);
+
+		echo json_encode( $response );
+		die;
 	}
 }

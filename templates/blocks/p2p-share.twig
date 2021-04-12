@@ -81,7 +81,7 @@
 				<label for="mobile">Mobile number:</label><br>
 				<input type="text" name="mobile" placeholder="07_ ___ __ __">
 				<div class="controls wp-block-button">
-					<button class="dark">Send SMS</button>
+					<button class="dark send-sms">Send SMS</button>
 				</div>
 				<p class="description">Your mobile number will only be used to send this message.</p>
 			</div>
@@ -106,7 +106,7 @@
 					<label for="mobile">Your Email:</label><br>
 					<input type="text" name="email"><br>
 					<div class="controls wp-block-button">
-						<button class="dark">Send email</button>
+						<button class="dark send-email">Send email</button>
 					</div>
 					<p class="description">Your email address will only be used to send this message.</p>
 				</div>
@@ -130,9 +130,10 @@
 				<div class="option">
 					<p class="description"><strong>Option 2:</strong> <br>Let us send you an SMS you can forward:</p>
 					<label for="mobile">Your mobile number:</label><br>
-					<input type="text" name="mobile" placeholder="07_ ___ __ __"><br>
+					<input type="text" id="share-sms-number" class="phone-number-field" name="mobile" placeholder="07_ ___ __ __"><br>
+					<p class="status error hidden">Please use a valid Swiss mobile number.</p>
 					<div class="controls wp-block-button">
-						<button class="dark">Send SMS</button>
+						<button class="dark send-sms" data-mobile-number-field="share-sms-number">Send SMS</button>
 					</div>
 					<p class="description">Your phone number will only be used to send this message.</p>
 				</div>
@@ -158,7 +159,7 @@
 					<label for="mobile">Your mobile number:</label><br>
 					<input type="text" name="mobile" placeholder="07_ ___ __ __"><br>
 					<div class="controls wp-block-button">
-						<button class="dark">Send SMS</button>
+						<button class="dark send-sms">Send SMS</button>
 					</div>
 					<p class="description">Your phone number will only be used to send this message.</p>
 				</div>

@@ -51,7 +51,7 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 			add_filter( 'block_categories', array( $this, 'register_block_category' ), 10, 2 );
 
 			// Register Scripts
-			add_action( 'init', array($this, 'register_scripts') );
+			add_action( 'init', array( $this, 'register_scripts' ) );
 
 			// Load Blocks
 			$this->blocks = [
@@ -153,15 +153,20 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 				filemtime( P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . $js ),
 				true );
 
+			wp_localize_script( 'planet4-gpch-blocks-js', 'gpchBlocks', array(
+				'restURL'   => rest_url(),
+				'restNonce' => wp_create_nonce( 'wp_rest' ),
+			) );
+
 			// Make the assets URL available in JS
 			$script = 'var gpchBlocksAssetsURL = "' . P4_GPCH_PLUGIN_BLOCKS_BASE_URL . 'assets/"';
 
-			wp_add_inline_script('planet4-gpch-blocks-js', $script, 'before');
+			wp_add_inline_script( 'planet4-gpch-blocks-js', $script, 'before' );
 		}
 
 		/**
-         * Register Gutenberg JS
-         */
+		 * Register Gutenberg JS
+		 */
 		function register_scripts() {
 			// automatically load dependencies and version
 			$asset_file = include( P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'build/js/admin/index.asset.php' );
