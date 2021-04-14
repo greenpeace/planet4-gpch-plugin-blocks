@@ -3,6 +3,7 @@
 namespace Greenpeace\Planet4GPCHBlocks\Blocks;
 
 use Greenpeace\Planet4GPCHBlocks\AssetEnqueuer;
+use Greenpeace\Planet4GPCHBlocks\Sms_Client;
 
 /**
  * P2P Share Block Class.
@@ -91,6 +92,9 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 				'test'
 			)
 		);
+
+		$sms = new Sms_Client();
+		$sms->sendSMS('12345', 'test');
 
 		echo json_encode( $response );
 		die;
