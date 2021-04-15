@@ -118,6 +118,9 @@ smsButtons.forEach( ( item ) => {
 		const numberField = document.getElementById(
 			event.target.dataset.mobileNumberField
 		);
+		const statusElement = event.target
+			.closest( '.option' )
+			.querySelector( ':scope .status' );
 
 		let phoneNumber;
 
@@ -128,21 +131,15 @@ smsButtons.forEach( ( item ) => {
 				throw 'Invalid phone number.';
 			}
 		} catch ( e ) {
-			event.target
-				.closest( '.option' )
-				.querySelector( ':scope .status.error' )
-				.classList.remove( 'hidden' );
+			statusElement.classList.remove( 'hidden', 'success' );
+			statusElement.classList.add( 'error' );
+			statusElement.innerText = 'Please use a valid Swiss mobile number.';
 
 			return;
 		}
 
-		console.log( phoneNumber.number );
-
 		// Hide error message
-		event.target
-			.closest( '.option' )
-			.querySelector( ':scope .status.error' )
-			.classList.add( 'hidden' );
+		statusElement.classList.add( 'hidden' );
 
 		// Send SMS
 		apiFetch.use( apiFetch.createNonceMiddleware( gpchBlocks.restNonce ) );
@@ -152,8 +149,32 @@ smsButtons.forEach( ( item ) => {
 			data: {
 				phone: phoneNumber.number,
 			},
-		} ).then( ( res ) => {
-			console.log( res );
-		} );
+		} ).then(
+			( result ) => {
+				console.log( 'result' );
+				console.log( result );
+				console.log( result.data.status );
+
+				if ( result.status == 'success' ) {
+					statusElement.innerText =
+						'Your message was sent. Check your phone!';
+					statusElement.classList.remove( 'hidden', 'error' );
+					statusElement.classList.add( 'success' );
+
+					// Disable button to prevent multiple messages to be sent.
+					// event.target.classList.add( 'hidden' );
+				} else if ( result.status == 'error' ) {
+					statusElement.innerText = result.msg;
+					statusElement.classList.remove( 'hidden', 'success' );
+					statusElement.classList.add( 'error' );
+				}
+			},
+			( result ) => {
+				statusElement.innerText =
+					'Application error. Please try again later.';
+				statusElement.classList.remove( 'hidden', 'success' );
+				statusElement.classList.add( 'error' );
+			}
+		);
 	} );
 } );

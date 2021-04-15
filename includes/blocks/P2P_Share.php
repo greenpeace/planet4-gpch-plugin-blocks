@@ -85,16 +85,21 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 		}
 	}
 
-	public function restAPI_send_sms() {
+	public function restAPI_send_sms( $data ) {
+		// Validate phone number
+		$sms    = new Sms_Client();
+		$result = $sms->sendSMS( $data['phone'], 'This is a test.' );
+
 		$response = array(
-			'status' => 'success',
-			'data' => array(
-				'test'
+			'status' => $result['status'],
+			'data'   => array(
+				'number_sent' => $data['phone'],
 			)
 		);
 
-		$sms = new Sms_Client();
-		$sms->sendSMS('12345', 'test');
+		if ( isset ( $result['msg'] ) ) {
+			$response['msg'] = $result['msg'];
+		}
 
 		echo json_encode( $response );
 		die;
