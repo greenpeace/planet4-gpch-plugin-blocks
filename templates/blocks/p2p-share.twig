@@ -2,24 +2,32 @@
 	<form class="p2p-share-form">
 		<fieldset class="p2p-share-step p2p-share-step-1">
 			<legend>
-				How many people can you motivate to sign the petition?
+				{{ attributes.step1Title }}
 			</legend>
 			<ul class="select">
 				<li>
-					<input id="n1" type="radio" name="number_of_people" value="1-5" data-next-element=".p2p-share-step-2"/>
-					<label for="n1"><img class="social-icon" src="{{ base_url }}assets/img/icon/people-1.svg"> 1 - 5 People</label>
+					<input id="n1" type="radio" name="number_of_people" value="1-5"
+						   data-next-element=".p2p-share-step-2"/>
+					<label for="n1"><img class="social-icon" src="{{ base_url }}assets/img/icon/people-1.svg"> 1 - 5
+						People</label>
 				</li>
 				<li>
-					<input id="n6" type="radio" name="number_of_people" value="6-10" data-next-element=".p2p-share-step-2"/>
-					<label for="n6"><img class="social-icon" src="{{ base_url }}assets/img/icon/people-2.svg"> 6 - 10 People</label>
+					<input id="n6" type="radio" name="number_of_people" value="6-10"
+						   data-next-element=".p2p-share-step-2"/>
+					<label for="n6"><img class="social-icon" src="{{ base_url }}assets/img/icon/people-2.svg"> 6 - 10
+						People</label>
 				</li>
 				<li>
-					<input id="n10" type="radio" name="number_of_people" value="10-20" data-next-element=".p2p-share-step-2"/>
-					<label for="n10"><img class="social-icon" src="{{ base_url }}assets/img/icon/people-3.svg"> 10 - 20 People</label>
+					<input id="n10" type="radio" name="number_of_people" value="10-20"
+						   data-next-element=".p2p-share-step-2"/>
+					<label for="n10"><img class="social-icon" src="{{ base_url }}assets/img/icon/people-3.svg"> 10 - 20
+						People</label>
 				</li>
 				<li>
-					<input id="n20" type="radio" name="number_of_people" value="20+" data-next-element=".p2p-share-step-2"/>
-					<label for="n20"><img class="social-icon" src="{{ base_url }}assets/img/icon/people-3.svg"><img class="social-icon" src="{{ base_url }}assets/img/icon/people-3.svg"> 20+ People</label>
+					<input id="n20" type="radio" name="number_of_people" value="20+"
+						   data-next-element=".p2p-share-step-2"/>
+					<label for="n20"><img class="social-icon" src="{{ base_url }}assets/img/icon/people-3.svg"><img
+								class="social-icon" src="{{ base_url }}assets/img/icon/people-3.svg"> 20+ People</label>
 				</li>
 			</ul>
 			<div class="controls form-section wp-block-button">
@@ -27,34 +35,39 @@
 			</div>
 		</fieldset>
 		<fieldset class="p2p-share-step p2p-share-step-2">
-			<legend>How will you be able to reach your friends?</legend>
+			<legend>{{ attributes.step2Title }}</legend>
 			<ul class="select">
 				<li>
-					<input id="channel-whatsapp" type="radio" name="channel" value="whatsapp" data-next-element=".p2p-share-step-3.whatsapp"/>
+					<input id="channel-whatsapp" type="radio" name="channel" value="whatsapp"
+						   data-next-element=".p2p-share-step-3.whatsapp"/>
 					<label for="channel-whatsapp" class="channel whatsapp">
 						<img class="social-icon" src="{{ base_url }}assets/img/social/whatsapp.svg"> WhatsApp
 					</label>
 				</li>
 				<li>
-					<input id="channel-email" type="radio" name="channel" value="email"  data-next-element=".p2p-share-step-3.email"/>
+					<input id="channel-email" type="radio" name="channel" value="email"
+						   data-next-element=".p2p-share-step-3.email"/>
 					<label for="channel-email" class="channel email">
 						<img class="social-icon" src="{{ base_url }}assets/img/social/email.svg"> Email
 					</label>
 				</li>
 				<li>
-					<input id="channel-sms" type="radio" name="channel" value="sms" data-next-element=".p2p-share-step-3.sms"/>
+					<input id="channel-sms" type="radio" name="channel" value="sms"
+						   data-next-element=".p2p-share-step-3.sms"/>
 					<label for="channel-sms" class="channel sms">
 						<img class="social-icon" src="{{ base_url }}assets/img/social/sms.svg"> SMS
 					</label>
 				</li>
 				<li>
-					<input id="channel-signal" type="radio" name="channel" value="signal" data-next-element=".p2p-share-step-3.signal"/>
+					<input id="channel-signal" type="radio" name="channel" value="signal"
+						   data-next-element=".p2p-share-step-3.signal"/>
 					<label for="channel-signal" class="channel signal">
 						<img class="social-icon" src="{{ base_url }}assets/img/social/signal.svg"> Signal
 					</label>
 				</li>
 				<li>
-					<input id="channel-threema" type="radio" name="channel" value="threema" data-next-element=".p2p-share-step-3.threema"/>
+					<input id="channel-threema" type="radio" name="channel" value="threema"
+						   data-next-element=".p2p-share-step-3.threema"/>
 					<label for="channel-threema" class="channel threema">
 						<img class="social-icon" src="{{ base_url }}assets/img/social/threema.svg"> Threema
 					</label>
@@ -89,57 +102,71 @@
 				<button class="button previous stealth" data-previous-element=".p2p-share-step-2">Back</button>
 			</div>
 		</fieldset>
+
+
 		<fieldset class="p2p-share-step p2p-share-step-3 email">
 			<legend>
-				Share by Email <img class="social-icon" src="{{ base_url }}assets/img/social/email.svg">
+				<img class="social-icon"
+					 src="{{ base_url }}assets/img/social/email.svg"> {{ __('Share by Email', 'planet4-gpch-blocks') }}
 			</legend>
 			<div class="share-options">
-				<div class="option">
-					<p class="description"><strong>Option 1:</strong> <br>Copy/Paste this text:</p>
-					<textarea id="clipboard-copy-text-email" rows="5">SEND THIS TEXT</textarea><br>
+				<div class="option hide-desktop hide-mobile">
+					<label for="copy-text">{{ __('Email:', 'planet4-gpch-blocks') }}</label>
+					<textarea id="clipboard-copy-text-email" name="copy-text" rows="5">SEND THIS TEXT</textarea><br>
 					<div class="controls wp-block-button">
-						<button class="dark copy-to-clipboard" data-copy-field="clipboard-copy-text-email">Copy to clipboard</button>
+						<button class="dark copy-to-clipboard" data-copy-field="clipboard-copy-text-email">{{ __('Copy to
+							clipboard', 'planet4-gpch-blocks') }}
+						</button>
 					</div>
 				</div>
 				<div class="option">
-					<p class="description"><strong>Option 2:</strong> <br>Let us send you an email you can forward:</p>
-					<label for="mobile">Your Email:</label><br>
-					<input type="text" name="email"><br>
+					<label for="email">{{ __('Email:', 'planet4-gpch-blocks') }}</label>
+					<input type="text" id="share-email" class="email-field" name="email"><br>
+					<p class="status error hidden"></p>
+					<p class="description">{{ __('Great! Let us send you an email you can forward to your friends.', 'planet4-gpch-blocks') }}
+						<br><i>{{ __('We
+							will not use your email address for anything else.', 'planet4-gpch-blocks') }}</i></p>
 					<div class="controls wp-block-button">
-						<button class="dark send-email">Send email</button>
+						<button class="dark send-email">{{ __('Send Email', 'planet4-gpch-blocks') }}</button>
 					</div>
-					<p class="description">Your email address will only be used to send this message.</p>
 				</div>
 			</div>
 			<div class="controls form-section wp-block-button">
-				<button class="button previous stealth" data-previous-element=".p2p-share-step-2">Back</button>
+				<button class="button previous stealth"
+						data-previous-element=".p2p-share-step-2">{{ __('Back', 'planet4-gpch-blocks') }}</button>
 			</div>
 		</fieldset>
 		<fieldset class="p2p-share-step p2p-share-step-3 sms">
 			<legend>
-				Share by SMS <img class="social-icon" src="{{ base_url }}assets/img/social/sms.svg">
+				<img class="social-icon"
+					 src="{{ base_url }}assets/img/social/sms.svg"> {{ __('Share by SMS', 'planet4-gpch-blocks') }}
 			</legend>
 			<div class="share-options">
-				<div class="option">
-					<p class="description"><strong>Option 1:</strong> <br>Copy/Paste this text:</p>
-					<textarea id="clipboard-copy-text-sms" rows="5">SEND THIS TEXT</textarea><br>
+				<div class="option hide-desktop">
+					<label for="copy-text">{{ __('Copy/Paste this text:', 'planet4-gpch-blocks') }}</label>
+					<textarea id="clipboard-copy-text-sms" name="copy-text" rows="5">{{ attributes.smsShareText }}</textarea><br>
 					<div class="controls wp-block-button">
-						<button class="dark copy-to-clipboard" data-copy-field="clipboard-copy-text-sms">Copy to clipboard</button>
+						<button class="dark copy-to-clipboard" data-copy-field="clipboard-copy-text-sms">{{ __('Copy to
+							clipboard', 'planet4-gpch-blocks') }}
+						</button>
 					</div>
 				</div>
-				<div class="option">
-					<p class="description"><strong>Option 2:</strong> <br>Let us send you an SMS you can forward:</p>
-					<label for="mobile">Your mobile number:</label><br>
-					<input type="text" id="share-sms-number" class="phone-number-field" name="mobile" placeholder="07_ ___ __ __"><br>
+				<div class="option hide-mobile">
+					<label for="mobile">{{ __('Mobile number:', 'planet4-gpch-blocks') }}</label>
+					<input type="text" id="share-sms-number" class="phone-number-field" name="mobile"
+						   placeholder="07_ ___ __ __"><br>
 					<p class="status error hidden"></p>
+					<p class="description">{{ __('Great! Let us send you an SMS to your phone that you can forward to your
+						friends.', 'planet4-gpch-blocks') }}
+						<br><i>{{ __('We will not use your number for anything else.', 'planet4-gpch-blocks') }}</i></p>
 					<div class="controls wp-block-button">
 						<button class="dark send-sms" data-mobile-number-field="share-sms-number">Send SMS</button>
 					</div>
-					<p class="description">Your phone number will only be used to send this message.</p>
 				</div>
 			</div>
 			<div class="controls form-section wp-block-button">
-				<button class="button previous stealth" data-previous-element=".p2p-share-step-2">Back</button>
+				<button class="button previous stealth"
+						data-previous-element=".p2p-share-step-2">{{ __('Back', 'planet4-gpch-blocks') }}</button>
 			</div>
 		</fieldset>
 		<fieldset class="p2p-share-step p2p-share-step-3 signal">
@@ -151,7 +178,9 @@
 					<p class="description"><strong>Option 1:</strong> <br>Copy/Paste this text:</p>
 					<textarea id="clipboard-copy-text-signal" rows="5">SEND THIS TEXT</textarea><br>
 					<div class="controls wp-block-button">
-						<button class="dark copy-to-clipboard" data-copy-field="clipboard-copy-text-signal">Copy to clipboard</button>
+						<button class="dark copy-to-clipboard" data-copy-field="clipboard-copy-text-signal">Copy to
+							clipboard
+						</button>
 					</div>
 				</div>
 				<div class="option">

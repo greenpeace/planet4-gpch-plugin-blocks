@@ -58,7 +58,8 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 	function dynamic_render_callback( $block_attributes, $content ) {
 		// Prepare parameters for template
 		$params = array(
-			'base_url' => P4_GPCH_PLUGIN_BLOCKS_BASE_URL,
+			'base_url'   => P4_GPCH_PLUGIN_BLOCKS_BASE_URL,
+			'attributes' => $block_attributes
 		);
 
 		// Output template
@@ -86,20 +87,59 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 	}
 
 	public function restAPI_send_sms( $data ) {
-		// Validate phone number
-		$sms    = new Sms_Client();
-		$result = $sms->sendSMS( $data['phone'], 'This is a test.' );
+		$post = get_post( $data['postId'] );
 
-		$response = array(
-			'status' => $result['status'],
-			'data'   => array(
-				'number_sent' => $data['phone'],
-			)
-		);
+		if ( has_blocks( $post->post_content ) ) {
+			$blocks = parse_blocks( $post->post_content );
 
-		if ( isset ( $result['msg'] ) ) {
-			$response['msg'] = $result['msg'];
+			try {
+				foreach ( $blocks as $block ) {
+					if ( $block['blockName'] == 'planet4-gpch-plugin-blocks/p2p-share' ) {
+						if ( isset( $block['attrs']['smsMessage'] ) && $block['attrs']['smsMessage'] != null ) {
+							$message1 = $block['attrs']['smsMessage'];
+						}
+
+						if ( isset( $block['attrs']['smsShareText'] ) && $block['attrs']['smsShareText'] != null ) {
+							$message2 = $block['attrs']['smsShareText'];
+						}
+
+						break;
+					}
+				}
+
+				if ( ! isset( $message1 ) || ! isset( $message2 ) ) {
+					throw new \Exception( 'Text messages are not defined.' );
+				}
+
+				// Send first message
+				$sms1   = new Sms_Client();
+				$result = $sms1->sendSMS( $data['phone'], $message1 );
+
+				if ( $result['status'] == 'error' ) {
+					throw new \Exception( $result['msg'] );
+				}
+
+				// Send second message
+				$sms2   = new Sms_Client();
+				$result = $sms2->sendSMS( $data['phone'], $message2 );
+
+				if ( $result['status'] == 'error' ) {
+					throw new \Exception( $result['msg'] );
+				}
+			} catch ( \Exception $e ) {
+				$response = array(
+					'status' => 'error',
+					'data'   => array(
+						'msg' => $e->getMessage(),
+					)
+				);
+
+				echo json_encode( $response );
+				die;
+			}
 		}
+
+		$response = [ 'status' => 'success' ];
 
 		echo json_encode( $response );
 		die;

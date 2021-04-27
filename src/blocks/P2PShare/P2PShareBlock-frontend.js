@@ -1,10 +1,5 @@
 //const validate = require( 'validate.js' );
-import {
-	parsePhoneNumber,
-	AsYouType,
-	isPossiblePhoneNumber,
-	isValidPhoneNumber,
-} from 'libphonenumber-js/mobile';
+import { parsePhoneNumber } from 'libphonenumber-js/mobile';
 import apiFetch from '@wordpress/api-fetch';
 
 const constraints = {};
@@ -148,13 +143,10 @@ smsButtons.forEach( ( item ) => {
 			method: 'POST',
 			data: {
 				phone: phoneNumber.number,
+				postId: gpchBlocks.postID,
 			},
 		} ).then(
 			( result ) => {
-				console.log( 'result' );
-				console.log( result );
-				console.log( result.data.status );
-
 				if ( result.status == 'success' ) {
 					statusElement.innerText =
 						'Your message was sent. Check your phone!';
@@ -164,7 +156,7 @@ smsButtons.forEach( ( item ) => {
 					// Disable button to prevent multiple messages to be sent.
 					// event.target.classList.add( 'hidden' );
 				} else if ( result.status == 'error' ) {
-					statusElement.innerText = result.msg;
+					statusElement.innerText = result.data.msg;
 					statusElement.classList.remove( 'hidden', 'success' );
 					statusElement.classList.add( 'error' );
 				}

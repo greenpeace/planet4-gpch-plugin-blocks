@@ -156,6 +156,7 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 			wp_localize_script( 'planet4-gpch-blocks-js', 'gpchBlocks', array(
 				'restURL'   => rest_url(),
 				'restNonce' => wp_create_nonce( 'wp_rest' ),
+				'postID'    => get_the_ID(),
 			) );
 
 			// Make the assets URL available in JS

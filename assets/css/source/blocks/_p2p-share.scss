@@ -1,8 +1,8 @@
 .wp-block-planet4-gpch-plugin-blocks-p2p-share {
 	.p2p-share-step {
 		background-color: $color_standard_2;
+		max-width: 32em;
 		padding: 1rem;
-		padding-top: 2rem;
 		margin-bottom: 1em;
 
 		&.hidden {
@@ -12,11 +12,13 @@
 		legend {
 			float: left;
 			width: 100%;
+			margin-bottom: 1rem;
 			font-weight: bold;
 		}
 
 		label {
 			font-weight: 600;
+			margin-bottom: .4rem;
 		}
 
 		ul.select {
@@ -86,21 +88,46 @@
 		}
 
 		.share-options {
+			/*
 			display: inline-flex;
 			flex-wrap: wrap;
 
+			 */
+
 			.option {
-				flex-basis: 40%;
+				/*
+				flex-basis: 100%;
 				flex-grow: 1;
+
+				 */
+				label {
+					display: block;
+				}
 			}
 
 			.option:nth-child(1) {
-				padding-right: 1em;
-				border-right: solid 1px #999;
+				/*padding-right: 1em;*/
+				/*border-right: solid 1px #999;*/
 			}
 
 			.option:nth-child(2) {
-				padding-left: 1em;
+				/*padding-left: 1em;*/
+			}
+
+			.option.desktop {
+				max-width: calc(#{$size_width_desktop} - 1px);
+			}
+
+
+			@media (max-width: #{$size_width_desktop - 1px } ) {
+				.option.hide-mobile {
+					display: none;
+				}
+			}
+			@media (min-width: $size_width_desktop ) {
+				.option.hide-desktop {
+					display: none;
+				}
 			}
 
 			textarea {
@@ -115,7 +142,7 @@
 
 		&.p2p-share-step-3 {
 			.social-icon {
-				max-height: 1em;
+				max-height: 2rem;
 			}
 
 			.phone-number-field {
@@ -146,8 +173,6 @@
 		}
 	}
 
-
-
 	.wp-block-button {
 		margin-top: 0;
 	}
@@ -158,7 +183,7 @@
 	}
 
 	.description {
-		font-style: italic;
 		font-size: 1rem;
 	}
+
 }
