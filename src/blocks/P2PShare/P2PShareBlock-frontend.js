@@ -110,6 +110,7 @@ smsButtons.forEach( ( item ) => {
 	item.addEventListener( 'click', ( event ) => {
 		event.preventDefault();
 
+		const channel = event.target.dataset.channel;
 		const numberField = document.getElementById(
 			event.target.dataset.mobileNumberField
 		);
@@ -143,6 +144,7 @@ smsButtons.forEach( ( item ) => {
 			method: 'POST',
 			data: {
 				phone: phoneNumber.number,
+				channel: channel,
 				postId: gpchBlocks.postID,
 			},
 		} ).then(

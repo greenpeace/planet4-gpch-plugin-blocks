@@ -59,7 +59,8 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 		// Prepare parameters for template
 		$params = array(
 			'base_url'   => P4_GPCH_PLUGIN_BLOCKS_BASE_URL,
-			'attributes' => $block_attributes
+			'attributes' => $block_attributes,
+			'whatsAppLink' => $this->generate_whats_app_share_link($block_attributes['whatsAppShareText'])
 		);
 
 		// Output template
@@ -88,6 +89,7 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 
 	public function restAPI_send_sms( $data ) {
 		$post = get_post( $data['postId'] );
+		$channel = $data['channel'];
 
 		if ( has_blocks( $post->post_content ) ) {
 			$blocks = parse_blocks( $post->post_content );
@@ -96,35 +98,55 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 				foreach ( $blocks as $block ) {
 					if ( $block['blockName'] == 'planet4-gpch-plugin-blocks/p2p-share' ) {
 						if ( isset( $block['attrs']['smsMessage'] ) && $block['attrs']['smsMessage'] != null ) {
-							$message1 = $block['attrs']['smsMessage'];
+							$message_sms_1 = $block['attrs']['smsMessage'];
 						}
 
 						if ( isset( $block['attrs']['smsShareText'] ) && $block['attrs']['smsShareText'] != null ) {
-							$message2 = $block['attrs']['smsShareText'];
+							$message_sms_2 = $block['attrs']['smsShareText'];
+						}
+
+						if ( isset( $block['attrs']['whatsAppSmsText'] ) && $block['attrs']['whatsAppSmsText'] != null ) {
+							$message_whatsapp = $block['attrs']['whatsAppSmsText'];
 						}
 
 						break;
 					}
 				}
 
-				if ( ! isset( $message1 ) || ! isset( $message2 ) ) {
-					throw new \Exception( 'Text messages are not defined.' );
+				if ($channel == 'sms') {
+					if ( ! isset( $message_sms_1 ) || ! isset( $message_sms_2 ) ) {
+						throw new \Exception( 'Text messages are not defined.' );
+					}
+
+					// Send first message
+					$sms1   = new Sms_Client();
+					$result = $sms1->sendSMS( $data['phone'], $message_sms_1 );
+
+					if ( $result['status'] == 'error' ) {
+						throw new \Exception( $result['msg'] );
+					}
+
+					// Send second message
+					$sms2   = new Sms_Client();
+					$result = $sms2->sendSMS( $data['phone'], $message_sms_2 );
+
+
+					if ( $result['status'] == 'error' ) {
+						throw new \Exception( $result['msg'] );
+					}
 				}
+				elseif ($channel == 'whatsapp') {
+					if ( ! isset( $message_whatsapp ) ) {
+						throw new \Exception( 'Text message for WhatsApp is not defined.' );
+					}
 
-				// Send first message
-				$sms1   = new Sms_Client();
-				$result = $sms1->sendSMS( $data['phone'], $message1 );
+					// Send first message
+					$sms   = new Sms_Client();
+					$result = $sms->sendSMS( $data['phone'], $message_whatsapp );
 
-				if ( $result['status'] == 'error' ) {
-					throw new \Exception( $result['msg'] );
-				}
-
-				// Send second message
-				$sms2   = new Sms_Client();
-				$result = $sms2->sendSMS( $data['phone'], $message2 );
-
-				if ( $result['status'] == 'error' ) {
-					throw new \Exception( $result['msg'] );
+					if ( $result['status'] == 'error' ) {
+						throw new \Exception( $result['msg'] );
+					}
 				}
 			} catch ( \Exception $e ) {
 				$response = array(
@@ -143,5 +165,10 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 
 		echo json_encode( $response );
 		die;
+	}
+
+	private function generate_whats_app_share_link($text) {
+		// See https://faq.whatsapp.com/general/chats/how-to-use-click-to-chat
+		return 'https://wa.me/?text=' . urlencode($text);
 	}
 }

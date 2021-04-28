@@ -35,6 +35,12 @@ export class P2PShareBlock {
 						'planet4-gpch-blocks'
 					),
 				},
+				whatsAppShareText: {
+					type: 'string',
+				},
+				whatsAppSmsText: {
+					type: 'string',
+				},
 				smsMessage: {
 					type: 'string',
 				},
@@ -126,6 +132,53 @@ export class P2PShareBlock {
 									onChange={ ( val ) =>
 										setAttributes( { step2Title: val } )
 									}
+								/>
+								<h3 style={ separatorStyle }>WhatsApp Share</h3>
+								<Text
+									variant="caption"
+									style={ descriptionStyle }
+								>
+									{ __(
+										'WhatsApp Share Text:',
+										'planet4-gpch-blocks'
+									) }
+								</Text>
+								<RichText
+									value={ attributes.whatsAppShareText }
+									placeholder={ __(
+										'THE TEXT TO SHARE BY WHATSAPP',
+										'planet4-gpch-blocks'
+									) }
+									allowedFormats={ [] }
+									onChange={ ( val ) =>
+										setAttributes( {
+											whatsAppShareText: val,
+										} )
+									}
+									style={ textboxStyle }
+								/>
+								<Text
+									variant="caption"
+									style={ descriptionStyle }
+								>
+									{ __(
+										'WhatsApp SMS Text (needs to include a WhatsApp link):',
+										'planet4-gpch-blocks'
+									) }
+								</Text>
+								<RichText
+									value={ attributes.whatsAppSmsText }
+									placeholder={ __(
+										'THE TEXT TO SEND BY SMS',
+										'planet4-gpch-blocks'
+									) }
+									allowedFormats={ [] }
+									onChange={ ( val ) =>
+										setAttributes( {
+											whatsAppSmsText: val,
+										} )
+									}
+									style={ textboxStyle }
 								/>
 								<h3 style={ separatorStyle }>SMS Share</h3>
 								<Text
