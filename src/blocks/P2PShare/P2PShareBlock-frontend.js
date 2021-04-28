@@ -172,3 +172,61 @@ smsButtons.forEach( ( item ) => {
 		);
 	} );
 } );
+
+// Send by email
+const emailButtons = p2pShareElement.querySelectorAll(
+	':scope .controls .send-email'
+);
+
+emailButtons.forEach( ( item ) => {
+	item.addEventListener( 'click', ( event ) => {
+		event.preventDefault();
+
+		const channel = event.target.dataset.channel;
+		const emailField = document.getElementById(
+			event.target.dataset.emailField
+		);
+		const statusElement = event.target
+			.closest( '.option' )
+			.querySelector( ':scope .status' );
+
+		let emailAddress = emailField.value;
+
+		// Hide error message
+		statusElement.classList.add( 'hidden' );
+
+		// Send Email
+		apiFetch.use( apiFetch.createNonceMiddleware( gpchBlocks.restNonce ) );
+		apiFetch( {
+			path: gpchBlocks.restURL + 'gpchblockP2p/v1/sendEmail',
+			method: 'POST',
+			data: {
+				email: emailAddress,
+				channel: channel,
+				postId: gpchBlocks.postID,
+			},
+		} ).then(
+			( result ) => {
+				if ( result.status == 'success' ) {
+					statusElement.innerText =
+						'Your message was sent. Check your email!';
+					statusElement.classList.remove( 'hidden', 'error' );
+					statusElement.classList.add( 'success' );
+
+					// Disable button to prevent multiple messages to be sent.
+					// event.target.classList.add( 'hidden' );
+				} else if ( result.status == 'error' ) {
+					statusElement.innerText = result.data.msg;
+					statusElement.classList.remove( 'hidden', 'success' );
+					statusElement.classList.add( 'error' );
+				}
+			},
+			( result ) => {
+				statusElement.innerText =
+					'Application error. Please try again later.';
+				statusElement.classList.remove( 'hidden', 'success' );
+				statusElement.classList.add( 'error' );
+			}
+		);
+	} );
+} );

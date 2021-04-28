@@ -104,7 +104,7 @@
 						</p>
 						<div class="controls wp-block-button">
 							<button class="dark send-sms" data-channel="whatsapp"
-									data-mobile-number-field="share-whatsapp-number">Send SMS
+									data-mobile-number-field="share-whatsapp-number">{{ __('Send SMS', 'planet4-gpch-blocks') }}
 							</button>
 						</div>
 					</div>
@@ -115,7 +115,6 @@
 			</div>
 		</fieldset>
 
-
 		<fieldset class="p2p-share-step p2p-share-step-3 email">
 			<legend>
 				<img class="social-icon"
@@ -123,8 +122,9 @@
 			</legend>
 			<div class="share-options">
 				<div class="option hide-desktop hide-mobile">
-					<label for="copy-text">{{ __('Email:', 'planet4-gpch-blocks') }}</label>
-					<textarea id="clipboard-copy-text-email" name="copy-text" rows="5">SEND THIS TEXT</textarea><br>
+					<label for="copy-text">{{ __('Copy/Paste this text:', 'planet4-gpch-blocks') }}</label>
+					<textarea id="clipboard-copy-text-email" name="copy-text"
+							  rows="5">{{ attributes.emailShareText }}</textarea><br>
 					<div class="controls wp-block-button">
 						<button class="dark copy-to-clipboard" data-copy-field="clipboard-copy-text-email">{{ __('Copy to
 							clipboard', 'planet4-gpch-blocks') }}
@@ -139,7 +139,9 @@
 						<br><i>{{ __('We
 							will not use your email address for anything else.', 'planet4-gpch-blocks') }}</i></p>
 					<div class="controls wp-block-button">
-						<button class="dark send-email">{{ __('Send Email', 'planet4-gpch-blocks') }}</button>
+						<button class="dark send-email" data-channel="email" data-email-field="share-email">
+							{{ __('Send Email', 'planet4-gpch-blocks') }}
+						</button>
 					</div>
 				</div>
 			</div>
@@ -148,6 +150,7 @@
 						data-previous-element=".p2p-share-step-2">{{ __('Back', 'planet4-gpch-blocks') }}</button>
 			</div>
 		</fieldset>
+
 		<fieldset class="p2p-share-step p2p-share-step-3 sms">
 			<legend>
 				<img class="social-icon"
@@ -174,7 +177,7 @@
 						<br><i>{{ __('We will not use your number for anything else.', 'planet4-gpch-blocks') }}</i></p>
 					<div class="controls wp-block-button">
 						<button class="dark send-sms" data-channel="sms" data-mobile-number-field="share-sms-number">
-							Send SMS
+							{{ __('Send SMS', 'planet4-gpch-blocks') }}
 						</button>
 					</div>
 				</div>
@@ -210,6 +213,37 @@
 			</div>
 			<div class="controls form-section wp-block-button">
 				<button class="button previous stealth" data-previous-element=".p2p-share-step-2">Back</button>
+			</div>
+		</fieldset>
+
+		<fieldset class="p2p-share-step p2p-share-step-3 threema">
+			<legend>
+				Share on Threema <img class="social-icon" src="{{ base_url }}assets/img/social/threema.svg">
+			</legend>
+			<div class="share-options">
+				<div class="option hide-desktop">
+					<p>Thanks for sharing!</p>
+					<div class="action-controls">
+						<p class="description">Click the button to open Threema. You can edit the message before
+							sending.</p>
+						<div class="controls wp-block-button">
+							<a class="" target="_blank" href="{{ threemaAppLink }}">Open Threema</a>
+						</div>
+					</div>
+				</div>
+				<div class="option hide-mobile">
+					<label for="copy-text">{{ __('Copy/Paste this text:', 'planet4-gpch-blocks') }}</label>
+					<textarea id="clipboard-copy-text-threema" name="copy-text"
+							  rows="5">{{ attributes.threemaShareText }}</textarea><br>
+					<div class="controls wp-block-button">
+						<button class="dark copy-to-clipboard" data-copy-field="clipboard-copy-text-threema">{{ __('Copy to
+							clipboard', 'planet4-gpch-blocks') }}
+						</button>
+					</div>
+				</div>
+				<div class="controls form-section wp-block-button">
+					<button class="button previous stealth" data-previous-element=".p2p-share-step-2">Back</button>
+				</div>
 			</div>
 		</fieldset>
 	</form>

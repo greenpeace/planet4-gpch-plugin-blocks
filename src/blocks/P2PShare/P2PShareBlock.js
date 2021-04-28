@@ -11,6 +11,7 @@ import {
 	RichText,
 	ColorPalette,
 	InspectorControls,
+	__experimentalLinkControl as LinkControl,
 } from '@wordpress/block-editor';
 
 export class P2PShareBlock {
@@ -35,10 +36,20 @@ export class P2PShareBlock {
 						'planet4-gpch-blocks'
 					),
 				},
-				whatsAppShareText: {
+				shareText: {
 					type: 'string',
 				},
-				whatsAppSmsText: {
+				shareLink: {
+					type: 'object',
+				},
+				utmMedium: {
+					type: 'string',
+					default: 'p2p',
+				},
+				utmCampaign: {
+					type: 'string',
+				},
+				whatsAppSmsCTA: {
 					type: 'string',
 				},
 				smsMessage: {
@@ -47,19 +58,20 @@ export class P2PShareBlock {
 				smsShareText: {
 					type: 'string',
 				},
+				emailText: {
+					type: 'string',
+				},
+				emailSubject: {
+					type: 'string',
+				},
+				threemaShareText: {
+					type: 'string',
+				},
 
 				bg_color: { type: 'string', default: '#000000' },
 				text_color: { type: 'string', default: '#ffffff' },
 			},
 			edit: ( { attributes, isSelected, setAttributes } ) => {
-				const onChangeBGColor = ( hexColor ) => {
-					setAttributes( { bg_color: hexColor } );
-				};
-
-				const onChangeTextColor = ( hexColor ) => {
-					setAttributes( { text_color: hexColor } );
-				};
-
 				const separatorStyle = {
 					color: '#fff',
 					backgroundColor: '#333',
@@ -87,29 +99,33 @@ export class P2PShareBlock {
 										<fieldset>
 											<legend className="blocks-base-control__label">
 												{ __(
-													'Background color',
+													'UTM Tags',
 													'planet4-gpch-blocks'
 												) }
 											</legend>
-											<RichText
-												value={ attributes.smsText1 }
-												allowedFormats={ [] }
+											<TextControl
+												label={ __(
+													'UTM Medium',
+													'planet4-gpch-blocks'
+												) }
+												value={ attributes.utmMedium }
 												onChange={ ( val ) =>
 													setAttributes( {
-														smsText1: val,
+														utmMedium: val,
 													} )
 												}
 											/>
-										</fieldset>
-										<fieldset>
-											<legend className="blocks-base-control__label">
-												{ __(
-													'Text color',
+											<TextControl
+												label={ __(
+													'UTM Campaign',
 													'planet4-gpch-blocks'
 												) }
-											</legend>
-											<ColorPalette // Element Tag for Gutenberg standard colour selector
-												onChange={ onChangeTextColor } // onChange event callback
+												value={ attributes.utmCampaign }
+												onChange={ ( val ) =>
+													setAttributes( {
+														utmCampaign: val,
+													} )
+												}
 											/>
 										</fieldset>
 									</div>
@@ -133,41 +149,63 @@ export class P2PShareBlock {
 										setAttributes( { step2Title: val } )
 									}
 								/>
+								<h3 style={ separatorStyle }>
+									Share text/links
+								</h3>
+								<Text
+									variant="caption"
+									style={ descriptionStyle }
+								>
+									{ __(
+										'Share link (unshortened and without UTM tags)',
+										'planet4-gpch-blocks'
+									) }
+								</Text>
+								<LinkControl
+									value={ attributes.shareLink }
+									onChange={ ( val ) =>
+										setAttributes( {
+											shareLink: val,
+										} )
+									}
+									settings={ [] }
+									showSuggestions={ true }
+								></LinkControl>
+								<Text
+									variant="caption"
+									style={ descriptionStyle }
+								>
+									{ __(
+										'Share text for all channels. The link will be shortened and added to the end of the text:',
+										'planet4-gpch-blocks'
+									) }
+								</Text>
+								<RichText
+									value={ attributes.shareText }
+									placeholder={ __(
+										'THE SHARE TEXT FOR ALL CHANNELS',
+										'planet4-gpch-blocks'
+									) }
+									allowedFormats={ [] }
+									onChange={ ( val ) =>
+										setAttributes( {
+											shareText: val,
+										} )
+									}
+									style={ textboxStyle }
+								/>
 								<h3 style={ separatorStyle }>WhatsApp Share</h3>
 								<Text
 									variant="caption"
 									style={ descriptionStyle }
 								>
 									{ __(
-										'WhatsApp Share Text:',
+										'WhatsApp SMS CTA (Link will be added at the end):',
 										'planet4-gpch-blocks'
 									) }
 								</Text>
 								<RichText
-									value={ attributes.whatsAppShareText }
-									placeholder={ __(
-										'THE TEXT TO SHARE BY WHATSAPP',
-										'planet4-gpch-blocks'
-									) }
-									allowedFormats={ [] }
-									onChange={ ( val ) =>
-										setAttributes( {
-											whatsAppShareText: val,
-										} )
-									}
-									style={ textboxStyle }
-								/>
-								<Text
-									variant="caption"
-									style={ descriptionStyle }
-								>
-									{ __(
-										'WhatsApp SMS Text (needs to include a WhatsApp link):',
-										'planet4-gpch-blocks'
-									) }
-								</Text>
-								<RichText
-									value={ attributes.whatsAppSmsText }
+									value={ attributes.whatsAppSmsCTA }
 									placeholder={ __(
 										'THE TEXT TO SEND BY SMS',
 										'planet4-gpch-blocks'
@@ -175,7 +213,54 @@ export class P2PShareBlock {
 									allowedFormats={ [] }
 									onChange={ ( val ) =>
 										setAttributes( {
-											whatsAppSmsText: val,
+											whatsAppSmsCTA: val,
+										} )
+									}
+									style={ textboxStyle }
+								/>
+								<h3 style={ separatorStyle }>Email Share</h3>
+								<Text
+									variant="body.small"
+									style={ descriptionStyle }
+								>
+									{ __(
+										'Email Subject:',
+										'planet4-gpch-blocks'
+									) }
+								</Text>
+								<RichText
+									value={ attributes.emailSubject }
+									placeholder={ __(
+										'EMAIL SUBJECT',
+										'planet4-gpch-blocks'
+									) }
+									allowedFormats={ [] }
+									onChange={ ( val ) =>
+										setAttributes( {
+											emailSubject: val,
+										} )
+									}
+									style={ textboxStyle }
+								/>
+								<Text
+									variant="body.small"
+									style={ descriptionStyle }
+								>
+									{ __(
+										'Email Text:',
+										'planet4-gpch-blocks'
+									) }
+								</Text>
+								<RichText
+									value={ attributes.emailText }
+									placeholder={ __(
+										'EMAIL TEXT',
+										'planet4-gpch-blocks'
+									) }
+									allowedFormats={ [] }
+									onChange={ ( val ) =>
+										setAttributes( {
+											emailText: val,
 										} )
 									}
 									style={ textboxStyle }
@@ -223,6 +308,30 @@ export class P2PShareBlock {
 									onChange={ ( val ) =>
 										setAttributes( {
 											smsShareText: val,
+										} )
+									}
+									style={ textboxStyle }
+								/>
+								<h3 style={ separatorStyle }>Threema Share</h3>
+								<Text
+									variant="body.small"
+									style={ descriptionStyle }
+								>
+									{ __(
+										'Threema Share Text:',
+										'planet4-gpch-blocks'
+									) }
+								</Text>
+								<RichText
+									value={ attributes.threemaShareText }
+									placeholder={ __(
+										'THREEMA SHARE TEXT',
+										'planet4-gpch-blocks'
+									) }
+									allowedFormats={ [] }
+									onChange={ ( val ) =>
+										setAttributes( {
+											threemaShareText: val,
 										} )
 									}
 									style={ textboxStyle }
