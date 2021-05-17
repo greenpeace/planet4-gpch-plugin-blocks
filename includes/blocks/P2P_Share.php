@@ -225,6 +225,8 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 				}
 			}
 		} catch ( \Exception $e ) {
+			\Sentry\captureException( $e );
+
 			$response = array(
 				'status' => 'error',
 				'data'   => array(
@@ -272,6 +274,8 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 				throw new \Exception( 'Email could not be sent.' );
 			}
 		} catch ( \Exception $e ) {
+			\Sentry\captureException( $e );
+
 			$response = array(
 				'status' => 'error',
 				'data'   => array(
@@ -368,26 +372,32 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 	 * @return mixed
 	 */
 	private function shorten_link( $link ) {
-		$api     = new Api( $this->bitly_token );
-		$bitlink = new Bitlink( $api );
-		$result  = $bitlink->createBitlink( [ 'long_url' => $link ] );
+		try {
+			$api     = new Api( $this->bitly_token );
+			$bitlink = new Bitlink( $api );
+			$result  = $bitlink->createBitlink( [ 'long_url' => $link ] );
 
-		if ( $api->isCurlError() ) {
-			print( $api->getCurlErrno() . ': ' . $api->getCurlError() );
-		} else {
-			// if Bitly response contains error message.
-			if ( $result->isError() ) {
-				throw new \Exception( $result->getResponse() . ': ' . $result->getDescription() );
+			if ( $api->isCurlError() ) {
+				print( $api->getCurlErrno() . ': ' . $api->getCurlError() );
 			} else {
-				// if Bitly response is 200 or 201
-				if ( $result->isSuccess() ) {
-					$response = $result->getResponseArray();
-
-					return $response['link'];
+				// if Bitly response contains error message.
+				if ( $result->isError() ) {
+					throw new \Exception( $result->getResponse() . ': ' . $result->getDescription() );
 				} else {
-					throw new \Exception( $result->getResponse() );
+					// if Bitly response is 200 or 201
+					if ( $result->isSuccess() ) {
+						$response = $result->getResponseArray();
+
+						return $response['link'];
+					} else {
+						throw new \Exception( $result->getResponse() );
+					}
 				}
 			}
+		} catch ( \Exception $e ) {
+			\Sentry\captureException( $e );
+
+			return $link;
 		}
 	}
 
