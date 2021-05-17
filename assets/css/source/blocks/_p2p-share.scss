@@ -1,12 +1,30 @@
 .wp-block-planet4-gpch-plugin-blocks-p2p-share {
+	max-width: 32em;
+	min-height: 600px;
+	position: relative;
+	overflow: hidden;
+
 	.p2p-share-step {
 		background-color: $color_standard_2;
-		max-width: 32em;
+		width: 100%;
 		padding: 1rem;
 		margin-bottom: 1em;
 
+		position: absolute;
+		left: 0;
+
+		transition: left .3s;
+		visibility: hidden;
+
+		&.p2p-share-step-1 {
+			visibility: visible;
+		}
+
 		&.hidden {
-			display: none;
+			left: 100%;
+		}
+		&.hidden.prev {
+			left: -100%;
 		}
 
 		legend {

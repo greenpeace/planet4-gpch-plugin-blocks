@@ -12,16 +12,26 @@ const p2pStepElements = p2pShareElement.querySelectorAll(
 	':scope .p2p-share-step'
 );
 
-/*
-Temporary hide
- */
+// Hide form steps
 p2pStepElements.forEach( ( item ) => {
 	item.classList.add( 'hidden' );
 } );
 document.querySelector( '.p2p-share-step-1' ).classList.remove( 'hidden' );
-/*
-End temporary hide
- */
+
+// Resize parent element to max child height
+function setParentHeight() {
+	let maxHeight = 0;
+
+	p2pStepElements.forEach( ( item ) => {
+		if ( item.offsetHeight > maxHeight ) {
+			maxHeight = item.offsetHeight;
+		}
+	} );
+
+	p2pShareElement.style.height = maxHeight;
+}
+window.onresize = setParentHeight;
+window.onload = setParentHeight;
 
 // Next button events
 const nextButtons = p2pShareElement.querySelectorAll(
@@ -48,11 +58,36 @@ nextButtons.forEach( ( item ) => {
 
 			const elementToShow = document.querySelector( nextElementSelector );
 
-			event.target.closest( '.p2p-share-step' ).classList.add( 'hidden' );
+			event.target
+				.closest( '.p2p-share-step' )
+				.classList.add( 'hidden', 'prev' );
+			elementToShow.style.visibility = 'visible';
 			elementToShow.classList.remove( 'hidden' );
 		} catch ( e ) {
-			console.log( e );
 			return;
+		}
+	} );
+} );
+
+// Radio fields auto forward to next step
+const radioForwardFields = p2pShareElement.querySelectorAll(
+	':scope input.autoforward'
+);
+
+radioForwardFields.forEach( ( item ) => {
+	item.addEventListener( 'change', ( event ) => {
+		const nextElementSelector = event.target.getAttribute(
+			'data-next-element'
+		);
+
+		if ( nextElementSelector !== null ) {
+			const elementToShow = document.querySelector( nextElementSelector );
+
+			event.target
+				.closest( '.p2p-share-step' )
+				.classList.add( 'hidden', 'prev' );
+			elementToShow.style.visibility = 'visible';
+			elementToShow.classList.remove( 'hidden' );
 		}
 	} );
 } );
@@ -75,7 +110,7 @@ backButtons.forEach( ( item ) => {
 		);
 
 		event.target.closest( '.p2p-share-step' ).classList.add( 'hidden' );
-		prevStep[ 0 ].classList.remove( 'hidden' );
+		prevStep[ 0 ].classList.remove( 'hidden', 'prev' );
 	} );
 } );
 
