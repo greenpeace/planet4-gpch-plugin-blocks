@@ -6,7 +6,7 @@ Install dependencies:
 
 `npm install --save-dev`
 
-`composer install`
+`composer install --ignore-platform-reqs`
 
 ## Coding Standards
 
