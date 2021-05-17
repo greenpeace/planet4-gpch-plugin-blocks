@@ -55,16 +55,13 @@ export class P2PShareBlock {
 				smsMessage: {
 					type: 'string',
 				},
-				smsShareText: {
+				signalMessage: {
 					type: 'string',
 				},
 				emailText: {
 					type: 'string',
 				},
 				emailSubject: {
-					type: 'string',
-				},
-				threemaShareText: {
 					type: 'string',
 				},
 
@@ -294,48 +291,53 @@ export class P2PShareBlock {
 									style={ descriptionStyle }
 								>
 									{ __(
-										'Second SMS, Text to share:',
+										'The second SMS is generated from default share message.',
+										'planet4-gpch-blocks'
+									) }
+								</Text>
+								<h3 style={ separatorStyle }>Signal Share</h3>
+								<Text
+									variant="body.small"
+									style={ descriptionStyle }
+								>
+									{ __(
+										'First SMS, share CTA:',
 										'planet4-gpch-blocks'
 									) }
 								</Text>
 								<RichText
-									value={ attributes.smsShareText }
+									value={ attributes.signalMessage }
 									placeholder={ __(
-										'THE TEXT TO SHARE BY SMS',
+										'FOR EXAMPLE: Thank you for sharing with your friends. Please copy/paste the following text into signal and send it to your friends.',
 										'planet4-gpch-blocks'
 									) }
 									allowedFormats={ [] }
 									onChange={ ( val ) =>
 										setAttributes( {
-											smsShareText: val,
+											signalMessage: val,
 										} )
 									}
 									style={ textboxStyle }
 								/>
+								<Text
+									variant="caption"
+									style={ descriptionStyle }
+								>
+									{ __(
+										'The second SMS is generated from default share message.',
+										'planet4-gpch-blocks'
+									) }
+								</Text>
 								<h3 style={ separatorStyle }>Threema Share</h3>
 								<Text
 									variant="body.small"
 									style={ descriptionStyle }
 								>
 									{ __(
-										'Threema Share Text:',
+										'The Threema share text will be generated from the default share message.',
 										'planet4-gpch-blocks'
 									) }
 								</Text>
-								<RichText
-									value={ attributes.threemaShareText }
-									placeholder={ __(
-										'THREEMA SHARE TEXT',
-										'planet4-gpch-blocks'
-									) }
-									allowedFormats={ [] }
-									onChange={ ( val ) =>
-										setAttributes( {
-											threemaShareText: val,
-										} )
-									}
-									style={ textboxStyle }
-								/>
 							</div>
 						) }
 					</div>
