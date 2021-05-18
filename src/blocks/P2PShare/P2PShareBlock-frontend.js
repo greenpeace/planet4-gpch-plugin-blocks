@@ -85,6 +85,22 @@ radioForwardFields.forEach( ( item ) => {
 			elementToShow.classList.remove( 'hidden' );
 		}
 	} );
+	// Add the same functionality to the label
+	item.nextElementSibling.addEventListener( 'click', ( event ) => {
+		const nextElementSelector = event.currentTarget.previousElementSibling.getAttribute(
+			'data-next-element'
+		);
+
+		if ( nextElementSelector !== null ) {
+			const elementToShow = document.querySelector( nextElementSelector );
+
+			event.currentTarget.previousElementSibling
+				.closest( '.p2p-share-step' )
+				.classList.add( 'hidden', 'prev' );
+			elementToShow.style.visibility = 'visible';
+			elementToShow.classList.remove( 'hidden' );
+		}
+	} );
 } );
 
 // Back button events
