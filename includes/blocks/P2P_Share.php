@@ -318,6 +318,17 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 				throw new \Exception( 'Invalid email address' );
 			}
 
+			// Replace CTA_LINK in email text
+			$link = $this->block_attributes['shareLink'];
+			if ( $link !== null ) {
+				$cta_link = $this->get_shortened_link( $link['url'], 'email' );
+			}
+			else {
+				$cta_link = '';
+			}
+
+			$email_text = str_replace('CTA_LINK', $cta_link , $email_text);
+
 			// Send email
 			$result = wp_mail( $data['email'], $email_subject, $email_text );
 			if ( $result === false ) {
