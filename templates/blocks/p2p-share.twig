@@ -8,26 +8,31 @@
 				<li>
 					<input id="n1" type="radio" name="number_of_people" value="1-5" class="autoforward"
 						   data-next-element=".p2p-share-step-2"/>
-					<label for="n1"><img class="social-icon" src="{{ base_url }}assets/img/icon/people-1.svg"> 1 - 5
-						People</label>
+					<label for="n1"><img class="social-icon" src="{{ base_url }}assets/img/icon/people-1.svg">
+						{{ __('1 - 5 People', 'planet4-gpch-blocks') }}
+					</label>
 				</li>
 				<li>
 					<input id="n6" type="radio" name="number_of_people" value="6-10" class="autoforward"
 						   data-next-element=".p2p-share-step-2"/>
-					<label for="n6"><img class="social-icon" src="{{ base_url }}assets/img/icon/people-2.svg"> 6 - 10
-						People</label>
+					<label for="n6"><img class="social-icon" src="{{ base_url }}assets/img/icon/people-2.svg">
+						{{ __('6 - 10 People', 'planet4-gpch-blocks') }}
+					</label>
 				</li>
 				<li>
 					<input id="n10" type="radio" name="number_of_people" value="10-20" class="autoforward"
 						   data-next-element=".p2p-share-step-2"/>
-					<label for="n10"><img class="social-icon" src="{{ base_url }}assets/img/icon/people-3.svg"> 10 - 20
-						People</label>
+					<label for="n10"><img class="social-icon" src="{{ base_url }}assets/img/icon/people-3.svg">
+						{{ __('10 - 20 People', 'planet4-gpch-blocks') }}
+					</label>
 				</li>
 				<li>
 					<input id="n20" type="radio" name="number_of_people" value="20+" class="autoforward"
 						   data-next-element=".p2p-share-step-2"/>
 					<label for="n20"><img class="social-icon" src="{{ base_url }}assets/img/icon/people-3.svg"><img
-								class="social-icon" src="{{ base_url }}assets/img/icon/people-3.svg"> 20+ People</label>
+								class="social-icon" src="{{ base_url }}assets/img/icon/people-3.svg">
+						{{ __('20+ People', 'planet4-gpch-blocks') }}
+					</label>
 				</li>
 			</ul>
 			<div class="controls form-section wp-block-button">
@@ -41,35 +46,35 @@
 					<input id="channel-whatsapp" type="radio" name="channel" value="whatsapp" class="autoforward"
 						   data-next-element=".p2p-share-step-3.whatsapp"/>
 					<label for="channel-whatsapp" class="channel whatsapp">
-						<img class="social-icon" src="{{ base_url }}assets/img/social/whatsapp.svg"> WhatsApp
+						<img class="social-icon" src="{{ base_url }}assets/img/social/whatsapp.svg"> {{ __('WhatsApp', 'planet4-gpch-blocks') }}
 					</label>
 				</li>
 				<li>
 					<input id="channel-email" type="radio" name="channel" value="email" class="autoforward"
 						   data-next-element=".p2p-share-step-3.email"/>
 					<label for="channel-email" class="channel email">
-						<img class="social-icon" src="{{ base_url }}assets/img/social/email.svg"> Email
+						<img class="social-icon" src="{{ base_url }}assets/img/social/email.svg"> {{ __('Email', 'planet4-gpch-blocks') }}
 					</label>
 				</li>
 				<li>
 					<input id="channel-sms" type="radio" name="channel" value="sms" class="autoforward"
 						   data-next-element=".p2p-share-step-3.sms"/>
 					<label for="channel-sms" class="channel sms">
-						<img class="social-icon" src="{{ base_url }}assets/img/social/sms.svg"> SMS
+						<img class="social-icon" src="{{ base_url }}assets/img/social/sms.svg"> {{ __('SMS', 'planet4-gpch-blocks') }}
 					</label>
 				</li>
 				<li>
 					<input id="channel-signal" type="radio" name="channel" value="signal" class="autoforward"
 						   data-next-element=".p2p-share-step-3.signal"/>
 					<label for="channel-signal" class="channel signal">
-						<img class="social-icon" src="{{ base_url }}assets/img/social/signal.svg"> Signal
+						<img class="social-icon" src="{{ base_url }}assets/img/social/signal.svg"> {{ __('Signal', 'planet4-gpch-blocks') }}
 					</label>
 				</li>
 				<li>
 					<input id="channel-threema" type="radio" name="channel" value="threema" class="autoforward"
 						   data-next-element=".p2p-share-step-3.threema"/>
 					<label for="channel-threema" class="channel threema">
-						<img class="social-icon" src="{{ base_url }}assets/img/social/threema.svg"> Threema
+						<img class="social-icon" src="{{ base_url }}assets/img/social/threema.svg"> {{ __('Threema', 'planet4-gpch-blocks') }}
 					</label>
 				</li>
 				<li>
@@ -77,22 +82,22 @@
 				</li>
 			</ul>
 			<div class="controls form-section wp-block-button">
-				<button class="button previous stealth" data-previous-element=".p2p-share-step-1">Back</button>
-				<button class="button next dark" data-next-step-field="channel">Next</button>
+				<button class="button previous stealth" data-previous-element=".p2p-share-step-1">{{ __('Back', 'planet4-gpch-blocks') }}</button>
+				<button class="button next dark" data-next-step-field="channel">{{ __('Next', 'planet4-gpch-blocks') }}</button>
 			</div>
 		</fieldset>
 		<fieldset class="p2p-share-step p2p-share-step-3 whatsapp">
 			<legend>
-				Share on WhatsApp <img class="social-icon" src="{{ base_url }}assets/img/social/whatsapp.svg">
+				{{ __('Share on WhatsApp', 'planet4-gpch-blocks') }} <img class="social-icon" src="{{ base_url }}assets/img/social/whatsapp.svg">
 			</legend>
 			<div class="share-options">
 				<div class="option hide-desktop">
-					<p>Thanks for sharing!</p>
+					<p>{{ __('Thanks for sharing!', 'planet4-gpch-blocks') }}</p>
 					<div class="action-controls">
-						<p class="description">Click the button to open WhatsApp. You can edit the message before
-							sending.</p>
+						<p class="description">{{ __('Click the button to open WhatsApp. You can edit the message before
+							sending.', 'planet4-gpch-blocks') }}</p>
 						<div class="controls wp-block-button">
-							<a class="" target="_blank" href="{{ whatsAppLink }}">Open WhatsApp</a>
+							<a class="" target="_blank" href="{{ whatsAppLink }}">{{ __('Open WhatsApp', 'planet4-gpch-blocks') }}</a>
 						</div>
 					</div>
 				</div>
@@ -113,7 +118,7 @@
 					</div>
 				</div>
 				<div class="controls form-section wp-block-button">
-					<button class="button previous stealth" data-previous-element=".p2p-share-step-2">Back</button>
+					<button class="button previous stealth" data-previous-element=".p2p-share-step-2">{{ __('Back', 'planet4-gpch-blocks') }}</button>
 				</div>
 			</div>
 		</fieldset>
@@ -231,17 +236,17 @@
 
 		<fieldset class="p2p-share-step p2p-share-step-3 threema">
 			<legend>
-				Share on Threema <img class="social-icon" src="{{ base_url }}assets/img/social/threema.svg">
+				{{ __('Share on Threema', 'planet4-gpch-blocks') }} <img class="social-icon" src="{{ base_url }}assets/img/social/threema.svg">
 			</legend>
 			<div class="share-options">
 				<div class="option hide-desktop">
-					<p>Thanks for sharing!</p>
+					<p>{{ __('Thanks for sharing!', 'planet4-gpch-blocks') }}</p>
 					<div class="action-controls">
 						<p class="description">
 							{{ __('Click the button to open Threema. You can edit the message before sending.', 'planet4-gpch-blocks') }}
 						</p>
 						<div class="controls wp-block-button">
-							<a class="" target="_blank" href="{{ threemaAppLink }}">Open Threema</a>
+							<a class="" target="_blank" href="{{ threemaAppLink }}">{{ __('Open Threema', 'planet4-gpch-blocks') }}</a>
 						</div>
 					</div>
 				</div>
@@ -256,7 +261,7 @@
 					</div>
 				</div>
 				<div class="controls form-section wp-block-button">
-					<button class="button previous stealth" data-previous-element=".p2p-share-step-2">Back</button>
+					<button class="button previous stealth" data-previous-element=".p2p-share-step-2">{{ __('Back', 'planet4-gpch-blocks') }}</button>
 				</div>
 			</div>
 		</fieldset>

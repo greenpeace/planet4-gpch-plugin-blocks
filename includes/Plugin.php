@@ -157,6 +157,7 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 				'restURL'   => rest_url(),
 				'restNonce' => wp_create_nonce( 'wp_rest' ),
 				'postID'    => get_the_ID(),
+				'pluginUrl' => P4_GPCH_PLUGIN_BLOCKS_BASE_URL,
 			) );
 
 			// Make the assets URL available in JS

@@ -89,6 +89,48 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 						'planet4-gpch-blocks'
 					),
 				],
+				'shareText' => [
+					'type'    => 'string',
+					'default' => __(
+						'I just signed this petition, it\'s a very important topic. Click here to sign it also: ',
+						'planet4-gpch-blocks'
+					),
+				],
+				'whatsAppSmsCTA' => [
+					'type'    => 'string',
+					'default' => __(
+						'Thank you for sharing on WhatsApp! Click this link, you will be able to edit the message before sending it: ',
+						'planet4-gpch-blocks'
+					),
+				],
+				'emailSubject' => [
+					'type'    => 'string',
+					'default' => __(
+						'Help by also signing this petition!',
+						'planet4-gpch-blocks'
+					),
+				],
+				'emailText' => [
+					'type'    => 'string',
+					'default' => __(
+						'Hi, I just signed this petition. Can I ask you to sign it too? CTA_LINK',
+						'planet4-gpch-blocks'
+					),
+				],
+				'smsMessage' => [
+					'type'    => 'string',
+					'default' => __(
+						'Thank you for sharing by SMS! Please copy the following message and send it to your friends.',
+						'planet4-gpch-blocks'
+					),
+				],
+				'signalMessage' => [
+					'type'    => 'string',
+					'default' => __(
+						'Thank you for sharing on Signal! Please copy the following message and send it to your friends.',
+						'planet4-gpch-blocks'
+					),
+				],
 				'utmMedium'  => [
 					'type'    => 'string',
 					'default' => 'p2p',
@@ -356,7 +398,7 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 	private function create_utm_link( $url, $channel ) {
 		$parameters = [
 			'utm_medium'   => $this->block_attributes['utmMedium'],
-			'utm_campaign' => $this->block_attributes['utmCampaign'],
+			'utm_campaign' => (isset($this->block_attributes['utmCampaign'])) ? $this->block_attributes['utmCampaign'] : 'GreenpeaceWebsite',
 			'utm_source'   => $channel,
 		];
 
