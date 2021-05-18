@@ -112,7 +112,11 @@
 						</p>
 						<div class="controls wp-block-button">
 							<button class="dark send-sms" data-channel="whatsapp"
-									data-mobile-number-field="share-whatsapp-number">{{ __('Send SMS', 'planet4-gpch-blocks') }}
+									data-mobile-number-field="share-whatsapp-number">
+								<div class="lds-ring state-progress hidden"><div></div><div></div><div></div><div></div></div>
+								<span class="state-default">{{ __('Send SMS', 'planet4-gpch-blocks') }}</span>
+								<span class="state-progress hidden">{{ __('Sending...', 'planet4-gpch-blocks') }}</span>
+								<span class="state-done hidden">{{ __('👍 Done!', 'planet4-gpch-blocks') }}</span>
 							</button>
 						</div>
 					</div>
@@ -185,8 +189,12 @@
 						<br><i>{{ __('We will not use your number for anything else.', 'planet4-gpch-blocks') }}</i></p>
 					<div class="controls wp-block-button">
 						<button class="dark send-sms" data-channel="sms" data-mobile-number-field="share-sms-number">
-							{{ __('Send SMS', 'planet4-gpch-blocks') }}
+							<div class="lds-ring state-progress hidden"><div></div><div></div><div></div><div></div></div>
+							<span class="state-default">{{ __('Send SMS', 'planet4-gpch-blocks') }}</span>
+							<span class="state-progress hidden">{{ __('Sending...', 'planet4-gpch-blocks') }}</span>
+							<span class="state-done hidden">{{ __('👍 Done!', 'planet4-gpch-blocks') }}</span>
 						</button>
+
 					</div>
 				</div>
 			</div>
@@ -223,7 +231,10 @@
 					<div class="controls wp-block-button">
 						<button class="dark send-sms" data-channel="signal"
 								data-mobile-number-field="share-signal-number">
-							{{ __('Send SMS', 'planet4-gpch-blocks') }}
+							<div class="lds-ring state-progress hidden"><div></div><div></div><div></div><div></div></div>
+							<span class="state-default">{{ __('Send SMS', 'planet4-gpch-blocks') }}</span>
+							<span class="state-progress hidden">{{ __('Sending...', 'planet4-gpch-blocks') }}</span>
+							<span class="state-done hidden">{{ __('👍 Done!', 'planet4-gpch-blocks') }}</span>
 						</button>
 					</div>
 				</div>

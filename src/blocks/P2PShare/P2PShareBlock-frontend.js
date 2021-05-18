@@ -156,6 +156,25 @@ smsButtons.forEach( ( item ) => {
 	item.addEventListener( 'click', ( event ) => {
 		event.preventDefault();
 
+		event.target.disabled = true;
+
+		const defaultStateElements = event.target.querySelectorAll(
+			':scope .state-default'
+		);
+		const progressStateElements = event.target.querySelectorAll(
+			':scope .state-progress'
+		);
+		const doneStateElements = event.target.querySelectorAll(
+			':scope .state-done'
+		);
+
+		defaultStateElements.forEach( ( item ) => {
+			item.classList.add( 'hidden' );
+		} );
+		progressStateElements.forEach( ( item ) => {
+			item.classList.remove( 'hidden' );
+		} );
+
 		const channel = event.target.dataset.channel;
 		const numberField = document.getElementById(
 			event.target.dataset.mobileNumberField
@@ -203,11 +222,27 @@ smsButtons.forEach( ( item ) => {
 					statusElement.classList.add( 'success' );
 
 					// Disable button to prevent multiple messages to be sent.
-					// event.target.classList.add( 'hidden' );
+					event.target.disabled = true;
+
+					// Change button state
+					progressStateElements.forEach( ( item ) => {
+						item.classList.add( 'hidden' );
+					} );
+					doneStateElements.forEach( ( item ) => {
+						item.classList.remove( 'hidden' );
+					} );
 				} else if ( result.status === 'error' ) {
 					statusElement.innerText = result.data.msg;
 					statusElement.classList.remove( 'hidden', 'success' );
 					statusElement.classList.add( 'error' );
+
+					// Change button state
+					progressStateElements.forEach( ( item ) => {
+						item.classList.add( 'hidden' );
+					} );
+					defaultStateElements.forEach( ( item ) => {
+						item.classList.remove( 'hidden' );
+					} );
 				}
 			},
 			() => {
@@ -215,6 +250,14 @@ smsButtons.forEach( ( item ) => {
 					'Application error. Please try again later.';
 				statusElement.classList.remove( 'hidden', 'success' );
 				statusElement.classList.add( 'error' );
+
+				// Change button state
+				progressStateElements.forEach( ( item ) => {
+					item.classList.add( 'hidden' );
+				} );
+				defaultStateElements.forEach( ( item ) => {
+					item.classList.remove( 'hidden' );
+				} );
 			}
 		);
 	} );
