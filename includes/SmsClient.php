@@ -105,6 +105,4 @@ class Sms_Client {
 			'twilio_status' => $message->status
 		];
 	}
-
-
 }

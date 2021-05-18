@@ -135,6 +135,11 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 		}
 	}
 
+	/**
+	 * Rest API endpoint to send CTA SMS
+	 *
+	 * @param $data
+	 */
 	public function restAPI_send_sms( $data ) {
 		$channel = $data['channel'];
 
@@ -238,14 +243,17 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 			die;
 		}
 
-
 		$response = [ 'status' => 'success' ];
 
 		echo json_encode( $response );
 		die;
 	}
 
-
+	/**
+	 * Rest API endpoint to send CTA email
+	 *
+	 * @param $data
+	 */
 	public function restAPI_send_email( $data ) {
 		$block                  = $this->get_first_p2p_block_in_post( $data['postId'] );
 		$this->block_attributes = $block['attrs'];
@@ -293,30 +301,55 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 		die;
 	}
 
+	/**
+	 * Get the share message including the link with appropriate UTM tags for the channel.
+	 *
+	 * @param $channel
+	 *
+	 * @return string
+	 * @throws \Exception
+	 */
 	private function get_share_message( $channel ) {
 		$text = $this->block_attributes['shareText'];
 		$link = $this->block_attributes['shareLink'];
 
-		$link = $this->get_shortened_link( $link['url'], $channel );
+		if ( $link !== null ) {
+			$link = $this->get_shortened_link( $link['url'], $channel );
+		} else {
+			$link = '';
+		}
 
 		return $text . ' ' . $link;
 	}
 
+	/**
+	 * Generates a share link for WhatsApp
+	 *
+	 * @param $text
+	 *
+	 * @return string
+	 */
 	private function generate_whatsapp_share_link( $text ) {
 		// See https://faq.whatsapp.com/general/chats/how-to-use-click-to-chat
 		return 'https://wa.me/?text=' . urlencode( $text );
 	}
 
+	/**
+	 * Generates a share link for Threema
+	 *
+	 * @param $text
+	 *
+	 * @return string
+	 */
 	private function generate_threeema_share_link( $text ) {
 		return 'threema://compose?text=' . urlencode( $text );
 	}
 
 	/**
-	 * Creates a link with UTM parameters
+	 * Adds UTM parameters to a link
 	 *
 	 * @param $url
 	 * @param $channel
-	 * @param $postID
 	 *
 	 * @return string
 	 */

@@ -2,8 +2,6 @@
 import { parsePhoneNumber } from 'libphonenumber-js/mobile';
 import apiFetch from '@wordpress/api-fetch';
 
-const constraints = {};
-
 const p2pShareElement = document.querySelector(
 	'.wp-block-planet4-gpch-plugin-blocks-p2p-share'
 );
@@ -54,7 +52,6 @@ nextButtons.forEach( ( item ) => {
 			const nextElementSelector = selectedField.getAttribute(
 				'data-next-element'
 			);
-			const nextFieldValue = selectedField.value;
 
 			const elementToShow = document.querySelector( nextElementSelector );
 
@@ -63,9 +60,7 @@ nextButtons.forEach( ( item ) => {
 				.classList.add( 'hidden', 'prev' );
 			elementToShow.style.visibility = 'visible';
 			elementToShow.classList.remove( 'hidden' );
-		} catch ( e ) {
-			return;
-		}
+		} catch ( e ) {}
 	} );
 } );
 
@@ -173,18 +168,19 @@ smsButtons.forEach( ( item ) => {
 		statusElement.classList.add( 'hidden' );
 
 		// Send SMS
+		/* global gpchBlocks */
 		apiFetch.use( apiFetch.createNonceMiddleware( gpchBlocks.restNonce ) );
 		apiFetch( {
 			path: gpchBlocks.restURL + 'gpchblockP2p/v1/sendSMS',
 			method: 'POST',
 			data: {
 				phone: phoneNumber.number,
-				channel: channel,
+				channel,
 				postId: gpchBlocks.postID,
 			},
 		} ).then(
 			( result ) => {
-				if ( result.status == 'success' ) {
+				if ( result.status === 'success' ) {
 					statusElement.innerText =
 						'Your message was sent. Check your phone!';
 					statusElement.classList.remove( 'hidden', 'error' );
@@ -192,13 +188,13 @@ smsButtons.forEach( ( item ) => {
 
 					// Disable button to prevent multiple messages to be sent.
 					// event.target.classList.add( 'hidden' );
-				} else if ( result.status == 'error' ) {
+				} else if ( result.status === 'error' ) {
 					statusElement.innerText = result.data.msg;
 					statusElement.classList.remove( 'hidden', 'success' );
 					statusElement.classList.add( 'error' );
 				}
 			},
-			( result ) => {
+			() => {
 				statusElement.innerText =
 					'Application error. Please try again later.';
 				statusElement.classList.remove( 'hidden', 'success' );
@@ -225,7 +221,7 @@ emailButtons.forEach( ( item ) => {
 			.closest( '.option' )
 			.querySelector( ':scope .status' );
 
-		let emailAddress = emailField.value;
+		const emailAddress = emailField.value;
 
 		// Hide error message
 		statusElement.classList.add( 'hidden' );
@@ -237,12 +233,12 @@ emailButtons.forEach( ( item ) => {
 			method: 'POST',
 			data: {
 				email: emailAddress,
-				channel: channel,
+				channel,
 				postId: gpchBlocks.postID,
 			},
 		} ).then(
 			( result ) => {
-				if ( result.status == 'success' ) {
+				if ( result.status === 'success' ) {
 					statusElement.innerText =
 						'Your message was sent. Check your email!';
 					statusElement.classList.remove( 'hidden', 'error' );
@@ -250,13 +246,13 @@ emailButtons.forEach( ( item ) => {
 
 					// Disable button to prevent multiple messages to be sent.
 					// event.target.classList.add( 'hidden' );
-				} else if ( result.status == 'error' ) {
+				} else if ( result.status === 'error' ) {
 					statusElement.innerText = result.data.msg;
 					statusElement.classList.remove( 'hidden', 'success' );
 					statusElement.classList.add( 'error' );
 				}
 			},
-			( result ) => {
+			() => {
 				statusElement.innerText =
 					'Application error. Please try again later.';
 				statusElement.classList.remove( 'hidden', 'success' );

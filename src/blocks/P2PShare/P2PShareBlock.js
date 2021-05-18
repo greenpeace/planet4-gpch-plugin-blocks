@@ -1,15 +1,9 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
-import {
-	Placeholder,
-	TextControl,
-	Tooltip,
-	__experimentalText as Text,
-} from '@wordpress/components';
+import { TextControl, __experimentalText as Text } from '@wordpress/components';
 import {
 	useBlockProps,
 	RichText,
-	ColorPalette,
 	InspectorControls,
 	__experimentalLinkControl as LinkControl,
 } from '@wordpress/block-editor';
@@ -85,8 +79,10 @@ export class P2PShareBlock {
 					fontStyle: 'italic',
 				};
 
+				const blockProps = useBlockProps();
+
 				return (
-					<div { ...useBlockProps() }>
+					<div { ...blockProps }>
 						{ ! isSelected ? (
 							<div>HERE GOES A PREVIEW OF THE BLOCK</div>
 						) : (
@@ -343,22 +339,6 @@ export class P2PShareBlock {
 					</div>
 				);
 			},
-			/*
-			save: ( { attributes } ) => {
-				return (
-					<div
-						{ ...useBlockProps.save() }
-						style={ {
-							backgroundColor: attributes.bg_color,
-							color: attributes.text_color,
-						} }
-					>
-						{ attributes.message }
-					</div>
-				);
-			},
-			
-			 */
 		} );
 	}
 }
