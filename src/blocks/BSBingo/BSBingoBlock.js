@@ -12,9 +12,9 @@ export class BSBingoBlock {
 			icon: 'lightbulb',
 			category: 'gpch',
 			keywords: [
-				__( 'bullshit', 'planet4-gpch-blocks' ),
-				__( 'bingo', 'planet4-gpch-blocks' ),
-				__( 'buzzword', 'planet4-gpch-blocks' ),
+				__( 'bullshit', 'planet4-gpch-plugin-blocks' ),
+				__( 'bingo', 'planet4-gpch-plugin-blocks' ),
+				__( 'buzzword', 'planet4-gpch-plugin-blocks' ),
 			],
 			attributes: {
 				bsTerms: {

@@ -22,21 +22,21 @@ export class P2PShareBlock {
 					type: 'string',
 					default: __(
 						'How many people can you motivate to also sign the petition?',
-						'planet4-gpch-blocks'
+						'planet4-gpch-plugin-blocks'
 					),
 				},
 				step2Title: {
 					type: 'string',
 					default: __(
 						'How will you be able to reach your friends best?',
-						'planet4-gpch-blocks'
+						'planet4-gpch-plugin-blocks'
 					),
 				},
 				shareText: {
 					type: 'string',
 					default: __(
 						"I just signed this petition, it's a very important topic. Click here to sign it also: ",
-						'planet4-gpch-blocks'
+						'planet4-gpch-plugin-blocks'
 					),
 				},
 				shareLink: {
@@ -53,35 +53,35 @@ export class P2PShareBlock {
 					type: 'string',
 					default: __(
 						'Thank you for sharing on WhatsApp! Click this link, you will be able to edit the message before sending it: ',
-						'planet4-gpch-blocks'
+						'planet4-gpch-plugin-blocks'
 					),
 				},
 				smsMessage: {
 					type: 'string',
 					default: __(
 						'Thank you for sharing by SMS! Please copy the following message and send it to your friends.',
-						'planet4-gpch-blocks'
+						'planet4-gpch-plugin-blocks'
 					),
 				},
 				signalMessage: {
 					type: 'string',
 					default: __(
 						'Thank you for sharing on Signal! Please copy the following message and send it to your friends.',
-						'planet4-gpch-blocks'
+						'planet4-gpch-plugin-blocks'
 					),
 				},
 				emailText: {
 					type: 'string',
 					default: __(
 						'Hi, I just signed this petition. Can I ask you to sign it too? CTA_LINK',
-						'planet4-gpch-blocks'
+						'planet4-gpch-plugin-blocks'
 					),
 				},
 				emailSubject: {
 					type: 'string',
 					default: __(
 						'Help by also signing this petition!',
-						'planet4-gpch-blocks'
+						'planet4-gpch-plugin-blocks'
 					),
 				},
 
@@ -224,13 +224,13 @@ export class P2PShareBlock {
 											<legend className="blocks-base-control__label">
 												{ __(
 													'UTM Tags',
-													'planet4-gpch-blocks'
+													'planet4-gpch-plugin-blocks'
 												) }
 											</legend>
 											<TextControl
 												label={ __(
 													'UTM Medium',
-													'planet4-gpch-blocks'
+													'planet4-gpch-plugin-blocks'
 												) }
 												value={ attributes.utmMedium }
 												onChange={ ( val ) =>
@@ -242,7 +242,7 @@ export class P2PShareBlock {
 											<TextControl
 												label={ __(
 													'UTM Campaign',
-													'planet4-gpch-blocks'
+													'planet4-gpch-plugin-blocks'
 												) }
 												value={ attributes.utmCampaign }
 												onChange={ ( val ) =>
@@ -255,7 +255,7 @@ export class P2PShareBlock {
 												<i>
 													{ __(
 														'utm_source will be added automatically depending on the channel.',
-														'planet4-gpch-blocks'
+														'planet4-gpch-plugin-blocks'
 													) }
 												</i>
 											</p>
@@ -264,7 +264,10 @@ export class P2PShareBlock {
 								</InspectorControls>
 
 								<h3 style={ separatorStyle }>
-									{ __( 'Step 1', 'planet4-gpch-blocks' ) }
+									{ __(
+										'Step 1',
+										'planet4-gpch-plugin-blocks'
+									) }
 								</h3>
 								<RichText
 									style={ editElementStyle }
@@ -276,7 +279,10 @@ export class P2PShareBlock {
 									}
 								/>
 								<h3 style={ separatorStyle }>
-									{ __( 'Step 2', 'planet4-gpch-blocks' ) }
+									{ __(
+										'Step 2',
+										'planet4-gpch-plugin-blocks'
+									) }
 								</h3>
 								<RichText
 									style={ editElementStyle }
@@ -290,20 +296,20 @@ export class P2PShareBlock {
 								<h3 style={ separatorStyle }>
 									{ __(
 										'Share text/links',
-										'planet4-gpch-blocks'
+										'planet4-gpch-plugin-blocks'
 									) }
 								</h3>
 								<p style={ descriptionStyle }>
 									{ __(
 										'Share text for all channels. The link will be shortened and added to the end of the text:',
-										'planet4-gpch-blocks'
+										'planet4-gpch-plugin-blocks'
 									) }
 								</p>
 								<RichText
 									value={ attributes.shareText }
 									placeholder={ __(
 										'THE SHARE TEXT FOR ALL CHANNELS',
-										'planet4-gpch-blocks'
+										'planet4-gpch-plugin-blocks'
 									) }
 									allowedFormats={ [] }
 									onChange={ ( val ) =>
@@ -316,7 +322,7 @@ export class P2PShareBlock {
 								<p style={ descriptionStyle }>
 									{ __(
 										'Share link (unshortened and without UTM tags)',
-										'planet4-gpch-blocks'
+										'planet4-gpch-plugin-blocks'
 									) }
 								</p>
 								<LinkControl
@@ -335,14 +341,14 @@ export class P2PShareBlock {
 								<p style={ descriptionStyle }>
 									{ __(
 										'WhatsApp SMS CTA (Link to WhatsApp will be added at the end):',
-										'planet4-gpch-blocks'
+										'planet4-gpch-plugin-blocks'
 									) }
 								</p>
 								<RichText
 									value={ attributes.whatsAppSmsCTA }
 									placeholder={ __(
 										'THE TEXT TO SEND BY SMS',
-										'planet4-gpch-blocks'
+										'planet4-gpch-plugin-blocks'
 									) }
 									allowedFormats={ [] }
 									onChange={ ( val ) =>
@@ -356,14 +362,14 @@ export class P2PShareBlock {
 								<p style={ descriptionStyle }>
 									{ __(
 										'Email Subject:',
-										'planet4-gpch-blocks'
+										'planet4-gpch-plugin-blocks'
 									) }
 								</p>
 								<RichText
 									value={ attributes.emailSubject }
 									placeholder={ __(
 										'EMAIL SUBJECT',
-										'planet4-gpch-blocks'
+										'planet4-gpch-plugin-blocks'
 									) }
 									allowedFormats={ [] }
 									onChange={ ( val ) =>
@@ -376,14 +382,14 @@ export class P2PShareBlock {
 								<p style={ descriptionStyle }>
 									{ __(
 										'Email Text. Put CTA_LINK anywhere you would like to put a shortened link.',
-										'planet4-gpch-blocks'
+										'planet4-gpch-plugin-blocks'
 									) }
 								</p>
 								<RichText
 									value={ attributes.emailText }
 									placeholder={ __(
 										'EMAIL TEXT',
-										'planet4-gpch-blocks'
+										'planet4-gpch-plugin-blocks'
 									) }
 									allowedFormats={ [] }
 									onChange={ ( val ) =>
@@ -397,14 +403,14 @@ export class P2PShareBlock {
 								<p style={ descriptionStyle }>
 									{ __(
 										'First SMS, share CTA:',
-										'planet4-gpch-blocks'
+										'planet4-gpch-plugin-blocks'
 									) }
 								</p>
 								<RichText
 									value={ attributes.smsMessage }
 									placeholder={ __(
 										'FOR EXAMPLE: Thank you for sharing with your friends. Please forward the following SMS text to them.',
-										'planet4-gpch-blocks'
+										'planet4-gpch-plugin-blocks'
 									) }
 									allowedFormats={ [] }
 									onChange={ ( val ) =>
@@ -417,21 +423,21 @@ export class P2PShareBlock {
 								<p style={ descriptionStyle }>
 									{ __(
 										'A second SMS is sent with the share text and link.',
-										'planet4-gpch-blocks'
+										'planet4-gpch-plugin-blocks'
 									) }
 								</p>
 								<h3 style={ separatorStyle }>Signal Share</h3>
 								<p style={ descriptionStyle }>
 									{ __(
 										'First SMS, share CTA:',
-										'planet4-gpch-blocks'
+										'planet4-gpch-plugin-blocks'
 									) }
 								</p>
 								<RichText
 									value={ attributes.signalMessage }
 									placeholder={ __(
 										'FOR EXAMPLE: Thank you for sharing with your friends. Please copy/paste the following text into signal and send it to your friends.',
-										'planet4-gpch-blocks'
+										'planet4-gpch-plugin-blocks'
 									) }
 									allowedFormats={ [] }
 									onChange={ ( val ) =>
@@ -444,14 +450,14 @@ export class P2PShareBlock {
 								<p style={ descriptionStyle }>
 									{ __(
 										'A second SMS is sent with the share text and link.',
-										'planet4-gpch-blocks'
+										'planet4-gpch-plugin-blocks'
 									) }
 								</p>
 								<h3 style={ separatorStyle }>Threema Share</h3>
 								<p style={ descriptionStyle }>
 									{ __(
 										'No additional options.',
-										'planet4-gpch-blocks'
+										'planet4-gpch-plugin-blocks'
 									) }
 								</p>
 							</div>

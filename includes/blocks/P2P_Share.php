@@ -79,56 +79,56 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 					'type'    => 'string',
 					'default' => __(
 						'How many people can you motivate to also sign the petition?',
-						'planet4-gpch-blocks'
+						'planet4-gpch-plugin-blocks'
 					),
 				],
 				'step2Title' => [
 					'type'    => 'string',
 					'default' => __(
 						'How will you be able to reach your friends best?',
-						'planet4-gpch-blocks'
+						'planet4-gpch-plugin-blocks'
 					),
 				],
 				'shareText' => [
 					'type'    => 'string',
 					'default' => __(
 						'I just signed this petition, it\'s a very important topic. Click here to sign it also: ',
-						'planet4-gpch-blocks'
+						'planet4-gpch-plugin-blocks'
 					),
 				],
 				'whatsAppSmsCTA' => [
 					'type'    => 'string',
 					'default' => __(
 						'Thank you for sharing on WhatsApp! Click this link, you will be able to edit the message before sending it: ',
-						'planet4-gpch-blocks'
+						'planet4-gpch-plugin-blocks'
 					),
 				],
 				'emailSubject' => [
 					'type'    => 'string',
 					'default' => __(
 						'Help by also signing this petition!',
-						'planet4-gpch-blocks'
+						'planet4-gpch-plugin-blocks'
 					),
 				],
 				'emailText' => [
 					'type'    => 'string',
 					'default' => __(
 						'Hi, I just signed this petition. Can I ask you to sign it too? CTA_LINK',
-						'planet4-gpch-blocks'
+						'planet4-gpch-plugin-blocks'
 					),
 				],
 				'smsMessage' => [
 					'type'    => 'string',
 					'default' => __(
 						'Thank you for sharing by SMS! Please copy the following message and send it to your friends.',
-						'planet4-gpch-blocks'
+						'planet4-gpch-plugin-blocks'
 					),
 				],
 				'signalMessage' => [
 					'type'    => 'string',
 					'default' => __(
 						'Thank you for sharing on Signal! Please copy the following message and send it to your friends.',
-						'planet4-gpch-blocks'
+						'planet4-gpch-plugin-blocks'
 					),
 				],
 				'utmMedium'  => [

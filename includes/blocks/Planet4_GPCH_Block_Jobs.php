@@ -28,10 +28,10 @@ if ( ! class_exists( 'Planet4_GPCH_Block_GPCH_Jobs' ) ) {
 					'fields'                => array(
 						array(
 							'key'               => 'field_p4_gpch_blocks_gpch_jobs_description',
-							'label'             => __( 'No Jobs Text', 'planet4-gpch-blocks' ),
+							'label'             => __( 'No Jobs Text', 'planet4-gpch-plugin-blocks' ),
 							'name'              => 'no_jobs_text',
 							'type'              => 'wysiwyg',
-							'instructions'      => __( 'This text will be shown when no jobs are available', 'planet4-gpch-blocks' ),
+							'instructions'      => __( 'This text will be shown when no jobs are available', 'planet4-gpch-plugin-blocks' ),
 							'required'          => 0,
 							'conditional_logic' => 0,
 							'wrapper'           => array(
@@ -77,8 +77,8 @@ if ( ! class_exists( 'Planet4_GPCH_Block_GPCH_Jobs' ) ) {
 				// register a block
 				acf_register_block( array(
 					'name'            => 'p4-gpch-block-gpch-jobs',
-					'title'           => __( 'GPCH Jobs', 'planet4-gpch-blocks' ),
-					'description'     => __( 'GPCH Jobs', 'planet4-gpch-blocks' ),
+					'title'           => __( 'GPCH Jobs', 'planet4-gpch-plugin-blocks' ),
+					'description'     => __( 'GPCH Jobs', 'planet4-gpch-plugin-blocks' ),
 					'render_callback' => array( $this, 'render_block' ),
 					'category'        => 'gpch',
 					'icon'            => 'admin-users',

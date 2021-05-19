@@ -5,7 +5,8 @@
  * Description: Provides Planet4 content blocks specific to Greenpeace Switzerland
  * Version: 0.1.43
  * License: MIT
- * Text Domain: planet4-gpch-blocks
+ * Text Domain: planet4-gpch-plugin-blocks
+ * Domain Path: /languages
  */
 
 // Exit if accessed directly
@@ -20,7 +21,7 @@ define( 'P4_GPCH_PLUGIN_WORD_DICT_TABLE_NAME', 'gpch_wordcloud_dictionary' );
 add_action( 'plugins_loaded', 'planet4_gpch_plugin_blocks_load_textdomain' );
 
 function planet4_gpch_plugin_blocks_load_textdomain() {
-	load_plugin_textdomain( 'planet4-gpch-blocks', false, basename( dirname( __FILE__ ) ) . '/languages' );
+	load_plugin_textdomain( 'planet4-gpch-plugin-blocks', false, basename( dirname( __FILE__ ) ) . '/languages' );
 }
 
 // include the Composer autoload file

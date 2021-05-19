@@ -32,19 +32,19 @@ class Sms_Client {
 			// Valid phone number?
 			$isValid = $phoneUtil->isValidNumber( $swissNumberProto );
 			if ( ! $isValid ) {
-				throw new \Exception( __( 'Invalid phone number.', 'planet4-gpch-blocks' ) );
+				throw new \Exception( __( 'Invalid phone number.', 'planet4-gpch-plugin-blocks' ) );
 			}
 
 			// Make sure it's a mobile number.
 			$numberType = $phoneUtil->getNumberType( $swissNumberProto );
 			if ( $numberType != \libphonenumber\PhoneNumberType::MOBILE ) {
-				throw new \Exception( __( 'Only mobile numbers allowed.', 'planet4-gpch-blocks' ) );
+				throw new \Exception( __( 'Only mobile numbers allowed.', 'planet4-gpch-plugin-blocks' ) );
 			}
 
 			// Only allow CH numbers
 			$regionCode = $phoneUtil->getRegionCodeForNumber( $swissNumberProto );
 			if ( $regionCode != 'CH' ) {
-				throw new \Exception( __( 'Only Swiss phone number allowed.', 'planet4-gpch-blocks' ) );
+				throw new \Exception( __( 'Only Swiss phone number allowed.', 'planet4-gpch-plugin-blocks' ) );
 			}
 
 			// Format number
@@ -70,7 +70,7 @@ class Sms_Client {
 		// See https://www.twilio.com/docs/glossary/what-is-gsm-7-character-encoding
 		try {
 			if ( strlen( $message ) > 201 ) {
-				throw new \Exception( __( 'Text message is too long.', 'planet4-gpch-blocks' ) );
+				throw new \Exception( __( 'Text message is too long.', 'planet4-gpch-plugin-blocks' ) );
 			}
 		} catch ( \Exception $e ) {
 			\Sentry\captureException( $e );
@@ -96,7 +96,7 @@ class Sms_Client {
 
 			return [
 				'status' => 'error',
-				'msg'    => __( 'SMS could not be sent. Try again later.', 'planet4-gpch-blocks' ),
+				'msg'    => __( 'SMS could not be sent. Try again later.', 'planet4-gpch-plugin-blocks' ),
 			];
 		}
 

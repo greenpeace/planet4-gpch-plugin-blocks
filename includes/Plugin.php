@@ -102,7 +102,7 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 				array(
 					array(
 						'slug'  => 'gpch',
-						'title' => __( 'GPCH', 'planet4-gpch-blocks' ),
+						'title' => __( 'GPCH', 'planet4-gpch-plugin-blocks' ),
 					),
 				)
 			);
@@ -115,7 +115,7 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 		public function error_message_no_acf() {
 			?>
             <div class="error notice">
-                <p><?php _e( 'Planet 4 GPCH Blocks: Advanced Custom Fields must be installed and activated for this plugin to work.', 'planet4-gpch-blocks' ); ?></p>
+                <p><?php _e( 'Planet 4 GPCH Blocks: Advanced Custom Fields must be installed and activated for this plugin to work.', 'planet4-gpch-plugin-blocks' ); ?></p>
             </div>
 			<?php
 		}
@@ -127,7 +127,7 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 		public function error_message_no_timber() {
 			?>
             <div class="error notice">
-                <p><?php _e( 'Planet 4 GPCH Blocks: Timber must be installed and activated for this plugin to work.', 'planet4-gpch-blocks' ); ?></p>
+                <p><?php _e( 'Planet 4 GPCH Blocks: Timber must be installed and activated for this plugin to work.', 'planet4-gpch-plugin-blocks' ); ?></p>
             </div>
 			<?php
 		}
