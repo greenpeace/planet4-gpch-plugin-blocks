@@ -1,6 +1,7 @@
-//const validate = require( 'validate.js' );
 import { parsePhoneNumber } from 'libphonenumber-js/mobile';
 import apiFetch from '@wordpress/api-fetch';
+
+const { __ } = wp.i18n;
 
 const p2pShareElement = document.querySelector(
 	'.wp-block-planet4-gpch-plugin-blocks-p2p-share'
@@ -142,7 +143,10 @@ clipboardButtons.forEach( ( item ) => {
 		const result = document.execCommand( 'copy' );
 
 		if ( result !== false ) {
-			event.target.innerText = '👍 Copied!';
+			event.target.innerText = __(
+				'👍 Copied!',
+				'planet4-gpch-plugin-blocks'
+			);
 		}
 	} );
 } );
@@ -194,7 +198,10 @@ smsButtons.forEach( ( item ) => {
 		} catch ( e ) {
 			statusElement.classList.remove( 'hidden', 'success' );
 			statusElement.classList.add( 'error' );
-			statusElement.innerText = 'Please use a valid Swiss mobile number.';
+			statusElement.innerText = __(
+				'Please use a valid Swiss mobile number.',
+				'planet4-gpch-plugin-blocks'
+			);
 
 			return;
 		}
@@ -216,8 +223,10 @@ smsButtons.forEach( ( item ) => {
 		} ).then(
 			( result ) => {
 				if ( result.status === 'success' ) {
-					statusElement.innerText =
-						'Your message was sent. Check your phone!';
+					statusElement.innerText = __(
+						'Your message was sent. Check your phone!',
+						'planet4-gpch-plugin-blocks'
+					);
 					statusElement.classList.remove( 'hidden', 'error' );
 					statusElement.classList.add( 'success' );
 
@@ -246,8 +255,10 @@ smsButtons.forEach( ( item ) => {
 				}
 			},
 			() => {
-				statusElement.innerText =
-					'Application error. Please try again later.';
+				statusElement.innerText = __(
+					'Application error. Please try again later.',
+					'planet4-gpch-plugin-blocks'
+				);
 				statusElement.classList.remove( 'hidden', 'success' );
 				statusElement.classList.add( 'error' );
 
@@ -298,8 +309,10 @@ emailButtons.forEach( ( item ) => {
 		} ).then(
 			( result ) => {
 				if ( result.status === 'success' ) {
-					statusElement.innerText =
-						'Your message was sent. Check your email!';
+					statusElement.innerText = __(
+						'Your message was sent. Check your email!',
+						'planet4-gpch-plugin-blocks'
+					);
 					statusElement.classList.remove( 'hidden', 'error' );
 					statusElement.classList.add( 'success' );
 
@@ -312,8 +325,10 @@ emailButtons.forEach( ( item ) => {
 				}
 			},
 			() => {
-				statusElement.innerText =
-					'Application error. Please try again later.';
+				statusElement.innerText = __(
+					'Application error. Please try again later.',
+					'planet4-gpch-plugin-blocks'
+				);
 				statusElement.classList.remove( 'hidden', 'success' );
 				statusElement.classList.add( 'error' );
 			}

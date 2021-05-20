@@ -18,11 +18,11 @@ define( 'P4_GPCH_PLUGIN_BLOCKS_BASE_URL', plugin_dir_url( __FILE__ ) );
 define( 'P4_GPCH_PLUGIN_WORD_DICT_TABLE_NAME', 'gpch_wordcloud_dictionary' );
 
 // Load translations
-add_action( 'plugins_loaded', 'planet4_gpch_plugin_blocks_load_textdomain' );
-
 function planet4_gpch_plugin_blocks_load_textdomain() {
 	load_plugin_textdomain( 'planet4-gpch-plugin-blocks', false, basename( dirname( __FILE__ ) ) . '/languages' );
 }
+add_action( 'plugins_loaded', 'planet4_gpch_plugin_blocks_load_textdomain' );
+
 
 // include the Composer autoload file
 require P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'vendor/autoload.php';

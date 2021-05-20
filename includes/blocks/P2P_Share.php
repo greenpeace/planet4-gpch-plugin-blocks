@@ -75,21 +75,21 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 			'render_callback' => [ $this, 'dynamic_render_callback' ],
 			// Attributes with default values need to have them set server side
 			'attributes'      => [
-				'step1Title' => [
+				'step1Title'     => [
 					'type'    => 'string',
 					'default' => __(
 						'How many people can you motivate to also sign the petition?',
 						'planet4-gpch-plugin-blocks'
 					),
 				],
-				'step2Title' => [
+				'step2Title'     => [
 					'type'    => 'string',
 					'default' => __(
 						'How will you be able to reach your friends best?',
 						'planet4-gpch-plugin-blocks'
 					),
 				],
-				'shareText' => [
+				'shareText'      => [
 					'type'    => 'string',
 					'default' => __(
 						'I just signed this petition, it\'s a very important topic. Click here to sign it also: ',
@@ -103,35 +103,35 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 						'planet4-gpch-plugin-blocks'
 					),
 				],
-				'emailSubject' => [
+				'emailSubject'   => [
 					'type'    => 'string',
 					'default' => __(
 						'Help by also signing this petition!',
 						'planet4-gpch-plugin-blocks'
 					),
 				],
-				'emailText' => [
+				'emailText'      => [
 					'type'    => 'string',
 					'default' => __(
 						'Hi, I just signed this petition. Can I ask you to sign it too? CTA_LINK',
 						'planet4-gpch-plugin-blocks'
 					),
 				],
-				'smsMessage' => [
+				'smsMessage'     => [
 					'type'    => 'string',
 					'default' => __(
 						'Thank you for sharing by SMS! Please copy the following message and send it to your friends.',
 						'planet4-gpch-plugin-blocks'
 					),
 				],
-				'signalMessage' => [
+				'signalMessage'  => [
 					'type'    => 'string',
 					'default' => __(
 						'Thank you for sharing on Signal! Please copy the following message and send it to your friends.',
 						'planet4-gpch-plugin-blocks'
 					),
 				],
-				'utmMedium'  => [
+				'utmMedium'      => [
 					'type'    => 'string',
 					'default' => 'p2p',
 				],
@@ -156,11 +156,6 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 
 		// Output template
 		return \Timber::fetch( $this->template_file, $params );
-
-		return sprintf(
-			'<div class="wp-block-planet4-gpch-plugin-blocks-p2p-share">%1$s</div>',
-			esc_html( get_the_title() )
-		);
 	}
 
 	/**
@@ -171,7 +166,8 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 			AssetEnqueuer::enqueue_js(
 				'planet4-gpch-blocks-p2p-share',
 				'blocks/p2pShare.js',
-				[ 'wp-element' ],
+				[ 'wp-element', 'wp-i18n' ],
+				true,
 				true
 			);
 		}
@@ -322,12 +318,11 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 			$link = $this->block_attributes['shareLink'];
 			if ( $link !== null ) {
 				$cta_link = $this->get_shortened_link( $link['url'], 'email' );
-			}
-			else {
+			} else {
 				$cta_link = '';
 			}
 
-			$email_text = str_replace('CTA_LINK', $cta_link , $email_text);
+			$email_text = str_replace( 'CTA_LINK', $cta_link, $email_text );
 
 			// Send email
 			$result = wp_mail( $data['email'], $email_subject, $email_text );
@@ -409,7 +404,7 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 	private function create_utm_link( $url, $channel ) {
 		$parameters = [
 			'utm_medium'   => $this->block_attributes['utmMedium'],
-			'utm_campaign' => (isset($this->block_attributes['utmCampaign'])) ? $this->block_attributes['utmCampaign'] : 'GreenpeaceWebsite',
+			'utm_campaign' => ( isset( $this->block_attributes['utmCampaign'] ) ) ? $this->block_attributes['utmCampaign'] : 'GreenpeaceWebsite',
 			'utm_source'   => $channel,
 		];
 
