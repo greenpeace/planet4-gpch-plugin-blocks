@@ -157,7 +157,15 @@
 					</p>
 					<div class="controls wp-block-button">
 						<button class="dark send-email" data-channel="email" data-email-field="share-email">
-							{{ __('Send Email', 'planet4-gpch-plugin-blocks') }}
+							<div class="lds-ring state-progress hidden">
+								<div></div>
+								<div></div>
+								<div></div>
+								<div></div>
+							</div>
+							<span class="state-default">{{ __('Send Email', 'planet4-gpch-plugin-blocks') }}</span>
+							<span class="state-progress hidden">{{ __('Sending...', 'planet4-gpch-plugin-blocks') }}</span>
+							<span class="state-done hidden">{{ __('👍 Done!', 'planet4-gpch-plugin-blocks') }}</span>
 						</button>
 					</div>
 				</div>

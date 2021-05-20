@@ -184,7 +184,8 @@
 				}
 			}
 
-			.send-sms {
+			.send-sms,
+			.send-email {
 				.hidden {
 					display: none;
 				}

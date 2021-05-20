@@ -311,7 +311,7 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 			}
 
 			if ( ! filter_var( $data['email'], FILTER_VALIDATE_EMAIL ) ) {
-				throw new \Exception( 'Invalid email address' );
+				throw new \Exception( __( 'Invalid email address', 'planet4-gpch-plugin-blocks' ) );
 			}
 
 			// Replace CTA_LINK in email text

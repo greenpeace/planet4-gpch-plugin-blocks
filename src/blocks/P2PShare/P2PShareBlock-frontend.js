@@ -29,6 +29,7 @@ function setParentHeight() {
 
 	p2pShareElement.style.height = maxHeight;
 }
+
 window.onresize = setParentHeight;
 window.onload = setParentHeight;
 
@@ -160,20 +161,20 @@ smsButtons.forEach( ( item ) => {
 	item.addEventListener( 'click', ( event ) => {
 		event.preventDefault();
 
-		const sendButton = event.target;
+		const sendButton = event.currentTarget;
 
 		// Disable button
 		sendButton.disabled = true;
 
-		const defaultStateElements = event.target.querySelectorAll(
+		const defaultStateElements = sendButton.querySelectorAll(
 			':scope .state-default'
 		);
-		const progressStateElements = event.target.querySelectorAll(
+		const progressStateElements = sendButton.querySelectorAll(
 			':scope .state-progress'
 		);
 		// Kept here for better readability
 		// eslint-disable-next-line @wordpress/no-unused-vars-before-return
-		const doneStateElements = event.target.querySelectorAll(
+		const doneStateElements = sendButton.querySelectorAll(
 			':scope .state-done'
 		);
 
@@ -184,11 +185,11 @@ smsButtons.forEach( ( item ) => {
 			item2.classList.remove( 'hidden' );
 		} );
 
-		const channel = event.target.dataset.channel;
+		const channel = sendButton.dataset.channel;
 		const numberField = document.getElementById(
-			event.target.dataset.mobileNumberField
+			sendButton.dataset.mobileNumberField
 		);
-		const statusElement = event.target
+		const statusElement = sendButton
 			.closest( '.option' )
 			.querySelector( ':scope .status' );
 
@@ -196,6 +197,7 @@ smsButtons.forEach( ( item ) => {
 
 		try {
 			phoneNumber = parsePhoneNumber( numberField.value, 'CH' );
+			console.log( phoneNumber );
 
 			if ( phoneNumber === undefined || ! phoneNumber.isValid() ) {
 				throw 'Invalid phone number.';
@@ -207,6 +209,17 @@ smsButtons.forEach( ( item ) => {
 				'Please use a valid Swiss mobile number.',
 				'planet4-gpch-plugin-blocks'
 			);
+
+			// Reenable button
+			sendButton.disabled = false;
+
+			// Change button state
+			progressStateElements.forEach( ( item2 ) => {
+				item2.classList.add( 'hidden' );
+			} );
+			defaultStateElements.forEach( ( item2 ) => {
+				item2.classList.remove( 'hidden' );
+			} );
 
 			return;
 		}
@@ -291,11 +304,35 @@ emailButtons.forEach( ( item ) => {
 	item.addEventListener( 'click', ( event ) => {
 		event.preventDefault();
 
-		const channel = event.target.dataset.channel;
-		const emailField = document.getElementById(
-			event.target.dataset.emailField
+		const sendButton = event.currentTarget;
+
+		// Disable button
+		sendButton.disabled = true;
+
+		const defaultStateElements = sendButton.querySelectorAll(
+			':scope .state-default'
 		);
-		const statusElement = event.target
+		const progressStateElements = sendButton.querySelectorAll(
+			':scope .state-progress'
+		);
+		// Kept here for better readability
+		// eslint-disable-next-line @wordpress/no-unused-vars-before-return
+		const doneStateElements = sendButton.querySelectorAll(
+			':scope .state-done'
+		);
+
+		defaultStateElements.forEach( ( item2 ) => {
+			item2.classList.add( 'hidden' );
+		} );
+		progressStateElements.forEach( ( item2 ) => {
+			item2.classList.remove( 'hidden' );
+		} );
+
+		const channel = sendButton.dataset.channel;
+		const emailField = document.getElementById(
+			sendButton.dataset.emailField
+		);
+		const statusElement = sendButton
 			.closest( '.option' )
 			.querySelector( ':scope .status' );
 
@@ -324,12 +361,28 @@ emailButtons.forEach( ( item ) => {
 					statusElement.classList.remove( 'hidden', 'error' );
 					statusElement.classList.add( 'success' );
 
-					// Disable button to prevent multiple messages to be sent.
-					// event.target.classList.add( 'hidden' );
+					// Change button state
+					progressStateElements.forEach( ( item2 ) => {
+						item2.classList.add( 'hidden' );
+					} );
+					doneStateElements.forEach( ( item2 ) => {
+						item2.classList.remove( 'hidden' );
+					} );
 				} else if ( result.status === 'error' ) {
 					statusElement.innerText = result.data.msg;
 					statusElement.classList.remove( 'hidden', 'success' );
 					statusElement.classList.add( 'error' );
+
+					// Reenable button
+					sendButton.disabled = false;
+
+					// Change button state
+					progressStateElements.forEach( ( item2 ) => {
+						item2.classList.add( 'hidden' );
+					} );
+					defaultStateElements.forEach( ( item2 ) => {
+						item2.classList.remove( 'hidden' );
+					} );
 				}
 			},
 			() => {
@@ -339,6 +392,17 @@ emailButtons.forEach( ( item ) => {
 				);
 				statusElement.classList.remove( 'hidden', 'success' );
 				statusElement.classList.add( 'error' );
+
+				// Reenable button
+				sendButton.disabled = false;
+
+				// Change button state
+				progressStateElements.forEach( ( item2 ) => {
+					item2.classList.add( 'hidden' );
+				} );
+				defaultStateElements.forEach( ( item2 ) => {
+					item2.classList.remove( 'hidden' );
+				} );
 			}
 		);
 	} );
