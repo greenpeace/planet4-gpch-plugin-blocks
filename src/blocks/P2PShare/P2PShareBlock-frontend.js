@@ -160,7 +160,10 @@ smsButtons.forEach( ( item ) => {
 	item.addEventListener( 'click', ( event ) => {
 		event.preventDefault();
 
-		event.target.disabled = true;
+		const sendButton = event.target;
+
+		// Disable button
+		sendButton.disabled = true;
 
 		const defaultStateElements = event.target.querySelectorAll(
 			':scope .state-default'
@@ -168,15 +171,17 @@ smsButtons.forEach( ( item ) => {
 		const progressStateElements = event.target.querySelectorAll(
 			':scope .state-progress'
 		);
+		// Kept here for better readability
+		// eslint-disable-next-line @wordpress/no-unused-vars-before-return
 		const doneStateElements = event.target.querySelectorAll(
 			':scope .state-done'
 		);
 
-		defaultStateElements.forEach( ( item ) => {
-			item.classList.add( 'hidden' );
+		defaultStateElements.forEach( ( item2 ) => {
+			item2.classList.add( 'hidden' );
 		} );
-		progressStateElements.forEach( ( item ) => {
-			item.classList.remove( 'hidden' );
+		progressStateElements.forEach( ( item2 ) => {
+			item2.classList.remove( 'hidden' );
 		} );
 
 		const channel = event.target.dataset.channel;
@@ -230,27 +235,27 @@ smsButtons.forEach( ( item ) => {
 					statusElement.classList.remove( 'hidden', 'error' );
 					statusElement.classList.add( 'success' );
 
-					// Disable button to prevent multiple messages to be sent.
-					event.target.disabled = true;
-
 					// Change button state
-					progressStateElements.forEach( ( item ) => {
-						item.classList.add( 'hidden' );
+					progressStateElements.forEach( ( item2 ) => {
+						item2.classList.add( 'hidden' );
 					} );
-					doneStateElements.forEach( ( item ) => {
-						item.classList.remove( 'hidden' );
+					doneStateElements.forEach( ( item2 ) => {
+						item2.classList.remove( 'hidden' );
 					} );
 				} else if ( result.status === 'error' ) {
 					statusElement.innerText = result.data.msg;
 					statusElement.classList.remove( 'hidden', 'success' );
 					statusElement.classList.add( 'error' );
 
+					// Reenable button
+					sendButton.disabled = false;
+
 					// Change button state
-					progressStateElements.forEach( ( item ) => {
-						item.classList.add( 'hidden' );
+					progressStateElements.forEach( ( item2 ) => {
+						item2.classList.add( 'hidden' );
 					} );
-					defaultStateElements.forEach( ( item ) => {
-						item.classList.remove( 'hidden' );
+					defaultStateElements.forEach( ( item2 ) => {
+						item2.classList.remove( 'hidden' );
 					} );
 				}
 			},
@@ -262,12 +267,15 @@ smsButtons.forEach( ( item ) => {
 				statusElement.classList.remove( 'hidden', 'success' );
 				statusElement.classList.add( 'error' );
 
+				// Reenable button
+				sendButton.disabled = false;
+
 				// Change button state
-				progressStateElements.forEach( ( item ) => {
-					item.classList.add( 'hidden' );
+				progressStateElements.forEach( ( item2 ) => {
+					item2.classList.add( 'hidden' );
 				} );
-				defaultStateElements.forEach( ( item ) => {
-					item.classList.remove( 'hidden' );
+				defaultStateElements.forEach( ( item2 ) => {
+					item2.classList.remove( 'hidden' );
 				} );
 			}
 		);
