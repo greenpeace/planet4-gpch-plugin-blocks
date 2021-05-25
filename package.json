@@ -35,7 +35,11 @@
     "babel-loader": "^8.2.2"
   },
   "dependencies": {
+    "@wordpress/api-fetch": "^5.0.0",
+    "@wordpress/components": "^13.0.2",
     "@wordpress/element": "^2.19.1",
-    "animejs": "^3.2.1"
+    "@wordpress/i18n": "^3.19.2",
+    "animejs": "^3.2.1",
+    "libphonenumber-js": "^1.9.16"
   }
 }

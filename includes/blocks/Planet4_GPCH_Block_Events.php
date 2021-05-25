@@ -28,7 +28,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_GPCH_Events' ) ) {
 					'fields'                => array(
 						array(
 							'key'               => 'field_p4_gpch_blocks_gpch_events_title',
-							'label'             => __( 'Title', 'planet4-gpch-blocks' ),
+							'label'             => __( 'Title', 'planet4-gpch-plugin-blocks' ),
 							'name'              => 'title',
 							'type'              => 'text',
 							'instructions'      => '',
@@ -47,10 +47,10 @@ if ( ! class_exists( 'Planet4_GPCH_Block_GPCH_Events' ) ) {
 						),
 						array(
 							'key'               => 'field_p4_gpch_blocks_gpch_events_count',
-							'label'             => __( 'Number of events', 'planet4-gpch-blocks' ),
+							'label'             => __( 'Number of events', 'planet4-gpch-plugin-blocks' ),
 							'name'              => 'event_count',
 							'type'              => 'number',
-							'instructions'      => __( 'The maximum number of events to display', 'planet4-gpch-blocks' ),
+							'instructions'      => __( 'The maximum number of events to display', 'planet4-gpch-plugin-blocks' ),
 							'required'          => 0,
 							'conditional_logic' => 0,
 							'wrapper'           => array(
@@ -68,7 +68,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_GPCH_Events' ) ) {
 						),
 						array(
 							'key'               => 'field_p4_gpch_blocks_gpch_events_display',
-							'label'             => __( 'Display', 'planet4-gpch-blocks' ),
+							'label'             => __( 'Display', 'planet4-gpch-plugin-blocks' ),
 							'name'              => 'display',
 							'type'              => 'select',
 							'instructions'      => '',
@@ -80,9 +80,9 @@ if ( ! class_exists( 'Planet4_GPCH_Block_GPCH_Events' ) ) {
 								'id'    => '',
 							),
 							'choices'           => array(
-								'upcoming' => __( 'Upcoming Events', 'planet4-gpch-blocks' ),
-								'past'     => __( 'Past Events', 'planet4-gpch-blocks' ),
-								'all'      => __( 'All Events', 'planet4-gpch-blocks' ),
+								'upcoming' => __( 'Upcoming Events', 'planet4-gpch-plugin-blocks' ),
+								'past'     => __( 'Past Events', 'planet4-gpch-plugin-blocks' ),
+								'all'      => __( 'All Events', 'planet4-gpch-plugin-blocks' ),
 							),
 							'default_value'     => array(
 								0 => 'upcoming',
@@ -96,7 +96,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_GPCH_Events' ) ) {
 						),
 						array(
 							'key'               => 'field_p4_gpch_blocks_gpch_events_order',
-							'label'             => __( 'Order', 'planet4-gpch-blocks' ),
+							'label'             => __( 'Order', 'planet4-gpch-plugin-blocks' ),
 							'name'              => 'order',
 							'type'              => 'select',
 							'instructions'      => '',
@@ -108,8 +108,8 @@ if ( ! class_exists( 'Planet4_GPCH_Block_GPCH_Events' ) ) {
 								'id'    => '',
 							),
 							'choices'           => array(
-								'asc'  => __( 'Date Ascending', 'planet4-gpch-blocks' ),
-								'desc' => __( 'Date Descending', 'planet4-gpch-blocks' ),
+								'asc'  => __( 'Date Ascending', 'planet4-gpch-plugin-blocks' ),
+								'desc' => __( 'Date Descending', 'planet4-gpch-plugin-blocks' ),
 							),
 							'default_value'     => array(
 								0 => 'asc',
@@ -123,7 +123,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_GPCH_Events' ) ) {
 						),
 						array(
 							'key'               => 'field_p4_gpch_blocks_gpch_events_tags',
-							'label'             => __( 'Tags', 'planet4-gpch-blocks' ),
+							'label'             => __( 'Tags', 'planet4-gpch-plugin-blocks' ),
 							'name'              => 'tags',
 							'type'              => 'taxonomy',
 							'instructions'      => '',
@@ -145,10 +145,10 @@ if ( ! class_exists( 'Planet4_GPCH_Block_GPCH_Events' ) ) {
 						),
 						array(
 							'key'               => 'field_p4_gpch_blocks_gpch_events_ignore_tags',
-							'label'             => __( 'Ignore Tags', 'planet4-gpch-blocks' ),
+							'label'             => __( 'Ignore Tags', 'planet4-gpch-plugin-blocks' ),
 							'name'              => 'ignore_tags',
 							'type'              => 'select',
-							'instructions'      => __( 'Ignore tags and show events of all tags', 'planet4-gpch-blocks' ),
+							'instructions'      => __( 'Ignore tags and show events of all tags', 'planet4-gpch-plugin-blocks' ),
 							'required'          => 0,
 							'conditional_logic' => 0,
 							'wrapper'           => array(
@@ -172,7 +172,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_GPCH_Events' ) ) {
 						),
 						array(
 							'key'               => 'field_p4_gpch_blocks_gpch_events_select_posts',
-							'label'             => __( 'Select posts', 'planet4-gpch-blocks' ),
+							'label'             => __( 'Select posts', 'planet4-gpch-plugin-blocks' ),
 							'name'              => 'select_posts',
 							'type'              => 'post_object',
 							'instructions'      => __( 'Select posts to show manually and override the tag / post type selection', 'planet4-gutenberg-blocks' ),
@@ -193,10 +193,10 @@ if ( ! class_exists( 'Planet4_GPCH_Block_GPCH_Events' ) ) {
 
 						array(
 							'key'               => 'field_p4_gpch_blocks_gpch_events_description',
-							'label'             => __( 'No Events Text', 'planet4-gpch-blocks' ),
+							'label'             => __( 'No Events Text', 'planet4-gpch-plugin-blocks' ),
 							'name'              => 'no_events_text',
 							'type'              => 'wysiwyg',
-							'instructions'      => __( 'This text will be shown when no events are available', 'planet4-gpch-blocks' ),
+							'instructions'      => __( 'This text will be shown when no events are available', 'planet4-gpch-plugin-blocks' ),
 							'required'          => 0,
 							'conditional_logic' => 0,
 							'wrapper'           => array(
@@ -241,8 +241,8 @@ if ( ! class_exists( 'Planet4_GPCH_Block_GPCH_Events' ) ) {
 				// register a block
 				acf_register_block( array(
 					'name'            => 'p4-gpch-block-gpch-events',
-					'title'           => __( 'GPCH Events', 'planet4-gpch-blocks' ),
-					'description'     => __( 'GPCH Events', 'planet4-gpch-blocks' ),
+					'title'           => __( 'GPCH Events', 'planet4-gpch-plugin-blocks' ),
+					'description'     => __( 'GPCH Events', 'planet4-gpch-plugin-blocks' ),
 					'render_callback' => array( $this, 'render_block' ),
 					'category'        => 'gpch',
 					'icon'            => 'calendar',

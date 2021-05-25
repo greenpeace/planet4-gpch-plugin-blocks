@@ -28,6 +28,7 @@ class ComposerStaticInit1f0a357e88357c4512048dc57e74c22c
     public static $classMap = array (
         'Greenpeace\\Planet4GPCHBlocks\\AssetEnqueuer' => __DIR__ . '/../..' . '/includes/AssetEnqueuer.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\BS_Bingo_Block' => __DIR__ . '/../..' . '/includes/blocks/BS_Bingo.php',
+        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\P2P_Share_Block' => __DIR__ . '/../..' . '/includes/blocks/P2P_Share.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Action_Divider' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Action_Divider.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Base_Block' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Base_Block.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Base_Form_Block' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Base_Form_Block.php',
@@ -44,6 +45,7 @@ class ComposerStaticInit1f0a357e88357c4512048dc57e74c22c
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Word_Cloud' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Word_Cloud.php',
         'Greenpeace\\Planet4GPCHBlocks\\Planet4_GPCH_Blocks_Dictionary_Table' => __DIR__ . '/../..' . '/includes/admin-pages/Planet4_GPCH_Blocks_Dictionary_Table.php',
         'Greenpeace\\Planet4GPCHBlocks\\Planet4_GPCH_Plugin_Blocks' => __DIR__ . '/../..' . '/includes/Plugin.php',
+        'Greenpeace\\Planet4GPCHBlocks\\Sms_Client' => __DIR__ . '/../..' . '/includes/SmsClient.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

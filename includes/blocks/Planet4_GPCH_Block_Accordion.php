@@ -28,7 +28,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Accordion' ) ) {
 					'fields'                => array(
 						array(
 							'key'               => 'field_p4_gpch_blocks_accordion_elements',
-							'label'             => __('Accordion-Elements', 'planet4-gpch-blocks' ),
+							'label'             => __('Accordion-Elements', 'planet4-gpch-plugin-blocks' ),
 							'name'              => 'accordion-elements',
 							'type'              => 'repeater',
 							'instructions'      => '',
@@ -47,7 +47,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Accordion' ) ) {
 							'sub_fields'        => array(
 								array(
 									'key'               => 'field_p4_gpch_blocks_accordion_title',
-									'label'             => __('Title', 'planet4-gpch-blocks' ),
+									'label'             => __('Title', 'planet4-gpch-plugin-blocks' ),
 									'name'              => 'title',
 									'type'              => 'text',
 									'instructions'      => '',
@@ -66,7 +66,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Accordion' ) ) {
 								),
 								array(
 									'key'               => 'field_p4_gpch_blocks_accordion_text',
-									'label'             => __('Text', 'planet4-gpch-blocks' ),
+									'label'             => __('Text', 'planet4-gpch-plugin-blocks' ),
 									'name'              => 'text',
 									'type'              => 'wysiwyg',
 									'instructions'      => '',
@@ -117,8 +117,8 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Accordion' ) ) {
 				// register a block
 				acf_register_block( array(
 					'name'            => 'p4-gpch-block-accordion',
-					'title'           => __( 'Accordion', 'planet4-gpch-blocks' ),
-					'description'     => __( 'Accordion', 'planet4-gpch-blocks' ),
+					'title'           => __( 'Accordion', 'planet4-gpch-plugin-blocks' ),
+					'description'     => __( 'Accordion', 'planet4-gpch-plugin-blocks' ),
 					'render_callback' => array( $this, 'render_block' ),
 					'category'        => 'gpch',
 					'icon'            => 'feedback',
