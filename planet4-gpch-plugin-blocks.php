@@ -3,9 +3,10 @@
  * Plugin Name: Planet4 GPCH Plugin Blocks
  * Plugin URI: https://github.com/greenpeace/planet4-gpch-plugin-blocks
  * Description: Provides Planet4 content blocks specific to Greenpeace Switzerland
- * Version: 0.1.43
+ * Version: 1.0.0
  * License: MIT
- * Text Domain: planet4-gpch-blocks
+ * Text Domain: planet4-gpch-plugin-blocks
+ * Domain Path: /languages
  */
 
 // Exit if accessed directly
@@ -17,11 +18,11 @@ define( 'P4_GPCH_PLUGIN_BLOCKS_BASE_URL', plugin_dir_url( __FILE__ ) );
 define( 'P4_GPCH_PLUGIN_WORD_DICT_TABLE_NAME', 'gpch_wordcloud_dictionary' );
 
 // Load translations
+function planet4_gpch_plugin_blocks_load_textdomain() {
+	load_plugin_textdomain( 'planet4-gpch-plugin-blocks', false, basename( dirname( __FILE__ ) ) . '/languages' );
+}
 add_action( 'plugins_loaded', 'planet4_gpch_plugin_blocks_load_textdomain' );
 
-function planet4_gpch_plugin_blocks_load_textdomain() {
-	load_plugin_textdomain( 'planet4-gpch-blocks', false, basename( dirname( __FILE__ ) ) . '/languages' );
-}
 
 // include the Composer autoload file
 require P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'vendor/autoload.php';

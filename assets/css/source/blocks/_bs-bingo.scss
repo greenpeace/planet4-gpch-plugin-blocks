@@ -1,0 +1,139 @@
+.wp-block-planet4-gpch-plugin-blocks-bs-bingo {
+	max-width: 80vh;
+
+	.fireworks {
+		position: absolute;
+		z-index: 20;
+
+		height: 80vh ;
+		width: 80vh ;
+		max-width: 100%;
+	}
+
+	.grid {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-evenly;
+
+		.box {
+			position: relative;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			background-color: #eee;
+
+			margin: 2px;
+			width: calc(20% - 4px);
+
+			cursor: pointer;
+			border: solid 1px #bbb;
+
+			&:after {
+				content: "";
+				display: block;
+				padding-bottom: 100%;
+			}
+
+			.box-content {
+				position: absolute;
+				padding: 7%;
+
+				font-size: 20px;
+				line-height: 1.2em;
+				text-align: center;
+			}
+
+			&.off {
+
+			}
+
+			&.on {
+				background-color: #cbe0b1;
+
+			}
+
+			&.won {
+				background-color: #206a0c;
+				color: #fff;
+			}
+
+			/* Editor style */
+			&.rich-text {
+				padding: 1%;
+			}
+		}
+	}
+
+	.controls {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		justify-content: space-evenly;
+
+		.wp-block-buttons,
+		.bingo-score {
+			display: flex;
+		}
+
+		.wp-block-buttons {
+			flex-grow: 1;
+
+			.wp-block-button {
+				margin-top: 1em;
+			}
+		}
+
+		.bingo-score {
+			margin-top: .58em;
+			font-size: 28px;
+		}
+	}
+}
+
+
+/* Color Schemes */
+@for $i from 1 through length($schema_names) {
+	#{nth($selectors, $i)} {
+		.wp-block-planet4-gpch-plugin-blocks-bs-bingo {
+			.grid {
+				.box {
+					background-color: #{nth($colors_2, $i)};
+					color: #{nth($colors_2_font, $i)};
+
+					&.on {
+						background-color: #{nth($colors_1, $i)};
+						color: #{nth($colors_1_font, $i)};
+					}
+
+					&.won {
+						background-color: #{nth($colors_3, $i)};
+						color: #{nth($colors_3_font, $i)};
+					}
+				}
+			}
+		}
+	}
+}
+
+#{$selector_colorscheme_climate} {
+	.wp-block-planet4-gpch-plugin-blocks-bs-bingo {
+		.grid {
+			.box {
+				background-color: $color_climate_3;
+				color: $color_climate_3_font;
+
+				&.on {
+					background-color: $color_climate_2;
+					color: $color_climate_2_font;
+				}
+
+				&.won {
+					background-color: $color_climate_1;
+					color: $color_climate_1_font;
+				}
+			}
+		}
+	}
+}

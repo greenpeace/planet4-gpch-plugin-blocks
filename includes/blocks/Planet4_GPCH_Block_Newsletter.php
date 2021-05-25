@@ -28,7 +28,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Newsletter' ) ) {
 					'fields'                => array(
 						array(
 							'key' => 'field_p4_gpch_blocks_newsletter_language',
-							'label' => __('Language', 'planet4-gpch-blocks' ),
+							'label' => __('Language', 'planet4-gpch-plugin-blocks' ),
 							'name' => 'language',
 							'type' => 'select',
 							'instructions' => '',
@@ -54,7 +54,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Newsletter' ) ) {
 						),
 						array(
 							'key'               => 'field_p4_gpch_blocks_newsletter_title',
-							'label'             => __( 'Title', 'planet4-gpch-blocks' ),
+							'label'             => __( 'Title', 'planet4-gpch-plugin-blocks' ),
 							'name'              => 'title',
 							'type'              => 'text',
 							'instructions'      => '',
@@ -103,8 +103,8 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Newsletter' ) ) {
 				// register a block
 				acf_register_block( array(
 					'name'            => 'p4-gpch-block-newsletter',
-					'title'           => __( 'Newsletter', 'planet4-gpch-blocks' ),
-					'description'     => __( 'Newsletter-Form', 'planet4-gpch-blocks' ),
+					'title'           => __( 'Newsletter', 'planet4-gpch-plugin-blocks' ),
+					'description'     => __( 'Newsletter-Form', 'planet4-gpch-plugin-blocks' ),
 					'render_callback' => array( $this, 'render_block' ),
 					'category'        => 'gpch',
 					'icon'            => 'email',

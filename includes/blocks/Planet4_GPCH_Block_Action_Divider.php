@@ -26,7 +26,7 @@ if ( ! class_exists( 'Planet4_GPCH_Action_Divider' ) ) {
 					'fields'                => array(
 						array(
 							'key'               => 'field_p4_gpch_blocks_action_divider_text',
-							'label'             => __( 'Text', 'planet4-gpch-blocks' ),
+							'label'             => __( 'Text', 'planet4-gpch-plugin-blocks' ),
 							'name'              => 'text',
 							'type'              => 'text',
 							'instructions'      => '',
@@ -45,7 +45,7 @@ if ( ! class_exists( 'Planet4_GPCH_Action_Divider' ) ) {
 						),
 						array(
 							'key'               => 'field_p4_gpch_blocks_action_divider_button_link',
-							'label'             => __( 'Action Link', 'planet4-gpch-blocks' ),
+							'label'             => __( 'Action Link', 'planet4-gpch-plugin-blocks' ),
 							'name'              => 'action_link',
 							'type'              => 'link',
 							'instructions'      => '',
@@ -60,10 +60,10 @@ if ( ! class_exists( 'Planet4_GPCH_Action_Divider' ) ) {
 						),
 						array(
 							'key'               => 'field_p4_gpch_blocks_action_divider_icon',
-							'label'             => __( 'Icon', 'planet4-gpch-blocks' ),
+							'label'             => __( 'Icon', 'planet4-gpch-plugin-blocks' ),
 							'name'              => 'icon',
 							'type'              => 'select',
-							'instructions'      => __( 'For a preview please visit <a href="https://developer.wordpress.org/resource/dashicons/" target="_blank">https://developer.wordpress.org/resource/dashicons/</a>', 'planet4-gpch-blocks' ),
+							'instructions'      => __( 'For a preview please visit <a href="https://developer.wordpress.org/resource/dashicons/" target="_blank">https://developer.wordpress.org/resource/dashicons/</a>', 'planet4-gpch-plugin-blocks' ),
 							'required'          => 0,
 							'conditional_logic' => 0,
 							'wrapper'           => array(
@@ -72,7 +72,7 @@ if ( ! class_exists( 'Planet4_GPCH_Action_Divider' ) ) {
 								'id'    => '',
 							),
 							'choices'           => array(
-								'no-icon'                             => __( '-- no icon --', 'planet4-gpch-blocks' ),
+								'no-icon'                             => __( '-- no icon --', 'planet4-gpch-plugin-blocks' ),
 								'dashicons-menu'                      => 'menu',
 								'dashicons-menu-alt'                  => 'menu-alt',
 								'dashicons-menu-alt2'                 => 'menu-alt2',
@@ -545,8 +545,8 @@ if ( ! class_exists( 'Planet4_GPCH_Action_Divider' ) ) {
 				// register a block
 				acf_register_block( array(
 					'name'            => 'p4-gpch-block-action-divider',
-					'title'           => __( 'Action Divider', 'planet4-gpch-blocks' ),
-					'description'     => __( 'Divider Block with Donation Button', 'planet4-gpch-blocks' ),
+					'title'           => __( 'Action Divider', 'planet4-gpch-plugin-blocks' ),
+					'description'     => __( 'Divider Block with Donation Button', 'planet4-gpch-plugin-blocks' ),
 					'render_callback' => array( $this, 'render_block' ),
 					'category'        => 'gpch',
 					'icon'            => 'minus',

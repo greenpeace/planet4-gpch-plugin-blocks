@@ -57,8 +57,8 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Spacer' ) ) {
 				// register a block
 				acf_register_block( array(
 					'name'            => 'p4-gpch-block-spacer',
-					'title'           => __( 'Spacer', 'planet4-gpch-blocks' ),
-					'description'     => __( 'Spacer', 'planet4-gpch-blocks' ),
+					'title'           => __( 'Spacer', 'planet4-gpch-plugin-blocks' ),
+					'description'     => __( 'Spacer', 'planet4-gpch-plugin-blocks' ),
 					'render_callback' => array( $this, 'render_block' ),
 					'category'        => 'gpch',
 					'icon'            => 'arrow-down-alt',
