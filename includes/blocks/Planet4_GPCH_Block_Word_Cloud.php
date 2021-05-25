@@ -721,8 +721,8 @@ Amor 2',
 				// register a block
 				acf_register_block( array(
 					'name'            => 'p4-gpch-block-word-cloud',
-					'title'           => __( 'Word Cloud', 'planet4-gpch-blocks' ),
-					'description'     => __( 'Word Cloud', 'planet4-gpch-blocks' ),
+					'title'           => __( 'Word Cloud', 'planet4-gpch-plugin-blocks' ),
+					'description'     => __( 'Word Cloud', 'planet4-gpch-plugin-blocks' ),
 					'render_callback' => array( $this, 'render_block' ),
 					'category'        => 'gpch',
 					'icon'            => 'cloud',

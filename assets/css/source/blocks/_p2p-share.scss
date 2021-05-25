@@ -1,0 +1,254 @@
+.wp-block-planet4-gpch-plugin-blocks-p2p-share {
+	max-width: 32em;
+	min-height: 600px;
+	position: relative;
+	overflow: hidden;
+
+	.p2p-share-step {
+		background-color: $color_standard_2;
+		width: 100%;
+		padding: 1rem;
+		margin-bottom: 1em;
+
+		position: absolute;
+		left: 0;
+
+		transition: left .3s;
+		visibility: hidden;
+
+		&.p2p-share-step-1 {
+			visibility: visible;
+		}
+
+		&.hidden {
+			left: 100%;
+		}
+		&.hidden.prev {
+			left: -100%;
+		}
+
+		legend {
+			float: left;
+			width: 100%;
+			margin-bottom: 1rem;
+			font-weight: bold;
+		}
+
+		label {
+			font-weight: 600;
+			margin-bottom: .4rem;
+		}
+
+		ul.select {
+			list-style-type: none;
+
+			display: inline-flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+
+			padding: 0;
+
+			li {
+				flex-grow: 1;
+				flex-basis: 40%;
+				margin-right: 1em;
+				margin-bottom: .5em;
+
+				input[type="radio"] {
+					opacity: 0.011;
+					position: absolute;
+					z-index: 100;
+				}
+
+				label {
+					padding: .6rem 1rem;
+					border: 3px solid rgba(0,0,0,0);
+					cursor: pointer;
+					z-index: 90;
+					width: 100%;
+					min-width: 200px;
+					text-align: center;
+					font-weight: normal;
+					white-space: nowrap;
+
+					background-color: $color_white;
+
+					box-shadow: 2px 2px 2px #ddd;
+
+					.social-icon {
+						height: 1.6rem;
+						margin-right: .5rem;
+					}
+				}
+
+				input[type="radio"]:checked + label {
+					border-color: $color_standard_1;
+					font-weight: 600;
+				}
+
+				label:hover {
+					border-color: $color_standard_3;
+				}
+
+				/*
+				&:before {
+					content: "\2192 \0020";
+					font-size: 24px;
+				}
+				 */
+			}
+/*
+			label.channel.signal {
+				background: url("../img/social/signal.svg")
+			}
+
+ */
+		}
+
+		.share-options {
+			/*
+			display: inline-flex;
+			flex-wrap: wrap;
+
+			 */
+
+			.option {
+				/*
+				flex-basis: 100%;
+				flex-grow: 1;
+
+				 */
+				label {
+					display: block;
+				}
+			}
+
+			.option:nth-child(1) {
+				/*padding-right: 1em;*/
+				/*border-right: solid 1px #999;*/
+			}
+
+			.option:nth-child(2) {
+				/*padding-left: 1em;*/
+			}
+
+			.option.desktop {
+				max-width: calc(#{$size_width_desktop} - 1px);
+			}
+
+
+			@media (max-width: #{$size_width_desktop - 1px } ) {
+				.option.hide-mobile {
+					display: none;
+				}
+			}
+			@media (min-width: $size_width_desktop ) {
+				.option.hide-desktop {
+					display: none;
+				}
+			}
+
+			textarea {
+				width: 100%;
+			}
+		}
+
+		.controls.form-section {
+			border-top: 1px solid #999;
+			padding-top: 1rem;
+		}
+
+		&.p2p-share-step-3 {
+			.social-icon {
+				max-height: 2rem;
+			}
+
+			.phone-number-field {
+
+			}
+
+			.status {
+				font-size: 1rem;
+				font-style: italic;
+
+				&.error {
+					color: red;
+				}
+
+				&.success {
+					color: green;
+				}
+
+				&.hidden {
+					display: none;
+				}
+			}
+
+			.send-sms,
+			.send-email {
+				.hidden {
+					display: none;
+				}
+
+				&:disabled {
+					background-color: #888;
+				}
+			}
+
+		}
+	}
+
+	.wp-block-button {
+		margin-top: 0;
+	}
+
+	input[type=text],
+	textarea {
+		margin-bottom: 1em;
+	}
+
+	.description {
+		font-size: 1rem;
+	}
+
+	/* Loading animation */
+	.lds-ring {
+		background-color: transparent;
+		display: inline-block;
+		position: relative;
+		width: 26px;
+		height: 16px;
+	}
+	.lds-ring div {
+		background-color: transparent;
+		box-sizing: border-box;
+		display: block;
+		position: absolute;
+		width: 16px;
+		height: 16px;
+		margin: 3px;
+		border: 3px solid #fff;
+		border-radius: 50%;
+		animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+		border-color: #fff transparent transparent transparent;
+	}
+	.lds-ring div:nth-child(1) {
+		animation-delay: -0.45s;
+	}
+	.lds-ring div:nth-child(2) {
+		animation-delay: -0.3s;
+	}
+	.lds-ring div:nth-child(3) {
+		animation-delay: -0.15s;
+	}
+	@keyframes lds-ring {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+}
+
+

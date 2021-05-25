@@ -28,7 +28,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Taskforce' ) ) {
 					'fields'                => array(
 						array(
 							'key'               => 'field_p4_gpch_blocks_taskforce_title',
-							'label'             => __( 'Title', 'planet4-gpch-blocks' ),
+							'label'             => __( 'Title', 'planet4-gpch-plugin-blocks' ),
 							'name'              => 'title',
 							'type'              => 'text',
 							'instructions'      => '',
@@ -47,7 +47,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Taskforce' ) ) {
 						),
 						array(
 							'key'               => 'field_p4_gpch_blocks_taskforce_description',
-							'label'             => __( 'Description', 'planet4-gpch-blocks' ),
+							'label'             => __( 'Description', 'planet4-gpch-plugin-blocks' ),
 							'name'              => 'description',
 							'type'              => 'wysiwyg',
 							'instructions'      => '',
@@ -90,7 +90,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Taskforce' ) ) {
 						),
 						array(
 							'key'               => 'field_p4_gpch_blocks_taskforce_link',
-							'label'             => __( 'Button', 'planet4-gpch-blocks' ),
+							'label'             => __( 'Button', 'planet4-gpch-plugin-blocks' ),
 							'name'              => 'button',
 							'type'              => 'link',
 							'instructions'      => '',
@@ -157,8 +157,8 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Taskforce' ) ) {
 				// register a block
 				acf_register_block( array(
 					'name'            => 'p4-gpch-block-taskforce',
-					'title'           => __( 'Taskforce', 'planet4-gpch-blocks' ),
-					'description'     => __( 'Taskforce', 'planet4-gpch-blocks' ),
+					'title'           => __( 'Taskforce', 'planet4-gpch-plugin-blocks' ),
+					'description'     => __( 'Taskforce', 'planet4-gpch-plugin-blocks' ),
 					'render_callback' => array( $this, 'render_block' ),
 					'category'        => 'gpch',
 					'icon'            => 'editor-table',

@@ -35,7 +35,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Magazine_Articles' ) ) {
 					'fields'                => array(
 						array(
 							'key'               => 'field_p4_gpch_blocks_magazine_articles_tags',
-							'label'             => __( 'Tags', 'planet4-gpch-blocks' ),
+							'label'             => __( 'Tags', 'planet4-gpch-plugin-blocks' ),
 							'name'              => 'tags',
 							'type'              => 'taxonomy',
 							'instructions'      => '',
@@ -57,7 +57,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Magazine_Articles' ) ) {
 						),
 						array(
 							'key'               => 'field_p4_gpch_blocks_magazine_article_count',
-							'label'             => __( 'Article Count', 'planet4-gpch-blocks' ),
+							'label'             => __( 'Article Count', 'planet4-gpch-plugin-blocks' ),
 							'name'              => 'article_count',
 							'type'              => 'number',
 							'instructions'      => '',
@@ -78,7 +78,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Magazine_Articles' ) ) {
 						),
 						array(
 							'key'               => 'field_p4_gpch_blocks_magazine_articles_ignore_tags',
-							'label'             => __( 'Ignore Tags', 'planet4-gpch-blocks' ),
+							'label'             => __( 'Ignore Tags', 'planet4-gpch-plugin-blocks' ),
 							'name'              => 'ignore_tags',
 							'type'              => 'select',
 							'instructions'      => '',
@@ -134,8 +134,8 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Magazine_Articles' ) ) {
 				// register a block
 				acf_register_block( array(
 					'name'            => 'p4-gpch-block-magazine-articles',
-					'title'           => __( 'Magazine Articles', 'planet4-gpch-blocks' ),
-					'description'     => __( 'Magazine Articles', 'planet4-gpch-blocks' ),
+					'title'           => __( 'Magazine Articles', 'planet4-gpch-plugin-blocks' ),
+					'description'     => __( 'Magazine Articles', 'planet4-gpch-plugin-blocks' ),
 					'render_callback' => array( $this, 'render_block' ),
 					'category'        => 'gpch',
 					'icon'            => 'book',
@@ -210,7 +210,7 @@ if ( ! class_exists( 'Planet4_GPCH_Block_Magazine_Articles' ) ) {
 					$magazine_link  = '';
 
 					if ( $post_type_data && ( $post_type_data->name == 'gpch_magredirect' ) ) {
-						$post_type     = __( 'Magazine Articles', 'planet4-gpch-blocks' );
+						$post_type     = __( 'Magazine Articles', 'planet4-gpch-plugin-blocks' );
 						$magazine_link = 'https://www.greenpeace-magazin.ch';
 					}
 
