@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Planet4 GPCH Plugin Blocks 0.1.43\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/planet4-gpch-"
 "plugin-blocks\n"
-"POT-Creation-Date: 2021-05-20 10:40+0200\n"
-"PO-Revision-Date: 2021-05-20 11:08+0200\n"
+"POT-Creation-Date: 2021-05-26 14:30+0200\n"
+"PO-Revision-Date: 2021-05-26 14:36+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_CH\n"
@@ -29,17 +29,17 @@ msgstr "Bingo"
 msgid "buzzword"
 msgstr "Buzzword"
 
-#: includes/Plugin.php:105
+#: includes/Plugin.php:106
 msgid "GPCH"
 msgstr "GPCH"
 
-#: includes/Plugin.php:118
+#: includes/Plugin.php:119
 msgid ""
 "Planet 4 GPCH Blocks: Advanced Custom Fields must be installed and activated "
 "for this plugin to work."
 msgstr ""
 
-#: includes/Plugin.php:130
+#: includes/Plugin.php:131
 msgid ""
 "Planet 4 GPCH Blocks: Timber must be installed and activated for this plugin "
 "to work."
@@ -64,6 +64,74 @@ msgstr "Textnachricht ist zu lang."
 #: includes/SmsClient.php:99
 msgid "SMS could not be sent. Try again later."
 msgstr "SMS konnte nicht gesendet werden. Bitte versuch es später nochmal."
+
+#: includes/blocks/Form_Entries.php:123
+msgid "year"
+msgstr "Jahr"
+
+#: includes/blocks/Form_Entries.php:124
+msgid "month"
+msgstr "Monat"
+
+#: includes/blocks/Form_Entries.php:125
+msgid "week"
+msgstr "Woche"
+
+#: includes/blocks/Form_Entries.php:126
+msgid "day"
+msgstr "Tag"
+
+#: includes/blocks/Form_Entries.php:127
+msgid "hour"
+msgstr "Stunde"
+
+#: includes/blocks/Form_Entries.php:128
+msgid "minute"
+msgstr "Minute"
+
+#: includes/blocks/Form_Entries.php:129
+msgid "second"
+msgstr "Sekunde"
+
+#: includes/blocks/Form_Entries.php:132
+msgid "years"
+msgstr "Jahre"
+
+#: includes/blocks/Form_Entries.php:133
+msgid "months"
+msgstr "Monate"
+
+#: includes/blocks/Form_Entries.php:134
+msgid "weeks"
+msgstr "Wochen"
+
+#: includes/blocks/Form_Entries.php:135
+msgid "days"
+msgstr "Tagen"
+
+#: includes/blocks/Form_Entries.php:136
+msgid "hours"
+msgstr "Stunden"
+
+#: includes/blocks/Form_Entries.php:137
+msgid "minutes"
+msgstr "Minuten"
+
+#: includes/blocks/Form_Entries.php:138
+msgid "seconds"
+msgstr "Sekunden"
+
+#: includes/blocks/Form_Entries.php:140
+msgid "PRE_TEXT"
+msgstr " vor"
+
+#: includes/blocks/Form_Entries.php:141
+msgid "ago"
+msgstr " "
+
+#: includes/blocks/Form_Entries.php:155
+msgid "just now"
+msgstr "gerade eben"
 
 #: includes/blocks/P2P_Share.php:81 src/blocks/P2PShare/P2PShareBlock.js:25
 msgid "How many people can you motivate to also sign the petition?"
@@ -597,20 +665,20 @@ msgstr ""
 msgid "👍 Copied!"
 msgstr "👍 Kopiert!"
 
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:208
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:209
 msgid "Please use a valid Swiss mobile number."
 msgstr "Bitte verwende eine gültige Schweizer Mobiltelefon-Nummer."
 
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:236
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:245
 msgid "Your message was sent. Check your phone!"
 msgstr "Deine SMS wurde gesendet."
 
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:268
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:394
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:277
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:390
 msgid "Application error. Please try again later."
 msgstr "Fehler beim Senden. Bitte versuche es später nochmals."
 
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:359
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:358
 msgid "Your message was sent. Check your email!"
 msgstr "Deine Email wurde gesendet. Schau in deinen Posteingang!"
 
