@@ -55,9 +55,22 @@ class Form_Entries_Block extends Planet4_GPCH_Base_Block {
 			'editor_script'   => 'planet4-gpch-plugin-blocks',
 			'render_callback' => [ $this, 'dynamic_render_callback' ],
 			'attributes'      => [
+				'formId' => [
+					'type'    => 'integer',
+				],
+				'fieldId' => [
+					'type'    => 'integer',
+				],
 				'numberOfEntries' => [
 					'type'    => 'integer',
 					'default' => 4,
+				],
+				'text'            => [
+					'type'    => 'string',
+					'default' => __(
+						'FIELD_VALUE has signed TIME_AGO.',
+						'planet4-gpch-plugin-blocks'
+					),
 				],
 			]
 		] );
@@ -67,7 +80,7 @@ class Form_Entries_Block extends Planet4_GPCH_Base_Block {
 	function dynamic_render_callback( $block_attributes, $content ) {
 		$this->block_attributes = $block_attributes;
 
-		if (array_key_exists('formId', $block_attributes) && array_key_exists('fieldId', $block_attributes) ) {
+		if ( array_key_exists( 'formId', $block_attributes ) && array_key_exists( 'fieldId', $block_attributes ) ) {
 			$form_entries = $this->get_entries( $block_attributes['formId'], $block_attributes['fieldId'], $block_attributes['numberOfEntries'] );
 			$lines        = [];
 
@@ -89,8 +102,7 @@ class Form_Entries_Block extends Planet4_GPCH_Base_Block {
 
 			// Output template
 			return \Timber::fetch( $this->template_file, $params );
-		}
-		else {
+		} else {
 			return '<p style="color: red;">Missing content block configuration</p>';
 		}
 	}
