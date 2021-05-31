@@ -1,6 +1,6 @@
 import { registerBlockType } from '@wordpress/blocks';
 import {
-	TextControl,
+	// eslint-disable-next-line @wordpress/no-unsafe-wp-apis
 	__experimentalNumberControl as NumberControl,
 } from '@wordpress/components';
 import { useBlockProps, RichText } from '@wordpress/block-editor';

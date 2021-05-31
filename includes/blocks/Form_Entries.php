@@ -25,7 +25,15 @@ class Form_Entries_Block extends Planet4_GPCH_Base_Block {
 	 */
 	const BLOCK_NAME = 'form_entries';
 
-	private $block_attributes;
+	/**
+	 * Block name including namespace.
+	 *
+	 * @const string FULL_BLOCK_NAME.
+	 */
+	const FULL_BLOCK_NAME = 'planet4-gpch-plugin-blocks/form-entries';
+
+
+	public $block_attributes;
 
 
 	/**
@@ -38,7 +46,7 @@ class Form_Entries_Block extends Planet4_GPCH_Base_Block {
 
 		add_action( 'rest_api_init', function () {
 			register_rest_route( 'gpchblockFormEntries/v1', '/update', array(
-				'methods'             => 'GET',
+				'methods'             => 'POST',
 				'callback'            => [ $this, 'restAPI_get_update' ],
 				'permission_callback' => '__return_true',
 			) );
@@ -50,16 +58,16 @@ class Form_Entries_Block extends Planet4_GPCH_Base_Block {
 	 * Register Block.
 	 */
 	function register_block() {
-		register_block_type( 'planet4-gpch-plugin-blocks/form-entries', [
+		register_block_type( self::FULL_BLOCK_NAME, [
 			'apiVersion'      => 2,
 			'editor_script'   => 'planet4-gpch-plugin-blocks',
 			'render_callback' => [ $this, 'dynamic_render_callback' ],
 			'attributes'      => [
-				'formId' => [
-					'type'    => 'integer',
+				'formId'          => [
+					'type' => 'integer',
 				],
-				'fieldId' => [
-					'type'    => 'integer',
+				'fieldId'         => [
+					'type' => 'integer',
 				],
 				'numberOfEntries' => [
 					'type'    => 'integer',
@@ -82,22 +90,17 @@ class Form_Entries_Block extends Planet4_GPCH_Base_Block {
 
 		if ( array_key_exists( 'formId', $block_attributes ) && array_key_exists( 'fieldId', $block_attributes ) ) {
 			$form_entries = $this->get_entries( $block_attributes['formId'], $block_attributes['fieldId'], $block_attributes['numberOfEntries'] );
-			$lines        = [];
 
-			foreach ( $form_entries as $form_entry ) {
-				$line = $block_attributes['text'];
+			$lines = $this->prepareLines( $block_attributes['text'], $form_entries );
 
-				// Replace placeholders
-				$line = $email_text = str_replace( 'TIME_AGO', $form_entry['date'], $line );
-				$line = $email_text = str_replace( 'FIELD_VALUE', $form_entry['field'], $line );
-
-				$lines[] = ucfirst( $line );
-			}
+			$lastUpdate = $form_entries[0]['timestamp'];
 
 			// Prepare parameters for template
 			$params = array(
-				'attributes' => $block_attributes,
-				'lines'      => $lines,
+				'attributes'  => $block_attributes,
+				'lines'       => $lines,
+				'lastUpdate'  => $lastUpdate,
+				'styleHeight' => $block_attributes['numberOfEntries'] * 1.5,
 			);
 
 			// Output template
@@ -109,11 +112,35 @@ class Form_Entries_Block extends Planet4_GPCH_Base_Block {
 
 
 	/**
+	 * Prepare one line of text to output
+	 *
+	 * @param $text
+	 * @param $form_entries
+	 *
+	 * @return array
+	 */
+	private function prepareLines( $text, $form_entries ) {
+		$lines = [];
+
+		foreach ( $form_entries as $form_entry ) {
+			$line = $text;
+
+			// Replace placeholders
+			$line = $email_text = str_replace( 'TIME_AGO', $form_entry['date'], $line );
+			$line = $email_text = str_replace( 'FIELD_VALUE', $form_entry['field'], $line );
+
+			$lines[] = ucfirst( $line );
+		}
+
+		return $lines;
+	}
+
+
+	/**
 	 * Enqueue assets
 	 */
 	public function enqueue_if_block_is_present() {
-		/*
-		if ( has_block( 'planet4-gpch-plugin-blocks/p2p-share' ) ) {
+		if ( has_block( self::FULL_BLOCK_NAME ) ) {
 			AssetEnqueuer::enqueue_js(
 				'planet4-gpch-blocks-form-entries',
 				'blocks/formEntries.js',
@@ -122,9 +149,17 @@ class Form_Entries_Block extends Planet4_GPCH_Base_Block {
 				false
 			);
 		}
-		*/
 	}
 
+	/**
+	 * Get entries from the specified forms
+	 *
+	 * @param $form_id
+	 * @param $form_field
+	 * @param $number
+	 *
+	 * @return array
+	 */
 	public function get_entries( $form_id, $form_field, $number ) {
 		$search_criteria['status'] = 'active';
 		$paging                    = array( 'offset' => 0, 'page_size' => $number );
@@ -134,14 +169,24 @@ class Form_Entries_Block extends Planet4_GPCH_Base_Block {
 		$results = [];
 		foreach ( $entries as $entry ) {
 			$results[] = [
-				'date'  => $this->time_elapsed_string( $entry['date_created'] ),
-				'field' => $entry[ $form_field ]
+				'date'      => $this->time_elapsed_string( $entry['date_created'] ),
+				'timestamp' => strtotime( $entry['date_created'] ),
+				'field'     => $entry[ $form_field ]
 			];
 		}
 
 		return $results;
 	}
 
+	/**
+	 * Print a string in "2 minutes ago" format
+	 *
+	 * @param $datetime
+	 * @param false $full
+	 *
+	 * @return string
+	 * @throws \Exception
+	 */
 	public function time_elapsed_string( $datetime, $full = false ) {
 		$now  = new \DateTime;
 		$ago  = new \DateTime( $datetime );
@@ -172,6 +217,11 @@ class Form_Entries_Block extends Planet4_GPCH_Base_Block {
 		$preText       = __( 'PRE_TEXT', 'planet4-gpch-plugin-blocks' );
 		$postText      = __( 'ago', 'planet4-gpch-plugin-blocks' );
 
+		// PRE_TEXT is only a placeholder for translation. Remove it if it isn't translated
+		if ( $preText == 'PRE_TEXT' ) {
+			$preText = '';
+		}
+
 		foreach ( $strings as $k => &$v ) {
 			if ( $diff->$k ) {
 				$v = $diff->$k . ' ' . ( $diff->$k > 1 ? $pluralStrings[ $k ] : $v );
@@ -187,25 +237,44 @@ class Form_Entries_Block extends Planet4_GPCH_Base_Block {
 		return $strings ? $preText . ' ' . implode( ', ', $strings ) . ' ' . $postText : __( 'just now', 'planet4-gpch-plugin-blocks' );
 	}
 
+
 	/**
-	 * Rest API endpoint to send CTA SMS
+	 * Rest API endpoint to get updated form entries
 	 *
 	 * @param $data
 	 */
-	/*
 	public function restAPI_get_update( $data ) {
 		$channel = $data['channel'];
 
-		$block                  = $this->get_first_p2p_block_in_post( $data['postId'] );
+		$block                  = $this->get_first_block_in_post( self::FULL_BLOCK_NAME, $data['postId'] );
 		$this->block_attributes = $block['attrs'];
 		$this->fill_in_default_atrributes();
 
+		$form_entries = $this->get_entries( $this->block_attributes['formId'], $this->block_attributes['fieldId'], 1 );
 
-		$response = [ 'status' => 'success' ];
+		// Remove entries that were already retrieved
+		for ( $i = 0; $i < sizeof( $form_entries ); $i ++ ) {
+			if ( $form_entries[ $i ]['timestamp'] <= $data['lastUpdate'] ) {
+				unset( $form_entries[ $i ] );
+			}
+		}
+
+		$data = [];
+		foreach ( $form_entries as $entry ) {
+			$lines  = $this->prepareLines( $this->block_attributes['text'], array( $entry ) );
+			$data[] = [
+				'line'      => $lines[0],
+				'timestamp' => $entry['timestamp'],
+			];
+		}
+
+		$response = [
+			'status' => 'success',
+			'data'   => $data,
+		];
 
 		echo json_encode( $response );
 		die;
 	}
-	*/
 
 }

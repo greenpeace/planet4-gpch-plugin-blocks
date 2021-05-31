@@ -28,6 +28,7 @@ const frontendConfig = Object.assign( {}, config, {
 		// Frontend JS for blocks
 		bsBingo: './src/blocks/BSBingo/BSBingoBlock-frontend.js',
 		p2pShare: './src/blocks/P2PShare/P2PShareBlock-frontend.js',
+		formEntries: './src/blocks/FormEntries/FormEntriesBlock-frontend.js',
 	},
 	
 	output: {
