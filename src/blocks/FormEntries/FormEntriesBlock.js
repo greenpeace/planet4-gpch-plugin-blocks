@@ -57,6 +57,10 @@ export class FormEntriesBlock {
 							</div>
 						) : (
 							<div style={ blockStyle }>
+								<ServerSideRender
+									block="planet4-gpch-plugin-blocks/form-entries"
+									attributes={ attributes }
+								/>
 								<NumberControl
 									label={ 'Form ID' }
 									description={
