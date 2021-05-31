@@ -246,7 +246,8 @@ class Form_Entries_Block extends Planet4_GPCH_Base_Block {
 	public function restAPI_get_update( $data ) {
 		$channel = $data['channel'];
 
-		$block                  = $this->get_first_block_in_post( self::FULL_BLOCK_NAME, $data['postId'] );
+		$block = $this->get_first_block_in_post( self::FULL_BLOCK_NAME, $data['postId'] );
+
 		$this->block_attributes = $block['attrs'];
 		$this->fill_in_default_atrributes();
 

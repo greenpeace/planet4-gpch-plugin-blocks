@@ -59,6 +59,7 @@ if ( ! class_exists( 'Planet4_GPCH_Base_Block' ) ) {
 			return false;
 		}
 
+
 		/**
 		 * Grab default values of parameters because Wordpress doesn't by default
 		 */
