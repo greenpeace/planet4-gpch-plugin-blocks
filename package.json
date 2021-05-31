@@ -32,6 +32,7 @@
     "@wordpress/block-editor": "^5.2.10",
     "@wordpress/blocks": "^7.0.6",
     "@wordpress/scripts": "^13.0.2",
+    "@wordpress/server-side-render": "^2.1.1",
     "babel-loader": "^8.2.2"
   },
   "dependencies": {

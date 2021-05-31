@@ -20,7 +20,6 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 	 */
 	protected $template_file = P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'templates/blocks/p2p-share.twig';
 
-
 	/**
 	 * Block name.
 	 *
@@ -28,9 +27,16 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 	 */
 	const BLOCK_NAME = 'p2p_share';
 
+	/**
+	 * Block name including namespace.
+	 *
+	 * @const string FULL_BLOCK_NAME.
+	 */
+	const FULL_BLOCK_NAME = 'planet4-gpch-plugin-blocks/p2p-share';
+
 	private $bitly_token;
 
-	private $block_attributes;
+	public $block_attributes;
 
 	private $postID;
 
@@ -44,7 +50,7 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 
 		$child_options = get_option( 'gpch_child_options' );
 
-		if ( $child_options !== false ) {
+		if ( $child_options !== false && array_key_exists( 'gpch_child_field_bitly_token', $child_options ) ) {
 			$this->bitly_token = $child_options['gpch_child_field_bitly_token'];
 		}
 
@@ -181,7 +187,8 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 	public function restAPI_send_sms( $data ) {
 		$channel = $data['channel'];
 
-		$block                  = $this->get_first_p2p_block_in_post( $data['postId'] );
+		$block = $this->get_first_block_in_post( self::FULL_BLOCK_NAME, $data['postId'] );
+
 		$this->block_attributes = $block['attrs'];
 		$this->fill_in_default_atrributes();
 
@@ -293,7 +300,8 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 	 * @param $data
 	 */
 	public function restAPI_send_email( $data ) {
-		$block                  = $this->get_first_p2p_block_in_post( $data['postId'] );
+		$block = $this->get_first_block_in_post( self::FULL_BLOCK_NAME, $data['postId'] );
+
 		$this->block_attributes = $block['attrs'];
 		$this->fill_in_default_atrributes();
 
@@ -479,45 +487,6 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 			\Sentry\captureException( $e );
 
 			return $link;
-		}
-	}
-
-	/**
-	 * Returns the first P2P block in a post/page
-	 *
-	 * @param $postID
-	 *
-	 * @return false|mixed
-	 */
-	private function get_first_p2p_block_in_post( $postID ) {
-		$post = get_post( $postID );
-
-		if ( has_blocks( $post->post_content ) ) {
-			$blocks = parse_blocks( $post->post_content );
-			foreach ( $blocks as $block ) {
-				if ( $block['blockName'] == 'planet4-gpch-plugin-blocks/p2p-share' ) {
-					return $block;
-				}
-			}
-		}
-
-		return false;
-	}
-
-	/**
-	 * Grab default values of parameters because Wordpress doesn't
-	 */
-	private function fill_in_default_atrributes() {
-		$block_registry = \WP_Block_Type_Registry::get_instance();
-		$p2pBlock       = $block_registry->get_registered( 'planet4-gpch-plugin-blocks/p2p-share' );
-
-
-		foreach ( $p2pBlock->attributes as $name => $parameters ) {
-			if ( array_key_exists( 'default', $parameters ) ) {
-				if ( ! isset( $this->block_attributes[ $name ] ) ) {
-					$this->block_attributes[ $name ] = $parameters['default'];
-				}
-			}
 		}
 	}
 }

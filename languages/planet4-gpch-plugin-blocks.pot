@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Planet4 GPCH Plugin Blocks\n"
-"POT-Creation-Date: 2021-05-20 10:40+0200\n"
+"POT-Creation-Date: 2021-05-26 14:30+0200\n"
 "PO-Revision-Date: 2021-05-19 16:04+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -35,17 +35,17 @@ msgstr ""
 msgid "buzzword"
 msgstr ""
 
-#: includes/Plugin.php:105
+#: includes/Plugin.php:106
 msgid "GPCH"
 msgstr ""
 
-#: includes/Plugin.php:118
+#: includes/Plugin.php:119
 msgid ""
 "Planet 4 GPCH Blocks: Advanced Custom Fields must be installed and activated "
 "for this plugin to work."
 msgstr ""
 
-#: includes/Plugin.php:130
+#: includes/Plugin.php:131
 msgid ""
 "Planet 4 GPCH Blocks: Timber must be installed and activated for this plugin "
 "to work."
@@ -69,6 +69,74 @@ msgstr ""
 
 #: includes/SmsClient.php:99
 msgid "SMS could not be sent. Try again later."
+msgstr ""
+
+#: includes/blocks/Form_Entries.php:123
+msgid "year"
+msgstr ""
+
+#: includes/blocks/Form_Entries.php:124
+msgid "month"
+msgstr ""
+
+#: includes/blocks/Form_Entries.php:125
+msgid "week"
+msgstr ""
+
+#: includes/blocks/Form_Entries.php:126
+msgid "day"
+msgstr ""
+
+#: includes/blocks/Form_Entries.php:127
+msgid "hour"
+msgstr ""
+
+#: includes/blocks/Form_Entries.php:128
+msgid "minute"
+msgstr ""
+
+#: includes/blocks/Form_Entries.php:129
+msgid "second"
+msgstr ""
+
+#: includes/blocks/Form_Entries.php:132
+msgid "years"
+msgstr ""
+
+#: includes/blocks/Form_Entries.php:133
+msgid "months"
+msgstr ""
+
+#: includes/blocks/Form_Entries.php:134
+msgid "weeks"
+msgstr ""
+
+#: includes/blocks/Form_Entries.php:135
+msgid "days"
+msgstr ""
+
+#: includes/blocks/Form_Entries.php:136
+msgid "hours"
+msgstr ""
+
+#: includes/blocks/Form_Entries.php:137
+msgid "minutes"
+msgstr ""
+
+#: includes/blocks/Form_Entries.php:138
+msgid "seconds"
+msgstr ""
+
+#: includes/blocks/Form_Entries.php:140
+msgid "PRE_TEXT"
+msgstr ""
+
+#: includes/blocks/Form_Entries.php:141
+msgid "ago"
+msgstr ""
+
+#: includes/blocks/Form_Entries.php:155
+msgid "just now"
 msgstr ""
 
 #: includes/blocks/P2P_Share.php:81 src/blocks/P2PShare/P2PShareBlock.js:25
@@ -592,20 +660,20 @@ msgstr ""
 msgid "👍 Copied!"
 msgstr ""
 
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:208
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:209
 msgid "Please use a valid Swiss mobile number."
 msgstr ""
 
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:236
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:245
 msgid "Your message was sent. Check your phone!"
 msgstr ""
 
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:268
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:394
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:277
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:390
 msgid "Application error. Please try again later."
 msgstr ""
 
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:359
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:358
 msgid "Your message was sent. Check your email!"
 msgstr ""
 
