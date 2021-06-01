@@ -27,7 +27,7 @@ function setParentHeight() {
 		}
 	} );
 
-	p2pShareElement.style.height = maxHeight;
+	p2pShareElement.style.minHeight = maxHeight + 'px';
 }
 
 window.onresize = setParentHeight;
