@@ -295,6 +295,38 @@ smsButtons.forEach( ( item ) => {
 	} );
 } );
 
+// Listen to enter key press in sms fields
+const smsInputFields = p2pShareElement.querySelectorAll(
+	':scope .phone-number-field'
+);
+
+smsInputFields.forEach( ( item ) => {
+	item.addEventListener( 'keyup', function ( event ) {
+		event.preventDefault();
+
+		// Enter key
+		if ( event.keyCode === 13 ) {
+			item.parentNode.querySelector( ':scope button.send-sms' ).click();
+		}
+	} );
+} );
+
+// Listen to enter key press in email fields
+const emailInputFields = p2pShareElement.querySelectorAll(
+	':scope .email-field'
+);
+
+emailInputFields.forEach( ( item ) => {
+	item.addEventListener( 'keyup', function ( event ) {
+		event.preventDefault();
+
+		// Enter key
+		if ( event.keyCode === 13 ) {
+			item.parentNode.querySelector( ':scope button.send-email' ).click();
+		}
+	} );
+} );
+
 // Send by email
 const emailButtons = p2pShareElement.querySelectorAll(
 	':scope .controls .send-email'
