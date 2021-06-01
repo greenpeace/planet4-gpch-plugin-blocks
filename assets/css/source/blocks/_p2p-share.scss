@@ -89,47 +89,14 @@
 				label:hover {
 					border-color: $color_standard_3;
 				}
-
-				/*
-				&:before {
-					content: "\2192 \0020";
-					font-size: 24px;
-				}
-				 */
 			}
-/*
-			label.channel.signal {
-				background: url("../img/social/signal.svg")
-			}
-
- */
 		}
 
 		.share-options {
-			/*
-			display: inline-flex;
-			flex-wrap: wrap;
-
-			 */
-
 			.option {
-				/*
-				flex-basis: 100%;
-				flex-grow: 1;
-
-				 */
 				label {
 					display: block;
 				}
-			}
-
-			.option:nth-child(1) {
-				/*padding-right: 1em;*/
-				/*border-right: solid 1px #999;*/
-			}
-
-			.option:nth-child(2) {
-				/*padding-left: 1em;*/
 			}
 
 			.option.desktop {
@@ -160,7 +127,19 @@
 
 		&.p2p-share-step-3 {
 			.social-icon {
-				max-height: 2rem;
+				position: absolute;
+				right: 1rem;
+				max-height: 4rem;
+				max-width: 4rem; /* Chrome enlarges element to 100% without this */
+			}
+
+			@media (max-width: #{$size_width_tablet } ) {
+				.social-icon {
+					position: relative;
+					right: auto;
+					display: block;
+					margin-bottom: 1rem;
+				}
 			}
 
 			.phone-number-field {
