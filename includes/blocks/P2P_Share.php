@@ -199,7 +199,7 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 					$message_sms_1 = $this->block_attributes['smsMessage'];
 				}
 
-				$message_sms_2 = $this->get_share_message( 'sms' );
+				$message_sms_2 = $this->get_share_message( 'sms', true );
 
 				if ( ! isset( $message_sms_1 ) || ! isset( $message_sms_2 ) ) {
 					throw new \Exception( 'Text messages are not defined.' );
@@ -216,7 +216,6 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 				// Send second message
 				$sms2   = new Sms_Client();
 				$result = $sms2->sendSMS( $data['phone'], $message_sms_2 );
-
 
 				if ( $result['status'] == 'error' ) {
 					throw new \Exception( $result['msg'] );
@@ -251,7 +250,7 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 					$message_signal_1 = $this->block_attributes['signalMessage'];
 				}
 
-				$message_signal_2 = $this->get_share_message( 'signal' );
+				$message_signal_2 = $this->get_share_message( 'signal', true );
 
 				if ( ! isset( $message_signal_1 ) || ! isset( $message_signal_2 ) ) {
 					throw new \Exception( 'Signal messages are not defined.' );
@@ -365,8 +364,14 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 	 * @return string
 	 * @throws \Exception
 	 */
-	private function get_share_message( $channel ) {
-		$text = $this->block_attributes['shareText'];
+	private function get_share_message( $channel, $shortVersion = false ) {
+		if ($shortVersion) {
+			$text = $this->block_attributes['shareTextShort'];
+		}
+		else {
+			$text = $this->block_attributes['shareText'];
+		}
+
 		$link = $this->block_attributes['shareLink'];
 
 		if ( $link !== null ) {

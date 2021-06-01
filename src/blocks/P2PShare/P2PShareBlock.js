@@ -40,6 +40,13 @@ export class P2PShareBlock {
 						'planet4-gpch-plugin-blocks'
 					),
 				},
+				shareTextShort: {
+					type: 'string',
+					default: __(
+						"I just signed this petition, it's a very important topic. Click here to sign it also: ",
+						'planet4-gpch-plugin-blocks'
+					),
+				},
 				shareLink: {
 					type: 'object',
 				},
@@ -206,14 +213,6 @@ export class P2PShareBlock {
 												</label>
 											</li>
 										</ul>
-										<div className="controls form-section wp-block-button">
-											<button
-												className="button next dark"
-												data-next-step-field="number_of_people"
-											>
-												Next
-											</button>
-										</div>
 									</fieldset>
 								</form>
 							</div>
@@ -316,6 +315,26 @@ export class P2PShareBlock {
 									onChange={ ( val ) =>
 										setAttributes( {
 											shareText: val,
+										} )
+									}
+									style={ textboxStyle }
+								/>
+								<p style={ descriptionStyle }>
+									{ __(
+										'Short version (max. 178 characters) of the share text when sent by SMS. The link will be shortened and added to the end of the text:',
+										'planet4-gpch-plugin-blocks'
+									) }
+								</p>
+								<RichText
+									value={ attributes.shareTextShort }
+									placeholder={ __(
+										'THE SHARE TEXT FOR ALL CHANNELS (when sent by SMS)',
+										'planet4-gpch-plugin-blocks'
+									) }
+									allowedFormats={ [] }
+									onChange={ ( val ) =>
+										setAttributes( {
+											shareTextShort: val,
 										} )
 									}
 									style={ textboxStyle }
