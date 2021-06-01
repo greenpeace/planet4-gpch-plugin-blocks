@@ -18,8 +18,9 @@ p2pStepElements.forEach( ( item ) => {
 document.querySelector( '.p2p-share-step-1' ).classList.remove( 'hidden' );
 
 // Resize parent element to max child height
-function setParentHeight() {
+function setParentHeight( upsizeOnly = false ) {
 	let maxHeight = 0;
+	const currentHeight = p2pShareElement.offsetHeight;
 
 	p2pStepElements.forEach( ( item ) => {
 		if ( item.offsetHeight > maxHeight ) {
@@ -27,7 +28,9 @@ function setParentHeight() {
 		}
 	} );
 
-	p2pShareElement.style.minHeight = maxHeight + 'px';
+	if ( ! upsizeOnly || maxHeight > currentHeight ) {
+		p2pShareElement.style.minHeight = maxHeight + 'px';
+	}
 }
 
 window.onresize = setParentHeight;
@@ -255,6 +258,8 @@ smsButtons.forEach( ( item ) => {
 					doneStateElements.forEach( ( item2 ) => {
 						item2.classList.remove( 'hidden' );
 					} );
+
+					setParentHeight( true );
 				} else if ( result.status === 'error' ) {
 					statusElement.innerText = result.data.msg;
 					statusElement.classList.remove( 'hidden', 'success' );
@@ -270,6 +275,8 @@ smsButtons.forEach( ( item ) => {
 					defaultStateElements.forEach( ( item2 ) => {
 						item2.classList.remove( 'hidden' );
 					} );
+
+					setParentHeight( true );
 				}
 			},
 			() => {
@@ -290,6 +297,8 @@ smsButtons.forEach( ( item ) => {
 				defaultStateElements.forEach( ( item2 ) => {
 					item2.classList.remove( 'hidden' );
 				} );
+
+				setParentHeight( true );
 			}
 		);
 	} );
@@ -400,6 +409,8 @@ emailButtons.forEach( ( item ) => {
 					doneStateElements.forEach( ( item2 ) => {
 						item2.classList.remove( 'hidden' );
 					} );
+
+					setParentHeight( true );
 				} else if ( result.status === 'error' ) {
 					statusElement.innerText = result.data.msg;
 					statusElement.classList.remove( 'hidden', 'success' );
@@ -415,6 +426,8 @@ emailButtons.forEach( ( item ) => {
 					defaultStateElements.forEach( ( item2 ) => {
 						item2.classList.remove( 'hidden' );
 					} );
+
+					setParentHeight( true );
 				}
 			},
 			() => {
@@ -435,6 +448,8 @@ emailButtons.forEach( ( item ) => {
 				defaultStateElements.forEach( ( item2 ) => {
 					item2.classList.remove( 'hidden' );
 				} );
+
+				setParentHeight( true );
 			}
 		);
 	} );
