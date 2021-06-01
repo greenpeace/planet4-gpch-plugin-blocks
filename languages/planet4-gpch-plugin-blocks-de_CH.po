@@ -6,7 +6,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/planet4-gpch-"
 "plugin-blocks\n"
 "POT-Creation-Date: 2021-05-26 14:30+0200\n"
-"PO-Revision-Date: 2021-05-26 14:36+0200\n"
+"PO-Revision-Date: 2021-06-01 16:36+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_CH\n"
@@ -123,11 +123,11 @@ msgstr "Sekunden"
 
 #: includes/blocks/Form_Entries.php:140
 msgid "PRE_TEXT"
-msgstr " vor"
+msgstr "vor"
 
 #: includes/blocks/Form_Entries.php:141
 msgid "ago"
-msgstr " "
+msgstr ""
 
 #: includes/blocks/Form_Entries.php:155
 msgid "just now"
@@ -186,7 +186,7 @@ msgstr ""
 
 #: includes/blocks/P2P_Share.php:314
 msgid "Invalid email address"
-msgstr "Ungültige Email-Adresse"
+msgstr "Ungültige E-Mail-Adresse"
 
 #: includes/blocks/Planet4_GPCH_Banner_Tool.php:41
 msgid "Gravity Form ID"
@@ -680,7 +680,7 @@ msgstr "Fehler beim Senden. Bitte versuche es später nochmals."
 
 #: src/blocks/P2PShare/P2PShareBlock-frontend.js:358
 msgid "Your message was sent. Check your email!"
-msgstr "Deine Email wurde gesendet. Schau in deinen Posteingang!"
+msgstr "Deine E-Mail wurde gesendet. Schau in deinen Posteingang!"
 
 #: src/blocks/P2PShare/P2PShareBlock.js:227
 msgid "UTM Tags"
@@ -736,20 +736,20 @@ msgstr "DER PER SMS VERSENDETE TEXT"
 
 #: src/blocks/P2PShare/P2PShareBlock.js:365
 msgid "Email Subject:"
-msgstr "Email-Betreff:"
+msgstr "E-Mail-Betreff:"
 
 #: src/blocks/P2PShare/P2PShareBlock.js:372
 msgid "EMAIL SUBJECT"
-msgstr "EMAIL-BETREFF"
+msgstr "E-MAIL-BETREFF"
 
 #: src/blocks/P2PShare/P2PShareBlock.js:385
 msgid ""
 "Email Text. Put CTA_LINK anywhere you would like to put a shortened link."
-msgstr "Email Text. Benutze CTA_LINK um einen gekürzten Link einzufügen."
+msgstr "E-Mail Text. Benutze CTA_LINK um einen gekürzten Link einzufügen."
 
 #: src/blocks/P2PShare/P2PShareBlock.js:392
 msgid "EMAIL TEXT"
-msgstr "EMAIL TEXT"
+msgstr "E-MAIL TEXT"
 
 #: src/blocks/P2PShare/P2PShareBlock.js:406
 #: src/blocks/P2PShare/P2PShareBlock.js:433
@@ -807,7 +807,7 @@ msgstr "WhatsApp"
 
 #: templates/blocks/p2p-share.twig:55
 msgid "Email"
-msgstr "Email"
+msgstr "E-Mail"
 
 #: templates/blocks/p2p-share.twig:63
 msgid "SMS"
@@ -877,7 +877,7 @@ msgstr "Zurück"
 
 #: templates/blocks/p2p-share.twig:138
 msgid "Share by Email"
-msgstr "Per Email teilen"
+msgstr "Per E-Mail teilen"
 
 #: templates/blocks/p2p-share.twig:142 templates/blocks/p2p-share.twig:186
 #: templates/blocks/p2p-share.twig:232 templates/blocks/p2p-share.twig:290
@@ -891,11 +891,11 @@ msgstr "In Zwischenablage kopieren"
 
 #: templates/blocks/p2p-share.twig:152
 msgid "Email:"
-msgstr "Email-Adresse:"
+msgstr "E-Mail-Adresse:"
 
 #: templates/blocks/p2p-share.twig:155
 msgid "Great! Let us send you an email you can forward to your friends."
-msgstr "Super! Lass dir eine Email zusenden, die du dann weiterleiten kannst."
+msgstr "Super! Lass dir eine E-Mail zusenden, die du dann weiterleiten kannst."
 
 #: templates/blocks/p2p-share.twig:156
 msgid "We will not use your email address for anything else."
@@ -903,7 +903,7 @@ msgstr "Wir verwenden deine Nummer für nichts anderes."
 
 #: templates/blocks/p2p-share.twig:166
 msgid "Send Email"
-msgstr "Email senden"
+msgstr "E-Mail senden"
 
 #: templates/blocks/p2p-share.twig:182
 msgid "Share by SMS"
