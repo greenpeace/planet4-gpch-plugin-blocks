@@ -3,11 +3,14 @@ import { __ } from '@wordpress/i18n';
 import { TextControl } from '@wordpress/components';
 import {
 	useBlockProps,
-	RichText,
+	RichText as BaseRichText,
 	InspectorControls,
 	// eslint-disable-next-line @wordpress/no-unsafe-wp-apis
 	__experimentalLinkControl as LinkControl,
 } from '@wordpress/block-editor';
+import withCharacterCounter from '../../components/withCharacterCounter/withCharacterCounter';
+
+const RichText = withCharacterCounter( BaseRichText );
 
 /* global gpchBlocks */
 
@@ -338,6 +341,7 @@ export class P2PShareBlock {
 										} )
 									}
 									style={ textboxStyle }
+									characterLimit={ 178 }
 								/>
 								<p style={ descriptionStyle }>
 									{ __(
