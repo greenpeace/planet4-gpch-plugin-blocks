@@ -23,6 +23,7 @@
 		&.hidden {
 			left: 100%;
 		}
+
 		&.hidden.prev {
 			left: -100%;
 		}
@@ -62,7 +63,7 @@
 
 				label {
 					padding: .6rem 1rem;
-					border: 3px solid rgba(0,0,0,0);
+					border: 3px solid rgba(0, 0, 0, 0);
 					cursor: pointer;
 					z-index: 90;
 					width: 100%;
@@ -104,12 +105,12 @@
 			}
 
 
-			@media (max-width: #{$size_width_desktop - 1px } ) {
+			@media (max-width: #{$size_width_desktop - 1px }) {
 				.option.hide-mobile {
 					display: none;
 				}
 			}
-			@media (min-width: $size_width_desktop ) {
+			@media (min-width: $size_width_desktop) {
 				.option.hide-desktop {
 					display: none;
 				}
@@ -133,7 +134,7 @@
 				max-width: 4rem; /* Chrome enlarges element to 100% without this */
 			}
 
-			@media (max-width: #{$size_width_tablet } ) {
+			@media (max-width: #{$size_width_tablet }) {
 				.social-icon {
 					position: relative;
 					right: auto;
@@ -198,6 +199,7 @@
 		width: 26px;
 		height: 16px;
 	}
+
 	.lds-ring div {
 		background-color: transparent;
 		box-sizing: border-box;
@@ -211,15 +213,19 @@
 		animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
 		border-color: #fff transparent transparent transparent;
 	}
+
 	.lds-ring div:nth-child(1) {
 		animation-delay: -0.45s;
 	}
+
 	.lds-ring div:nth-child(2) {
 		animation-delay: -0.3s;
 	}
+
 	.lds-ring div:nth-child(3) {
 		animation-delay: -0.15s;
 	}
+
 	@keyframes lds-ring {
 		0% {
 			transform: rotate(0deg);
@@ -230,4 +236,57 @@
 	}
 }
 
+/* Color Schemes */
+@for $i from 1 through length($schema_names) {
+	#{nth($selectors, $i)} {
+		.wp-block-planet4-gpch-plugin-blocks-p2p-share {
+			/* Reset button color scheme styles for the block */
+			.wp-block-button {
+				button,
+				a,
+				a:visited {
+					background-color: $color_standard_1;
+					color: $color_standard_1_font;
+				}
 
+				button:hover,
+				a:hover {
+					background-color: $color_standard_3;
+					color: $color_standard_3_font;
+				}
+			}
+
+			/*
+			 Button Style secondary
+			 */
+			.wp-block-button {
+				button.dark,
+				a {
+					background-color: $color_standard_3;
+					color: $color_standard_3_font;
+					border: 0;
+				}
+
+				button:hover,
+				a:hover {
+					background-color: $color_standard_1;
+					color: $color_standard_1_font;
+				}
+			}
+			/*
+			 Button Style Stealth
+			 */
+			.wp-block-button {
+				button.stealth {
+					background-color: rgb(34, 34, 34);
+					color: #fff;
+				}
+
+				button.stealth:hover {
+					background-color: rgb(108, 108, 108);
+					color: #fff;
+				}
+			}
+		}
+	}
+}
