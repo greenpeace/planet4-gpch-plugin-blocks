@@ -289,13 +289,28 @@
 					</div>
 				</div>
 				<div class="option hide-mobile">
-					<label for="copy-text">{{ __('Copy/Paste this text:', 'planet4-gpch-plugin-blocks') }}</label>
-					<textarea id="clipboard-copy-text-threema" name="copy-text"
-							  rows="5">{{ threemaMessage }}</textarea><br>
-					<div class="controls wp-block-button">
-						<button class="dark copy-to-clipboard" type="button"
-								data-copy-field="clipboard-copy-text-threema">{{ __('Copy to clipboard', 'planet4-gpch-plugin-blocks') }}
-						</button>
+					<div class="sms-box">
+						<label for="mobile">{{ __('Mobile number:', 'planet4-gpch-plugin-blocks') }}</label>
+						<input type="text" id="share-threema-number" class="phone-number-field" name="mobile"
+							   placeholder="07_ ___ __ __"><br>
+						<p class="status error hidden"></p>
+						<p class="description">{{ __('Great! Enter your phone number to receive an SMS you can forward to your friends.', 'planet4-gpch-plugin-blocks') }}
+							<br><i>{{ __('We will not use your number for anything else.', 'planet4-gpch-plugin-blocks') }}</i>
+						</p>
+						<div class="controls wp-block-button">
+							<button class="dark send-sms" data-channel="threema" type="button"
+									data-mobile-number-field="share-threema-number">
+								<div class="lds-ring state-progress hidden">
+									<div></div>
+									<div></div>
+									<div></div>
+									<div></div>
+								</div>
+								<span class="state-default">{{ __('Send SMS', 'planet4-gpch-plugin-blocks') }}</span>
+								<span class="state-progress hidden">{{ __('Sending...', 'planet4-gpch-plugin-blocks') }}</span>
+								<span class="state-done hidden">{{ __('👍 Done!', 'planet4-gpch-plugin-blocks') }}</span>
+							</button>
+						</div>
 					</div>
 				</div>
 				<div class="controls form-section wp-block-button">

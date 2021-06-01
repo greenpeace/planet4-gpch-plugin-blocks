@@ -157,7 +157,7 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 			'smsMessage'      => $this->get_share_message( 'sms' ),
 			'signalMessage'   => $this->get_share_message( 'signal' ),
 			'threemaMessage'  => $this->get_share_message( 'threema' ),
-			'threemaAppLink'  => $this->generate_threeema_share_link( $this->get_share_message( 'threema' ) ),
+			'threemaAppLink'  => $this->generate_threema_share_link( $this->get_share_message( 'threema' ) ),
 		);
 
 		// Output template
@@ -193,13 +193,19 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 		$this->fill_in_default_atrributes();
 
 		try {
-			if ( $channel == 'sms' ) {
+			if ( $channel == 'sms' || $channel == 'signal' || $channel == 'threema' ) { // Channels that need two separate SMS
+				$relatedBlockAttributes = [
+					'sms'     => 'smsMessage',
+					'signal'  => 'signalMessage',
+					'threema' => 'threemaMessage',
+				];
+
 				// Get messages
-				if ( isset( $this->block_attributes['smsMessage'] ) && $this->block_attributes['smsMessage'] != null ) {
-					$message_sms_1 = $this->block_attributes['smsMessage'];
+				if ( isset( $this->block_attributes[ $relatedBlockAttributes[ $channel ] ] ) && $this->block_attributes[ $relatedBlockAttributes[ $channel ] ] != null ) {
+					$message_sms_1 = $this->block_attributes[ $relatedBlockAttributes[ $channel ] ];
 				}
 
-				$message_sms_2 = $this->get_share_message( 'sms', true );
+				$message_sms_2 = $this->get_share_message( $channel, true );
 
 				if ( ! isset( $message_sms_1 ) || ! isset( $message_sms_2 ) ) {
 					throw new \Exception( 'Text messages are not defined.' );
@@ -220,58 +226,36 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 				if ( $result['status'] == 'error' ) {
 					throw new \Exception( $result['msg'] );
 				}
-			} elseif ( $channel == 'whatsapp' ) {
+			} elseif ( ( $channel == 'whatsapp' ) ) { // Channels that get sent a CTA link in a single SMS
+				$relatedBlockAttributes = [
+					'whatsapp' => 'whatsAppSmsCTA',
+				];
+
 				// Get messages
-				if ( isset( $this->block_attributes['whatsAppSmsCTA'] ) && $this->block_attributes['whatsAppSmsCTA'] != null ) {
-					$whatsapp_share_link = $this->generate_whatsapp_share_link(
-						$this->get_share_message( 'whatsapp' ),
-						'whatsapp-sms',
-						false );
+				if ( isset( $this->block_attributes[ $relatedBlockAttributes[ $channel ] ] ) && $this->block_attributes[ $relatedBlockAttributes[ $channel ] ] != null ) {
 
-					$whatsapp_share_link_shortened = $this->get_shortened_link( $whatsapp_share_link, 'whatsapp', false );
+					if ( $channel == 'whatsapp' ) {
+						$share_link = $this->generate_whatsapp_share_link( $this->get_share_message( $channel ) );
+					}
 
-					$message_whatsapp = $this->block_attributes['whatsAppSmsCTA'] . ' ' . $whatsapp_share_link_shortened;
+					$share_link_shortened = $this->get_shortened_link( $share_link, $channel, false );
+
+					$message = $this->block_attributes[ $relatedBlockAttributes[ $channel ] ] . ' ' . $share_link_shortened;
+
+					if ( ! isset( $message ) ) {
+						throw new \Exception( 'Text message for ' . $channel . ' is not defined.' );
+					}
+
+					// Send SMS
+					$sms    = new Sms_Client();
+					$result = $sms->sendSMS( $data['phone'], $message );
+
+					if ( $result['status'] == 'error' ) {
+						throw new \Exception( $result['msg'] );
+					}
 				}
-
-				if ( ! isset( $message_whatsapp ) ) {
-					throw new \Exception( 'Text message for WhatsApp is not defined.' );
-				}
-
-				// Send SMS
-				$sms    = new Sms_Client();
-				$result = $sms->sendSMS( $data['phone'], $message_whatsapp );
-
-				if ( $result['status'] == 'error' ) {
-					throw new \Exception( $result['msg'] );
-				}
-			} elseif ( $channel == 'signal' ) {
-				// Get messages
-				if ( isset( $this->block_attributes['signalMessage'] ) && $this->block_attributes['signalMessage'] != null ) {
-					$message_signal_1 = $this->block_attributes['signalMessage'];
-				}
-
-				$message_signal_2 = $this->get_share_message( 'signal', true );
-
-				if ( ! isset( $message_signal_1 ) || ! isset( $message_signal_2 ) ) {
-					throw new \Exception( 'Signal messages are not defined.' );
-				}
-
-				// Send first message
-				$sms1   = new Sms_Client();
-				$result = $sms1->sendSMS( $data['phone'], $message_signal_1 );
-
-				if ( $result['status'] == 'error' ) {
-					throw new \Exception( $result['msg'] );
-				}
-
-				// Send second message
-				$sms2   = new Sms_Client();
-				$result = $sms2->sendSMS( $data['phone'], $message_signal_2 );
-
-
-				if ( $result['status'] == 'error' ) {
-					throw new \Exception( $result['msg'] );
-				}
+			} else {
+				throw new \Exception( 'Unknown channel.' );
 			}
 		} catch ( \Exception $e ) {
 			\Sentry\captureException( $e );
@@ -365,10 +349,9 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 	 * @throws \Exception
 	 */
 	private function get_share_message( $channel, $shortVersion = false ) {
-		if ($shortVersion) {
+		if ( $shortVersion ) {
 			$text = $this->block_attributes['shareTextShort'];
-		}
-		else {
+		} else {
 			$text = $this->block_attributes['shareText'];
 		}
 
@@ -402,7 +385,7 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 	 *
 	 * @return string
 	 */
-	private function generate_threeema_share_link( $text ) {
+	private function generate_threema_share_link( $text ) {
 		return 'threema://compose?text=' . urlencode( $text );
 	}
 

@@ -67,6 +67,13 @@ export class P2PShareBlock {
 						'planet4-gpch-plugin-blocks'
 					),
 				},
+				threemaMessage: {
+					type: 'string',
+					default: __(
+						'Thank you for sharing on Threema! Please copy the following message and send it to your friends.',
+						'planet4-gpch-plugin-blocks'
+					),
+				},
 				smsMessage: {
 					type: 'string',
 					default: __(
@@ -364,7 +371,7 @@ export class P2PShareBlock {
 								<h3 style={ separatorStyle }>WhatsApp Share</h3>
 								<p style={ descriptionStyle }>
 									{ __(
-										'WhatsApp SMS CTA (Link to WhatsApp will be added at the end):',
+										'WhatsApp SMS CTA (178 characters max, link to WhatsApp will be added at the end):',
 										'planet4-gpch-plugin-blocks'
 									) }
 								</p>
@@ -381,6 +388,7 @@ export class P2PShareBlock {
 										} )
 									}
 									style={ textboxStyle }
+									characterLimit={ 178 }
 								/>
 								<h3 style={ separatorStyle }>Email Share</h3>
 								<p style={ descriptionStyle }>
@@ -426,7 +434,7 @@ export class P2PShareBlock {
 								<h3 style={ separatorStyle }>SMS Share</h3>
 								<p style={ descriptionStyle }>
 									{ __(
-										'First SMS, share CTA:',
+										'First SMS, share CTA (178 characters max):',
 										'planet4-gpch-plugin-blocks'
 									) }
 								</p>
@@ -443,6 +451,7 @@ export class P2PShareBlock {
 										} )
 									}
 									style={ textboxStyle }
+									characterLimit={ 178 }
 								/>
 								<p style={ descriptionStyle }>
 									{ __(
@@ -453,14 +462,14 @@ export class P2PShareBlock {
 								<h3 style={ separatorStyle }>Signal Share</h3>
 								<p style={ descriptionStyle }>
 									{ __(
-										'First SMS, share CTA:',
+										'First SMS, share CTA (178 characters max):',
 										'planet4-gpch-plugin-blocks'
 									) }
 								</p>
 								<RichText
 									value={ attributes.signalMessage }
 									placeholder={ __(
-										'FOR EXAMPLE: Thank you for sharing with your friends. Please copy/paste the following text into signal and send it to your friends.',
+										'FOR EXAMPLE: Thank you for sharing with your friends. Please copy/paste the following text into Signal and send it to your friends.',
 										'planet4-gpch-plugin-blocks'
 									) }
 									allowedFormats={ [] }
@@ -470,6 +479,7 @@ export class P2PShareBlock {
 										} )
 									}
 									style={ textboxStyle }
+									characterLimit={ 178 }
 								/>
 								<p style={ descriptionStyle }>
 									{ __(
@@ -480,7 +490,28 @@ export class P2PShareBlock {
 								<h3 style={ separatorStyle }>Threema Share</h3>
 								<p style={ descriptionStyle }>
 									{ __(
-										'No additional options.',
+										'First SMS, share CTA (178 characters max):',
+										'planet4-gpch-plugin-blocks'
+									) }
+								</p>
+								<RichText
+									value={ attributes.threemaMessage }
+									placeholder={ __(
+										'FOR EXAMPLE: Thank you for sharing with your friends. Please copy/paste the following text into Threema and send it to your friends.',
+										'planet4-gpch-plugin-blocks'
+									) }
+									allowedFormats={ [] }
+									onChange={ ( val ) =>
+										setAttributes( {
+											threemaMessage: val,
+										} )
+									}
+									style={ textboxStyle }
+									characterLimit={ 178 }
+								/>
+								<p style={ descriptionStyle }>
+									{ __(
+										'A second SMS is sent with the share text and link.',
 										'planet4-gpch-plugin-blocks'
 									) }
 								</p>
