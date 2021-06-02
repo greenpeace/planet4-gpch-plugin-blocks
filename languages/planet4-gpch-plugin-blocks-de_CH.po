@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Planet4 GPCH Plugin Blocks 0.1.43\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/planet4-gpch-"
 "plugin-blocks\n"
-"POT-Creation-Date: 2021-05-26 14:30+0200\n"
-"PO-Revision-Date: 2021-05-26 14:36+0200\n"
+"POT-Creation-Date: 2021-06-02 07:05+0200\n"
+"PO-Revision-Date: 2021-06-02 07:26+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_CH\n"
@@ -65,84 +65,90 @@ msgstr "Textnachricht ist zu lang."
 msgid "SMS could not be sent. Try again later."
 msgstr "SMS konnte nicht gesendet werden. Bitte versuch es später nochmal."
 
-#: includes/blocks/Form_Entries.php:123
+#: includes/blocks/Form_Entries.php:79
+#: src/blocks/FormEntries/FormEntriesBlock.js:31
+msgid "FIELD_VALUE has signed TIME_AGO."
+msgstr "FIELD_VALUE hat TIME_AGO unterschrieben."
+
+#: includes/blocks/Form_Entries.php:200
 msgid "year"
 msgstr "Jahr"
 
-#: includes/blocks/Form_Entries.php:124
+#: includes/blocks/Form_Entries.php:201
 msgid "month"
 msgstr "Monat"
 
-#: includes/blocks/Form_Entries.php:125
+#: includes/blocks/Form_Entries.php:202
 msgid "week"
 msgstr "Woche"
 
-#: includes/blocks/Form_Entries.php:126
+#: includes/blocks/Form_Entries.php:203
 msgid "day"
 msgstr "Tag"
 
-#: includes/blocks/Form_Entries.php:127
+#: includes/blocks/Form_Entries.php:204
 msgid "hour"
 msgstr "Stunde"
 
-#: includes/blocks/Form_Entries.php:128
+#: includes/blocks/Form_Entries.php:205
 msgid "minute"
 msgstr "Minute"
 
-#: includes/blocks/Form_Entries.php:129
+#: includes/blocks/Form_Entries.php:206
 msgid "second"
 msgstr "Sekunde"
 
-#: includes/blocks/Form_Entries.php:132
+#: includes/blocks/Form_Entries.php:209
 msgid "years"
 msgstr "Jahre"
 
-#: includes/blocks/Form_Entries.php:133
+#: includes/blocks/Form_Entries.php:210
 msgid "months"
 msgstr "Monate"
 
-#: includes/blocks/Form_Entries.php:134
+#: includes/blocks/Form_Entries.php:211
 msgid "weeks"
 msgstr "Wochen"
 
-#: includes/blocks/Form_Entries.php:135
+#: includes/blocks/Form_Entries.php:212
 msgid "days"
 msgstr "Tagen"
 
-#: includes/blocks/Form_Entries.php:136
+#: includes/blocks/Form_Entries.php:213
 msgid "hours"
 msgstr "Stunden"
 
-#: includes/blocks/Form_Entries.php:137
+#: includes/blocks/Form_Entries.php:214
 msgid "minutes"
 msgstr "Minuten"
 
-#: includes/blocks/Form_Entries.php:138
+#: includes/blocks/Form_Entries.php:215
 msgid "seconds"
 msgstr "Sekunden"
 
-#: includes/blocks/Form_Entries.php:140
+#: includes/blocks/Form_Entries.php:217
 msgid "PRE_TEXT"
-msgstr " vor"
+msgstr "vor"
 
-#: includes/blocks/Form_Entries.php:141
+#: includes/blocks/Form_Entries.php:218
 msgid "ago"
 msgstr " "
 
-#: includes/blocks/Form_Entries.php:155
+#: includes/blocks/Form_Entries.php:237
 msgid "just now"
 msgstr "gerade eben"
 
-#: includes/blocks/P2P_Share.php:81 src/blocks/P2PShare/P2PShareBlock.js:25
+#: includes/blocks/P2P_Share.php:87 src/blocks/P2PShare/P2PShareBlock.js:28
 msgid "How many people can you motivate to also sign the petition?"
 msgstr ""
 "Wie viele Personen kannst du motivieren, die Petition auch zu unterschreiben?"
 
-#: includes/blocks/P2P_Share.php:88 src/blocks/P2PShare/P2PShareBlock.js:32
+#: includes/blocks/P2P_Share.php:94 src/blocks/P2PShare/P2PShareBlock.js:35
 msgid "How will you be able to reach your friends best?"
 msgstr "Wie erreichst du deine Freunde am besten?"
 
-#: includes/blocks/P2P_Share.php:95 src/blocks/P2PShare/P2PShareBlock.js:39
+#: includes/blocks/P2P_Share.php:101 src/blocks/P2PShare/P2PShareBlock.js:42
+#: src/blocks/P2PShare/P2PShareBlock.js:49
 msgid ""
 "I just signed this petition, it's a very important topic. Click here to sign "
 "it also: "
@@ -150,7 +156,7 @@ msgstr ""
 "Ich habe gerade diese Petition zu einem wichtigen Thema unterschrieben. "
 "Klick hier um sie auch zu unterschreiben: "
 
-#: includes/blocks/P2P_Share.php:102 src/blocks/P2PShare/P2PShareBlock.js:56
+#: includes/blocks/P2P_Share.php:108 src/blocks/P2PShare/P2PShareBlock.js:66
 msgid ""
 "Thank you for sharing on WhatsApp! Click this link, you will be able to edit "
 "the message before sending it: "
@@ -158,17 +164,17 @@ msgstr ""
 "Vielen Dank fürs Teilen auf WhatsApp! Klick diesen Link, du kannst die "
 "Nachricht noch bearbeiten bevor du sie abschickst:"
 
-#: includes/blocks/P2P_Share.php:109 src/blocks/P2PShare/P2PShareBlock.js:84
+#: includes/blocks/P2P_Share.php:115 src/blocks/P2PShare/P2PShareBlock.js:101
 msgid "Help by also signing this petition!"
 msgstr "Hilf mit indem du die Petition auch unterschreibst!"
 
-#: includes/blocks/P2P_Share.php:116 src/blocks/P2PShare/P2PShareBlock.js:77
+#: includes/blocks/P2P_Share.php:122 src/blocks/P2PShare/P2PShareBlock.js:94
 msgid "Hi, I just signed this petition. Can I ask you to sign it too? CTA_LINK"
 msgstr ""
 "Hallo, ich habe gerade diese Petition unterschrieben. Willst du nicht auch "
 "unterschreiben? CTA_LINK"
 
-#: includes/blocks/P2P_Share.php:123 src/blocks/P2PShare/P2PShareBlock.js:63
+#: includes/blocks/P2P_Share.php:129 src/blocks/P2PShare/P2PShareBlock.js:80
 msgid ""
 "Thank you for sharing by SMS! Please copy the following message and send it "
 "to your friends."
@@ -176,7 +182,7 @@ msgstr ""
 "Vielen Dank fürs Teilen per SMS! Bitte kopiere die folgende Nachricht und "
 "sende sie an deine Freund*innen."
 
-#: includes/blocks/P2P_Share.php:130 src/blocks/P2PShare/P2PShareBlock.js:70
+#: includes/blocks/P2P_Share.php:136 src/blocks/P2PShare/P2PShareBlock.js:87
 msgid ""
 "Thank you for sharing on Signal! Please copy the following message and send "
 "it to your friends."
@@ -184,9 +190,9 @@ msgstr ""
 "Vielen Dank fürs Teilen per Signal! Bitte kopiere die folgende Nachricht und "
 "schicke sie an deine Freund*innen."
 
-#: includes/blocks/P2P_Share.php:314
+#: includes/blocks/P2P_Share.php:305
 msgid "Invalid email address"
-msgstr "Ungültige Email-Adresse"
+msgstr "Ungültige E-Mail-Adresse"
 
 #: includes/blocks/Planet4_GPCH_Banner_Tool.php:41
 msgid "Gravity Form ID"
@@ -359,7 +365,7 @@ msgstr "Abschicken"
 msgid "Delete"
 msgstr ""
 
-#: includes/blocks/Planet4_GPCH_Base_Block.php:16
+#: includes/blocks/Planet4_GPCH_Base_Block.php:32
 msgid "Error"
 msgstr ""
 
@@ -661,56 +667,64 @@ msgstr ""
 msgid "Find"
 msgstr ""
 
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:148
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:151
 msgid "👍 Copied!"
 msgstr "👍 Kopiert!"
 
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:209
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:212
 msgid "Please use a valid Swiss mobile number."
 msgstr "Bitte verwende eine gültige Schweizer Mobiltelefon-Nummer."
 
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:245
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:248
 msgid "Your message was sent. Check your phone!"
 msgstr "Deine SMS wurde gesendet."
 
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:277
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:390
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:284
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:435
 msgid "Application error. Please try again later."
 msgstr "Fehler beim Senden. Bitte versuche es später nochmals."
 
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:358
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:399
 msgid "Your message was sent. Check your email!"
-msgstr "Deine Email wurde gesendet. Schau in deinen Posteingang!"
+msgstr "Deine E-Mail wurde gesendet. Schau in deinen Posteingang!"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:227
+#: src/blocks/P2PShare/P2PShareBlock.js:73
+msgid ""
+"Thank you for sharing on Threema! Please copy the following message and send "
+"it to your friends."
+msgstr ""
+"Vielen Dank fürs Teilen per Threema! Bitte kopiere die folgende Nachricht "
+"und schicke sie an deine Freund*innen."
+
+#: src/blocks/P2PShare/P2PShareBlock.js:236
 msgid "UTM Tags"
 msgstr "UTM Tags"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:233
+#: src/blocks/P2PShare/P2PShareBlock.js:242
 msgid "UTM Medium"
 msgstr "UTM Medium"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:245
+#: src/blocks/P2PShare/P2PShareBlock.js:254
 msgid "UTM Campaign"
 msgstr "UTM Campaign"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:258
+#: src/blocks/P2PShare/P2PShareBlock.js:267
 msgid "utm_source will be added automatically depending on the channel."
 msgstr "utm_source wird automatisch hinzugefügt und dem Kanal angepasst."
 
-#: src/blocks/P2PShare/P2PShareBlock.js:269
+#: src/blocks/P2PShare/P2PShareBlock.js:278
 msgid "Step 1"
 msgstr "Schritt 1"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:284
+#: src/blocks/P2PShare/P2PShareBlock.js:293
 msgid "Step 2"
 msgstr "Schritt 2"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:299
+#: src/blocks/P2PShare/P2PShareBlock.js:308
 msgid "Share text/links"
 msgstr "Teilen-Text und -Link"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:305
+#: src/blocks/P2PShare/P2PShareBlock.js:314
 msgid ""
 "Share text for all channels. The link will be shortened and added to the end "
 "of the text:"
@@ -718,45 +732,61 @@ msgstr ""
 "Geteilter Text auf allen Kanälen. Der Link wird gekürzt und am Ende des "
 "Textes angehängt:"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:312
+#: src/blocks/P2PShare/P2PShareBlock.js:321
 msgid "THE SHARE TEXT FOR ALL CHANNELS"
 msgstr "GETEILTER TEXT FÜR ALLE KANÄLE"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:325
+#: src/blocks/P2PShare/P2PShareBlock.js:334
+msgid ""
+"Short version (max. 178 characters) of the share text when sent by SMS. The "
+"link will be shortened and added to the end of the text:"
+msgstr ""
+"Kurze Version (max. 178 Zeichen) des geteilten Textes für den Versand per "
+"SMS. Der Link wird gekürzt und am Ende des Textes angehängt:"
+
+#: src/blocks/P2PShare/P2PShareBlock.js:341
+msgid "THE SHARE TEXT FOR ALL CHANNELS (when sent by SMS)"
+msgstr "GETEILTER TEXT FÜR ALLE KANÄLE (wenn per SMS versendet)"
+
+#: src/blocks/P2PShare/P2PShareBlock.js:355
 msgid "Share link (unshortened and without UTM tags)"
 msgstr "Geteilter Link (ungekürzt und ohne UTM Tags)"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:344
-msgid "WhatsApp SMS CTA (Link to WhatsApp will be added at the end):"
-msgstr "WhatsApp SMS CTA (Link zu WhatsApp wird am Ende angefügt)"
+#: src/blocks/P2PShare/P2PShareBlock.js:374
+msgid ""
+"WhatsApp SMS CTA (178 characters max, link to WhatsApp will be added at the "
+"end):"
+msgstr ""
+"WhatsApp SMS CTA (max. 178 Zeichen, Link zu WhatsApp wird am Ende angefügt)"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:351
+#: src/blocks/P2PShare/P2PShareBlock.js:381
 msgid "THE TEXT TO SEND BY SMS"
 msgstr "DER PER SMS VERSENDETE TEXT"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:365
+#: src/blocks/P2PShare/P2PShareBlock.js:396
 msgid "Email Subject:"
-msgstr "Email-Betreff:"
+msgstr "E-Mail-Betreff:"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:372
+#: src/blocks/P2PShare/P2PShareBlock.js:403
 msgid "EMAIL SUBJECT"
-msgstr "EMAIL-BETREFF"
+msgstr "E-MAIL-BETREFF"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:385
+#: src/blocks/P2PShare/P2PShareBlock.js:416
 msgid ""
 "Email Text. Put CTA_LINK anywhere you would like to put a shortened link."
-msgstr "Email Text. Benutze CTA_LINK um einen gekürzten Link einzufügen."
+msgstr "E-Mail Text. Benutze CTA_LINK um einen gekürzten Link einzufügen."
 
-#: src/blocks/P2PShare/P2PShareBlock.js:392
+#: src/blocks/P2PShare/P2PShareBlock.js:423
 msgid "EMAIL TEXT"
-msgstr "EMAIL TEXT"
+msgstr "E-MAIL TEXT"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:406
-#: src/blocks/P2PShare/P2PShareBlock.js:433
-msgid "First SMS, share CTA:"
-msgstr "Erstes SMS, CTA zum Teilen:"
+#: src/blocks/P2PShare/P2PShareBlock.js:437
+#: src/blocks/P2PShare/P2PShareBlock.js:465
+#: src/blocks/P2PShare/P2PShareBlock.js:493
+msgid "First SMS, share CTA (178 characters max):"
+msgstr "Erstes SMS, CTA zum Teilen (max. 178 Zeichen):"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:413
+#: src/blocks/P2PShare/P2PShareBlock.js:444
 msgid ""
 "FOR EXAMPLE: Thank you for sharing with your friends. Please forward the "
 "following SMS text to them."
@@ -764,22 +794,27 @@ msgstr ""
 "ZUM BEISPIEL: Vielen Dank fürs Teilen mit deinen Freund*innen. Bitte leite "
 "die folgende SMS an sie weiter."
 
-#: src/blocks/P2PShare/P2PShareBlock.js:426
-#: src/blocks/P2PShare/P2PShareBlock.js:453
+#: src/blocks/P2PShare/P2PShareBlock.js:458
+#: src/blocks/P2PShare/P2PShareBlock.js:486
+#: src/blocks/P2PShare/P2PShareBlock.js:514
 msgid "A second SMS is sent with the share text and link."
 msgstr "Ein zweites SMS wird gesendet mit dem Teilen-Text und Link."
 
-#: src/blocks/P2PShare/P2PShareBlock.js:440
+#: src/blocks/P2PShare/P2PShareBlock.js:472
 msgid ""
 "FOR EXAMPLE: Thank you for sharing with your friends. Please copy/paste the "
-"following text into signal and send it to your friends."
+"following text into Signal and send it to your friends."
 msgstr ""
 "ZUM BEISPIEL: Vielen Dank fürs Teilen mit deinen Freunden. Bitte kopiere die "
 "folgende Nachricht und leite sie per Signal an deine Freund*innen weiter."
 
-#: src/blocks/P2PShare/P2PShareBlock.js:460
-msgid "No additional options."
-msgstr "Keine zusätzlichen Optionen."
+#: src/blocks/P2PShare/P2PShareBlock.js:500
+msgid ""
+"FOR EXAMPLE: Thank you for sharing with your friends. Please copy/paste the "
+"following text into Threema and send it to your friends."
+msgstr ""
+"ZUM BEISPIEL: Vielen Dank fürs Teilen mit deinen Freunden. Bitte kopiere die "
+"folgende Nachricht und leite sie per Threema an deine Freund*innen weiter."
 
 #: templates/blocks/gpch_events.twig:18
 msgid "Event"
@@ -807,7 +842,7 @@ msgstr "WhatsApp"
 
 #: templates/blocks/p2p-share.twig:55
 msgid "Email"
-msgstr "Email"
+msgstr "E-Mail"
 
 #: templates/blocks/p2p-share.twig:63
 msgid "SMS"
@@ -821,11 +856,11 @@ msgstr "Signal"
 msgid "Threema"
 msgstr "Threema"
 
-#: templates/blocks/p2p-share.twig:89
+#: templates/blocks/p2p-share.twig:90
 msgid "Share on WhatsApp"
 msgstr "Auf WhatsApp teilen"
 
-#: templates/blocks/p2p-share.twig:94 templates/blocks/p2p-share.twig:278
+#: templates/blocks/p2p-share.twig:94 templates/blocks/p2p-share.twig:281
 msgid "Thanks for sharing!"
 msgstr "Vielen Dank fürs Teilen!"
 
@@ -836,80 +871,90 @@ msgstr ""
 "Mit dem Knopf öffnest du WhatsApp. Du kannst die Nachricht noch ändern bevor "
 "du sie sendest."
 
-#: templates/blocks/p2p-share.twig:99
+#: templates/blocks/p2p-share.twig:97
+msgid ""
+"WhatsApp limits sending to 5 people at a time. You can click the button "
+"again to send to more people."
+msgstr ""
+"Auf WhatsApp kannst du nur 5 Personen gleichzeitig auswählen. Du kannst aber "
+"den Knopf mehrmals benutzen wenn du möchtest."
+
+#: templates/blocks/p2p-share.twig:100
 msgid "Open WhatsApp"
 msgstr "WhatsApp öffnen"
 
-#: templates/blocks/p2p-share.twig:105 templates/blocks/p2p-share.twig:196
-#: templates/blocks/p2p-share.twig:242
+#: templates/blocks/p2p-share.twig:106 templates/blocks/p2p-share.twig:198
+#: templates/blocks/p2p-share.twig:245 templates/blocks/p2p-share.twig:294
 msgid "Mobile number:"
 msgstr "Mobile-Nummer:"
 
-#: templates/blocks/p2p-share.twig:109
+#: templates/blocks/p2p-share.twig:110
 msgid "Great! Enter your phone number to receive an SMS with a WhatsApp link."
 msgstr "Super! Lass dir eine SMS mit einem Link für WhatsApp zuschicken."
 
-#: templates/blocks/p2p-share.twig:110 templates/blocks/p2p-share.twig:201
-#: templates/blocks/p2p-share.twig:247
+#: templates/blocks/p2p-share.twig:111 templates/blocks/p2p-share.twig:203
+#: templates/blocks/p2p-share.twig:250 templates/blocks/p2p-share.twig:299
 msgid "We will not use your number for anything else."
 msgstr "Wir verwenden deine Nummer für nichts anderes."
 
-#: templates/blocks/p2p-share.twig:121 templates/blocks/p2p-share.twig:211
-#: templates/blocks/p2p-share.twig:258
+#: templates/blocks/p2p-share.twig:122 templates/blocks/p2p-share.twig:214
+#: templates/blocks/p2p-share.twig:261 templates/blocks/p2p-share.twig:310
 msgid "Send SMS"
 msgstr "SMS senden"
 
-#: templates/blocks/p2p-share.twig:122 templates/blocks/p2p-share.twig:167
-#: templates/blocks/p2p-share.twig:212 templates/blocks/p2p-share.twig:259
+#: templates/blocks/p2p-share.twig:123 templates/blocks/p2p-share.twig:169
+#: templates/blocks/p2p-share.twig:215 templates/blocks/p2p-share.twig:262
+#: templates/blocks/p2p-share.twig:311
 msgid "Sending..."
 msgstr "Senden..."
 
-#: templates/blocks/p2p-share.twig:123 templates/blocks/p2p-share.twig:168
-#: templates/blocks/p2p-share.twig:213 templates/blocks/p2p-share.twig:260
+#: templates/blocks/p2p-share.twig:124 templates/blocks/p2p-share.twig:170
+#: templates/blocks/p2p-share.twig:216 templates/blocks/p2p-share.twig:263
+#: templates/blocks/p2p-share.twig:312
 msgid "👍 Done!"
 msgstr "👍 Erledigt!"
 
-#: templates/blocks/p2p-share.twig:130 templates/blocks/p2p-share.twig:175
-#: templates/blocks/p2p-share.twig:221 templates/blocks/p2p-share.twig:267
-#: templates/blocks/p2p-share.twig:301
+#: templates/blocks/p2p-share.twig:131 templates/blocks/p2p-share.twig:177
+#: templates/blocks/p2p-share.twig:224 templates/blocks/p2p-share.twig:270
+#: templates/blocks/p2p-share.twig:319
 msgid "Back"
 msgstr "Zurück"
 
-#: templates/blocks/p2p-share.twig:138
+#: templates/blocks/p2p-share.twig:139
 msgid "Share by Email"
-msgstr "Per Email teilen"
+msgstr "Per E-Mail teilen"
 
-#: templates/blocks/p2p-share.twig:142 templates/blocks/p2p-share.twig:186
-#: templates/blocks/p2p-share.twig:232 templates/blocks/p2p-share.twig:290
+#: templates/blocks/p2p-share.twig:143 templates/blocks/p2p-share.twig:188
+#: templates/blocks/p2p-share.twig:235
 msgid "Copy/Paste this text:"
 msgstr "Kopiere diesen Text:"
 
-#: templates/blocks/p2p-share.twig:147 templates/blocks/p2p-share.twig:191
-#: templates/blocks/p2p-share.twig:237 templates/blocks/p2p-share.twig:295
+#: templates/blocks/p2p-share.twig:148 templates/blocks/p2p-share.twig:193
+#: templates/blocks/p2p-share.twig:240
 msgid "Copy to clipboard"
 msgstr "In Zwischenablage kopieren"
 
-#: templates/blocks/p2p-share.twig:152
+#: templates/blocks/p2p-share.twig:153
 msgid "Email:"
-msgstr "Email-Adresse:"
-
-#: templates/blocks/p2p-share.twig:155
-msgid "Great! Let us send you an email you can forward to your friends."
-msgstr "Super! Lass dir eine Email zusenden, die du dann weiterleiten kannst."
+msgstr "E-Mail-Adresse:"
 
 #: templates/blocks/p2p-share.twig:156
+msgid "Great! Let us send you an email you can forward to your friends."
+msgstr "Super! Lass dir eine E-Mail zusenden, die du dann weiterleiten kannst."
+
+#: templates/blocks/p2p-share.twig:157
 msgid "We will not use your email address for anything else."
 msgstr "Wir verwenden deine Nummer für nichts anderes."
 
-#: templates/blocks/p2p-share.twig:166
+#: templates/blocks/p2p-share.twig:168
 msgid "Send Email"
-msgstr "Email senden"
+msgstr "E-Mail senden"
 
-#: templates/blocks/p2p-share.twig:182
+#: templates/blocks/p2p-share.twig:184
 msgid "Share by SMS"
 msgstr "Per SMS teilen"
 
-#: templates/blocks/p2p-share.twig:200
+#: templates/blocks/p2p-share.twig:202 templates/blocks/p2p-share.twig:298
 msgid ""
 "Great! Enter your phone number to receive an SMS you can forward to your "
 "friends."
@@ -917,29 +962,29 @@ msgstr ""
 "Super! Trag deine Nummer ein und wir senden dir eine SMS, die du dann "
 "weiterleiten kannst."
 
-#: templates/blocks/p2p-share.twig:228
+#: templates/blocks/p2p-share.twig:231
 msgid "Share by Signal"
 msgstr "Auf Signal teilen"
 
-#: templates/blocks/p2p-share.twig:246
+#: templates/blocks/p2p-share.twig:249
 msgid ""
 "Great! Enter your phone number to receive an SMS you can forward on Signal."
 msgstr ""
 "Super! Trag deine Nummer ein und wir senden dir eine SMS, die du dann per "
 "Signal weiterleiten kannst."
 
-#: templates/blocks/p2p-share.twig:273
+#: templates/blocks/p2p-share.twig:277
 msgid "Share on Threema"
 msgstr "Auf Threema teilen"
 
-#: templates/blocks/p2p-share.twig:281
+#: templates/blocks/p2p-share.twig:284
 msgid ""
 "Click the button to open Threema. You can edit the message before sending."
 msgstr ""
 "Mit dem Knopf öffnest du Threema. Du kannst die Nachricht vor dem Senden "
 "noch bearbeiten."
 
-#: templates/blocks/p2p-share.twig:285
+#: templates/blocks/p2p-share.twig:288
 msgid "Open Threema"
 msgstr "Threema öffnen"
 
@@ -959,23 +1004,3 @@ msgstr "https://github.com/greenpeace/planet4-gpch-plugin-blocks"
 #. Description of the plugin/theme
 msgid "Provides Planet4 content blocks specific to Greenpeace Switzerland"
 msgstr "Inhaltselemente für Planet4 spezifisch für Greenpeace Schweiz"
-
-#~ msgid "Next"
-#~ msgstr "Weiter"
-
-#~ msgid ""
-#~ "Great! Let us send you an SMS to your phone that contains a link with a "
-#~ "WhatsApp message."
-#~ msgstr ""
-#~ "Super! Lass dir eine SMS zusenden mit einem klickbaren WhatsApp-Link."
-
-#~ msgid ""
-#~ "Great! Let us send you an SMS to your phone that you can forward to your\n"
-#~ "                                                friends."
-#~ msgstr "Super! Lass dir eine SMS zusenden die du dann weiterleiten kannst."
-
-#~ msgid ""
-#~ "We\n"
-#~ "                                                        will not use your "
-#~ "email address for anything else."
-#~ msgstr "Wir verwenden deine Emailadresse für nichts anderes."
