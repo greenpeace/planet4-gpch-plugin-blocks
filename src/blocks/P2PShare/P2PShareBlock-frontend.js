@@ -200,7 +200,6 @@ smsButtons.forEach( ( item ) => {
 
 		try {
 			phoneNumber = parsePhoneNumber( numberField.value, 'CH' );
-			console.log( phoneNumber );
 
 			if ( phoneNumber === undefined || ! phoneNumber.isValid() ) {
 				throw 'Invalid phone number.';

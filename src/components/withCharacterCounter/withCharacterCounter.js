@@ -58,12 +58,7 @@ const withCharacterCounter = ( WrappedComponent ) => {
 		}
 
 		render() {
-			const {
-				characterLimit,
-				warningThreshold,
-				onChange,
-				...passThroughProps
-			} = this.props;
+			const { characterLimit, ...passThroughProps } = this.props;
 
 			const getClassnames = () =>
 				classNames( 'character-counter', {
