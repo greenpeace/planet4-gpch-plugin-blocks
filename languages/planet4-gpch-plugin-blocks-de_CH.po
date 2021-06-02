@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Planet4 GPCH Plugin Blocks 0.1.43\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/planet4-gpch-"
 "plugin-blocks\n"
-"POT-Creation-Date: 2021-06-01 18:12+0200\n"
-"PO-Revision-Date: 2021-06-01 18:19+0200\n"
+"POT-Creation-Date: 2021-06-02 07:05+0200\n"
+"PO-Revision-Date: 2021-06-02 07:07+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_CH\n"
@@ -667,24 +667,24 @@ msgstr ""
 msgid "Find"
 msgstr ""
 
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:148
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:151
 msgid "👍 Copied!"
 msgstr "👍 Kopiert!"
 
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:209
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:212
 msgid "Please use a valid Swiss mobile number."
 msgstr "Bitte verwende eine gültige Schweizer Mobiltelefon-Nummer."
 
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:245
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:248
 msgid "Your message was sent. Check your phone!"
 msgstr "Deine SMS wurde gesendet."
 
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:277
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:422
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:284
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:435
 msgid "Application error. Please try again later."
 msgstr "Fehler beim Senden. Bitte versuche es später nochmals."
 
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:390
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:399
 msgid "Your message was sent. Check your email!"
 msgstr "Deine E-Mail wurde gesendet. Schau in deinen Posteingang!"
 
@@ -860,7 +860,7 @@ msgstr "Threema"
 msgid "Share on WhatsApp"
 msgstr "Auf WhatsApp teilen"
 
-#: templates/blocks/p2p-share.twig:94 templates/blocks/p2p-share.twig:280
+#: templates/blocks/p2p-share.twig:94 templates/blocks/p2p-share.twig:281
 msgid "Thanks for sharing!"
 msgstr "Vielen Dank fürs Teilen!"
 
@@ -871,82 +871,90 @@ msgstr ""
 "Mit dem Knopf öffnest du WhatsApp. Du kannst die Nachricht noch ändern bevor "
 "du sie sendest."
 
-#: templates/blocks/p2p-share.twig:99
+#: templates/blocks/p2p-share.twig:97
+msgid ""
+"WhatsApp limits sending to 5 people at a time. You can click the button "
+"again to send to more people."
+msgstr ""
+"Auf WhatsApp kannst du nur 5 Personen gleichzeitig auswählen. Du kannst aber "
+"den Knopf mehrmals benutzen wenn du möchtest."
+
+#: templates/blocks/p2p-share.twig:100
 msgid "Open WhatsApp"
 msgstr "WhatsApp öffnen"
 
-#: templates/blocks/p2p-share.twig:105 templates/blocks/p2p-share.twig:197
-#: templates/blocks/p2p-share.twig:244 templates/blocks/p2p-share.twig:293
+#: templates/blocks/p2p-share.twig:106 templates/blocks/p2p-share.twig:198
+#: templates/blocks/p2p-share.twig:245 templates/blocks/p2p-share.twig:294
 msgid "Mobile number:"
 msgstr "Mobile-Nummer:"
 
-#: templates/blocks/p2p-share.twig:109
+#: templates/blocks/p2p-share.twig:110
 msgid "Great! Enter your phone number to receive an SMS with a WhatsApp link."
 msgstr "Super! Lass dir eine SMS mit einem Link für WhatsApp zuschicken."
 
-#: templates/blocks/p2p-share.twig:110 templates/blocks/p2p-share.twig:202
-#: templates/blocks/p2p-share.twig:249 templates/blocks/p2p-share.twig:298
+#: templates/blocks/p2p-share.twig:111 templates/blocks/p2p-share.twig:203
+#: templates/blocks/p2p-share.twig:250 templates/blocks/p2p-share.twig:299
 msgid "We will not use your number for anything else."
 msgstr "Wir verwenden deine Nummer für nichts anderes."
 
-#: templates/blocks/p2p-share.twig:121 templates/blocks/p2p-share.twig:213
-#: templates/blocks/p2p-share.twig:260 templates/blocks/p2p-share.twig:309
+#: templates/blocks/p2p-share.twig:122 templates/blocks/p2p-share.twig:214
+#: templates/blocks/p2p-share.twig:261 templates/blocks/p2p-share.twig:310
 msgid "Send SMS"
 msgstr "SMS senden"
-
-#: templates/blocks/p2p-share.twig:122 templates/blocks/p2p-share.twig:168
-#: templates/blocks/p2p-share.twig:214 templates/blocks/p2p-share.twig:261
-#: templates/blocks/p2p-share.twig:310
-msgid "Sending..."
-msgstr "Senden..."
 
 #: templates/blocks/p2p-share.twig:123 templates/blocks/p2p-share.twig:169
 #: templates/blocks/p2p-share.twig:215 templates/blocks/p2p-share.twig:262
 #: templates/blocks/p2p-share.twig:311
+msgid "Sending..."
+msgstr "Senden..."
+
+#: templates/blocks/p2p-share.twig:124 templates/blocks/p2p-share.twig:170
+#: templates/blocks/p2p-share.twig:216 templates/blocks/p2p-share.twig:263
+#: templates/blocks/p2p-share.twig:312
 msgid "👍 Done!"
 msgstr "👍 Erledigt!"
 
-#: templates/blocks/p2p-share.twig:130 templates/blocks/p2p-share.twig:176
-#: templates/blocks/p2p-share.twig:223 templates/blocks/p2p-share.twig:269
-#: templates/blocks/p2p-share.twig:318
+#: templates/blocks/p2p-share.twig:131 templates/blocks/p2p-share.twig:177
+#: templates/blocks/p2p-share.twig:224 templates/blocks/p2p-share.twig:270
+#: templates/blocks/p2p-share.twig:319
 msgid "Back"
 msgstr "Zurück"
 
-#: templates/blocks/p2p-share.twig:138
+#: templates/blocks/p2p-share.twig:139
 msgid "Share by Email"
 msgstr "Per E-Mail teilen"
 
-#: templates/blocks/p2p-share.twig:142 templates/blocks/p2p-share.twig:187
-#: templates/blocks/p2p-share.twig:234
+#: templates/blocks/p2p-share.twig:143 templates/blocks/p2p-share.twig:188
+#: templates/blocks/p2p-share.twig:235
 msgid "Copy/Paste this text:"
 msgstr "Kopiere diesen Text:"
 
-#: templates/blocks/p2p-share.twig:147 templates/blocks/p2p-share.twig:192
-#: templates/blocks/p2p-share.twig:239
+#: templates/blocks/p2p-share.twig:148 templates/blocks/p2p-share.twig:193
+#: templates/blocks/p2p-share.twig:240
 msgid "Copy to clipboard"
 msgstr "In Zwischenablage kopieren"
 
-#: templates/blocks/p2p-share.twig:152
+#: templates/blocks/p2p-share.twig:153
 msgid "Email:"
 msgstr "E-Mail-Adresse:"
 
-#: templates/blocks/p2p-share.twig:155
+#: templates/blocks/p2p-share.twig:156
 msgid "Great! Let us send you an email you can forward to your friends."
 msgstr "Super! Lass dir eine E-Mail zusenden, die du dann weiterleiten kannst."
 
-#: templates/blocks/p2p-share.twig:156
+#: templates/blocks/p2p-share.twig:157
 msgid "We will not use your email address for anything else."
 msgstr "Wir verwenden deine Nummer für nichts anderes."
 
-#: templates/blocks/p2p-share.twig:167
+#: templates/blocks/p2p-share.twig:168
 msgid "Send Email"
 msgstr "E-Mail senden"
 
-#: templates/blocks/p2p-share.twig:183
+#: templates/blocks/p2p-share.twig:184
 msgid "Share by SMS"
 msgstr "Per SMS teilen"
 
-#: templates/blocks/p2p-share.twig:201
+#: templates/blocks/p2p-share.twig:202 templates/blocks/p2p-share.twig:298
 msgid ""
 "Great! Enter your phone number to receive an SMS you can forward to your "
 "friends."
@@ -954,35 +962,31 @@ msgstr ""
 "Super! Trag deine Nummer ein und wir senden dir eine SMS, die du dann "
 "weiterleiten kannst."
 
-#: templates/blocks/p2p-share.twig:230
+#: templates/blocks/p2p-share.twig:231
 msgid "Share by Signal"
 msgstr "Auf Signal teilen"
 
-#: templates/blocks/p2p-share.twig:248
+#: templates/blocks/p2p-share.twig:249
 msgid ""
 "Great! Enter your phone number to receive an SMS you can forward on Signal."
 msgstr ""
 "Super! Trag deine Nummer ein und wir senden dir eine SMS, die du dann per "
 "Signal weiterleiten kannst."
 
-#: templates/blocks/p2p-share.twig:276
+#: templates/blocks/p2p-share.twig:277
 msgid "Share on Threema"
 msgstr "Auf Threema teilen"
 
-#: templates/blocks/p2p-share.twig:283
+#: templates/blocks/p2p-share.twig:284
 msgid ""
 "Click the button to open Threema. You can edit the message before sending."
 msgstr ""
 "Mit dem Knopf öffnest du Threema. Du kannst die Nachricht vor dem Senden "
 "noch bearbeiten."
 
-#: templates/blocks/p2p-share.twig:287
+#: templates/blocks/p2p-share.twig:288
 msgid "Open Threema"
 msgstr "Threema öffnen"
-
-#: templates/blocks/p2p-share.twig:297
-msgid "Great! Enter your phone number to receive an SMS with a Threema link."
-msgstr ""
 
 #: templates/teasers/tease-magazine-articles.twig:65
 #: templates/teasers/tease-magazine-articles.twig:73
