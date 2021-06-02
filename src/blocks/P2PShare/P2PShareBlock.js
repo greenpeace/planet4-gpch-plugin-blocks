@@ -3,11 +3,14 @@ import { __ } from '@wordpress/i18n';
 import { TextControl } from '@wordpress/components';
 import {
 	useBlockProps,
-	RichText,
+	RichText as BaseRichText,
 	InspectorControls,
 	// eslint-disable-next-line @wordpress/no-unsafe-wp-apis
 	__experimentalLinkControl as LinkControl,
 } from '@wordpress/block-editor';
+import withCharacterCounter from '../../components/withCharacterCounter/withCharacterCounter';
+
+const RichText = withCharacterCounter( BaseRichText );
 
 /* global gpchBlocks */
 
@@ -40,6 +43,13 @@ export class P2PShareBlock {
 						'planet4-gpch-plugin-blocks'
 					),
 				},
+				shareTextShort: {
+					type: 'string',
+					default: __(
+						"I just signed this petition, it's a very important topic. Click here to sign it also: ",
+						'planet4-gpch-plugin-blocks'
+					),
+				},
 				shareLink: {
 					type: 'object',
 				},
@@ -54,6 +64,20 @@ export class P2PShareBlock {
 					type: 'string',
 					default: __(
 						'Thank you for sharing on WhatsApp! Click this link, you will be able to edit the message before sending it: ',
+						'planet4-gpch-plugin-blocks'
+					),
+				},
+				telegramSmsCTA: {
+					type: 'string',
+					default: __(
+						'Thank you for sharing on Telegram! Click this link, you will be able to edit the message before sending it: ',
+						'planet4-gpch-plugin-blocks'
+					),
+				},
+				threemaMessage: {
+					type: 'string',
+					default: __(
+						'Thank you for sharing on Threema! Please copy the following message and send it to your friends.',
 						'planet4-gpch-plugin-blocks'
 					),
 				},
@@ -206,14 +230,6 @@ export class P2PShareBlock {
 												</label>
 											</li>
 										</ul>
-										<div className="controls form-section wp-block-button">
-											<button
-												className="button next dark"
-												data-next-step-field="number_of_people"
-											>
-												Next
-											</button>
-										</div>
 									</fieldset>
 								</form>
 							</div>
@@ -322,6 +338,27 @@ export class P2PShareBlock {
 								/>
 								<p style={ descriptionStyle }>
 									{ __(
+										'Short version (max. 178 characters) of the share text when sent by SMS. The link will be shortened and added to the end of the text:',
+										'planet4-gpch-plugin-blocks'
+									) }
+								</p>
+								<RichText
+									value={ attributes.shareTextShort }
+									placeholder={ __(
+										'THE SHARE TEXT FOR ALL CHANNELS (when sent by SMS)',
+										'planet4-gpch-plugin-blocks'
+									) }
+									allowedFormats={ [] }
+									onChange={ ( val ) =>
+										setAttributes( {
+											shareTextShort: val,
+										} )
+									}
+									style={ textboxStyle }
+									characterLimit={ 178 }
+								/>
+								<p style={ descriptionStyle }>
+									{ __(
 										'Share link (unshortened and without UTM tags)',
 										'planet4-gpch-plugin-blocks'
 									) }
@@ -337,11 +374,10 @@ export class P2PShareBlock {
 									showSuggestions={ true }
 									style={ editElementStyle }
 								></LinkControl>
-
 								<h3 style={ separatorStyle }>WhatsApp Share</h3>
 								<p style={ descriptionStyle }>
 									{ __(
-										'WhatsApp SMS CTA (Link to WhatsApp will be added at the end):',
+										'WhatsApp SMS CTA (178 characters max, link to WhatsApp will be added at the end):',
 										'planet4-gpch-plugin-blocks'
 									) }
 								</p>
@@ -358,6 +394,7 @@ export class P2PShareBlock {
 										} )
 									}
 									style={ textboxStyle }
+									characterLimit={ 178 }
 								/>
 								<h3 style={ separatorStyle }>Email Share</h3>
 								<p style={ descriptionStyle }>
@@ -403,7 +440,7 @@ export class P2PShareBlock {
 								<h3 style={ separatorStyle }>SMS Share</h3>
 								<p style={ descriptionStyle }>
 									{ __(
-										'First SMS, share CTA:',
+										'First SMS, share CTA (178 characters max):',
 										'planet4-gpch-plugin-blocks'
 									) }
 								</p>
@@ -420,6 +457,7 @@ export class P2PShareBlock {
 										} )
 									}
 									style={ textboxStyle }
+									characterLimit={ 178 }
 								/>
 								<p style={ descriptionStyle }>
 									{ __(
@@ -430,14 +468,14 @@ export class P2PShareBlock {
 								<h3 style={ separatorStyle }>Signal Share</h3>
 								<p style={ descriptionStyle }>
 									{ __(
-										'First SMS, share CTA:',
+										'First SMS, share CTA (178 characters max):',
 										'planet4-gpch-plugin-blocks'
 									) }
 								</p>
 								<RichText
 									value={ attributes.signalMessage }
 									placeholder={ __(
-										'FOR EXAMPLE: Thank you for sharing with your friends. Please copy/paste the following text into signal and send it to your friends.',
+										'FOR EXAMPLE: Thank you for sharing with your friends. Please copy/paste the following text into Signal and send it to your friends.',
 										'planet4-gpch-plugin-blocks'
 									) }
 									allowedFormats={ [] }
@@ -447,6 +485,7 @@ export class P2PShareBlock {
 										} )
 									}
 									style={ textboxStyle }
+									characterLimit={ 178 }
 								/>
 								<p style={ descriptionStyle }>
 									{ __(
@@ -457,10 +496,53 @@ export class P2PShareBlock {
 								<h3 style={ separatorStyle }>Threema Share</h3>
 								<p style={ descriptionStyle }>
 									{ __(
-										'No additional options.',
+										'First SMS, share CTA (178 characters max):',
 										'planet4-gpch-plugin-blocks'
 									) }
 								</p>
+								<RichText
+									value={ attributes.threemaMessage }
+									placeholder={ __(
+										'FOR EXAMPLE: Thank you for sharing with your friends. Please copy/paste the following text into Threema and send it to your friends.',
+										'planet4-gpch-plugin-blocks'
+									) }
+									allowedFormats={ [] }
+									onChange={ ( val ) =>
+										setAttributes( {
+											threemaMessage: val,
+										} )
+									}
+									style={ textboxStyle }
+									characterLimit={ 178 }
+								/>
+								<p style={ descriptionStyle }>
+									{ __(
+										'A second SMS is sent with the share text and link.',
+										'planet4-gpch-plugin-blocks'
+									) }
+								</p>
+								<h3 style={ separatorStyle }>Telegram Share</h3>
+								<p style={ descriptionStyle }>
+									{ __(
+										'Telegram SMS CTA (178 characters max, link to Telegram will be added at the end):',
+										'planet4-gpch-plugin-blocks'
+									) }
+								</p>
+								<RichText
+									value={ attributes.telegramSmsCTA }
+									placeholder={ __(
+										'THE TEXT TO SEND BY SMS',
+										'planet4-gpch-plugin-blocks'
+									) }
+									allowedFormats={ [] }
+									onChange={ ( val ) =>
+										setAttributes( {
+											telegramSmsCTA: val,
+										} )
+									}
+									style={ textboxStyle }
+									characterLimit={ 178 }
+								/>
 							</div>
 						) }
 					</div>

@@ -20,7 +20,6 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 	 */
 	protected $template_file = P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'templates/blocks/p2p-share.twig';
 
-
 	/**
 	 * Block name.
 	 *
@@ -28,9 +27,16 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 	 */
 	const BLOCK_NAME = 'p2p_share';
 
+	/**
+	 * Block name including namespace.
+	 *
+	 * @const string FULL_BLOCK_NAME.
+	 */
+	const FULL_BLOCK_NAME = 'planet4-gpch-plugin-blocks/p2p-share';
+
 	private $bitly_token;
 
-	private $block_attributes;
+	public $block_attributes;
 
 	private $postID;
 
@@ -44,7 +50,7 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 
 		$child_options = get_option( 'gpch_child_options' );
 
-		if ( $child_options !== false ) {
+		if ( $child_options !== false && array_key_exists( 'gpch_child_field_bitly_token', $child_options ) ) {
 			$this->bitly_token = $child_options['gpch_child_field_bitly_token'];
 		}
 
@@ -103,6 +109,13 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 						'planet4-gpch-plugin-blocks'
 					),
 				],
+				'telegramSmsCTA' => [
+					'type'    => 'string',
+					'default' => __(
+						'Thank you for sharing on Telegram! Click this link, you will be able to edit the message before sending it: ',
+						'planet4-gpch-plugin-blocks'
+					),
+				],
 				'emailSubject'   => [
 					'type'    => 'string',
 					'default' => __(
@@ -141,17 +154,18 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 
 	function dynamic_render_callback( $block_attributes, $content ) {
 		$this->block_attributes = $block_attributes;
-
+		
 		// Prepare parameters for template
 		$params = array(
 			'base_url'        => P4_GPCH_PLUGIN_BLOCKS_BASE_URL,
 			'attributes'      => $block_attributes,
 			'whatsAppMessage' => $this->get_share_message( 'whatsapp' ),
 			'whatsAppLink'    => $this->generate_whatsapp_share_link( $this->get_share_message( 'whatsapp' ) ),
+			'telegramLink'    => $this->generate_telegram_share_link( $this->get_shortened_link( $block_attributes['shareLink']['url'], 'telegram' ), $this->get_share_message( 'telegram' ) ),
 			'smsMessage'      => $this->get_share_message( 'sms' ),
 			'signalMessage'   => $this->get_share_message( 'signal' ),
 			'threemaMessage'  => $this->get_share_message( 'threema' ),
-			'threemaAppLink'  => $this->generate_threeema_share_link( $this->get_share_message( 'threema' ) ),
+			'threemaAppLink'  => $this->generate_threema_share_link( $this->get_share_message( 'threema' ) ),
 		);
 
 		// Output template
@@ -181,18 +195,25 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 	public function restAPI_send_sms( $data ) {
 		$channel = $data['channel'];
 
-		$block                  = $this->get_first_p2p_block_in_post( $data['postId'] );
+		$block = $this->get_first_block_in_post( self::FULL_BLOCK_NAME, $data['postId'] );
+
 		$this->block_attributes = $block['attrs'];
 		$this->fill_in_default_atrributes();
 
 		try {
-			if ( $channel == 'sms' ) {
+			if ( $channel == 'sms' || $channel == 'signal' || $channel == 'threema' ) { // Channels that need two separate SMS
+				$relatedBlockAttributes = [
+					'sms'     => 'smsMessage',
+					'signal'  => 'signalMessage',
+					'threema' => 'threemaMessage',
+				];
+
 				// Get messages
-				if ( isset( $this->block_attributes['smsMessage'] ) && $this->block_attributes['smsMessage'] != null ) {
-					$message_sms_1 = $this->block_attributes['smsMessage'];
+				if ( isset( $this->block_attributes[ $relatedBlockAttributes[ $channel ] ] ) && $this->block_attributes[ $relatedBlockAttributes[ $channel ] ] != null ) {
+					$message_sms_1 = $this->block_attributes[ $relatedBlockAttributes[ $channel ] ];
 				}
 
-				$message_sms_2 = $this->get_share_message( 'sms' );
+				$message_sms_2 = $this->get_share_message( $channel, true );
 
 				if ( ! isset( $message_sms_1 ) || ! isset( $message_sms_2 ) ) {
 					throw new \Exception( 'Text messages are not defined.' );
@@ -210,62 +231,42 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 				$sms2   = new Sms_Client();
 				$result = $sms2->sendSMS( $data['phone'], $message_sms_2 );
 
-
 				if ( $result['status'] == 'error' ) {
 					throw new \Exception( $result['msg'] );
 				}
-			} elseif ( $channel == 'whatsapp' ) {
+			} elseif ( ( $channel == 'whatsapp' || $channel == 'telegram' ) ) { // Channels that get sent a CTA link in a single SMS
+				$relatedBlockAttributes = [
+					'whatsapp' => 'whatsAppSmsCTA',
+					'telegram' => 'telegramSmsCTA',
+				];
+
 				// Get messages
-				if ( isset( $this->block_attributes['whatsAppSmsCTA'] ) && $this->block_attributes['whatsAppSmsCTA'] != null ) {
-					$whatsapp_share_link = $this->generate_whatsapp_share_link(
-						$this->get_share_message( 'whatsapp' ),
-						'whatsapp-sms',
-						false );
+				if ( isset( $this->block_attributes[ $relatedBlockAttributes[ $channel ] ] ) && $this->block_attributes[ $relatedBlockAttributes[ $channel ] ] != null ) {
 
-					$whatsapp_share_link_shortened = $this->get_shortened_link( $whatsapp_share_link, 'whatsapp', false );
+					if ( $channel == 'whatsapp' ) {
+						$share_link = $this->generate_whatsapp_share_link( $this->get_share_message( $channel ) );
+					} elseif ( $channel == 'telegram' ) {
+						$share_link = $this->generate_telegram_share_link( $this->block_attributes['shareLink']['url'], $this->get_share_message( $channel ) );
+					}
 
-					$message_whatsapp = $this->block_attributes['whatsAppSmsCTA'] . ' ' . $whatsapp_share_link_shortened;
+					$share_link_shortened = $this->get_shortened_link( $share_link, $channel, false );
+
+					$message = $this->block_attributes[ $relatedBlockAttributes[ $channel ] ] . ' ' . $share_link_shortened;
+
+					if ( ! isset( $message ) ) {
+						throw new \Exception( 'Text message for ' . $channel . ' is not defined.' );
+					}
+
+					// Send SMS
+					$sms    = new Sms_Client();
+					$result = $sms->sendSMS( $data['phone'], $message );
+
+					if ( $result['status'] == 'error' ) {
+						throw new \Exception( $result['msg'] );
+					}
 				}
-
-				if ( ! isset( $message_whatsapp ) ) {
-					throw new \Exception( 'Text message for WhatsApp is not defined.' );
-				}
-
-				// Send SMS
-				$sms    = new Sms_Client();
-				$result = $sms->sendSMS( $data['phone'], $message_whatsapp );
-
-				if ( $result['status'] == 'error' ) {
-					throw new \Exception( $result['msg'] );
-				}
-			} elseif ( $channel == 'signal' ) {
-				// Get messages
-				if ( isset( $this->block_attributes['signalMessage'] ) && $this->block_attributes['signalMessage'] != null ) {
-					$message_signal_1 = $this->block_attributes['signalMessage'];
-				}
-
-				$message_signal_2 = $this->get_share_message( 'signal' );
-
-				if ( ! isset( $message_signal_1 ) || ! isset( $message_signal_2 ) ) {
-					throw new \Exception( 'Signal messages are not defined.' );
-				}
-
-				// Send first message
-				$sms1   = new Sms_Client();
-				$result = $sms1->sendSMS( $data['phone'], $message_signal_1 );
-
-				if ( $result['status'] == 'error' ) {
-					throw new \Exception( $result['msg'] );
-				}
-
-				// Send second message
-				$sms2   = new Sms_Client();
-				$result = $sms2->sendSMS( $data['phone'], $message_signal_2 );
-
-
-				if ( $result['status'] == 'error' ) {
-					throw new \Exception( $result['msg'] );
-				}
+			} else {
+				throw new \Exception( 'Unknown channel.' );
 			}
 		} catch ( \Exception $e ) {
 			\Sentry\captureException( $e );
@@ -293,7 +294,8 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 	 * @param $data
 	 */
 	public function restAPI_send_email( $data ) {
-		$block                  = $this->get_first_p2p_block_in_post( $data['postId'] );
+		$block = $this->get_first_block_in_post( self::FULL_BLOCK_NAME, $data['postId'] );
+
 		$this->block_attributes = $block['attrs'];
 		$this->fill_in_default_atrributes();
 
@@ -357,8 +359,13 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 	 * @return string
 	 * @throws \Exception
 	 */
-	private function get_share_message( $channel ) {
-		$text = $this->block_attributes['shareText'];
+	private function get_share_message( $channel, $shortVersion = false ) {
+		if ( $shortVersion ) {
+			$text = $this->block_attributes['shareTextShort'];
+		} else {
+			$text = $this->block_attributes['shareText'];
+		}
+
 		$link = $this->block_attributes['shareLink'];
 
 		if ( $link !== null ) {
@@ -389,8 +396,20 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 	 *
 	 * @return string
 	 */
-	private function generate_threeema_share_link( $text ) {
+	private function generate_threema_share_link( $text ) {
 		return 'threema://compose?text=' . urlencode( $text );
+	}
+
+
+	/**
+	 * Generates a share link for Telegram
+	 *
+	 * @param $text
+	 *
+	 * @return string
+	 */
+	private function generate_telegram_share_link( $url, $text ) {
+		return 'https://t.me/share/url?url=' . rawurlencode( $this->get_shortened_link( $url, 'telegram' ) ) . '&text=' . rawurlencode( $text );
 	}
 
 	/**
@@ -479,45 +498,6 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 			\Sentry\captureException( $e );
 
 			return $link;
-		}
-	}
-
-	/**
-	 * Returns the first P2P block in a post/page
-	 *
-	 * @param $postID
-	 *
-	 * @return false|mixed
-	 */
-	private function get_first_p2p_block_in_post( $postID ) {
-		$post = get_post( $postID );
-
-		if ( has_blocks( $post->post_content ) ) {
-			$blocks = parse_blocks( $post->post_content );
-			foreach ( $blocks as $block ) {
-				if ( $block['blockName'] == 'planet4-gpch-plugin-blocks/p2p-share' ) {
-					return $block;
-				}
-			}
-		}
-
-		return false;
-	}
-
-	/**
-	 * Grab default values of parameters because Wordpress doesn't
-	 */
-	private function fill_in_default_atrributes() {
-		$block_registry = \WP_Block_Type_Registry::get_instance();
-		$p2pBlock       = $block_registry->get_registered( 'planet4-gpch-plugin-blocks/p2p-share' );
-
-
-		foreach ( $p2pBlock->attributes as $name => $parameters ) {
-			if ( array_key_exists( 'default', $parameters ) ) {
-				if ( ! isset( $this->block_attributes[ $name ] ) ) {
-					$this->block_attributes[ $name ] = $parameters['default'];
-				}
-			}
 		}
 	}
 }
