@@ -67,6 +67,13 @@ export class P2PShareBlock {
 						'planet4-gpch-plugin-blocks'
 					),
 				},
+				telegramSmsCTA: {
+					type: 'string',
+					default: __(
+						'Thank you for sharing on Telegram! Click this link, you will be able to edit the message before sending it: ',
+						'planet4-gpch-plugin-blocks'
+					),
+				},
 				threemaMessage: {
 					type: 'string',
 					default: __(
@@ -367,7 +374,6 @@ export class P2PShareBlock {
 									showSuggestions={ true }
 									style={ editElementStyle }
 								></LinkControl>
-
 								<h3 style={ separatorStyle }>WhatsApp Share</h3>
 								<p style={ descriptionStyle }>
 									{ __(
@@ -515,6 +521,28 @@ export class P2PShareBlock {
 										'planet4-gpch-plugin-blocks'
 									) }
 								</p>
+								<h3 style={ separatorStyle }>Telegram Share</h3>
+								<p style={ descriptionStyle }>
+									{ __(
+										'Telegram SMS CTA (178 characters max, link to Telegram will be added at the end):',
+										'planet4-gpch-plugin-blocks'
+									) }
+								</p>
+								<RichText
+									value={ attributes.telegramSmsCTA }
+									placeholder={ __(
+										'THE TEXT TO SEND BY SMS',
+										'planet4-gpch-plugin-blocks'
+									) }
+									allowedFormats={ [] }
+									onChange={ ( val ) =>
+										setAttributes( {
+											telegramSmsCTA: val,
+										} )
+									}
+									style={ textboxStyle }
+									characterLimit={ 178 }
+								/>
 							</div>
 						) }
 					</div>
