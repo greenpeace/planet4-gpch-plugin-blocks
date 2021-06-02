@@ -109,6 +109,13 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 						'planet4-gpch-plugin-blocks'
 					),
 				],
+				'telegramSmsCTA' => [
+					'type'    => 'string',
+					'default' => __(
+						'Thank you for sharing on Telegram! Click this link, you will be able to edit the message before sending it: ',
+						'planet4-gpch-plugin-blocks'
+					),
+				],
 				'emailSubject'   => [
 					'type'    => 'string',
 					'default' => __(
@@ -147,13 +154,14 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 
 	function dynamic_render_callback( $block_attributes, $content ) {
 		$this->block_attributes = $block_attributes;
-
+		
 		// Prepare parameters for template
 		$params = array(
 			'base_url'        => P4_GPCH_PLUGIN_BLOCKS_BASE_URL,
 			'attributes'      => $block_attributes,
 			'whatsAppMessage' => $this->get_share_message( 'whatsapp' ),
 			'whatsAppLink'    => $this->generate_whatsapp_share_link( $this->get_share_message( 'whatsapp' ) ),
+			'telegramLink'    => $this->generate_telegram_share_link( $this->get_shortened_link( $block_attributes['shareLink']['url'], 'telegram' ), $this->get_share_message( 'telegram' ) ),
 			'smsMessage'      => $this->get_share_message( 'sms' ),
 			'signalMessage'   => $this->get_share_message( 'signal' ),
 			'threemaMessage'  => $this->get_share_message( 'threema' ),
@@ -226,9 +234,10 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 				if ( $result['status'] == 'error' ) {
 					throw new \Exception( $result['msg'] );
 				}
-			} elseif ( ( $channel == 'whatsapp' ) ) { // Channels that get sent a CTA link in a single SMS
+			} elseif ( ( $channel == 'whatsapp' || $channel == 'telegram' ) ) { // Channels that get sent a CTA link in a single SMS
 				$relatedBlockAttributes = [
 					'whatsapp' => 'whatsAppSmsCTA',
+					'telegram' => 'telegramSmsCTA',
 				];
 
 				// Get messages
@@ -236,6 +245,8 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 
 					if ( $channel == 'whatsapp' ) {
 						$share_link = $this->generate_whatsapp_share_link( $this->get_share_message( $channel ) );
+					} elseif ( $channel == 'telegram' ) {
+						$share_link = $this->generate_telegram_share_link( $this->block_attributes['shareLink']['url'], $this->get_share_message( $channel ) );
 					}
 
 					$share_link_shortened = $this->get_shortened_link( $share_link, $channel, false );
@@ -387,6 +398,18 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 	 */
 	private function generate_threema_share_link( $text ) {
 		return 'threema://compose?text=' . urlencode( $text );
+	}
+
+
+	/**
+	 * Generates a share link for Telegram
+	 *
+	 * @param $text
+	 *
+	 * @return string
+	 */
+	private function generate_telegram_share_link( $url, $text ) {
+		return 'https://t.me/share/url?url=' . rawurlencode( $this->get_shortened_link( $url, 'telegram' ) ) . '&text=' . rawurlencode( $text );
 	}
 
 	/**
