@@ -57,8 +57,7 @@ function updateFormEntries() {
 				const newLine = result.data[ i ];
 
 				const newLineElement = document.createElement( 'li' );
-				const text = document.createTextNode( newLine.line );
-				newLineElement.appendChild( text );
+				newLineElement.innerHTML = newLine.line;
 
 				formEntriesList.style.transition = 'top 0s';
 				formEntriesList.style.top = '-1.5rem';
