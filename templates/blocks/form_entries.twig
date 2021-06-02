@@ -1,0 +1,7 @@
+<div class="wp-block-planet4-gpch-plugin-blocks-form_entries" style="height: {{ styleHeight }}rem;">
+	<ul data-last-update="{{ lastUpdate }}" data-number-of-lines="{{ lines|length }}">
+		{% for line in lines %}
+			<li>{{ line|raw }}</li>
+		{% endfor %}
+	</ul>
+</div>

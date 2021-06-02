@@ -57,6 +57,7 @@ if ( ! class_exists( 'Planet4_GPCH_Plugin_Blocks' ) ) {
 			$this->blocks = [
 				new Blocks\BS_Bingo_Block(),
 				new Blocks\P2P_Share_Block(),
+				new Blocks\Form_Entries_Block(),
 				new Blocks\Planet4_GPCH_Block_Form_Progress_Bar(),
 				new Blocks\Planet4_GPCH_Block_Form_Counter_Text(),
 				new Blocks\Planet4_GPCH_Action_Divider(),

@@ -18,8 +18,9 @@ p2pStepElements.forEach( ( item ) => {
 document.querySelector( '.p2p-share-step-1' ).classList.remove( 'hidden' );
 
 // Resize parent element to max child height
-function setParentHeight() {
+function setParentHeight( upsizeOnly = false ) {
 	let maxHeight = 0;
+	const currentHeight = p2pShareElement.offsetHeight;
 
 	p2pStepElements.forEach( ( item ) => {
 		if ( item.offsetHeight > maxHeight ) {
@@ -27,7 +28,9 @@ function setParentHeight() {
 		}
 	} );
 
-	p2pShareElement.style.height = maxHeight;
+	if ( ! upsizeOnly || maxHeight > currentHeight ) {
+		p2pShareElement.style.minHeight = maxHeight + 'px';
+	}
 }
 
 window.onresize = setParentHeight;
@@ -197,7 +200,6 @@ smsButtons.forEach( ( item ) => {
 
 		try {
 			phoneNumber = parsePhoneNumber( numberField.value, 'CH' );
-			console.log( phoneNumber );
 
 			if ( phoneNumber === undefined || ! phoneNumber.isValid() ) {
 				throw 'Invalid phone number.';
@@ -255,6 +257,8 @@ smsButtons.forEach( ( item ) => {
 					doneStateElements.forEach( ( item2 ) => {
 						item2.classList.remove( 'hidden' );
 					} );
+
+					setParentHeight( true );
 				} else if ( result.status === 'error' ) {
 					statusElement.innerText = result.data.msg;
 					statusElement.classList.remove( 'hidden', 'success' );
@@ -270,6 +274,8 @@ smsButtons.forEach( ( item ) => {
 					defaultStateElements.forEach( ( item2 ) => {
 						item2.classList.remove( 'hidden' );
 					} );
+
+					setParentHeight( true );
 				}
 			},
 			() => {
@@ -290,8 +296,42 @@ smsButtons.forEach( ( item ) => {
 				defaultStateElements.forEach( ( item2 ) => {
 					item2.classList.remove( 'hidden' );
 				} );
+
+				setParentHeight( true );
 			}
 		);
+	} );
+} );
+
+// Listen to enter key press in sms fields
+const smsInputFields = p2pShareElement.querySelectorAll(
+	':scope .phone-number-field'
+);
+
+smsInputFields.forEach( ( item ) => {
+	item.addEventListener( 'keyup', function ( event ) {
+		event.preventDefault();
+
+		// Enter key
+		if ( event.keyCode === 13 ) {
+			item.parentNode.querySelector( ':scope button.send-sms' ).click();
+		}
+	} );
+} );
+
+// Listen to enter key press in email fields
+const emailInputFields = p2pShareElement.querySelectorAll(
+	':scope .email-field'
+);
+
+emailInputFields.forEach( ( item ) => {
+	item.addEventListener( 'keyup', function ( event ) {
+		event.preventDefault();
+
+		// Enter key
+		if ( event.keyCode === 13 ) {
+			item.parentNode.querySelector( ':scope button.send-email' ).click();
+		}
 	} );
 } );
 
@@ -368,6 +408,8 @@ emailButtons.forEach( ( item ) => {
 					doneStateElements.forEach( ( item2 ) => {
 						item2.classList.remove( 'hidden' );
 					} );
+
+					setParentHeight( true );
 				} else if ( result.status === 'error' ) {
 					statusElement.innerText = result.data.msg;
 					statusElement.classList.remove( 'hidden', 'success' );
@@ -383,6 +425,8 @@ emailButtons.forEach( ( item ) => {
 					defaultStateElements.forEach( ( item2 ) => {
 						item2.classList.remove( 'hidden' );
 					} );
+
+					setParentHeight( true );
 				}
 			},
 			() => {
@@ -403,6 +447,8 @@ emailButtons.forEach( ( item ) => {
 				defaultStateElements.forEach( ( item2 ) => {
 					item2.classList.remove( 'hidden' );
 				} );
+
+				setParentHeight( true );
 			}
 		);
 	} );
