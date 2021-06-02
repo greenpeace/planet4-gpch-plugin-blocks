@@ -8,28 +8,32 @@
 				<li>
 					<input id="n1" type="radio" name="number_of_people" value="1-5" class="autoforward"
 						   data-next-element=".p2p-share-step-2"/>
-					<label for="n1"><img class="social-icon" src="{{ base_url }}assets/img/icon/people-1.svg">
+					<label for="n1" data-ga-category="P2P Block" data-ga-action="Contacts" data-ga-label="1-5"><img
+								class="social-icon" src="{{ base_url }}assets/img/icon/people-1.svg">
 						{{ __('1 - 5 People', 'planet4-gpch-plugin-blocks') }}
 					</label>
 				</li>
 				<li>
 					<input id="n6" type="radio" name="number_of_people" value="6-10" class="autoforward"
 						   data-next-element=".p2p-share-step-2"/>
-					<label for="n6"><img class="social-icon" src="{{ base_url }}assets/img/icon/people-2.svg">
+					<label for="n6" data-ga-category="P2P Block" data-ga-action="Contacts" data-ga-label="6-10"><img
+								class="social-icon" src="{{ base_url }}assets/img/icon/people-2.svg">
 						{{ __('6 - 10 People', 'planet4-gpch-plugin-blocks') }}
 					</label>
 				</li>
 				<li>
 					<input id="n10" type="radio" name="number_of_people" value="10-20" class="autoforward"
 						   data-next-element=".p2p-share-step-2"/>
-					<label for="n10"><img class="social-icon" src="{{ base_url }}assets/img/icon/people-3.svg">
+					<label for="n10" data-ga-category="P2P Block" data-ga-action="Contacts" data-ga-label="10-20"><img
+								class="social-icon" src="{{ base_url }}assets/img/icon/people-3.svg">
 						{{ __('10 - 20 People', 'planet4-gpch-plugin-blocks') }}
 					</label>
 				</li>
 				<li>
 					<input id="n20" type="radio" name="number_of_people" value="20+" class="autoforward"
 						   data-next-element=".p2p-share-step-2"/>
-					<label for="n20"><img class="social-icon" src="{{ base_url }}assets/img/icon/people-3.svg"><img
+					<label for="n20" data-ga-category="P2P Block" data-ga-action="Contacts" data-ga-label="20+"><img
+								class="social-icon" src="{{ base_url }}assets/img/icon/people-3.svg"><img
 								class="social-icon" src="{{ base_url }}assets/img/icon/people-3.svg">
 						{{ __('20+ People', 'planet4-gpch-plugin-blocks') }}
 					</label>
@@ -42,7 +46,8 @@
 				<li>
 					<input id="channel-whatsapp" type="radio" name="channel" value="whatsapp" class="autoforward"
 						   data-next-element=".p2p-share-step-3.whatsapp"/>
-					<label for="channel-whatsapp" class="channel whatsapp">
+					<label for="channel-whatsapp" class="channel whatsapp" data-ga-category="P2P Block"
+						   data-ga-action="Channel" data-ga-label="WhatsApp">
 						<img class="social-icon"
 							 src="{{ base_url }}assets/img/social/whatsapp.svg"> {{ __('WhatsApp', 'planet4-gpch-plugin-blocks') }}
 					</label>
@@ -50,7 +55,8 @@
 				<li>
 					<input id="channel-email" type="radio" name="channel" value="email" class="autoforward"
 						   data-next-element=".p2p-share-step-3.email"/>
-					<label for="channel-email" class="channel email">
+					<label for="channel-email" class="channel email" data-ga-category="P2P Block"
+						   data-ga-action="Channel" data-ga-label="Email">
 						<img class="social-icon"
 							 src="{{ base_url }}assets/img/social/email.svg"> {{ __('Email', 'planet4-gpch-plugin-blocks') }}
 					</label>
@@ -58,7 +64,8 @@
 				<li>
 					<input id="channel-sms" type="radio" name="channel" value="sms" class="autoforward"
 						   data-next-element=".p2p-share-step-3.sms"/>
-					<label for="channel-sms" class="channel sms">
+					<label for="channel-sms" class="channel sms" data-ga-category="P2P Block" data-ga-action="Channel"
+						   data-ga-label="SMS">
 						<img class="social-icon"
 							 src="{{ base_url }}assets/img/social/sms.svg"> {{ __('SMS', 'planet4-gpch-plugin-blocks') }}
 					</label>
@@ -66,7 +73,8 @@
 				<li>
 					<input id="channel-signal" type="radio" name="channel" value="signal" class="autoforward"
 						   data-next-element=".p2p-share-step-3.signal"/>
-					<label for="channel-signal" class="channel signal">
+					<label for="channel-signal" class="channel signal" data-ga-category="P2P Block"
+						   data-ga-action="Channel" data-ga-label="Signal">
 						<img class="social-icon"
 							 src="{{ base_url }}assets/img/social/signal.svg"> {{ __('Signal', 'planet4-gpch-plugin-blocks') }}
 					</label>
@@ -74,7 +82,8 @@
 				<li>
 					<input id="channel-threema" type="radio" name="channel" value="threema" class="autoforward"
 						   data-next-element=".p2p-share-step-3.threema"/>
-					<label for="channel-threema" class="channel threema">
+					<label for="channel-threema" class="channel threema" data-ga-category="P2P Block"
+						   data-ga-action="Channel" data-ga-label="Threema">
 						<img class="social-icon"
 							 src="{{ base_url }}assets/img/social/threema.svg"> {{ __('Threema', 'planet4-gpch-plugin-blocks') }}
 					</label>
@@ -82,7 +91,8 @@
 				<li>
 					<input id="channel-telegram" type="radio" name="channel" value="telegram" class="autoforward"
 						   data-next-element=".p2p-share-step-3.telegram"/>
-					<label for="channel-telegram" class="channel telegram">
+					<label for="channel-telegram" class="channel telegram" data-ga-category="P2P Block"
+						   data-ga-action="Channel" data-ga-label="Telegram">
 						<img class="social-icon"
 							 src="{{ base_url }}assets/img/social/telegram.svg"> {{ __('Telegram', 'planet4-gpch-plugin-blocks') }}
 					</label>
@@ -100,8 +110,9 @@
 					<div class="action-controls">
 						<p class="description">{{ __('Click the button to open WhatsApp. You can edit the message before sending.', 'planet4-gpch-plugin-blocks') }}</p>
 						<div class="controls wp-block-button">
-							<a class="" target="_blank"
-							   href="{{ whatsAppLink }}">{{ __('Open WhatsApp', 'planet4-gpch-plugin-blocks') }}</a>
+							<a class="" target="_blank" href="{{ whatsAppLink }}" data-ga-category="P2P Block"
+							   data-ga-action="Open"
+							   data-ga-label="WhatsApp">{{ __('Open WhatsApp', 'planet4-gpch-plugin-blocks') }}</a>
 						</div>
 						<p class="description">{{ __('WhatsApp limits sending to 5 people at a time. You can click the button again to send to more people.', 'planet4-gpch-plugin-blocks') }}</p>
 					</div>
@@ -117,7 +128,8 @@
 						</p>
 						<div class="controls wp-block-button">
 							<button class="dark send-sms" data-channel="whatsapp" type="button"
-									data-mobile-number-field="share-whatsapp-number">
+									data-mobile-number-field="share-whatsapp-number" data-ga-category="P2P Block"
+									data-ga-action="Send" data-ga-label="WhatsApp">
 								<div class="lds-ring state-progress hidden">
 									<div></div>
 									<div></div>
@@ -150,7 +162,9 @@
 							  rows="5">{{ __(attributes.emailShareText, 'planet4-gpch-plugin-blocks') }}</textarea><br>
 					<div class="controls wp-block-button">
 						<button class="dark copy-to-clipboard" type="button"
-								data-copy-field="clipboard-copy-text-email">{{ __('Copy to clipboard', 'planet4-gpch-plugin-blocks') }}
+								data-copy-field="clipboard-copy-text-email" data-ga-category="P2P Block"
+								data-ga-action="CopyPaste"
+								data-ga-label="Email">{{ __('Copy to clipboard', 'planet4-gpch-plugin-blocks') }}
 						</button>
 					</div>
 				</div>
@@ -163,7 +177,8 @@
 					</p>
 					<div class="controls wp-block-button">
 						<button class="dark send-email" data-channel="email" type="button"
-								data-email-field="share-email">
+								data-email-field="share-email" data-ga-category="P2P Block" data-ga-action="Send"
+								data-ga-label="Email">
 							<div class="lds-ring state-progress hidden">
 								<div></div>
 								<div></div>
@@ -195,7 +210,9 @@
 							  rows="5">{{ smsMessage }}</textarea><br>
 					<div class="controls wp-block-button">
 						<button class="dark copy-to-clipboard" type="button"
-								data-copy-field="clipboard-copy-text-sms">{{ __('Copy to clipboard', 'planet4-gpch-plugin-blocks') }}
+								data-copy-field="clipboard-copy-text-sms" data-ga-category="P2P Block"
+								data-ga-action="CopyPaste"
+								data-ga-label="SMS">{{ __('Copy to clipboard', 'planet4-gpch-plugin-blocks') }}
 						</button>
 					</div>
 				</div>
@@ -209,7 +226,8 @@
 					</p>
 					<div class="controls wp-block-button">
 						<button class="dark send-sms" data-channel="sms" type="button"
-								data-mobile-number-field="share-sms-number">
+								data-mobile-number-field="share-sms-number" data-ga-category="P2P Block"
+								data-ga-action="Send" data-ga-label="SMS">
 							<div class="lds-ring state-progress hidden">
 								<div></div>
 								<div></div>
@@ -242,7 +260,9 @@
 							  rows="5">{{ signalMessage }}</textarea><br>
 					<div class="controls wp-block-button">
 						<button class="dark copy-to-clipboard" type="button"
-								data-copy-field="clipboard-copy-text-signal">{{ __('Copy to clipboard', 'planet4-gpch-plugin-blocks') }}
+								data-copy-field="clipboard-copy-text-signal" data-ga-category="P2P Block"
+								data-ga-action="CopyPaste"
+								data-ga-label="Signal">{{ __('Copy to clipboard', 'planet4-gpch-plugin-blocks') }}
 						</button>
 					</div>
 				</div>
@@ -256,7 +276,8 @@
 					</p>
 					<div class="controls wp-block-button">
 						<button class="dark send-sms" data-channel="signal" type="button"
-								data-mobile-number-field="share-signal-number">
+								data-mobile-number-field="share-signal-number" data-ga-category="P2P Block"
+								data-ga-action="Send" data-ga-label="Signal">
 							<div class="lds-ring state-progress hidden">
 								<div></div>
 								<div></div>
@@ -290,7 +311,8 @@
 						</p>
 						<div class="controls wp-block-button">
 							<a class="" target="_blank"
-							   href="{{ threemaAppLink }}">{{ __('Open Threema', 'planet4-gpch-plugin-blocks') }}</a>
+							   href="{{ threemaAppLink }}" data-ga-category="P2P Block" data-ga-action="Open"
+							   data-ga-label="Threema">{{ __('Open Threema', 'planet4-gpch-plugin-blocks') }}</a>
 						</div>
 					</div>
 				</div>
@@ -305,7 +327,8 @@
 						</p>
 						<div class="controls wp-block-button">
 							<button class="dark send-sms" data-channel="threema" type="button"
-									data-mobile-number-field="share-threema-number">
+									data-mobile-number-field="share-threema-number" data-ga-category="P2P Block"
+									data-ga-action="Send" data-ga-label="Threema">
 								<div class="lds-ring state-progress hidden">
 									<div></div>
 									<div></div>
@@ -337,7 +360,8 @@
 						<p class="description">{{ __('Click the button to open Telegram. You can edit the message before sending.', 'planet4-gpch-plugin-blocks') }}</p>
 						<div class="controls wp-block-button">
 							<a class="" target="_blank"
-							   href="{{ telegramLink }}">{{ __('Open Telegram', 'planet4-gpch-plugin-blocks') }}</a>
+							   href="{{ telegramLink }}" data-ga-category="P2P Block" data-ga-action="Open"
+							   data-ga-label="Telegram">{{ __('Open Telegram', 'planet4-gpch-plugin-blocks') }}</a>
 						</div>
 					</div>
 				</div>
@@ -352,7 +376,8 @@
 						</p>
 						<div class="controls wp-block-button">
 							<button class="dark send-sms" data-channel="telegram" type="button"
-									data-mobile-number-field="share-telegram-number">
+									data-mobile-number-field="share-telegram-number" data-ga-category="P2P Block"
+									data-ga-action="Send" data-ga-label="Telegram">
 								<div class="lds-ring state-progress hidden">
 									<div></div>
 									<div></div>
