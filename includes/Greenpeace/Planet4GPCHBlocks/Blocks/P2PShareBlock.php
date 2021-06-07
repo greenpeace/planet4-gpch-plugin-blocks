@@ -365,7 +365,12 @@ class P2PShareBlock extends BaseBlock {
 			$text = $this->block_attributes['shareText'];
 		}
 
-		$link = $this->block_attributes['shareLink'];
+		if (array_key_exists('shareLink', $this->block_attributes)) {
+			$link = $this->block_attributes['shareLink'];
+		}
+		else {
+			$link = null;
+		}
 
 		if ( $link !== null ) {
 			$link = $this->get_shortened_link( $link['url'], $channel );
