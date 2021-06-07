@@ -4,7 +4,7 @@ namespace Greenpeace\Planet4GPCHBlocks;
 
 use Twilio\Rest\Client;
 
-class Sms_Client {
+class SmsClient {
 	private $account_sid;
 	private $auth_token;
 	private $sender_number;

@@ -11,10 +11,7 @@
     "autoload": {
         "psr-4": {
             "Greenpeace\\Planet4GPCHBlocks\\": [
-                "includes"
-            ],
-            "Greenpeace\\Planet4GPCHBlocks\\Blocks\\": [
-                "includes/blocks"
+                "includes/Greenpeace/Planet4GPCHBlocks"
             ]
         }
     }

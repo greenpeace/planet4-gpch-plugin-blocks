@@ -6,6 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Greenpeace\\Planet4GPCHBlocks\\Blocks\\' => array($baseDir . '/includes/blocks'),
-    'Greenpeace\\Planet4GPCHBlocks\\' => array($baseDir . '/includes'),
+    'Greenpeace\\Planet4GPCHBlocks\\' => array($baseDir . '/includes/Greenpeace/Planet4GPCHBlocks'),
 );

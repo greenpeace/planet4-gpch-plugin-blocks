@@ -30,8 +30,11 @@ require P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'vendor/autoload.php';
 // Include Admin Menu
 require P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'includes/admin-menus.php';
 
+// Include main plugin class
+require P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'includes/Plugin.php';
+
 // Initialize the actual plugin
-$p4_gpch_plugin_blocks = Greenpeace\Planet4GPCHBlocks\Planet4_GPCH_Plugin_Blocks::get_instance();
+$p4_gpch_plugin_blocks = Planet4_GPCH_Plugin_Blocks::get_instance();
 
 // Activation hooks
 register_activation_hook( __FILE__, 'gpch_plugin_blocks_db_install' );
