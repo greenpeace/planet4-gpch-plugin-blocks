@@ -6,7 +6,7 @@ if ( ! class_exists( '\WP_List_Table' ) ) {
 	require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
 }
 
-class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
+class DictionaryTable extends \WP_List_Table {
 	/*
 	 * Display the Word List Table
 	 * Callback for the add_users_page() in the add_plugin_admin_menu() method of this class.
@@ -130,7 +130,7 @@ class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
 			'set-adjective'   => 'Set as ADJECTIVE',
 			'set-verb'        => 'Set as VERB',
 			'set-diverse'     => 'Set as DIVERSE',
-			'set-misspelling'     => 'Set as MISSPELLING',
+			'set-misspelling' => 'Set as MISSPELLING',
 			'delete'          => 'delete',
 		);
 
@@ -202,7 +202,7 @@ class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
 				foreach ( $ids as $id => $value ) {
 					$wpdb->update( $table_name, array( 'confirmed' => 1, 'type' => 'DIV' ), array( 'id' => $id ) );
 				}
-			}elseif ( $action == 'set-misspelling' ) {
+			} elseif ( $action == 'set-misspelling' ) {
 				$ids = $_REQUEST['ba'];
 
 				foreach ( $ids as $id => $value ) {
@@ -230,8 +230,9 @@ class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
 		switch ( $column_name ) {
 			case 'id':
 			case 'type':
-				return $item[ $column_name ];case 'word';
-			return '<strong>' . $item[ $column_name ] . '</strong>';
+				return $item[ $column_name ];
+			case 'word';
+				return '<strong>' . $item[ $column_name ] . '</strong>';
 			default:
 				return print_r( $item, true ); //Show the whole array for troubleshooting purposes
 		}
@@ -291,5 +292,4 @@ class Planet4_GPCH_Blocks_Dictionary_Table extends \WP_List_Table {
 
 		return $sortable_columns;
 	}
-
 }

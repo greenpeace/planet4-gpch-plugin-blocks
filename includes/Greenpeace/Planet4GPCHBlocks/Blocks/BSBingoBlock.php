@@ -10,7 +10,7 @@ use Greenpeace\Planet4GPCHBlocks\AssetEnqueuer;
  * @package Greenpeace\Planet4GPCHBlocks
  * @since 1.0
  */
-class BS_Bingo_Block extends Planet4_GPCH_Base_Block {
+class BSBingoBlock extends BaseBlock {
 
 	/**
 	 * Block name.
