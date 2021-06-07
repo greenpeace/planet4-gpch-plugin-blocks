@@ -9,44 +9,39 @@ class ComposerStaticInit1f0a357e88357c4512048dc57e74c22c
     public static $prefixLengthsPsr4 = array (
         'G' => 
         array (
-            'Greenpeace\\Planet4GPCHBlocks\\Blocks\\' => 36,
             'Greenpeace\\Planet4GPCHBlocks\\' => 29,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/includes/blocks',
-        ),
         'Greenpeace\\Planet4GPCHBlocks\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/includes',
+            0 => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks',
         ),
     );
 
     public static $classMap = array (
-        'Greenpeace\\Planet4GPCHBlocks\\AssetEnqueuer' => __DIR__ . '/../..' . '/includes/AssetEnqueuer.php',
-        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\BS_Bingo_Block' => __DIR__ . '/../..' . '/includes/blocks/BS_Bingo.php',
-        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Form_Entries_Block' => __DIR__ . '/../..' . '/includes/blocks/Form_Entries.php',
-        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\P2P_Share_Block' => __DIR__ . '/../..' . '/includes/blocks/P2P_Share.php',
-        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Action_Divider' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Action_Divider.php',
-        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Base_Block' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Base_Block.php',
-        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Base_Form_Block' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Base_Form_Block.php',
-        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Accordion' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Accordion.php',
-        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Banner_Tool' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Banner_Tool.php',
-        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Form_Counter_Text' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Form_Counter_Text.php',
-        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Form_Progress_Bar' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Form_Progress_Bar.php',
-        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_GPCH_Events' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Events.php',
-        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_GPCH_Jobs' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Jobs.php',
-        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Magazine_Articles' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Magazine_Articles.php',
-        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Newsletter' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Newsletter.php',
-        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Spacer' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Spacer.php',
-        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Taskforce' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Taskforce.php',
-        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\Planet4_GPCH_Block_Word_Cloud' => __DIR__ . '/../..' . '/includes/blocks/Planet4_GPCH_Block_Word_Cloud.php',
-        'Greenpeace\\Planet4GPCHBlocks\\Planet4_GPCH_Blocks_Dictionary_Table' => __DIR__ . '/../..' . '/includes/admin-pages/Planet4_GPCH_Blocks_Dictionary_Table.php',
-        'Greenpeace\\Planet4GPCHBlocks\\Planet4_GPCH_Plugin_Blocks' => __DIR__ . '/../..' . '/includes/Plugin.php',
-        'Greenpeace\\Planet4GPCHBlocks\\Sms_Client' => __DIR__ . '/../..' . '/includes/SmsClient.php',
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Greenpeace\\Planet4GPCHBlocks\\AssetEnqueuer' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/AssetEnqueuer.php',
+        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\AccordionBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/AccordionBlock.php',
+        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\ActionDividerBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/ActionDividerBlock.php',
+        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\BSBingoBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/BSBingoBlock.php',
+        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\BannerToolBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/BannerToolBlock.php',
+        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\BaseBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/BaseBlock.php',
+        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\BaseFormBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/BaseFormBlock.php',
+        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\EventsBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/EventsBlock.php',
+        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\FormCounterTextBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormCounterTextBlock.php',
+        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\FormEntriesBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormEntriesBlock.php',
+        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\FormProgressBarBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormProgressBarBlock.php',
+        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\JobsBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/JobsBlock.php',
+        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\MagazineArticlesBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/MagazineArticlesBlock.php',
+        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\NewsletterBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/NewsletterBlock.php',
+        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\P2PShareBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/P2PShareBlock.php',
+        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\SpacerBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/SpacerBlock.php',
+        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\TaskforceBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/TaskforceBlock.php',
+        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\WordCloudBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/WordCloudBlock.php',
+        'Greenpeace\\Planet4GPCHBlocks\\DictionaryTable' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/DictionaryTable.php',
+        'Greenpeace\\Planet4GPCHBlocks\\SmsClient' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/SmsClient.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
