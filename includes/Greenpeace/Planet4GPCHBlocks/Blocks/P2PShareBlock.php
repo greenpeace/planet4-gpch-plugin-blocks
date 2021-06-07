@@ -3,7 +3,7 @@
 namespace Greenpeace\Planet4GPCHBlocks\Blocks;
 
 use Greenpeace\Planet4GPCHBlocks\AssetEnqueuer;
-use Greenpeace\Planet4GPCHBlocks\Sms_Client;
+use Greenpeace\Planet4GPCHBlocks\SmsClient;
 use PHPLicengine\Api\Api;
 use PHPLicengine\Service\Bitlink;
 
@@ -13,8 +13,7 @@ use PHPLicengine\Service\Bitlink;
  * @package Greenpeace\Planet4GPCHBlocks
  * @since 1.0
  */
-class P2P_Share_Block extends Planet4_GPCH_Base_Block {
-
+class P2PShareBlock extends BaseBlock {
 	/**
 	 * @var string Template file path
 	 */
@@ -220,7 +219,7 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 				}
 
 				// Send first message
-				$sms1   = new Sms_Client();
+				$sms1   = new SmsClient();
 				$result = $sms1->sendSMS( $data['phone'], $message_sms_1 );
 
 				if ( $result['status'] == 'error' ) {
@@ -228,7 +227,7 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 				}
 
 				// Send second message
-				$sms2   = new Sms_Client();
+				$sms2   = new SmsClient();
 				$result = $sms2->sendSMS( $data['phone'], $message_sms_2 );
 
 				if ( $result['status'] == 'error' ) {
@@ -258,7 +257,7 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 					}
 
 					// Send SMS
-					$sms    = new Sms_Client();
+					$sms    = new SmsClient();
 					$result = $sms->sendSMS( $data['phone'], $message );
 
 					if ( $result['status'] == 'error' ) {
@@ -366,7 +365,12 @@ class P2P_Share_Block extends Planet4_GPCH_Base_Block {
 			$text = $this->block_attributes['shareText'];
 		}
 
-		$link = $this->block_attributes['shareLink'];
+		if (array_key_exists('shareLink', $this->block_attributes)) {
+			$link = $this->block_attributes['shareLink'];
+		}
+		else {
+			$link = null;
+		}
 
 		if ( $link !== null ) {
 			$link = $this->get_shortened_link( $link['url'], $channel );

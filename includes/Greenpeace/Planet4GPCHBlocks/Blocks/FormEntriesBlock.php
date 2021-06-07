@@ -10,7 +10,7 @@ use Greenpeace\Planet4GPCHBlocks\AssetEnqueuer;
  * @package Greenpeace\Planet4GPCHBlocks
  * @since 1.0
  */
-class Form_Entries_Block extends Planet4_GPCH_Base_Block {
+class FormEntriesBlock extends BaseBlock {
 
 	/**
 	 * @var string Template file path
