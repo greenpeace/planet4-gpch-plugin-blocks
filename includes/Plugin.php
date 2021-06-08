@@ -177,5 +177,7 @@ class Planet4_GPCH_Plugin_Blocks {
 			$asset_file['dependencies'],
 			$asset_file['version']
 		);
+
+		wp_set_script_translations( 'planet4-gpch-plugin-blocks', 'planet4-gpch-plugin-blocks', P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . 'languages' );
 	}
 }
