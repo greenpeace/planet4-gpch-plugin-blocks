@@ -160,7 +160,7 @@ class P2PShareBlock extends BaseBlock {
 			'attributes'      => $block_attributes,
 			'whatsAppMessage' => $this->get_share_message( 'whatsapp' ),
 			'whatsAppLink'    => $this->generate_whatsapp_share_link( $this->get_share_message( 'whatsapp' ) ),
-			'telegramLink'    => $this->generate_telegram_share_link( $this->get_shortened_link( $block_attributes['shareLink']['url'], 'telegram' ), $this->get_share_message( 'telegram' ) ),
+			'telegramLink'    => $this->generate_telegram_share_link( $this->get_shortened_link( $block_attributes['shareLink']['url'], 'telegram', true ), $this->get_share_message( 'telegram' ) ),
 			'smsMessage'      => $this->get_share_message( 'sms' ),
 			'signalMessage'   => $this->get_share_message( 'signal' ),
 			'threemaMessage'  => $this->get_share_message( 'threema' ),
@@ -412,7 +412,7 @@ class P2PShareBlock extends BaseBlock {
 	 * @return string
 	 */
 	private function generate_telegram_share_link( $url, $text ) {
-		return 'https://t.me/share/url?url=' . rawurlencode( $this->get_shortened_link( $url, 'telegram' ) ) . '&text=' . rawurlencode( $text );
+		return 'https://t.me/share/url?url=' . rawurlencode( $this->get_shortened_link( $url, 'telegram', false ) ) . '&text=' . rawurlencode( $text );
 	}
 
 	/**
