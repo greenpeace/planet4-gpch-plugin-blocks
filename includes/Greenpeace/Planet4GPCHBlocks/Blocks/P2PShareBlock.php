@@ -153,7 +153,7 @@ class P2PShareBlock extends BaseBlock {
 
 	function dynamic_render_callback( $block_attributes, $content ) {
 		$this->block_attributes = $block_attributes;
-		
+
 		// Prepare parameters for template
 		$params = array(
 			'base_url'        => P4_GPCH_PLUGIN_BLOCKS_BASE_URL,
@@ -209,7 +209,7 @@ class P2PShareBlock extends BaseBlock {
 
 				// Get messages
 				if ( isset( $this->block_attributes[ $relatedBlockAttributes[ $channel ] ] ) && $this->block_attributes[ $relatedBlockAttributes[ $channel ] ] != null ) {
-					$message_sms_1 = $this->block_attributes[ $relatedBlockAttributes[ $channel ] ];
+					$message_sms_1 = __( $this->block_attributes[ $relatedBlockAttributes[ $channel ] ], 'planet4-gpch-plugin-blocks' );
 				}
 
 				$message_sms_2 = $this->get_share_message( $channel, true );
@@ -250,7 +250,7 @@ class P2PShareBlock extends BaseBlock {
 
 					$share_link_shortened = $this->get_shortened_link( $share_link, $channel, false );
 
-					$message = $this->block_attributes[ $relatedBlockAttributes[ $channel ] ] . ' ' . $share_link_shortened;
+					$message = __( $this->block_attributes[ $relatedBlockAttributes[ $channel ] ], 'planet4-gpch-plugin-blocks' ) . ' ' . $share_link_shortened;
 
 					if ( ! isset( $message ) ) {
 						throw new \Exception( 'Text message for ' . $channel . ' is not defined.' );
@@ -365,10 +365,9 @@ class P2PShareBlock extends BaseBlock {
 			$text = $this->block_attributes['shareText'];
 		}
 
-		if (array_key_exists('shareLink', $this->block_attributes)) {
+		if ( array_key_exists( 'shareLink', $this->block_attributes ) ) {
 			$link = $this->block_attributes['shareLink'];
-		}
-		else {
+		} else {
 			$link = null;
 		}
 
