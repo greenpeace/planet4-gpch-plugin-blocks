@@ -143,6 +143,13 @@ class P2PShareBlock extends BaseBlock {
 						'planet4-gpch-plugin-blocks'
 					),
 				],
+				'threemaMessage' => [
+					'type'    => 'string',
+					'default' => __(
+						'Thank you for sharing on Threema! Please copy the following message and send it to your friends.',
+						'planet4-gpch-plugin-blocks'
+					),
+				],
 				'utmMedium'      => [
 					'type'    => 'string',
 					'default' => 'p2p',
