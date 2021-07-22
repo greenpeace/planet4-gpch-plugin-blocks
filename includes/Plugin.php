@@ -54,6 +54,8 @@ class Planet4_GPCH_Plugin_Blocks {
 			new Blocks\BSBingoBlock(),
 			new Blocks\P2PShareBlock(),
 			new Blocks\FormEntriesBlock(),
+            new Blocks\DreampeaceCoverBlock(),
+            new Blocks\DreampeaceSlideBlock(),
 			new Blocks\FormProgressBarBlock(),
 			new Blocks\FormCounterTextBlock(),
 			new Blocks\ActionDividerBlock(),
