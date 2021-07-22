@@ -1,0 +1,22 @@
+<div class="gpch-plugin-blocks-dreampeace-slide" data-year="{{ year }}">
+	<div class="slide-header">
+		<i class="dreampeace-arrow-left prev-button"></i>
+		<div class="year">
+			<h2>{{ year }}
+			</h2>
+		</div>
+		<i class="dreampeace-arrow-right next-button"></i>
+	</div>
+	<div class="image-wrapper">
+		{{ function('wp_get_attachment_image', media.id, 'full', false )|raw }}
+	</div>
+	<div class="content-wrapper">
+		<p class="text">{{ text }}</p>
+		<p>#Dreampeace</p>
+		<div class="wp-block-buttons">
+			<div class="wp-block-button is-style-default">
+				<a class="wp-block-button__link" href="{{ link.url }}">{{ buttonText }}</a>
+			</div>
+		</div>
+	</div>
+</div>

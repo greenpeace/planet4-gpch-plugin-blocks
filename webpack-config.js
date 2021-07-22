@@ -1,8 +1,5 @@
 const defaultConfig = require(
-  './node_modules/@wordpress/scripts/config/webpack.config' )    // Require
-                                                                  // default
-                                                                  // Webpack
-                                                                  // config
+  './node_modules/@wordpress/scripts/config/webpack.config' )
 const path = require( 'path' )
 
 const config = {}
@@ -29,6 +26,8 @@ const frontendConfig = Object.assign( {}, config, {
 		bsBingo: './src/blocks/BSBingo/BSBingoBlock-frontend.js',
 		p2pShare: './src/blocks/P2PShare/P2PShareBlock-frontend.js',
 		formEntries: './src/blocks/FormEntries/FormEntriesBlock-frontend.js',
+		dreampeaceCover: './src/blocks/DreampeaceCover/DreampeaceCoverBlock-frontend.js',
+		dreampeaceSlide: './src/blocks/DreampeaceSlide/DreampeaceSlideBlock-frontend.js',
 	},
 	
 	output: {
