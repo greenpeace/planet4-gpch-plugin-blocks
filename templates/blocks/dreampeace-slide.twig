@@ -8,7 +8,7 @@
 		<i class="dreampeace-arrow-right next-button"></i>
 	</div>
 	<div class="image-wrapper">
-		{{ function('wp_get_attachment_image', media.id, 'full', false )|raw }}
+		{{ function('wp_get_attachment_image', media.id, 'full', false, imageAttributes )|raw }}
 	</div>
 	<div class="content-wrapper">
 		<p class="text">{{ text }}</p>
