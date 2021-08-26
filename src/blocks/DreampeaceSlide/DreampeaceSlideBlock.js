@@ -7,7 +7,7 @@ import {
 	__experimentalLinkControl as LinkControl,
 } from '@wordpress/block-editor';
 import ServerSideRender from '@wordpress/server-side-render';
-import { Button, TextControl } from '@wordpress/components';
+import { Button, TextControl, SelectControl } from '@wordpress/components';
 
 export class DreampeaceSlideBlock {
 	constructor() {
@@ -22,6 +22,10 @@ export class DreampeaceSlideBlock {
 				},
 				media: {
 					type: 'object',
+				},
+				imagePosition: {
+					type: 'string',
+					default: 'center center',
 				},
 				text: {
 					type: 'string',
@@ -143,6 +147,53 @@ export class DreampeaceSlideBlock {
 										</Button>
 									</MediaUploadCheck>
 								) }
+								<SelectControl
+									label="Image Position"
+									value={ attributes.imagePosition }
+									options={ [
+										{
+											label: 'Top Left',
+											value: 'top left',
+										},
+										{
+											label: 'Top Center',
+											value: 'top center',
+										},
+										{
+											label: 'Top Right',
+											value: 'top right',
+										},
+										{
+											label: 'Center Left',
+											value: 'center left',
+										},
+										{
+											label: 'Center Center',
+											value: 'center center',
+										},
+										{
+											label: 'Center Right',
+											value: 'center right',
+										},
+										{
+											label: 'Bottom Left',
+											value: 'bottom left',
+										},
+										{
+											label: 'Bottom Center',
+											value: 'bottom center',
+										},
+										{
+											label: 'Bottom Right',
+											value: 'bottom right',
+										},
+									] }
+									onChange={ ( value ) =>
+										setAttributes( {
+											imagePosition: value,
+										} )
+									}
+								/>
 								<TextControl
 									label="Text"
 									value={ attributes.text }
