@@ -55,19 +55,23 @@ class DreampeaceSlideBlock extends BaseBlock {
 			'editor_script'   => 'planet4-gpch-plugin-blocks',
 			'render_callback' => [ $this, 'dynamic_render_callback' ],
 			'attributes'      => [
-				'year'       => [
+				'year'          => [
 					'type' => 'string',
 				],
-				'media'      => [
+				'media'         => [
 					'type' => 'object',
 				],
-				'text'       => [
+				'imagePosition' => [
+					'type'    => 'string',
+					'default' => 'center center',
+				],
+				'text'          => [
 					'type' => 'string',
 				],
-				'buttonText' => [
+				'buttonText'    => [
 					'type' => 'string',
 				],
-				'link'       => [
+				'link'          => [
 					'type' => 'object',
 				],
 			],
@@ -92,6 +96,8 @@ class DreampeaceSlideBlock extends BaseBlock {
 
 	function dynamic_render_callback( $block_attributes, $content ) {
 		$this->block_attributes = $block_attributes;
+
+		$this->block_attributes['imageAttributes'] = [ 'style' => 'object-position: ' . $block_attributes['imagePosition'] . ';' ];
 
 		return \Timber::fetch( $this->template_file, $this->block_attributes );
 	}
