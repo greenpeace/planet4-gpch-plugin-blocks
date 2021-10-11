@@ -16,7 +16,7 @@
 </div>
 <script src="{{ script }}"></script>
 <script>
-	jQuery(document).ready(function(){
+	document.addEventListener("DOMContentLoaded", function(event) {
 		let wordList_{{ unique_id }} = {{ word_list|raw }};
 
 		var maxWordSize = {{ max_word_size }},
@@ -31,7 +31,6 @@
 			factor = minWordSize / maxWordSize,
 			scaleUpFactor = maxScale / ( Math.pow( maxWordSize, relativeScale ) / ( maxWordSize / maxScale ) )
 
-		jQuery(document).ready(function(){
 			WordCloud( document.getElementById( '{{ dom_id }}' ), {
 				list: wordList_{{ unique_id }},
 				fontWeight: 600,
@@ -65,5 +64,5 @@
 				{% endif %}
 			} );
 		});
-	});
+
 </script>
