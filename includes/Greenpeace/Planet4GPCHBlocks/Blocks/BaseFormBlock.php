@@ -6,11 +6,12 @@ class BaseFormBlock extends BaseBlock {
 	/**
 	 * Get the form entries count and/or number from global counter
 	 *
-	 * @param $block
+	 * @param $fields
+	 * @param false $count_actual_entries Count actual entries instead of using the entries count setting from the child theme.
 	 *
 	 * @return int
 	 */
-	public function get_numbers( $fields ) {
+	public function get_numbers( $fields, $count_actual_entries = false ) {
 		$sum = 0;
 
 		// Global Counter
@@ -24,11 +25,25 @@ class BaseFormBlock extends BaseBlock {
 			// IDs of forms to count entries
 			$ids = explode( ',', $fields['form_ids'] );
 
-			foreach ( $ids as $id ) {
-				if ( is_numeric( $id ) ) {
-					$counts = \GFFormsModel::get_form_counts( $id );
+			if ( $count_actual_entries ) {
+				// Count form entries
+				foreach ( $ids as $id ) {
+					if ( is_numeric( $id ) ) {
+						$counts = \GFFormsModel::get_form_counts( $id );
 
-					$sum += $counts['total'] - $counts['trash'] - $counts['spam'];
+						$sum += $counts['total'] - $counts['trash'] - $counts['spam'];
+					}
+				}
+			} else {
+				// Use the counter field in the forms
+				foreach ( $ids as $id ) {
+					if ( is_numeric( $id ) ) {
+						$form = \GFAPI::get_form( $id );
+
+						if ( $form != false && array_key_exists( 'gpch_entry_counter', $form ) ) {
+							$sum += $form['gpch_entry_counter'];
+						}
+					}
 				}
 			}
 		}
