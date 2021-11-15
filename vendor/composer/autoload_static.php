@@ -35,7 +35,6 @@ class ComposerStaticInit1f0a357e88357c4512048dc57e74c22c
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\FormCounterTextBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormCounterTextBlock.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\FormEntriesBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormEntriesBlock.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\FormProgressBarBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormProgressBarBlock.php',
-        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\JobsBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/JobsBlock.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\MagazineArticlesBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/MagazineArticlesBlock.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\NewsletterBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/NewsletterBlock.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\P2PShareBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/P2PShareBlock.php',

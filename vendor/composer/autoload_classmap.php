@@ -20,7 +20,6 @@ return array(
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\FormCounterTextBlock' => $baseDir . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormCounterTextBlock.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\FormEntriesBlock' => $baseDir . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormEntriesBlock.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\FormProgressBarBlock' => $baseDir . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormProgressBarBlock.php',
-    'Greenpeace\\Planet4GPCHBlocks\\Blocks\\JobsBlock' => $baseDir . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/JobsBlock.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\MagazineArticlesBlock' => $baseDir . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/MagazineArticlesBlock.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\NewsletterBlock' => $baseDir . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/NewsletterBlock.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\P2PShareBlock' => $baseDir . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/P2PShareBlock.php',
