@@ -12,6 +12,7 @@ let inProgress = false;
 let lastUpdate = formEntriesList.dataset.lastUpdate;
 
 if ( formEntriesElement !== null ) {
+	/* // Deactivated for now, needs optimization to ensure it doesn't cause a lot of load on the server
 	window.setInterval( function () {
 		if ( inProgress === false ) {
 			inProgress = true;
@@ -19,6 +20,7 @@ if ( formEntriesElement !== null ) {
 			inProgress = false;
 		}
 	}, 5000 );
+	 */
 }
 
 function flushCss( element ) {

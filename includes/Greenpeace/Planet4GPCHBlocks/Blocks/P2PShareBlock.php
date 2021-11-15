@@ -308,6 +308,9 @@ class P2PShareBlock extends BaseBlock {
 		try {
 			if ( isset( $this->block_attributes['emailText'] ) && $this->block_attributes['emailText'] != null ) {
 				$email_text = $this->block_attributes['emailText'];
+
+				// Replace <br> with \n
+				$email_text = preg_replace('#<br\s*/?>#i', "\n", $email_text);
 			}
 
 			if ( isset( $this->block_attributes['emailSubject'] ) && $this->block_attributes['emailSubject'] != null ) {
