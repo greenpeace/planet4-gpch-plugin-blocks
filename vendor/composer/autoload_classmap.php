@@ -11,7 +11,6 @@ return array(
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\AccordionBlock' => $baseDir . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/AccordionBlock.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\ActionDividerBlock' => $baseDir . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/ActionDividerBlock.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\BSBingoBlock' => $baseDir . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/BSBingoBlock.php',
-    'Greenpeace\\Planet4GPCHBlocks\\Blocks\\BannerToolBlock' => $baseDir . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/BannerToolBlock.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\BaseBlock' => $baseDir . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/BaseBlock.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\BaseFormBlock' => $baseDir . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/BaseFormBlock.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\DreampeaceCoverBlock' => $baseDir . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/DreampeaceCoverBlock.php',

@@ -26,7 +26,6 @@ class ComposerStaticInit1f0a357e88357c4512048dc57e74c22c
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\AccordionBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/AccordionBlock.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\ActionDividerBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/ActionDividerBlock.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\BSBingoBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/BSBingoBlock.php',
-        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\BannerToolBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/BannerToolBlock.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\BaseBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/BaseBlock.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\BaseFormBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/BaseFormBlock.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\DreampeaceCoverBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/DreampeaceCoverBlock.php',
