@@ -61,13 +61,11 @@ class Planet4_GPCH_Plugin_Blocks {
 			new Blocks\ActionDividerBlock(),
 			new Blocks\AccordionBlock(),
 			new Blocks\TaskforceBlock(),
-			new Blocks\JobsBlock(),
 			new Blocks\EventsBlock(),
 			new Blocks\NewsletterBlock(),
 			new Blocks\SpacerBlock(),
 			new Blocks\MagazineArticlesBlock(),
 			new Blocks\WordCloudBlock(),
-			new Blocks\BannerToolBlock(),
 		];
 	}
 
