@@ -1,6 +1,6 @@
 {
   "name": "planet4-gpch-plugin-blocks",
-  "version": "1.11",
+  "version": "1.12",
   "description": "Content Blocks for Greenpeace Switzerland",
   "main": "build/js/admin/index.js",
   "babel": {
