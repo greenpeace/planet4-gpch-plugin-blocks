@@ -32,6 +32,12 @@ dl.accordion {
 			&.active:after {
 				content: "";
 			}
+
+			&.external-link::after {
+				-webkit-mask-image: none;
+				mask-image: none;
+				background-color: transparent;;
+			}
 		}
 	}
 
