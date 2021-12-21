@@ -1,49 +1,62 @@
 <div class="gp-inxmail-signup-form">
-	<h3>{{ title }}</h3>
+	<div class="gp-inxmail-signup-form">
+		<script src="https://www.google.com/recaptcha/api.js" async="" defer=""></script>
+		<script>
+			function gpchNewsletterOnSubmit( token ) {
+				document.getElementById( 'displayform' ).submit()
+			}
+		</script>
 
-	<form id="inxmail-nl-form" method="post" action="https://mail.greenpeace.ch/inscription_infolettre_fr.jsp" target="_blank" class="inxform">
+		<h3>{{ title }}</h3>
 
-		<input value="s" name="c" type="hidden"/>
+		<div class="container">
+			<form action="https://web.inxmail.com/greenpeace-ch/subscription/servletv2" method="post"
+				  class="gpch-newsletter-form" id="displayform">
+				<input type="hidden" name="INXMAIL_SUBSCRIPTION" value="Greenpeace_Master">
+				<input type="hidden" name="INXMAIL_HTTP_REDIRECT"
+					   value="https://www.greenpeace.ch/fr/newsletter-inscription-succes/">
+				<input type="hidden" name="INXMAIL_HTTP_REDIRECT_ERROR" value="https://www.greenpeace.ch/fr/">
 
-		<ul>
+				<ul>
+					<li>
+						<label for="input_listfield_1" class="label">Titre<span class="required">*</span></label>
+						<div>
+							<select name="Sex" id="input_listfield_1" class="large">
+								<option value="2">Madame</option>
+								<option value="1">Monsieur</option>
+							</select>
+						</div>
+					</li>
 
-			<li>
-				<label for="input_listfield_1" class="label">Titre<span class="required">*</span></label>
-				<div>
-					<select name="Sex" id="input_listfield_1" class="large">
-						<option value="2">Madame</option>
-						<option value="1">Monsieur</option>
-					</select>
-				</div>
-			</li>
+					<li>
+						<label for="input_textfield_2" class="label">Prénom<span class="required">*</span></label>
+						<div>
+							<input class="text large" type="text" name="FirstName" id="input_textfield_2" value=""
+								   maxlength="254" placeholder="Vorname*" required/>
+						</div>
+					</li>
 
-			<li>
-				<label for="input_textfield_2" class="label">Prénom<span class="required">*</span></label>
-				<div>
-					<input class="text large" type="text" name="FirstName" id="input_textfield_2" value="" maxlength="254" placeholder="Prénom*" required/>
-				</div>
-			</li>
+					<li>
+						<label for="email">Courriel<span class="required">*</span></label>
+						<div>
+							<input type="email" name="email" required>
+						</div>
+					</li>
+				</ul>
 
-			<li>
-				<label for="input_textfield_3" class="label">Courriel<span class="required">*</span></label>
-				<div>
-					<input class="text large" type="email" name="email" id="input_textfield_3" value="" maxlength="254" placeholder="Courriel*" required/>
-				</div>
-			</li>
+				<input type="hidden" name="INXMAIL_CHARSET" value="UTF-8">
+				<input type="hidden" name="unsetLanguageCode" value="false"/>
+				<input type="hidden" name="LanguageCode" value="2"/>
 
-		</ul>
+				<input type="hidden" name="unsetflag_allgemein" value="false"/>
+				<input type="hidden" name="flag_allgemein" value="true"/>
 
-		<div class="subscription" id="subscription_4">
-			<input value="true" name="list_Greenpeace_Master" type="hidden"/>
+				<p>
+					<button class="g-recaptcha btn btn-accent" data-sitekey="6Ld673sUAAAAANIr4kvsqp3F1i4iiOatKNVWVCL2"
+							data-callback="gpchNewsletterOnSubmit" style="margin-top: 1em;">Inscription
+					</button>
+				</p>
+			</form>
 		</div>
-
-		<input type="hidden" name="unsetLanguageCode" value="false"/>
-		<input type="hidden" name="LanguageCode" value="2" checked="checked"/>
-
-		<input type="hidden" name="unsetflag_allgemein" value="false"/>
-		<input type="hidden" name="flag_allgemein" value="true" checked="checked"/>
-
-		<input type="submit" class="submit_button btn btn-accent btn-medium" value="Inscription"/>
-
-	</form>
+	</div>
 </div>
