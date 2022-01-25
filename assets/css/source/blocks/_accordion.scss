@@ -1,3 +1,4 @@
+.post-content dl.accordion,
 dl.accordion {
 	dt,
 	dd {
@@ -5,6 +6,10 @@ dl.accordion {
 	}
 
 	dt {
+		float: none;
+		width: 100%;
+		text-align: left;
+
 		&:first-of-type {
 			border-top: solid 1px #cccccc;
 		}
