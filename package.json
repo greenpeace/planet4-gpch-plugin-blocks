@@ -30,20 +30,20 @@
     "@babel/core": "^7.16.12",
     "@babel/preset-env": "^7.16.11",
     "@wordpress/block-editor": "^8.1.0",
-    "@wordpress/blocks": "^7.0.6",
+    "@wordpress/blocks": "^11.2.0",
     "@wordpress/scripts": "^20.0.2",
-    "@wordpress/server-side-render": "^2.1.1",
-    "babel-loader": "^8.2.2"
+    "@wordpress/server-side-render": "^3.1.0",
+    "babel-loader": "^8.2.3"
   },
   "dependencies": {
-    "@wordpress/api-fetch": "^5.0.0",
+    "@wordpress/api-fetch": "^6.0.0",
     "@wordpress/components": "^19.3.0",
-    "@wordpress/element": "^2.19.1",
-    "@wordpress/i18n": "^3.19.2",
+    "@wordpress/element": "^4.1.0",
+    "@wordpress/i18n": "^4.3.0",
     "animejs": "^3.2.1",
     "classnames": "^2.3.1",
     "libphonenumber-js": "^1.9.46",
-    "swiped-events": "^1.1.4",
+    "swiped-events": "^1.1.6",
     "wait-for-element-transition": "^3.3.0"
   }
 }
