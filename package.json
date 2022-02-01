@@ -12,7 +12,7 @@
   "scripts": {
     "start": "wp-scripts start --config webpack-config.js",
     "build": "wp-scripts build --config webpack-config.js  --mode=production",
-    "format:js:src": "wp-scripts format-js ./src",
+    "format:src": "wp-scripts format ./src",
     "lint:js:src": "wp-scripts lint-js ./src"
   },
   "repository": {
@@ -26,23 +26,23 @@
   },
   "homepage": "https://github.com/greenpeace/planet4-gpch-plugin-blocks#readme",
   "devDependencies": {
-    "@babel/cli": "^7.13.0",
-    "@babel/core": "^7.13.8",
-    "@babel/preset-env": "^7.13.9",
-    "@wordpress/block-editor": "^5.2.10",
+    "@babel/cli": "^7.16.8",
+    "@babel/core": "^7.16.12",
+    "@babel/preset-env": "^7.16.11",
+    "@wordpress/block-editor": "^8.1.0",
     "@wordpress/blocks": "^7.0.6",
-    "@wordpress/scripts": "^13.0.2",
+    "@wordpress/scripts": "^20.0.2",
     "@wordpress/server-side-render": "^2.1.1",
     "babel-loader": "^8.2.2"
   },
   "dependencies": {
     "@wordpress/api-fetch": "^5.0.0",
-    "@wordpress/components": "^13.0.2",
+    "@wordpress/components": "^19.3.0",
     "@wordpress/element": "^2.19.1",
     "@wordpress/i18n": "^3.19.2",
     "animejs": "^3.2.1",
     "classnames": "^2.3.1",
-    "libphonenumber-js": "^1.9.16",
+    "libphonenumber-js": "^1.9.46",
     "swiped-events": "^1.1.4",
     "wait-for-element-transition": "^3.3.0"
   }
