@@ -1,0 +1,16 @@
+/*!
+  * Wait-for-element-transition v3.3.0
+  * https://github.com/mkay581/wait-for-element-transition#readme
+  *
+  * Copyright (c) 2021 Mark Kennedy
+  * Licensed under the MIT license
+ */
+
+/*!
+ * swiped-events.js - v@version@
+ * Pure JavaScript swipe events
+ * https://github.com/john-doherty/swiped-events
+ * @inspiration https://stackoverflow.com/questions/16348031/disable-scrolling-when-touch-moving-certain-element
+ * @author John Doherty <www.johndoherty.info>
+ * @license MIT
+ */
