@@ -10,13 +10,13 @@ import {
 } from '@wordpress/block-editor';
 import withCharacterCounter from '../../components/withCharacterCounter/withCharacterCounter';
 
-const RichText = withCharacterCounter( BaseRichText );
+const RichText = withCharacterCounter(BaseRichText);
 
 /* global gpchBlocks */
 
 export class P2PShareBlock {
 	constructor() {
-		registerBlockType( 'planet4-gpch-plugin-blocks/p2p-share', {
+		registerBlockType('planet4-gpch-plugin-blocks/p2p-share', {
 			apiVersion: 2,
 			title: 'P2P Share',
 			icon: 'share',
@@ -31,10 +31,7 @@ export class P2PShareBlock {
 				},
 				step2Title: {
 					type: 'string',
-					default: __(
-						'How will you be able to reach your friends best?',
-						'planet4-gpch-plugin-blocks'
-					),
+					default: __('How will you be able to reach your friends best?', 'planet4-gpch-plugin-blocks'),
 				},
 				shareText: {
 					type: 'string',
@@ -104,16 +101,13 @@ export class P2PShareBlock {
 				},
 				emailSubject: {
 					type: 'string',
-					default: __(
-						'Help by also signing this petition!',
-						'planet4-gpch-plugin-blocks'
-					),
+					default: __('Help by also signing this petition!', 'planet4-gpch-plugin-blocks'),
 				},
 
 				bg_color: { type: 'string', default: '#000000' },
 				text_color: { type: 'string', default: '#ffffff' },
 			},
-			edit: ( { attributes, isSelected, setAttributes } ) => {
+			edit: ({ attributes, isSelected, setAttributes }) => {
 				const separatorStyle = {
 					color: '#000',
 					backgroundColor: '#dbebbe',
@@ -143,14 +137,12 @@ export class P2PShareBlock {
 				const blockProps = useBlockProps();
 
 				return (
-					<div { ...blockProps }>
-						{ ! isSelected ? (
+					<div {...blockProps}>
+						{!isSelected ? (
 							<div className="wp-block-planet4-gpch-plugin-blocks-p2p-share">
 								<form className="p2p-share-form">
 									<fieldset className="p2p-share-step p2p-share-step-1">
-										<legend>
-											{ attributes.step1Title }
-										</legend>
+										<legend>{attributes.step1Title}</legend>
 										<ul className="select">
 											<li>
 												<input
@@ -165,8 +157,8 @@ export class P2PShareBlock {
 													<img
 														alt=""
 														className="social-icon"
-														src={ `${ gpchBlocks.pluginUrl }assets/img/icon/people-1.svg` }
-													/>{ ' ' }
+														src={`${gpchBlocks.pluginUrl}assets/img/icon/people-1.svg`}
+													/>{' '}
 													1 - 5 People
 												</label>
 											</li>
@@ -183,8 +175,8 @@ export class P2PShareBlock {
 													<img
 														alt=""
 														className="social-icon"
-														src={ `${ gpchBlocks.pluginUrl }assets/img/icon/people-2.svg` }
-													/>{ ' ' }
+														src={`${gpchBlocks.pluginUrl}assets/img/icon/people-2.svg`}
+													/>{' '}
 													6 - 10 People
 												</label>
 											</li>
@@ -201,8 +193,8 @@ export class P2PShareBlock {
 													<img
 														alt=""
 														className="social-icon"
-														src={ `${ gpchBlocks.pluginUrl }assets/img/icon/people-3.svg` }
-													/>{ ' ' }
+														src={`${gpchBlocks.pluginUrl}assets/img/icon/people-3.svg`}
+													/>{' '}
 													10 - 20 People
 												</label>
 											</li>
@@ -219,13 +211,13 @@ export class P2PShareBlock {
 													<img
 														alt=""
 														className="social-icon"
-														src={ `${ gpchBlocks.pluginUrl }assets/img/icon/people-3.svg` }
+														src={`${gpchBlocks.pluginUrl}assets/img/icon/people-3.svg`}
 													/>
 													<img
 														alt=""
 														className="social-icon"
-														src={ `${ gpchBlocks.pluginUrl }assets/img/icon/people-3.svg` }
-													/>{ ' ' }
+														src={`${gpchBlocks.pluginUrl}assets/img/icon/people-3.svg`}
+													/>{' '}
 													20+ People
 												</label>
 											</li>
@@ -239,315 +231,255 @@ export class P2PShareBlock {
 									<div id="gpch-blocks-p2p-controls">
 										<fieldset>
 											<legend className="blocks-base-control__label">
-												{ __(
-													'UTM Tags',
-													'planet4-gpch-plugin-blocks'
-												) }
+												{__('UTM Tags', 'planet4-gpch-plugin-blocks')}
 											</legend>
 											<TextControl
-												label={ __(
-													'UTM Medium',
-													'planet4-gpch-plugin-blocks'
-												) }
-												value={ attributes.utmMedium }
-												onChange={ ( val ) =>
-													setAttributes( {
+												label={__('UTM Medium', 'planet4-gpch-plugin-blocks')}
+												value={attributes.utmMedium}
+												onChange={(val) =>
+													setAttributes({
 														utmMedium: val,
-													} )
+													})
 												}
 											/>
 											<TextControl
-												label={ __(
-													'UTM Campaign',
-													'planet4-gpch-plugin-blocks'
-												) }
-												value={ attributes.utmCampaign }
-												onChange={ ( val ) =>
-													setAttributes( {
+												label={__('UTM Campaign', 'planet4-gpch-plugin-blocks')}
+												value={attributes.utmCampaign}
+												onChange={(val) =>
+													setAttributes({
 														utmCampaign: val,
-													} )
+													})
 												}
 											/>
 											<p>
 												<i>
-													{ __(
+													{__(
 														'utm_source will be added automatically depending on the channel.',
 														'planet4-gpch-plugin-blocks'
-													) }
+													)}
 												</i>
 											</p>
 										</fieldset>
 									</div>
 								</InspectorControls>
 
-								<h3 style={ separatorStyle }>
-									{ __(
-										'Step 1',
-										'planet4-gpch-plugin-blocks'
-									) }
-								</h3>
+								<h3 style={separatorStyle}>{__('Step 1', 'planet4-gpch-plugin-blocks')}</h3>
 								<RichText
-									style={ editElementStyle }
-									tagName={ 'h4' }
-									value={ attributes.step1Title }
-									allowedFormats={ [] }
-									onChange={ ( val ) =>
-										setAttributes( { step1Title: val } )
-									}
+									style={editElementStyle}
+									tagName={'h4'}
+									value={attributes.step1Title}
+									allowedFormats={[]}
+									onChange={(val) => setAttributes({ step1Title: val })}
 								/>
-								<h3 style={ separatorStyle }>
-									{ __(
-										'Step 2',
-										'planet4-gpch-plugin-blocks'
-									) }
-								</h3>
+								<h3 style={separatorStyle}>{__('Step 2', 'planet4-gpch-plugin-blocks')}</h3>
 								<RichText
-									style={ editElementStyle }
-									tagName={ 'h4' }
-									value={ attributes.step2Title }
-									allowedFormats={ [] }
-									onChange={ ( val ) =>
-										setAttributes( { step2Title: val } )
-									}
+									style={editElementStyle}
+									tagName={'h4'}
+									value={attributes.step2Title}
+									allowedFormats={[]}
+									onChange={(val) => setAttributes({ step2Title: val })}
 								/>
-								<h3 style={ separatorStyle }>
-									{ __(
-										'Share text/links',
-										'planet4-gpch-plugin-blocks'
-									) }
-								</h3>
-								<p style={ descriptionStyle }>
-									{ __(
+								<h3 style={separatorStyle}>{__('Share text/links', 'planet4-gpch-plugin-blocks')}</h3>
+								<p style={descriptionStyle}>
+									{__(
 										'Share text for all channels. The link will be shortened and added to the end of the text:',
 										'planet4-gpch-plugin-blocks'
-									) }
+									)}
 								</p>
 								<RichText
-									value={ attributes.shareText }
-									placeholder={ __(
-										'THE SHARE TEXT FOR ALL CHANNELS',
-										'planet4-gpch-plugin-blocks'
-									) }
-									allowedFormats={ [] }
-									onChange={ ( val ) =>
-										setAttributes( {
+									value={attributes.shareText}
+									placeholder={__('THE SHARE TEXT FOR ALL CHANNELS', 'planet4-gpch-plugin-blocks')}
+									allowedFormats={[]}
+									onChange={(val) =>
+										setAttributes({
 											shareText: val,
-										} )
+										})
 									}
-									style={ textboxStyle }
+									style={textboxStyle}
 								/>
-								<p style={ descriptionStyle }>
-									{ __(
+								<p style={descriptionStyle}>
+									{__(
 										'Short version (max. 178 characters) of the share text when sent by SMS. The link will be shortened and added to the end of the text:',
 										'planet4-gpch-plugin-blocks'
-									) }
+									)}
 								</p>
 								<RichText
-									value={ attributes.shareTextShort }
-									placeholder={ __(
+									value={attributes.shareTextShort}
+									placeholder={__(
 										'THE SHARE TEXT FOR ALL CHANNELS (when sent by SMS)',
 										'planet4-gpch-plugin-blocks'
-									) }
-									allowedFormats={ [] }
-									onChange={ ( val ) =>
-										setAttributes( {
+									)}
+									allowedFormats={[]}
+									onChange={(val) =>
+										setAttributes({
 											shareTextShort: val,
-										} )
+										})
 									}
-									style={ textboxStyle }
-									characterLimit={ 178 }
+									style={textboxStyle}
+									characterLimit={178}
 								/>
-								<p style={ descriptionStyle }>
-									{ __(
-										'Share link (unshortened and without UTM tags)',
-										'planet4-gpch-plugin-blocks'
-									) }
+								<p style={descriptionStyle}>
+									{__('Share link (unshortened and without UTM tags)', 'planet4-gpch-plugin-blocks')}
 								</p>
 								<LinkControl
-									value={ attributes.shareLink }
-									onChange={ ( val ) =>
-										setAttributes( {
+									value={attributes.shareLink}
+									onChange={(val) =>
+										setAttributes({
 											shareLink: val,
-										} )
+										})
 									}
-									settings={ [] }
-									showSuggestions={ true }
-									style={ editElementStyle }
+									settings={[]}
+									showSuggestions={true}
+									style={editElementStyle}
 								></LinkControl>
-								<h3 style={ separatorStyle }>WhatsApp Share</h3>
-								<p style={ descriptionStyle }>
-									{ __(
+								<h3 style={separatorStyle}>WhatsApp Share</h3>
+								<p style={descriptionStyle}>
+									{__(
 										'WhatsApp SMS CTA (178 characters max, link to WhatsApp will be added at the end):',
 										'planet4-gpch-plugin-blocks'
-									) }
+									)}
 								</p>
 								<RichText
-									value={ attributes.whatsAppSmsCTA }
-									placeholder={ __(
-										'THE TEXT TO SEND BY SMS',
-										'planet4-gpch-plugin-blocks'
-									) }
-									allowedFormats={ [] }
-									onChange={ ( val ) =>
-										setAttributes( {
+									value={attributes.whatsAppSmsCTA}
+									placeholder={__('THE TEXT TO SEND BY SMS', 'planet4-gpch-plugin-blocks')}
+									allowedFormats={[]}
+									onChange={(val) =>
+										setAttributes({
 											whatsAppSmsCTA: val,
-										} )
+										})
 									}
-									style={ textboxStyle }
-									characterLimit={ 178 }
+									style={textboxStyle}
+									characterLimit={178}
 								/>
-								<h3 style={ separatorStyle }>Email Share</h3>
-								<p style={ descriptionStyle }>
-									{ __(
-										'Email Subject:',
-										'planet4-gpch-plugin-blocks'
-									) }
-								</p>
+								<h3 style={separatorStyle}>Email Share</h3>
+								<p style={descriptionStyle}>{__('Email Subject:', 'planet4-gpch-plugin-blocks')}</p>
 								<RichText
-									value={ attributes.emailSubject }
-									placeholder={ __(
-										'EMAIL SUBJECT',
-										'planet4-gpch-plugin-blocks'
-									) }
-									allowedFormats={ [] }
-									onChange={ ( val ) =>
-										setAttributes( {
+									value={attributes.emailSubject}
+									placeholder={__('EMAIL SUBJECT', 'planet4-gpch-plugin-blocks')}
+									allowedFormats={[]}
+									onChange={(val) =>
+										setAttributes({
 											emailSubject: val,
-										} )
+										})
 									}
-									style={ textboxStyle }
+									style={textboxStyle}
 								/>
-								<p style={ descriptionStyle }>
-									{ __(
+								<p style={descriptionStyle}>
+									{__(
 										'Email Text. Put CTA_LINK anywhere you would like to put a shortened link.',
 										'planet4-gpch-plugin-blocks'
-									) }
+									)}
 								</p>
 								<RichText
-									value={ attributes.emailText }
-									placeholder={ __(
-										'EMAIL TEXT',
-										'planet4-gpch-plugin-blocks'
-									) }
-									allowedFormats={ [] }
-									onChange={ ( val ) =>
-										setAttributes( {
+									value={attributes.emailText}
+									placeholder={__('EMAIL TEXT', 'planet4-gpch-plugin-blocks')}
+									allowedFormats={[]}
+									onChange={(val) =>
+										setAttributes({
 											emailText: val,
-										} )
+										})
 									}
-									style={ textboxStyle }
+									style={textboxStyle}
 								/>
-								<h3 style={ separatorStyle }>SMS Share</h3>
-								<p style={ descriptionStyle }>
-									{ __(
-										'First SMS, share CTA (178 characters max):',
-										'planet4-gpch-plugin-blocks'
-									) }
+								<h3 style={separatorStyle}>SMS Share</h3>
+								<p style={descriptionStyle}>
+									{__('First SMS, share CTA (178 characters max):', 'planet4-gpch-plugin-blocks')}
 								</p>
 								<RichText
-									value={ attributes.smsMessage }
-									placeholder={ __(
+									value={attributes.smsMessage}
+									placeholder={__(
 										'FOR EXAMPLE: Thank you for sharing with your friends. Please forward the following SMS text to them.',
 										'planet4-gpch-plugin-blocks'
-									) }
-									allowedFormats={ [] }
-									onChange={ ( val ) =>
-										setAttributes( {
+									)}
+									allowedFormats={[]}
+									onChange={(val) =>
+										setAttributes({
 											smsMessage: val,
-										} )
+										})
 									}
-									style={ textboxStyle }
-									characterLimit={ 178 }
+									style={textboxStyle}
+									characterLimit={178}
 								/>
-								<p style={ descriptionStyle }>
-									{ __(
+								<p style={descriptionStyle}>
+									{__(
 										'A second SMS is sent with the share text and link.',
 										'planet4-gpch-plugin-blocks'
-									) }
+									)}
 								</p>
-								<h3 style={ separatorStyle }>Signal Share</h3>
-								<p style={ descriptionStyle }>
-									{ __(
-										'First SMS, share CTA (178 characters max):',
-										'planet4-gpch-plugin-blocks'
-									) }
+								<h3 style={separatorStyle}>Signal Share</h3>
+								<p style={descriptionStyle}>
+									{__('First SMS, share CTA (178 characters max):', 'planet4-gpch-plugin-blocks')}
 								</p>
 								<RichText
-									value={ attributes.signalMessage }
-									placeholder={ __(
+									value={attributes.signalMessage}
+									placeholder={__(
 										'FOR EXAMPLE: Thank you for sharing with your friends. Please copy/paste the following text into Signal and send it to your friends.',
 										'planet4-gpch-plugin-blocks'
-									) }
-									allowedFormats={ [] }
-									onChange={ ( val ) =>
-										setAttributes( {
+									)}
+									allowedFormats={[]}
+									onChange={(val) =>
+										setAttributes({
 											signalMessage: val,
-										} )
+										})
 									}
-									style={ textboxStyle }
-									characterLimit={ 178 }
+									style={textboxStyle}
+									characterLimit={178}
 								/>
-								<p style={ descriptionStyle }>
-									{ __(
+								<p style={descriptionStyle}>
+									{__(
 										'A second SMS is sent with the share text and link.',
 										'planet4-gpch-plugin-blocks'
-									) }
+									)}
 								</p>
-								<h3 style={ separatorStyle }>Threema Share</h3>
-								<p style={ descriptionStyle }>
-									{ __(
-										'First SMS, share CTA (178 characters max):',
-										'planet4-gpch-plugin-blocks'
-									) }
+								<h3 style={separatorStyle}>Threema Share</h3>
+								<p style={descriptionStyle}>
+									{__('First SMS, share CTA (178 characters max):', 'planet4-gpch-plugin-blocks')}
 								</p>
 								<RichText
-									value={ attributes.threemaMessage }
-									placeholder={ __(
+									value={attributes.threemaMessage}
+									placeholder={__(
 										'FOR EXAMPLE: Thank you for sharing with your friends. Please copy/paste the following text into Threema and send it to your friends.',
 										'planet4-gpch-plugin-blocks'
-									) }
-									allowedFormats={ [] }
-									onChange={ ( val ) =>
-										setAttributes( {
+									)}
+									allowedFormats={[]}
+									onChange={(val) =>
+										setAttributes({
 											threemaMessage: val,
-										} )
+										})
 									}
-									style={ textboxStyle }
-									characterLimit={ 178 }
+									style={textboxStyle}
+									characterLimit={178}
 								/>
-								<p style={ descriptionStyle }>
-									{ __(
+								<p style={descriptionStyle}>
+									{__(
 										'A second SMS is sent with the share text and link.',
 										'planet4-gpch-plugin-blocks'
-									) }
+									)}
 								</p>
-								<h3 style={ separatorStyle }>Telegram Share</h3>
-								<p style={ descriptionStyle }>
-									{ __(
+								<h3 style={separatorStyle}>Telegram Share</h3>
+								<p style={descriptionStyle}>
+									{__(
 										'Telegram SMS CTA (178 characters max, link to Telegram will be added at the end):',
 										'planet4-gpch-plugin-blocks'
-									) }
+									)}
 								</p>
 								<RichText
-									value={ attributes.telegramSmsCTA }
-									placeholder={ __(
-										'THE TEXT TO SEND BY SMS',
-										'planet4-gpch-plugin-blocks'
-									) }
-									allowedFormats={ [] }
-									onChange={ ( val ) =>
-										setAttributes( {
+									value={attributes.telegramSmsCTA}
+									placeholder={__('THE TEXT TO SEND BY SMS', 'planet4-gpch-plugin-blocks')}
+									allowedFormats={[]}
+									onChange={(val) =>
+										setAttributes({
 											telegramSmsCTA: val,
-										} )
+										})
 									}
-									style={ textboxStyle }
-									characterLimit={ 178 }
+									style={textboxStyle}
+									characterLimit={178}
 								/>
 							</div>
-						) }
+						)}
 					</div>
 				);
 			},
-		} );
+		});
 	}
 }
