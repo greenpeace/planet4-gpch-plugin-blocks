@@ -76,9 +76,7 @@ class SpacerBlock extends BaseBlock {
 		$fields = get_fields();
 
 		// Prepare parameters for template
-		$params = array(
-			'title' => $fields['title'],
-		);
+		$params = array();
 
 		// Output template
 		\Timber::render( $this->template_file, $params );
