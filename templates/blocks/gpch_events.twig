@@ -18,6 +18,7 @@
 							   href="{{ archive_link }}">{{ __('Event', 'planet4-gpch-blocks') }}</a>
 
 							{% if event.tags|length > 0 %}
+								<span class="tag-wrap-bullet" aria-hidden="true">•</span>
 								<div class="tag-wrap tags">
 									{% for tag in event.tags %}
 										<a class="tag-item tag"
