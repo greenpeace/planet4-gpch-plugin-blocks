@@ -66,6 +66,7 @@ class Planet4_GPCH_Plugin_Blocks {
 			new Blocks\SpacerBlock(),
 			new Blocks\MagazineArticlesBlock(),
 			new Blocks\WordCloudBlock(),
+			new Blocks\DonationProgressBarBlock(),
 		];
 	}
 
