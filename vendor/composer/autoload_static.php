@@ -28,6 +28,7 @@ class ComposerStaticInit1f0a357e88357c4512048dc57e74c22c
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\BSBingoBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/BSBingoBlock.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\BaseBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/BaseBlock.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\BaseFormBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/BaseFormBlock.php',
+        'Greenpeace\\Planet4GPCHBlocks\\Blocks\\DonationProgressBarBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\DreampeaceCoverBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/DreampeaceCoverBlock.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\DreampeaceSlideBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/DreampeaceSlideBlock.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\EventsBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/EventsBlock.php',
@@ -41,6 +42,7 @@ class ComposerStaticInit1f0a357e88357c4512048dc57e74c22c
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\TaskforceBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/TaskforceBlock.php',
         'Greenpeace\\Planet4GPCHBlocks\\Blocks\\WordCloudBlock' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/WordCloudBlock.php',
         'Greenpeace\\Planet4GPCHBlocks\\DictionaryTable' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/DictionaryTable.php',
+        'Greenpeace\\Planet4GPCHBlocks\\RaiseNowAPI' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/RaiseNowAPI.php',
         'Greenpeace\\Planet4GPCHBlocks\\SmsClient' => __DIR__ . '/../..' . '/includes/Greenpeace/Planet4GPCHBlocks/SmsClient.php',
     );
 
