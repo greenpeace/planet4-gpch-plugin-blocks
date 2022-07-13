@@ -13,6 +13,7 @@ return array(
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\BSBingoBlock' => $baseDir . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/BSBingoBlock.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\BaseBlock' => $baseDir . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/BaseBlock.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\BaseFormBlock' => $baseDir . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/BaseFormBlock.php',
+    'Greenpeace\\Planet4GPCHBlocks\\Blocks\\DonationProgressBarBlock' => $baseDir . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\DreampeaceCoverBlock' => $baseDir . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/DreampeaceCoverBlock.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\DreampeaceSlideBlock' => $baseDir . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/DreampeaceSlideBlock.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\EventsBlock' => $baseDir . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/EventsBlock.php',
@@ -26,5 +27,6 @@ return array(
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\TaskforceBlock' => $baseDir . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/TaskforceBlock.php',
     'Greenpeace\\Planet4GPCHBlocks\\Blocks\\WordCloudBlock' => $baseDir . '/includes/Greenpeace/Planet4GPCHBlocks/Blocks/WordCloudBlock.php',
     'Greenpeace\\Planet4GPCHBlocks\\DictionaryTable' => $baseDir . '/includes/Greenpeace/Planet4GPCHBlocks/DictionaryTable.php',
+    'Greenpeace\\Planet4GPCHBlocks\\RaiseNowAPI' => $baseDir . '/includes/Greenpeace/Planet4GPCHBlocks/RaiseNowAPI.php',
     'Greenpeace\\Planet4GPCHBlocks\\SmsClient' => $baseDir . '/includes/Greenpeace/Planet4GPCHBlocks/SmsClient.php',
 );
