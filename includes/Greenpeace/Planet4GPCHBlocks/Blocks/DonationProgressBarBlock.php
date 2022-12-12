@@ -117,27 +117,8 @@ class DonationProgressBarBlock extends BaseBlock {
 						'step'              => 1,
 					),
 					array(
-						'key'               => 'field_p4_gpch_blocks_donation_purpose',
-						'label'             => __( 'Donation Purpose', 'planet4-gpch-plugin-blocks' ),
-						'name'              => 'donation_purpose',
-						'type'              => 'text',
-						'instructions'      => __( 'Set a search term for the donation purpose.', 'planet4-gpch-plugin-blocks' ),
-						'required'          => 0,
-						'conditional_logic' => 0,
-						'wrapper'           => array(
-							'width' => '',
-							'class' => '',
-							'id'    => '',
-						),
-						'default_value'     => '',
-						'placeholder'       => '',
-						'prepend'           => '',
-						'append'            => '',
-						'maxlength'         => '',
-					),
-					array(
 						'key'               => 'field_p4_gpch_blocks_sextant_id',
-						'label'             => __( 'Sextant Project ID', 'planet4-gpch-plugin-blocks' ),
+						'label'             => __( 'Salesforce Campaign ID', 'planet4-gpch-plugin-blocks' ),
 						'name'              => 'stored_campaign_id',
 						'type'              => 'text',
 						'instructions'      => __( 'The "stored_campaign_id" to include in results.', 'planet4-gpch-plugin-blocks' ),
@@ -348,7 +329,6 @@ class DonationProgressBarBlock extends BaseBlock {
 
 		// Get donation stats
 		$donations = $this->get_numbers( [
-			'donation_purpose'           => trim( $fields['donation_purpose'] ),
 			'stored_campaign_id'         => trim( $fields['stored_campaign_id'] ),
 			'merchant_config_identifier' => trim( $fields['merchant_config_identifier'] ),
 			'date_from'                  => trim( $fields['date_from'] ),
@@ -411,7 +391,6 @@ class DonationProgressBarBlock extends BaseBlock {
 		$raiseNowAPI = new RaiseNowAPI();
 
 		$terms = [
-			'purpose'                    => $searchTerms['donation_purpose'],
 			'merchant_config_identifier' => $searchTerms['merchant_config_identifier'],
 			'stored_campaign_id'         => $searchTerms['stored_campaign_id'],
 			'date_from'                  => $searchTerms['date_from'],
