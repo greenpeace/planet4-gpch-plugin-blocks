@@ -47,14 +47,6 @@ class RaiseNowAPI {
 			],
 		];
 
-		if ( array_key_exists( 'purpose', $terms ) && ! empty( $terms['purpose'] ) ) {
-			$parameters['filters'][] = [
-				'field_name' => 'stored_rnw_purpose_text',
-				'type'       => 'fulltext',
-				'value'      => $terms['purpose'],
-			];
-		}
-
 		if ( array_key_exists( 'merchant_config_identifier', $terms ) && ! empty( $terms['merchant_config_identifier'] ) ) {
 			$parameters['filters'][] = [
 				'field_name' => 'merchant_config_identifier',
@@ -66,7 +58,7 @@ class RaiseNowAPI {
 		if ( array_key_exists( 'stored_campaign_id', $terms ) && ! empty( $terms['stored_campaign_id'] ) ) {
 			$parameters['filters'][] = [
 				'field_name' => 'stored_campaign_id',
-				'type'       => 'term',
+				'type'       => 'fulltext',
 				'value'      => $terms['stored_campaign_id'],
 			];
 		}
