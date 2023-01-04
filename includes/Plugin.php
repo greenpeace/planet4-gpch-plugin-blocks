@@ -59,7 +59,6 @@ class Planet4_GPCH_Plugin_Blocks {
 			new Blocks\FormProgressBarBlock(),
 			new Blocks\FormCounterTextBlock(),
 			new Blocks\ActionDividerBlock(),
-			new Blocks\AccordionBlock(),
 			new Blocks\TaskforceBlock(),
 			new Blocks\EventsBlock(),
 			new Blocks\NewsletterBlock(),
