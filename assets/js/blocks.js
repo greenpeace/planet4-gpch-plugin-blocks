@@ -1,4 +1,4 @@
-jQuery(document).ready(function () {
+jQuery( document ).ready( function() {
 	// Action Divider Block
 	(function (jQuery) {
 		var yesButton = jQuery('.action-divider .action-divider-question-button-yes');
