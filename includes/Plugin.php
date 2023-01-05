@@ -44,7 +44,7 @@ class Planet4_GPCH_Plugin_Blocks {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
 		// Register a block category
-		add_filter( 'block_categories', array( $this, 'register_block_category' ), 10, 2 );
+		add_filter( 'block_categories_all', array( $this, 'register_block_category' ), 10, 2 );
 
 		// Register Scripts
 		add_action( 'init', array( $this, 'register_scripts' ) );
@@ -93,7 +93,7 @@ class Planet4_GPCH_Plugin_Blocks {
 	 *
 	 * @return array
 	 */
-	public function register_block_category( $categories, $post ) {
+	public function register_block_category( $categories, $context ) {
 		return array_merge(
 			$categories,
 			array(
