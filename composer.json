@@ -1,18 +1,17 @@
 {
-    "name": "greenpeace/planet4-gpch-plugin-blocks",
-    "description": "Provides Planet4 content blocks specific to Greenpeace Switzerland",
-    "type": "wordpress-plugin",
-    "license": "MIT",
-    "require": {
-    },
-    "config": {
-        "optimize-autoloader": true
-    },
-    "autoload": {
-        "psr-4": {
-            "Greenpeace\\Planet4GPCHBlocks\\": [
-                "includes/Greenpeace/Planet4GPCHBlocks"
-            ]
-        }
-    }
+	"name": "greenpeace/planet4-gpch-plugin-blocks",
+	"description": "Provides Planet4 content blocks specific to Greenpeace Switzerland",
+	"type": "wordpress-plugin",
+	"license": "MIT",
+	"require": {},
+	"config": {
+		"optimize-autoloader": true
+	},
+	"autoload": {
+		"psr-4": {
+			"Greenpeace\\Planet4GPCHBlocks\\": [
+				"includes/Greenpeace/Planet4GPCHBlocks"
+			]
+		}
+	}
 }
