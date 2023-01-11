@@ -146,7 +146,7 @@ class Planet4_GPCH_Plugin_Blocks {
 
 		wp_enqueue_script( 'planet4-gpch-blocks-js',
 			P4_GPCH_PLUGIN_BLOCKS_BASE_URL . $js,
-			array( 'jquery' ),
+			array( '' ),
 			filemtime( P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . $js ),
 			true );
 
