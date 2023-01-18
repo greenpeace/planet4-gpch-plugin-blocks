@@ -1,26 +1,25 @@
-const defaultConfig = require(
-  './node_modules/@wordpress/scripts/config/webpack.config' )
-const path = require( 'path' )
+const defaultConfig = require('./node_modules/@wordpress/scripts/config/webpack.config');
+const path = require('path');
 
-const config = {}
+const config = {};
 
-var backendConfig = {
+const backendConfig = {
 	...defaultConfig,
-	
+
 	entry: {
 		// Gutenberg blocks
 		index: './src/index.js',
 	},
-	
+
 	output: {
 		// [name] allows for the entry object keys to be used as file names.
 		filename: '[name].js',
 		// Specify the path to the JS files.
-		path: path.resolve( __dirname, 'build/js/admin' ),
+		path: path.resolve(__dirname, 'build/js/admin'),
 	},
-}
+};
 
-const frontendConfig = Object.assign( {}, config, {
+const frontendConfig = Object.assign({}, config, {
 	entry: {
 		// Frontend JS for blocks
 		bsBingo: './src/blocks/BSBingo/BSBingoBlock-frontend.js',
@@ -29,14 +28,14 @@ const frontendConfig = Object.assign( {}, config, {
 		dreampeaceCover: './src/blocks/DreampeaceCover/DreampeaceCoverBlock-frontend.js',
 		dreampeaceSlide: './src/blocks/DreampeaceSlide/DreampeaceSlideBlock-frontend.js',
 	},
-	
+
 	output: {
 		// [name] allows for the entry object keys to be used as file names.
 		filename: '[name].js',
 		// Specify the path to the JS files.
-		path: path.resolve( __dirname, 'build/js/blocks' ),
+		path: path.resolve(__dirname, 'build/js/blocks'),
 	},
-	
+
 	// Setup a loader to transpile down the latest and great JavaScript so
 	// older browsers can understand it.
 	module: {
@@ -51,8 +50,7 @@ const frontendConfig = Object.assign( {}, config, {
 			},
 		],
 	},
-} )
+});
 
 // Export the config object.
-module.exports = [backendConfig, frontendConfig]
-
+module.exports = [backendConfig, frontendConfig];
