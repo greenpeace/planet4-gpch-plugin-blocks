@@ -1,7 +1,9 @@
 # planet4-gpch-plugin-blocks
+
 Content Blocks, specific to the GPCH installation of Planet4.
 
 ## Install
+
 Install dependencies:
 
 `npm install --save-dev`
@@ -25,22 +27,20 @@ Set JSHint to use .jshintrc provided in this repository.
 
 ### Build
 
-Make sure your JS files are formatted correctly:
-`npm run format:js:src` 
+Make sure your files are formatted correctly:
+`npm run format` 
 
 Make sure your files pass ESLint with the provided config:
-`npm run lint:js:src` 
+`npm run lint:js` 
 
 Build files for production:
 `npm run build`
-
-Live building for development:
-`npm run start`
 
 Build styles: 
 `sass assets/css/source/style.scss assets/css/style.css --style=compressed`
 
 ### Autoloader
+
 To generate autoload files, run 
 `composer dump-autoload` 
 
@@ -49,7 +49,7 @@ To generate autoload files, run
 Generate and use .pot/.po/.mo files as usual. Make sure to include translations in Twig templates.
 
 Transform po files into additional JSON for use with Javascript.
-See: https://developer.wordpress.org/block-editor/how-to-guides/internationalization/
+See [the guide in dev docs](https://developer.wordpress.org/block-editor/how-to-guides/internationalization/)
 
 Example: 
 `wp i18n make-json planet4-gpch-plugin-blocks-de_CH.po --no-purge`

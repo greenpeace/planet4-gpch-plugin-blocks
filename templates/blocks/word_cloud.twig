@@ -19,7 +19,7 @@
 	document.addEventListener("DOMContentLoaded", function(event) {
 		let wordList_{{ unique_id }} = {{ word_list|raw }};
 
-		var maxWordSize = {{ max_word_size }},
+		let maxWordSize = {{ max_word_size }},
 			minWordSize = {{ min_word_size }},
 			maxScale = {{ max_scale }},
 			{# Relative size between largest and smallest words
@@ -37,7 +37,7 @@
 				fontFamily: 'Roboto, sans-serif',
 				minRotation: 0,
 				maxRotation: 0,
-				gridSize: Math.round( {{ grid_size }} * jQuery( '#{{ dom_id }}' ).width() / 1024 ),
+				gridSize: Math.round( {{ grid_size }} * document.getElementById( '{{ dom_id }}' ).offsetWidth / 1024 ),
 				weightFactor: function( size ) {
 				{# Formula to scale the words
 					- normalizes the size of the biggest number to maxScale

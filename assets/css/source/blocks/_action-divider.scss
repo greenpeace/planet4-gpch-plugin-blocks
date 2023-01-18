@@ -4,6 +4,12 @@
 	margin: 2em 0;
 	padding: 1em 2em;
 
+	.action-divider-question-wrapper {
+		overflow: hidden;
+		max-height: 300px;
+		transition: max-height 200ms;
+	}
+
 	.action-divider-text,
 	.action-divider-question {
 		text-align: center;
@@ -37,7 +43,10 @@
 	}
 
 	.action-divider-step2 {
-		display: none;
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height	200ms;
+		transition-delay: 100ms;
 	}
 
 	.action-divider-feedback-form {
