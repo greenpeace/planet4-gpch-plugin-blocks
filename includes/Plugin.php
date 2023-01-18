@@ -44,7 +44,7 @@ class Planet4_GPCH_Plugin_Blocks {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
 		// Register a block category
-		add_filter( 'block_categories', array( $this, 'register_block_category' ), 10, 2 );
+		add_filter( 'block_categories_all', array( $this, 'register_block_category' ), 10, 2 );
 
 		// Register Scripts
 		add_action( 'init', array( $this, 'register_scripts' ) );
@@ -59,7 +59,6 @@ class Planet4_GPCH_Plugin_Blocks {
 			new Blocks\FormProgressBarBlock(),
 			new Blocks\FormCounterTextBlock(),
 			new Blocks\ActionDividerBlock(),
-			new Blocks\AccordionBlock(),
 			new Blocks\TaskforceBlock(),
 			new Blocks\EventsBlock(),
 			new Blocks\NewsletterBlock(),
@@ -94,7 +93,7 @@ class Planet4_GPCH_Plugin_Blocks {
 	 *
 	 * @return array
 	 */
-	public function register_block_category( $categories, $post ) {
+	public function register_block_category( $categories, $context ) {
 		return array_merge(
 			$categories,
 			array(
@@ -147,7 +146,7 @@ class Planet4_GPCH_Plugin_Blocks {
 
 		wp_enqueue_script( 'planet4-gpch-blocks-js',
 			P4_GPCH_PLUGIN_BLOCKS_BASE_URL . $js,
-			array( 'jquery' ),
+			[],
 			filemtime( P4_GPCH_PLUGIN_BLOCKS_BASE_PATH . $js ),
 			true );
 
