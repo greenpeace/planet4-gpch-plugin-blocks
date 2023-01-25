@@ -35,7 +35,7 @@
 							</h4>
 							<p class="article-list-item-meta">
 								<time class="article-list-item-date"
-									  datetime="">{{ event.date|date("l, d. F Y") }} {{ event.start_time|date("H:i") }}</time>
+									  datetime="">{{ event.date|date("l, d. F Y") }}{% if (event.start_time) %} {{ event.start_time|date("H:i") }}{% endif %}</time>
 							</p>
 						</header>
 
