@@ -212,7 +212,7 @@ class DonationProgressBarBlock extends BaseBlock {
 						'label'             => __( 'Additional Text', 'planet4-gpch-plugin-blocks' ),
 						'name'              => 'additional_text',
 						'type'              => 'text',
-						'instructions'      => __( 'You can use the placeholders AMOUNT (current donation amount), NUMBER (current number of donations), and GOAL (for the goal) within your text.', 'planet4-gpch-plugin-blocks' ),
+						'instructions'      => __( 'You can use the placeholders AMOUNT (current donation amount), NUMBER (current number of donations), GOAL (for the goal), and AMOUNT_MULTIPLIED (for the amount multiplied by the value below) within your text.', 'planet4-gpch-plugin-blocks' ),
 						'required'          => 0,
 						'conditional_logic' => array(
 							array(
@@ -233,6 +233,35 @@ class DonationProgressBarBlock extends BaseBlock {
 						'prepend'           => '',
 						'append'            => '',
 						'maxlength'         => '',
+					),
+					array(
+						'key'               => 'field_p4_gpch_blocks_amount_multiplier',
+						'label'             => __( 'Multiplier for the AMOUNT_MULTIPLIED placeholder in the text field.', 'planet4-gpch-plugin-blocks' ),
+						'name'              => 'amount_multiplier',
+						'type'              => 'number',
+						'instructions'      => __( 'AMOUNT * this number = AMOUNT_MULTIPLIED', 'planet4-gpch-plugin-blocks' ),
+						'required'          => 0,
+						'conditional_logic' => array(
+							array(
+								array(
+									'field'    => 'field_p4_gpch_blocks_show_text',
+									'operator' => '==',
+									'value'    => '1',
+								),
+							),
+						),
+						'wrapper'           => array(
+							'width' => '',
+							'class' => '',
+							'id'    => '',
+						),
+						'default_value'     => 1,
+						'placeholder'       => '',
+						'prepend'           => '',
+						'append'            => '',
+						'min'               => '',
+						'max'               => '',
+						'step'              => 0.0001,
 					),
 					array(
 						'key'               => 'field_p4_gpch_blocks_bar_color',
@@ -335,8 +364,9 @@ class DonationProgressBarBlock extends BaseBlock {
 			'date_until'                 => trim( $fields['date_until'] ),
 		] );
 
-		$amount = $donations['amount'] + $fields['add_number_amount'];
-		$count  = $donations['count'] + $fields['add_number_count'];
+		$amount            = $donations['amount'] + $fields['add_number_amount'];
+		$count             = $donations['count'] + $fields['add_number_count'];
+		$amount_multiplied = $amount * $fields['amount_multiplier'];
 
 		if ( $fields['show'] == 'count' ) {
 			$percentage = $count / $fields['goal'] * 100;
@@ -346,7 +376,8 @@ class DonationProgressBarBlock extends BaseBlock {
 
 		// Additional Text
 		if ( $fields['show_text'] ) {
-			$text = str_replace( [ 'AMOUNT', 'NUMBER', 'GOAL' ], [
+			$text = str_replace( [ 'AMOUNT_MULTIPLIED', 'AMOUNT', 'NUMBER', 'GOAL' ], [
+				number_format( $amount_multiplied, 0, '.', '\'' ),
 				number_format( $amount, 0, '.', '\'' ),
 				$count,
 				number_format( $fields['goal'], 0, '.', '\'' ),
