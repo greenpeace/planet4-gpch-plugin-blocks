@@ -50,14 +50,18 @@ class SmsClient {
 			// Format number
 			$number = $phoneUtil->format( $swissNumberProto, \libphonenumber\PhoneNumberFormat::E164 );
 		} catch ( \libphonenumber\NumberParseException $e ) {
-			\Sentry\captureException( $e );
+			if (function_exists('\Sentry\captureException')) {
+				\Sentry\captureException( $e );
+			}
 
 			return [
 				'status' => 'error',
 				'msg'    => $e->getMessage()
 			];
 		} catch ( \Exception $e ) {
-			\Sentry\captureException( $e );
+			if (function_exists('\Sentry\captureException')) {
+				\Sentry\captureException( $e );
+			}
 
 			return [
 				'status' => 'error',
@@ -73,7 +77,9 @@ class SmsClient {
 				throw new \Exception( __( 'Text message is too long.', 'planet4-gpch-plugin-blocks' ) );
 			}
 		} catch ( \Exception $e ) {
-			\Sentry\captureException( $e );
+			if (function_exists('\Sentry\captureException')) {
+				\Sentry\captureException( $e );
+			}
 
 			return [
 				'status' => 'error',
@@ -92,7 +98,9 @@ class SmsClient {
 				)
 			);
 		} catch ( \Twilio\Exceptions\RestException $e ) {
-			\Sentry\captureException( $e );
+			if (function_exists('\Sentry\captureException')) {
+				\Sentry\captureException( $e );
+			}
 
 			return [
 				'status' => 'error',
