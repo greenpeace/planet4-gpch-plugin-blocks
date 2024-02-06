@@ -275,7 +275,9 @@ class P2PShareBlock extends BaseBlock {
 				throw new \Exception( 'Unknown channel.' );
 			}
 		} catch ( \Exception $e ) {
-			\Sentry\captureException( $e );
+			if (function_exists('\Sentry\captureException')) {
+				\Sentry\captureException( $e );
+			}
 
 			$response = array(
 				'status' => 'error',
@@ -341,7 +343,9 @@ class P2PShareBlock extends BaseBlock {
 				throw new \Exception( 'Email could not be sent.' );
 			}
 		} catch ( \Exception $e ) {
-			\Sentry\captureException( $e );
+			if (function_exists('\Sentry\captureException')) {
+				\Sentry\captureException( $e );
+			}
 
 			$response = array(
 				'status' => 'error',
@@ -508,7 +512,9 @@ class P2PShareBlock extends BaseBlock {
 				}
 			}
 		} catch ( \Exception $e ) {
-			\Sentry\captureException( $e );
+			if (function_exists('\Sentry\captureException')) {
+				\Sentry\captureException( $e );
+			}
 
 			return $link;
 		}
