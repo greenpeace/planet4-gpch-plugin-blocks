@@ -48,15 +48,40 @@ class BaseBlock {
 
 		if ( $post !== null && has_blocks( $post->post_content ) ) {
 			$blocks = parse_blocks( $post->post_content );
-			foreach ( $blocks as $block ) {
-				if ( $block['blockName'] == $block_name ) {
-					return $block;
-				}
+
+			$found_blocks = self::find_block( $blocks, $block_name );
+
+			if ( array_key_exists( 0, $found_blocks ) ) {
+				return $found_blocks[0];
 			}
 		}
 
 		return false;
 	}
+
+	/**
+	 * Recursively finds blocks in parse_blocks output of page content.
+	 *
+	 * @param $blocks
+	 *
+	 * @return array
+	 */
+	static function find_block( $blocks, $block_name ) {
+		$list = array();
+
+		foreach ( $blocks as $block ) {
+			if ( $block_name === $block['blockName'] ) {
+				// add current item, if it's a heading block
+				$list[] = $block;
+			} elseif ( ! empty( $block['innerBlocks'] ) ) {
+				// or call the function recursively, to find heading blocks in inner blocks
+				$list = array_merge( $list, self::find_block( $block['innerBlocks'], $block_name ) );
+			}
+		}
+
+		return $list;
+	}
+
 
 
 	/**

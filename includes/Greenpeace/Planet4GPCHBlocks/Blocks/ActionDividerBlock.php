@@ -575,11 +575,11 @@ class ActionDividerBlock extends BaseBlock {
 			'url'           => isset( $fields['action_link']['url'] ) ? $fields['action_link']['url'] : null,
 			'target'        => $target,
 			'icon'          => $fields['icon'],
-			'show_question' => $fields['cta_with_question'],
+			'show_question' => ( array_key_exists( 'cta_with_question', $fields ) && $fields['cta_with_question'] ) ? true : false,
 
 		);
-
-		if ( $fields['cta_with_question'] ) {
+		
+		if ( array_key_exists('cta_with_question', $fields) && $fields['cta_with_question'] ) {
 			$params['cta_question']    = $fields['cta_question_group']['cta_question'];
 			$params['button_yes_text'] = $fields['cta_question_group']['button_yes_text'];
 			$params['button_no_text']  = $fields['cta_question_group']['button_no_text'];
