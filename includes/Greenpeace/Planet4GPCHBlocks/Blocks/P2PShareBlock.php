@@ -248,14 +248,15 @@ class P2PShareBlock extends BaseBlock {
 
 				// Get messages
 				if ( isset( $this->block_attributes[ $relatedBlockAttributes[ $channel ] ] ) && $this->block_attributes[ $relatedBlockAttributes[ $channel ] ] != null ) {
-
 					if ( $channel == 'whatsapp' ) {
-						$share_link = $this->generate_whatsapp_share_link( $this->get_share_message( $channel ) );
+						$share_link = $this->generate_whatsapp_share_link( $this->get_share_message( $channel, false, $data['postId'] ) );
 					} elseif ( $channel == 'telegram' ) {
-						$share_link = $this->generate_telegram_share_link( $this->block_attributes['shareLink']['url'], $this->get_share_message( $channel ) );
+						$share_link = $this->generate_telegram_share_link( $this->block_attributes['shareLink']['url'], $this->get_share_message( $channel, false, $data['postId'] ) );
 					}
 
-					$share_link_shortened = $this->get_shortened_link( $share_link, $channel, false );
+
+					$share_link_shortened = $this->get_shortened_link( $share_link, $channel, false, $data['postId'] );
+
 
 					$message = __( $this->block_attributes[ $relatedBlockAttributes[ $channel ] ], 'planet4-gpch-plugin-blocks' ) . ' ' . $share_link_shortened;
 
@@ -329,8 +330,9 @@ class P2PShareBlock extends BaseBlock {
 
 			// Replace CTA_LINK in email text
 			$link = $this->block_attributes['shareLink'];
+
 			if ( $link !== null ) {
-				$cta_link = $this->get_shortened_link( $link['url'], 'email' );
+				$cta_link = $this->get_shortened_link( $link['url'], 'email', true, $data['postId'] );
 			} else {
 				$cta_link = '';
 			}
@@ -372,7 +374,7 @@ class P2PShareBlock extends BaseBlock {
 	 * @return string
 	 * @throws \Exception
 	 */
-	private function get_share_message( $channel, $shortVersion = false ) {
+	private function get_share_message( $channel, $shortVersion = false, $postID = false ) {
 		if ( $shortVersion ) {
 			$text = $this->block_attributes['shareTextShort'];
 		} else {
@@ -386,7 +388,7 @@ class P2PShareBlock extends BaseBlock {
 		}
 
 		if ( $link !== null ) {
-			$link = $this->get_shortened_link( $link['url'], $channel );
+			$link = $this->get_shortened_link( $link['url'], $channel, true, $postID );
 		} else {
 			$link = '';
 		}
@@ -458,12 +460,14 @@ class P2PShareBlock extends BaseBlock {
 	 * @return mixed
 	 * @throws \Exception
 	 */
-	private function get_shortened_link( $url, $channel, $use_utm_tags = true ) {
+	private function get_shortened_link( $url, $channel, $use_utm_tags = true, $postID = false ) {
 		if ( $use_utm_tags ) {
 			$url = $this->create_utm_link( $url, $channel );
 		}
 
-		$postID = get_the_ID();
+		if ($postID === false) {
+			$postID = get_the_ID();
+		}
 
 		$meta_key = 'gpch_p2p_shortlink_' . md5( $url . $channel . $postID );
 
