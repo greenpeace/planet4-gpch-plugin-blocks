@@ -344,16 +344,18 @@ class DonationProgressBarBlock extends BaseBlock {
 	public function render_block( $block ) {
 		$fields = get_fields();
 
-		// Basic validation for goal
-		if ( ! is_numeric( $fields['goal'] ) ) {
-			$this->render_error_message( __( 'Goal must be a numeric value', 'planet4-gpch-plugin-blocks' ) );
+		if ( $fields !== false ) {
+			// Basic validation for goal
+			if ( ! is_numeric( $fields['goal'] ) ) {
+				$this->render_error_message( __( 'Goal must be a numeric value', 'planet4-gpch-plugin-blocks' ) );
 
-			return; // can't display anything without the goal, stop here
-		}
+				return; // can't display anything without the goal, stop here
+			}
 
-		// Basic validation for added number
-		if ( ! is_numeric( $fields['add_number_amount'] ) || ! is_numeric( $fields['add_number_count'] ) ) {
-			$this->render_error_message( __( 'Added numbers must be numeric values', 'planet4-gpch-plugin-blocks' ) );
+			// Basic validation for added number
+			if ( ! is_numeric( $fields['add_number_amount'] ) || ! is_numeric( $fields['add_number_count'] ) ) {
+				$this->render_error_message( __( 'Added numbers must be numeric values', 'planet4-gpch-plugin-blocks' ) );
+			}
 		}
 
 		// Get donation stats
@@ -364,9 +366,23 @@ class DonationProgressBarBlock extends BaseBlock {
 			'date_until'                 => trim( $fields['date_until'] ),
 		] );
 
-		$amount            = $donations['amount'] + $fields['add_number_amount'];
-		$count             = $donations['count'] + $fields['add_number_count'];
-		$amount_multiplied = $amount * $fields['amount_multiplier'];
+		if ( is_numeric( $fields['add_number_amount'] ) ) {
+			$amount = $donations['amount'] + $fields['add_number_amount'];
+		} else {
+			$amount = $donations['amount'];
+		}
+
+		if ( is_numeric( $fields['add_number_count'] ) ) {
+			$count = $donations['count'] + $fields['add_number_count'];
+		} else {
+			$count = $donations['count'];
+		}
+
+		if ( array_key_exists( 'amount_multiplier', $fields ) && is_numeric( $fields['amount_multiplier'] ) ) {
+			$amount_multiplied = $amount * $fields['amount_multiplier'];
+		} else {
+			$amount_multiplied = $amount;
+		}
 
 		if ( $fields['show'] == 'count' ) {
 			$percentage = $count / $fields['goal'] * 100;
