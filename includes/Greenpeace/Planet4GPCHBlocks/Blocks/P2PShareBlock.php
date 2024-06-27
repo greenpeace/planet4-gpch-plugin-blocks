@@ -339,8 +339,18 @@ class P2PShareBlock extends BaseBlock {
 
 			$email_text = str_replace( 'CTA_LINK', $cta_link, $email_text );
 
+			$email_sender_name = _x(
+				'Greenpeace Switzerland',
+				'P2P Block email sender name',
+				'planet4-gpch-plugin-blocks'
+			);
+
+			$headers = [
+				'From: "' . $email_sender_name . '" <noreply@greenpeace.ch>' ,
+			];
+
 			// Send email
-			$result = wp_mail( $data['email'], $email_subject, $email_text );
+			$result = wp_mail( $data['email'], $email_subject, $email_text, $headers );
 			if ( $result === false ) {
 				throw new \Exception( 'Email could not be sent.' );
 			}
