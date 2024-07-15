@@ -15,23 +15,17 @@
 		max-width: 400px;
 
 		background-color: #fff;
-		color: $color_standard_2_font;
 
 		h2 {
 			margin-top: 0;
-			color: $color_standard_1;
 		}
 	}
 
 	.btn.btn-primary {
-		background-color: $color_standard_1;
-		color: $color_standard_1_font;
-
 		border: 0;
 
 		&:hover {
-			background-color: $color_standard_3;
-			color: $color_standard_3_font;
+
 		}
 	}
 }
@@ -70,29 +64,3 @@
 	}
 }
 
-
-/* Color Schemes */
-@for $i from 1 through length($schema_names) {
-	#{nth($selectors, $i)} {
-		/*background-color: #{nth($colors_1, $i)};*/
-		.gpch-taskforce-banner {
-			h2 {
-				color: #{nth($colors_1, $i)};
-			}
-
-			.gpch-taskforce-content {
-				color: #{nth($colors_2_font, $i)};
-			}
-
-			.btn.btn-primary {
-				background-color: #{nth($colors_1, $i)};
-				color: #{nth($colors_1_font, $i)};
-
-				&:hover {
-					background-color: #{nth($colors_3, $i)};
-					color: #{nth($colors_3_font, $i)};
-				}
-			}
-		}
-	}
-}
