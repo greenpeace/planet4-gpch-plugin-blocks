@@ -54,18 +54,3 @@
 		margin: 0 auto;
 	}
 }
-
-/* Color Schemes */
-@for $i from 1 through length($schema_names) {
-	#{nth($selectors, $i)} {
-		.action-divider {
-			border-color: #{nth($colors_1, $i)};
-
-			.action-divider-text {
-				.dashicons-before:before {
-					color: #{nth($colors_1, $i)};
-				}
-			}
-		}
-	}
-}
