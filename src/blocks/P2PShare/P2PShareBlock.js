@@ -1,6 +1,6 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
-import { TextControl } from '@wordpress/components';
+import { TextControl, ToggleControl, SelectControl } from '@wordpress/components';
 import {
 	useBlockProps,
 	RichText as BaseRichText,
@@ -28,6 +28,21 @@ export class P2PShareBlock {
 						'How many people can you motivate to also sign the petition?',
 						'planet4-gpch-plugin-blocks'
 					),
+				},
+				showDonation: {
+					type: 'boolean',
+					default: 1,
+				},
+				donationButtonText: {
+					type: 'string',
+					default: 'I prefer to make a donation',
+				},
+				donationButtonBehavior: {
+					type: 'string',
+				},
+				donationAnchor: {
+					type: 'string',
+					default: '',
 				},
 				step2Title: {
 					type: 'string',
@@ -271,6 +286,43 @@ export class P2PShareBlock {
 									allowedFormats={[]}
 									onChange={(val) => setAttributes({ step1Title: val })}
 								/>
+
+								<ToggleControl
+									label="Show donation button"
+									checked={attributes.showDonation}
+									onChange={(val) => setAttributes({ showDonation: val })}
+								/>
+
+								{attributes.showDonation ? (
+									<TextControl
+										label="Donation Button Text"
+										value={attributes.donationButtonText}
+										onChange={(val) => setAttributes({ donationButtonText: val })}
+										//cassName: props.checkToggle ? ('dev-sidebar-keywords-show') : ('dev-sidebar-keywords-hide'),
+									/>
+								) : null}
+
+								{attributes.showDonation ? (
+									<SelectControl
+										label="Donation Button Behavior"
+										value={attributes.donationButtonBehavior}
+										options={[
+											{ label: 'Scroll to donation form', value: 'scroll-to-form' },
+											{ label: 'Scroll to custom HTML anchor', value: 'scroll-to-anchor' },
+										]}
+										onChange={(val) => setAttributes({ donationButtonBehavior: val })}
+									/>
+								) : null}
+
+								{attributes.showDonation && attributes.donationButtonBehavior === 'scroll-to-anchor' ? (
+									<TextControl
+										label="Donation Anchor"
+										help="The HTML anchor the donate button will be linked to (without #)."
+										value={attributes.donationAnchor}
+										onChange={(val) => setAttributes({ donationAnchor: val })}
+									/>
+								) : null}
+
 								<h3 style={separatorStyle}>{__('Step 2', 'planet4-gpch-plugin-blocks')}</h3>
 								<RichText
 									style={editElementStyle}
