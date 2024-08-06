@@ -33,16 +33,18 @@
                 <img class="social-icon"
                      src="{{ base_url }}assets/img/icon/people-3.svg"> {{ __('20+ People', 'planet4-gpch-plugin-blocks') }}
             </button>
-            <button type="button" class="donate" data-ga-category="P2P Block" data-ga-action="Contacts"
-                    data-ga-label="Donate" data-button-behavior="{{ attributes.donationButtonBehavior }}"
-                    data-donate-anchor="{{ attributes.donationAnchor }}">
-                <img class="social-icon" src="{{ base_url }}assets/img/icon/heart-red.svg">
-                {% if attributes.donationButtonText is empty %}
-                    {{ __('I prefer to make a donation', 'planet4-gpch-plugin-blocks') }}
-                {% else %}
-                    {{ __(attributes.donationButtonText, 'planet4-gpch-plugin-blocks') }}
-                {% endif %}
-            </button>
+            {% if attributes.showDonation %}
+                <button type="button" class="donate" data-ga-category="P2P Block" data-ga-action="Contacts"
+                        data-ga-label="Donate" data-button-behavior="{{ attributes.donationButtonBehavior }}"
+                        data-donate-anchor="{{ attributes.donationAnchor }}">
+                    <img class="social-icon" src="{{ base_url }}assets/img/icon/heart-red.svg">
+                    {% if attributes.donationButtonText is empty %}
+                        {{ __('I prefer to make a donation', 'planet4-gpch-plugin-blocks') }}
+                    {% else %}
+                        {{ __(attributes.donationButtonText, 'planet4-gpch-plugin-blocks') }}
+                    {% endif %}
+                </button>
+            {% endif %}
         </div>
     </div>
 
