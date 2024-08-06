@@ -31,7 +31,7 @@ export class P2PShareBlock {
 				},
 				showDonation: {
 					type: 'boolean',
-					default: 1,
+					default: 0,
 				},
 				donationButtonText: {
 					type: 'string',
