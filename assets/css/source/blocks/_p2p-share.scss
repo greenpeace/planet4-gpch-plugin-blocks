@@ -37,10 +37,11 @@
 			font-family: var(--font-family-secondary);
 			font-weight: var(--gpch--font-weight--bold);
 
+			margin-top: 0rem;
 			margin-bottom: 1rem;
 
 			&::after {
-				display: none;
+				display: none !important;
 			}
 		}
 
