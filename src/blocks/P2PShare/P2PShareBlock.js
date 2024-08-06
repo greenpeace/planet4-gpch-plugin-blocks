@@ -35,7 +35,10 @@ export class P2PShareBlock {
 				},
 				donationButtonText: {
 					type: 'string',
-					default: 'I prefer to make a donation',
+					default: __(
+						'I prefer to make a donation',
+						'planet4-gpch-plugin-blocks'
+					)
 				},
 				donationButtonBehavior: {
 					type: 'string',
@@ -155,90 +158,45 @@ export class P2PShareBlock {
 					<div {...blockProps}>
 						{!isSelected ? (
 							<div className="wp-block-planet4-gpch-plugin-blocks-p2p-share">
-								<form className="p2p-share-form">
-									<fieldset className="p2p-share-step p2p-share-step-1">
-										<legend>{attributes.step1Title}</legend>
-										<ul className="select">
-											<li>
-												<input
-													id="n1"
-													type="radio"
-													name="number_of_people"
-													value="1-5"
-													className="autoforward"
-													data-next-element=".p2p-share-step-2"
-												/>
-												<label htmlFor="n1">
-													<img
-														alt=""
-														className="social-icon"
-														src={`${gpchBlocks.pluginUrl}assets/img/icon/people-1.svg`}
-													/>{' '}
-													1 - 5 People
-												</label>
-											</li>
-											<li>
-												<input
-													id="n6"
-													type="radio"
-													name="number_of_people"
-													value="6-10"
-													className="autoforward"
-													data-next-element=".p2p-share-step-2"
-												/>
-												<label htmlFor="n6">
-													<img
-														alt=""
-														className="social-icon"
-														src={`${gpchBlocks.pluginUrl}assets/img/icon/people-2.svg`}
-													/>{' '}
-													6 - 10 People
-												</label>
-											</li>
-											<li>
-												<input
-													id="n10"
-													type="radio"
-													name="number_of_people"
-													value="10-20"
-													className="autoforward"
-													data-next-element=".p2p-share-step-2"
-												/>
-												<label htmlFor="n10">
-													<img
-														alt=""
-														className="social-icon"
-														src={`${gpchBlocks.pluginUrl}assets/img/icon/people-3.svg`}
-													/>{' '}
-													10 - 20 People
-												</label>
-											</li>
-											<li>
-												<input
-													id="n20"
-													type="radio"
-													name="number_of_people"
-													value="20+"
-													className="autoforward"
-													data-next-element=".p2p-share-step-2"
-												/>
-												<label htmlFor="n20">
-													<img
-														alt=""
-														className="social-icon"
-														src={`${gpchBlocks.pluginUrl}assets/img/icon/people-3.svg`}
-													/>
-													<img
-														alt=""
-														className="social-icon"
-														src={`${gpchBlocks.pluginUrl}assets/img/icon/people-3.svg`}
-													/>{' '}
-													20+ People
-												</label>
-											</li>
-										</ul>
-									</fieldset>
-								</form>
+								<div className="p2p-share-step p2p-share-step-1">
+									<h2>{attributes.step1Title}</h2>
+									<div className="buttons next-step">
+										<button type="button" data-ga-category="P2P Block" data-ga-action="Contacts"
+												data-ga-label="1-5"
+												data-next-element=".p2p-share-step-2">
+											<img className="social-icon"
+												 src={`${gpchBlocks.pluginUrl}assets/img/icon/people-1.svg`}/> 1 - 5 People
+										</button>
+										<button type="button" data-ga-category="P2P Block" data-ga-action="Contacts"
+												data-ga-label="6-10"
+												data-next-element=".p2p-share-step-2">
+											<img className="social-icon"
+												 src={`${gpchBlocks.pluginUrl}assets/img/icon/people-2.svg`}/> 6 - 10 People
+										</button>
+										<button type="button" data-ga-category="P2P Block" data-ga-action="Contacts"
+												data-ga-label="10-20"
+												data-next-element=".p2p-share-step-2">
+											<img className="social-icon"
+												 src={`${gpchBlocks.pluginUrl}assets/img/icon/people-2.svg`}/> 10 - 20 People
+										</button>
+										<button type="button" data-ga-category="P2P Block" data-ga-action="Contacts"
+												data-ga-label="20+"
+												data-next-element=".p2p-share-step-2">
+											<img className="social-icon"
+												 src={`${gpchBlocks.pluginUrl}assets/img/icon/people-3.svg`}/> 20+ People
+										</button>
+										{attributes.showDonation ? (
+											<button type="button" className="donate" data-ga-category="P2P Block"
+													data-ga-action="Contacts"
+													data-ga-label="Donate"
+													data-button-behavior="{{ attributes.donationButtonBehavior }}"
+													data-donate-anchor="{{ attributes.donationAnchor }}">
+												<img className="social-icon"
+													 src={`${gpchBlocks.pluginUrl}assets/img/icon/heart-red.svg`}/> {attributes.donationButtonText}
+											</button>
+										): (<div></div> )}
+									</div>
+								</div>
 							</div>
 						) : (
 							<div>
@@ -284,20 +242,20 @@ export class P2PShareBlock {
 									tagName={'h4'}
 									value={attributes.step1Title}
 									allowedFormats={[]}
-									onChange={(val) => setAttributes({ step1Title: val })}
+									onChange={(val) => setAttributes({step1Title: val})}
 								/>
 
 								<ToggleControl
 									label="Show donation button"
 									checked={attributes.showDonation}
-									onChange={(val) => setAttributes({ showDonation: val })}
+									onChange={(val) => setAttributes({showDonation: val})}
 								/>
 
 								{attributes.showDonation ? (
 									<TextControl
 										label="Donation Button Text"
 										value={attributes.donationButtonText}
-										onChange={(val) => setAttributes({ donationButtonText: val })}
+										onChange={(val) => setAttributes({donationButtonText: val})}
 										//cassName: props.checkToggle ? ('dev-sidebar-keywords-show') : ('dev-sidebar-keywords-hide'),
 									/>
 								) : null}

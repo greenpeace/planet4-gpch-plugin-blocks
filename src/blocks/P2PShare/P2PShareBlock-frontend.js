@@ -53,7 +53,7 @@ stepButtons.forEach((item) => {
 const donateButton = p2pShareElement.querySelector(':scope .buttons.next-step button.donate');
 
 donateButton.addEventListener('click', (event) => {
-	if (event.target.dataset.buttonBehavior === 'scroll-to-form') {
+	if (event.target.dataset.buttonBehavior === 'scroll-to-form' || event.target.dataset.buttonBehavior === '') {
 		const element = document.querySelector('.rnw-widget-container');
 
 		element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
