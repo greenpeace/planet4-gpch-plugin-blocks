@@ -1,14 +1,18 @@
 msgid ""
 msgstr ""
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Project-Id-Version: Planet4 GPCH Plugin Blocks\n"
-"POT-Creation-Date: 2021-06-02 08:23+0200\n"
-"PO-Revision-Date: 2021-06-10 15:13+0200\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/planet4-gpch-"
+"plugin-blocks\n"
+"POT-Creation-Date: 2024-08-06 14:49+0200\n"
+"PO-Revision-Date: 2024-08-06 14:57+0200\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.4.3\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: planet4-gpch-plugin-blocks.php\n"
@@ -16,118 +20,460 @@ msgstr ""
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
 "esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
 "_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
-"Last-Translator: \n"
-"Language: fr_FR\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 "X-Poedit-SearchPathExcluded-2: node_modules\n"
 
-#: includes/SmsClient.php:35
-msgid "Invalid phone number."
-msgstr "Numéro de téléphone invalide"
+#: build/js/admin/index.js:1 src/blocks/BSBingo/BSBingoBlock.js:15
+msgid "bullshit"
+msgstr ""
 
-#: includes/SmsClient.php:41
-msgid "Only mobile numbers allowed."
-msgstr "Seuls les numéros de téléphone mobile sont autorisés."
+#: build/js/admin/index.js:1 src/blocks/BSBingo/BSBingoBlock.js:16
+msgid "bingo"
+msgstr ""
 
-#: includes/SmsClient.php:47
-msgid "Only Swiss phone number allowed."
-msgstr "Seuls les numéros de téléphone mobile suisses sont autorisés."
+#: build/js/admin/index.js:1 src/blocks/BSBingo/BSBingoBlock.js:17
+msgid "buzzword"
+msgstr ""
 
-#: includes/SmsClient.php:73
-msgid "Text message is too long."
-msgstr "Le message est trop long."
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/ActionDividerBlock.php:28
+msgid "Text"
+msgstr ""
 
-#: includes/SmsClient.php:99
-msgid "SMS could not be sent. Try again later."
-msgstr "Le SMS n’a pas pu être envoyé. Essayez à nouveau plus tard."
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/ActionDividerBlock.php:47
+msgid "Action Link"
+msgstr ""
 
-#: includes/blocks/Form_Entries.php:79
-#: src/blocks/FormEntries/FormEntriesBlock.js:31
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/ActionDividerBlock.php:62
+msgid "Icon"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/ActionDividerBlock.php:65
+msgid ""
+"For a preview please visit <a href=\"https://developer.wordpress.org/"
+"resource/dashicons/\" target=\"_blank\">https://developer.wordpress.org/"
+"resource/dashicons/</a>"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/ActionDividerBlock.php:74
+msgid "-- no icon --"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/ActionDividerBlock.php:547
+msgid "Action Divider"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/ActionDividerBlock.php:548
+msgid "Divider Block with Donation Button"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/BaseBlock.php:31
+msgid "Error"
+msgstr "Erreur"
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php:33
+msgid "Use for progress"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php:36
+msgid ""
+"Use the donated amount or the numbers of donations for the progress bar."
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php:58
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormProgressBarBlock.php:30
+msgid "Goal"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php:61
+msgid "Donation amount in CHF needed to fill the progress bar"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php:79
+msgid "Add number to donation amount"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php:82
+msgid "Add this number to the amount we display"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php:100
+msgid "Add number to donations count"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php:103
+msgid "Add this number to the donations count we display"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php:121
+msgid "Salesforce Campaign ID"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php:124
+msgid "The \"stored_campaign_id\" to include in results."
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php:140
+msgid "Merchant config identifier"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php:143
+msgid "Merchant config identifier in RaiseNow."
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php:159
+msgid "Date From"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php:176
+msgid "Date until"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php:196
+msgid "Show a text below the progress bar?"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php:212
+msgid "Additional Text"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php:215
+msgid ""
+"You can use the placeholders AMOUNT (current donation amount), NUMBER "
+"(current number of donations), GOAL (for the goal), and AMOUNT_MULTIPLIED "
+"(for the amount multiplied by the value below) within your text."
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php:239
+msgid "Multiplier for the AMOUNT_MULTIPLIED placeholder in the text field."
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php:242
+msgid "AMOUNT * this number = AMOUNT_MULTIPLIED"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php:268
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormProgressBarBlock.php:72
+msgid "Bar Color"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php:283
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormProgressBarBlock.php:87
+msgid "Background Color"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php:328
+msgid "Donation Progress Bar"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php:329
+msgid "Progress Bar for RaiseNow Donations"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php:350
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormProgressBarBlock.php:268
+msgid "Goal must be a numeric value"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/DonationProgressBarBlock.php:357
+msgid "Added numbers must be numeric values"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/EventsBlock.php:30
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/NewsletterBlock.php:55
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/TaskforceBlock.php:30
+msgid "Title"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/EventsBlock.php:49
+msgid "Number of events"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/EventsBlock.php:52
+msgid "The maximum number of events to display"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/EventsBlock.php:70
+msgid "Display"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/EventsBlock.php:82
+msgid "Upcoming Events"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/EventsBlock.php:83
+#, fuzzy
+#| msgid "Event"
+msgid "Past Events"
+msgstr "Événement"
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/EventsBlock.php:84
+#, fuzzy
+#| msgid "Event"
+msgid "All Events"
+msgstr "Événement"
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/EventsBlock.php:98
+msgid "Order"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/EventsBlock.php:110
+msgid "Date Ascending"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/EventsBlock.php:111
+msgid "Date Descending"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/EventsBlock.php:125
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/MagazineArticlesBlock.php:37
+#, fuzzy
+#| msgid "UTM Tags"
+msgid "Tags"
+msgstr "Balises UTM"
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/EventsBlock.php:147
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/MagazineArticlesBlock.php:80
+msgid "Ignore Tags"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/EventsBlock.php:150
+msgid "Ignore tags and show events of all tags"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/EventsBlock.php:174
+msgid "Select posts"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/EventsBlock.php:177
+msgid ""
+"Select posts to show manually and override the tag / post type selection"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/EventsBlock.php:195
+msgid "No Events Text"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/EventsBlock.php:198
+msgid "This text will be shown when no events are available"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/EventsBlock.php:243
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/EventsBlock.php:244
+#, fuzzy
+#| msgid "Event"
+msgid "GPCH Events"
+msgstr "Événement"
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormCounterTextBlock.php:30
+msgid "Text before the number"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormCounterTextBlock.php:49
+msgid "Text after the number"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormCounterTextBlock.php:68
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormProgressBarBlock.php:51
+msgid "Add number"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormCounterTextBlock.php:71
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormProgressBarBlock.php:54
+msgid "Add this number to the number of form entries"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormCounterTextBlock.php:89
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormProgressBarBlock.php:102
+msgid "Count Form entries"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormCounterTextBlock.php:92
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormProgressBarBlock.php:105
+msgid "Would you like to count entries in a Gravity Form?"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormCounterTextBlock.php:108
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormProgressBarBlock.php:121
+#, fuzzy
+#| msgid "Gravity Form ID"
+msgid "Form IDs"
+msgstr "Gravity Form ID"
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormCounterTextBlock.php:111
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormProgressBarBlock.php:124
+msgid ""
+"To include more than one form, enter the IDs separated by commas (no "
+"spaces). Example: 1,2,3"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormCounterTextBlock.php:135
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormProgressBarBlock.php:148
+msgid "Use Global Counter"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormCounterTextBlock.php:138
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormProgressBarBlock.php:151
+msgid "Would you like to add the number of a global counter?"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormCounterTextBlock.php:154
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormProgressBarBlock.php:167
+msgid "Global Counter URL"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormCounterTextBlock.php:157
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormProgressBarBlock.php:170
+msgid "The URL of a global petition counter"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormCounterTextBlock.php:177
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormProgressBarBlock.php:190
+msgid "Global Counter JSON key"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormCounterTextBlock.php:180
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormProgressBarBlock.php:193
+msgid "It's usually safe to keep the default to unique_count"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormCounterTextBlock.php:234
+msgid "Form/Petition Counter with Text"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormCounterTextBlock.php:235
+msgid ""
+"Counter for Gravity Forms (Petitions and other forms) with additional text."
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormCounterTextBlock.php:255
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormProgressBarBlock.php:275
+msgid "Added number must be a numeric value"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormEntriesBlock.php:79
+#: src/blocks/FormEntries/FormEntriesBlock.js:30
 msgid "FIELD_VALUE has signed TIME_AGO."
 msgstr "FIELD_VALUE a signé TIME_AGO."
 
-#: includes/blocks/Form_Entries.php:200
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormEntriesBlock.php:200
 msgid "year"
 msgstr "année"
 
-#: includes/blocks/Form_Entries.php:201
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormEntriesBlock.php:201
 msgid "month"
 msgstr "mois"
 
-#: includes/blocks/Form_Entries.php:202
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormEntriesBlock.php:202
 msgid "week"
 msgstr "semaine"
 
-#: includes/blocks/Form_Entries.php:203
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormEntriesBlock.php:203
 msgid "day"
 msgstr "jour"
 
-#: includes/blocks/Form_Entries.php:204
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormEntriesBlock.php:204
 msgid "hour"
 msgstr "heure"
 
-#: includes/blocks/Form_Entries.php:205
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormEntriesBlock.php:205
 msgid "minute"
 msgstr "minute"
 
-#: includes/blocks/Form_Entries.php:206
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormEntriesBlock.php:206
 msgid "second"
 msgstr "seconde"
 
-#: includes/blocks/Form_Entries.php:209
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormEntriesBlock.php:209
 msgid "years"
 msgstr "années"
 
-#: includes/blocks/Form_Entries.php:210
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormEntriesBlock.php:210
 msgid "months"
 msgstr "mois"
 
-#: includes/blocks/Form_Entries.php:211
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormEntriesBlock.php:211
 msgid "weeks"
 msgstr "semaines"
 
-#: includes/blocks/Form_Entries.php:212
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormEntriesBlock.php:212
 msgid "days"
 msgstr "jours"
 
-#: includes/blocks/Form_Entries.php:213
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormEntriesBlock.php:213
 msgid "hours"
 msgstr "heures"
 
-#: includes/blocks/Form_Entries.php:214
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormEntriesBlock.php:214
 msgid "minutes"
 msgstr "minutes"
 
-#: includes/blocks/Form_Entries.php:215
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormEntriesBlock.php:215
 msgid "seconds"
 msgstr "secondes"
 
-#: includes/blocks/Form_Entries.php:217
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormEntriesBlock.php:217
 msgid "PRE_TEXT"
 msgstr ""
 
-#: includes/blocks/Form_Entries.php:218
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormEntriesBlock.php:218
 msgid "ago"
 msgstr "il y a"
 
-#: includes/blocks/Form_Entries.php:237
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormEntriesBlock.php:237
 msgid "just now"
 msgstr "à l’instant"
 
-#: includes/blocks/P2P_Share.php:87 src/blocks/P2PShare/P2PShareBlock.js:28
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormProgressBarBlock.php:33
+msgid "Number of form entries needed to fill the progress bar"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormProgressBarBlock.php:247
+msgid "Form Progress Bar"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/FormProgressBarBlock.php:248
+msgid "Progress Bar for Gravity Forms (Petitions and other forms)"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/MagazineArticlesBlock.php:59
+msgid "Article Count"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/MagazineArticlesBlock.php:136
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/MagazineArticlesBlock.php:137
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/MagazineArticlesBlock.php:212
+msgid "Magazine Articles"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/NewsletterBlock.php:30
+msgid "Language"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/NewsletterBlock.php:104
+msgid "Newsletter"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/NewsletterBlock.php:105
+msgid "Newsletter-Form"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/P2PShareBlock.php:86
+#: src/blocks/P2PShare/P2PShareBlock.js:28
 msgid "How many people can you motivate to also sign the petition?"
 msgstr ""
 "Combien de personnes pouvez-vous motiver pour qu’elles signent également la "
 "pétition?"
 
-#: includes/blocks/P2P_Share.php:94 src/blocks/P2PShare/P2PShareBlock.js:35
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/P2PShareBlock.php:93
+#: src/blocks/P2PShare/P2PShareBlock.js:52
 msgid "How will you be able to reach your friends best?"
 msgstr "Quelle est la manière la plus simple pour atteindre vos proches?*"
 
-#: includes/blocks/P2P_Share.php:101 src/blocks/P2PShare/P2PShareBlock.js:42
-#: src/blocks/P2PShare/P2PShareBlock.js:49
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/P2PShareBlock.php:100
+#: src/blocks/P2PShare/P2PShareBlock.js:57
+#: src/blocks/P2PShare/P2PShareBlock.js:64
 msgid ""
 "I just signed this petition, it's a very important topic. Click here to sign "
 "it also: "
@@ -135,7 +481,8 @@ msgstr ""
 "Je viens de signer cette pétition, c’est un sujet très important. Cliquez "
 "ici pour la signer également : "
 
-#: includes/blocks/P2P_Share.php:108 src/blocks/P2PShare/P2PShareBlock.js:66
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/P2PShareBlock.php:107
+#: src/blocks/P2PShare/P2PShareBlock.js:81
 msgid ""
 "Thank you for sharing on WhatsApp! Click this link, you will be able to edit "
 "the message before sending it: "
@@ -143,7 +490,8 @@ msgstr ""
 "Merci de partager sur WhatsApp ! Cliquez sur ce lien, vous pourrez modifier "
 "le message avant de l’envoyer : "
 
-#: includes/blocks/P2P_Share.php:115 src/blocks/P2PShare/P2PShareBlock.js:73
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/P2PShareBlock.php:114
+#: src/blocks/P2PShare/P2PShareBlock.js:88
 msgid ""
 "Thank you for sharing on Telegram! Click this link, you will be able to edit "
 "the message before sending it: "
@@ -151,17 +499,20 @@ msgstr ""
 "Merci de partager sur Telegram ! Cliquez sur ce lien, vous pourrez modifier "
 "le message avant de l’envoyer : "
 
-#: includes/blocks/P2P_Share.php:122 src/blocks/P2PShare/P2PShareBlock.js:108
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/P2PShareBlock.php:121
+#: src/blocks/P2PShare/P2PShareBlock.js:122
 msgid "Help by also signing this petition!"
 msgstr "Aidez-nous en signant aussi cette pétition !"
 
-#: includes/blocks/P2P_Share.php:129 src/blocks/P2PShare/P2PShareBlock.js:101
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/P2PShareBlock.php:128
+#: src/blocks/P2PShare/P2PShareBlock.js:116
 msgid "Hi, I just signed this petition. Can I ask you to sign it too? CTA_LINK"
 msgstr ""
 "Bonjour, je viens de signer cette pétition. Pourriez-vous la signer aussi ? "
 "CTA_LINK"
 
-#: includes/blocks/P2P_Share.php:136 src/blocks/P2PShare/P2PShareBlock.js:87
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/P2PShareBlock.php:135
+#: src/blocks/P2PShare/P2PShareBlock.js:102
 msgid ""
 "Thank you for sharing by SMS! Please copy the following message and send it "
 "to your friends."
@@ -169,7 +520,8 @@ msgstr ""
 "Merci de partager par SMS ! Copiez le message suivant et envoyez-le à vos "
 "amis."
 
-#: includes/blocks/P2P_Share.php:143 src/blocks/P2PShare/P2PShareBlock.js:94
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/P2PShareBlock.php:142
+#: src/blocks/P2PShare/P2PShareBlock.js:109
 msgid ""
 "Thank you for sharing on Signal! Please copy the following message and send "
 "it to your friends."
@@ -177,40 +529,8 @@ msgstr ""
 "Merci de partager sur Signal !  Copiez le message suivant et envoyez-le à "
 "vos amis."
 
-#: includes/blocks/P2P_Share.php:316
-msgid "Invalid email address"
-msgstr "Adresse email non valide"
-
-#: includes/blocks/Planet4_GPCH_Banner_Tool.php:41
-msgid "Gravity Form ID"
-msgstr "Gravity Form ID"
-
-#: includes/blocks/Planet4_GPCH_Base_Block.php:32
-msgid "Error"
-msgstr "Erreur"
-
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:151
-msgid "👍 Copied!"
-msgstr "👍 Copié !"
-
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:211
-msgid "Please use a valid Swiss mobile number."
-msgstr "Veuillez utiliser un numéro de mobile suisse valable."
-
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:247
-msgid "Your message was sent. Check your phone!"
-msgstr "Votre message a été envoyé. Vérifiez votre téléphone!"
-
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:283
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:434
-msgid "Application error. Please try again later."
-msgstr "Erreur d’application. Veuillez réessayer ultérieurement."
-
-#: src/blocks/P2PShare/P2PShareBlock-frontend.js:398
-msgid "Your message was sent. Check your email!"
-msgstr "Votre message a été envoyé. Vérifiez votre e-mail!"
-
-#: src/blocks/P2PShare/P2PShareBlock.js:80
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/P2PShareBlock.php:149
+#: src/blocks/P2PShare/P2PShareBlock.js:95
 msgid ""
 "Thank you for sharing on Threema! Please copy the following message and send "
 "it to your friends."
@@ -218,35 +538,136 @@ msgstr ""
 "Merci d’avoir partagé sur Threema! Copiez le message suivant et envoyez-le à "
 "vos amis."
 
-#: src/blocks/P2PShare/P2PShareBlock.js:243
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/P2PShareBlock.php:328
+msgid "Invalid email address"
+msgstr "Adresse email non valide"
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/P2PShareBlock.php:343
+msgctxt "P2P Block email sender name"
+msgid "Greenpeace Switzerland"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/SpacerBlock.php:59
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/SpacerBlock.php:60
+msgid "Spacer"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/TaskforceBlock.php:49
+msgid "Description"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/TaskforceBlock.php:92
+msgid "Button"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/TaskforceBlock.php:159
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/TaskforceBlock.php:160
+msgid "Taskforce"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/WordCloudBlock.php:723
+#: includes/Greenpeace/Planet4GPCHBlocks/Blocks/WordCloudBlock.php:724
+msgid "Word Cloud"
+msgstr ""
+
+#: includes/Greenpeace/Planet4GPCHBlocks/SmsClient.php:35
+msgid "Invalid phone number."
+msgstr "Numéro de téléphone invalide"
+
+#: includes/Greenpeace/Planet4GPCHBlocks/SmsClient.php:41
+msgid "Only mobile numbers allowed."
+msgstr "Seuls les numéros de téléphone mobile sont autorisés."
+
+#: includes/Greenpeace/Planet4GPCHBlocks/SmsClient.php:47
+msgid "Only Swiss phone number allowed."
+msgstr "Seuls les numéros de téléphone mobile suisses sont autorisés."
+
+#: includes/Greenpeace/Planet4GPCHBlocks/SmsClient.php:77
+msgid "Text message is too long."
+msgstr "Le message est trop long."
+
+#: includes/Greenpeace/Planet4GPCHBlocks/SmsClient.php:107
+msgid "SMS could not be sent. Try again later."
+msgstr "Le SMS n’a pas pu être envoyé. Essayez à nouveau plus tard."
+
+#: includes/Plugin.php:102
+msgid "GPCH"
+msgstr ""
+
+#: includes/Plugin.php:115
+msgid ""
+"Planet 4 GPCH Blocks: Advanced Custom Fields must be installed and activated "
+"for this plugin to work."
+msgstr ""
+
+#: includes/Plugin.php:127
+msgid ""
+"Planet 4 GPCH Blocks: Timber must be installed and activated for this plugin "
+"to work."
+msgstr ""
+
+#: includes/views/partials-wp-admin-cloud-block-dictionary-table.php:2
+msgid "Cloud Block Dictionary"
+msgstr ""
+
+#: includes/views/partials-wp-admin-cloud-block-dictionary-table.php:6
+msgid "Find"
+msgstr ""
+
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:144
+msgid "Copied!"
+msgstr "Copié !"
+
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:190
+msgid "Please use a valid Swiss mobile number."
+msgstr "Veuillez utiliser un numéro de mobile suisse valable."
+
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:224
+msgid "Your message was sent. Check your phone!"
+msgstr "Votre message a été envoyé. Vérifiez votre téléphone!"
+
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:260
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:395
+msgid "Application error. Please try again later."
+msgstr "Erreur d’application. Veuillez réessayer ultérieurement."
+
+#: src/blocks/P2PShare/P2PShareBlock-frontend.js:359
+msgid "Your message was sent. Check your email!"
+msgstr "Votre message a été envoyé. Vérifiez votre e-mail!"
+
+#: src/blocks/P2PShare/P2PShareBlock.js:39 templates/blocks/p2p-share.twig:42
+msgid "I prefer to make a donation"
+msgstr "Je préfère faire un don"
+
+#: src/blocks/P2PShare/P2PShareBlock.js:207
 msgid "UTM Tags"
 msgstr "Balises UTM"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:249
+#: src/blocks/P2PShare/P2PShareBlock.js:210
 msgid "UTM Medium"
 msgstr "UTM Medium"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:261
+#: src/blocks/P2PShare/P2PShareBlock.js:219
 msgid "UTM Campaign"
 msgstr "Campagne UTM"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:274
+#: src/blocks/P2PShare/P2PShareBlock.js:230
 msgid "utm_source will be added automatically depending on the channel."
 msgstr "utm_source seront ajoutés automatiquement en fonction du canal."
 
-#: src/blocks/P2PShare/P2PShareBlock.js:285
+#: src/blocks/P2PShare/P2PShareBlock.js:239
 msgid "Step 1"
 msgstr "Étape 1"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:300
+#: src/blocks/P2PShare/P2PShareBlock.js:284
 msgid "Step 2"
 msgstr "Étape 2"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:315
+#: src/blocks/P2PShare/P2PShareBlock.js:292
 msgid "Share text/links"
 msgstr "Partager du texte/des liens"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:321
+#: src/blocks/P2PShare/P2PShareBlock.js:295
 msgid ""
 "Share text for all channels. The link will be shortened and added to the end "
 "of the text:"
@@ -254,11 +675,11 @@ msgstr ""
 "Partagez le texte sur tous les réseaux. Le lien sera raccourci et ajouté à "
 "la fin du texte :"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:328
+#: src/blocks/P2PShare/P2PShareBlock.js:301
 msgid "THE SHARE TEXT FOR ALL CHANNELS"
 msgstr " Le texte à partager sur tous les réseaux"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:341
+#: src/blocks/P2PShare/P2PShareBlock.js:312
 msgid ""
 "Short version (max. 178 characters) of the share text when sent by SMS. The "
 "link will be shortened and added to the end of the text:"
@@ -266,16 +687,16 @@ msgstr ""
 "Version courte (max. 178 caractères) du texte partagé lorsqu’il est envoyé "
 "par SMS. Le lien sera raccourci et ajouté à la fin du texte :"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:348
+#: src/blocks/P2PShare/P2PShareBlock.js:319
 msgid "THE SHARE TEXT FOR ALL CHANNELS (when sent by SMS)"
 msgstr ""
 "LE TEXTE DE PARTAGE POUR TOUS LES CANAUX (lorsqu’il est envoyé par SMS)"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:362
+#: src/blocks/P2PShare/P2PShareBlock.js:332
 msgid "Share link (unshortened and without UTM tags)"
 msgstr "Lien de partage (non raccourci et sans balises UTM)"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:380
+#: src/blocks/P2PShare/P2PShareBlock.js:348
 msgid ""
 "WhatsApp SMS CTA (178 characters max, link to WhatsApp will be added at the "
 "end):"
@@ -283,37 +704,37 @@ msgstr ""
 "WhatsApp SMS CTA (178 caractères max, le lien vers WhatsApp sera ajouté à la "
 "fin):"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:387
-#: src/blocks/P2PShare/P2PShareBlock.js:534
+#: src/blocks/P2PShare/P2PShareBlock.js:354
+#: src/blocks/P2PShare/P2PShareBlock.js:478
 msgid "THE TEXT TO SEND BY SMS"
 msgstr "LE TEXTE À ENVOYER PAR SMS"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:402
+#: src/blocks/P2PShare/P2PShareBlock.js:365
 msgid "Email Subject:"
 msgstr "Objet du mail:"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:409
+#: src/blocks/P2PShare/P2PShareBlock.js:368
 msgid "EMAIL SUBJECT"
 msgstr "SUJET DE L’EMAIL"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:422
+#: src/blocks/P2PShare/P2PShareBlock.js:379
 msgid ""
 "Email Text. Put CTA_LINK anywhere you would like to put a shortened link."
 msgstr ""
 "Texte de l’e-mail. Mettez CTA_LINK où vous souhaitez mettre un lien "
 "raccourci."
 
-#: src/blocks/P2PShare/P2PShareBlock.js:429
+#: src/blocks/P2PShare/P2PShareBlock.js:385
 msgid "EMAIL TEXT"
 msgstr "TEXTE EMAIL"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:443
-#: src/blocks/P2PShare/P2PShareBlock.js:471
-#: src/blocks/P2PShare/P2PShareBlock.js:499
+#: src/blocks/P2PShare/P2PShareBlock.js:396
+#: src/blocks/P2PShare/P2PShareBlock.js:421
+#: src/blocks/P2PShare/P2PShareBlock.js:446
 msgid "First SMS, share CTA (178 characters max):"
 msgstr "Premier SMS, partageZ CTA (178 caractères max) :"
 
-#: src/blocks/P2PShare/P2PShareBlock.js:450
+#: src/blocks/P2PShare/P2PShareBlock.js:401
 msgid ""
 "FOR EXAMPLE: Thank you for sharing with your friends. Please forward the "
 "following SMS text to them."
@@ -321,13 +742,13 @@ msgstr ""
 "PAR EXEMPLE: Merci d’avoir partagé avec vos amis. Veuillez leur transmettre "
 "le texte SMS suivant."
 
-#: src/blocks/P2PShare/P2PShareBlock.js:464
-#: src/blocks/P2PShare/P2PShareBlock.js:492
-#: src/blocks/P2PShare/P2PShareBlock.js:520
+#: src/blocks/P2PShare/P2PShareBlock.js:415
+#: src/blocks/P2PShare/P2PShareBlock.js:440
+#: src/blocks/P2PShare/P2PShareBlock.js:465
 msgid "A second SMS is sent with the share text and link."
 msgstr "Un deuxième SMS est envoyé avec le texte de partage et le lien."
 
-#: src/blocks/P2PShare/P2PShareBlock.js:478
+#: src/blocks/P2PShare/P2PShareBlock.js:426
 msgid ""
 "FOR EXAMPLE: Thank you for sharing with your friends. Please copy/paste the "
 "following text into Signal and send it to your friends."
@@ -335,7 +756,7 @@ msgstr ""
 "PAR EXEMPLE: Merci d’avoir partagé avec vos amis. Veuillez copier/coller le "
 "texte suivant dans Signal et l’envoyer à vos amis."
 
-#: src/blocks/P2PShare/P2PShareBlock.js:506
+#: src/blocks/P2PShare/P2PShareBlock.js:451
 msgid ""
 "FOR EXAMPLE: Thank you for sharing with your friends. Please copy/paste the "
 "following text into Threema and send it to your friends."
@@ -343,7 +764,7 @@ msgstr ""
 "PAR EXEMPLE: Merci d’avoir partagé avec vos amis. Veuillez copier/coller le "
 "texte suivant dans Threema et l’envoyer à vos amis."
 
-#: src/blocks/P2PShare/P2PShareBlock.js:527
+#: src/blocks/P2PShare/P2PShareBlock.js:472
 msgid ""
 "Telegram SMS CTA (178 characters max, link to Telegram will be added at the "
 "end):"
@@ -352,18 +773,20 @@ msgstr ""
 "la fin):"
 
 #: templates/blocks/gpch_events.twig:18
+#, fuzzy
+#| msgid "Event"
 msgid "Event"
 msgstr "Événement"
 
-#: templates/blocks/p2p-share.twig:12
+#: templates/blocks/p2p-share.twig:19
 msgid "1 - 5 People"
 msgstr "1 - 5 personnes"
 
-#: templates/blocks/p2p-share.twig:19
+#: templates/blocks/p2p-share.twig:24
 msgid "6 - 10 People"
 msgstr "6 - 10 Personnes"
 
-#: templates/blocks/p2p-share.twig:26
+#: templates/blocks/p2p-share.twig:29
 msgid "10 - 20 People"
 msgstr "10 - 20 Personnes"
 
@@ -371,97 +794,89 @@ msgstr "10 - 20 Personnes"
 msgid "20+ People"
 msgstr "Plus de 20"
 
-#: templates/blocks/p2p-share.twig:47
+#: templates/blocks/p2p-share.twig:57
 msgid "WhatsApp"
 msgstr "WhatsApp"
 
-#: templates/blocks/p2p-share.twig:55
+#: templates/blocks/p2p-share.twig:62
 msgid "Email"
 msgstr "E-mail"
 
-#: templates/blocks/p2p-share.twig:63
+#: templates/blocks/p2p-share.twig:67
 msgid "SMS"
 msgstr "SMS"
 
-#: templates/blocks/p2p-share.twig:71
+#: templates/blocks/p2p-share.twig:72
 msgid "Signal"
 msgstr "Signal"
 
-#: templates/blocks/p2p-share.twig:79
+#: templates/blocks/p2p-share.twig:77
 msgid "Threema"
 msgstr "Threema"
 
-#: templates/blocks/p2p-share.twig:87
+#: templates/blocks/p2p-share.twig:82
 msgid "Telegram"
 msgstr "Telegram"
 
-#: templates/blocks/p2p-share.twig:95
+#: templates/blocks/p2p-share.twig:91
 msgid "Share on WhatsApp"
 msgstr "Partager sur WhatsApp"
 
-#: templates/blocks/p2p-share.twig:99 templates/blocks/p2p-share.twig:286
-#: templates/blocks/p2p-share.twig:335
+#: templates/blocks/p2p-share.twig:95 templates/blocks/p2p-share.twig:283
+#: templates/blocks/p2p-share.twig:337
 msgid "Thanks for sharing!"
 msgstr "Merci de partager !"
 
-#: templates/blocks/p2p-share.twig:101
+#: templates/blocks/p2p-share.twig:97
 msgid ""
 "Click the button to open WhatsApp. You can edit the message before sending."
 msgstr ""
 "Cliquez sur le bouton pour ouvrir WhatsApp. Vous pouvez modifier le message "
 "avant de l’envoyer."
 
-#: templates/blocks/p2p-share.twig:104
+#: templates/blocks/p2p-share.twig:103
 msgid "Open WhatsApp"
 msgstr "Ouvrez WhatsApp"
 
-#: templates/blocks/p2p-share.twig:106
-msgid ""
-"WhatsApp limits sending to 5 people at a time. You can click the button "
-"again to send to more people."
-msgstr ""
-"WhatsApp limite l’envoi à 5 personnes à la fois. Vous pouvez cliquer à "
-"nouveau sur le bouton pour envoyer à plus de personnes."
-
-#: templates/blocks/p2p-share.twig:111 templates/blocks/p2p-share.twig:203
-#: templates/blocks/p2p-share.twig:250 templates/blocks/p2p-share.twig:299
-#: templates/blocks/p2p-share.twig:346
+#: templates/blocks/p2p-share.twig:110 templates/blocks/p2p-share.twig:196
+#: templates/blocks/p2p-share.twig:246 templates/blocks/p2p-share.twig:300
+#: templates/blocks/p2p-share.twig:352
 msgid "Mobile number:"
 msgstr "Numéro de téléphone portable :"
 
-#: templates/blocks/p2p-share.twig:115
+#: templates/blocks/p2p-share.twig:114
 msgid "Great! Enter your phone number to receive an SMS with a WhatsApp link."
 msgstr ""
 "Génial! Entrez votre numéro de téléphone pour recevoir un SMS avec un lien "
 "WhatsApp."
 
-#: templates/blocks/p2p-share.twig:116 templates/blocks/p2p-share.twig:208
-#: templates/blocks/p2p-share.twig:255 templates/blocks/p2p-share.twig:304
-#: templates/blocks/p2p-share.twig:351
+#: templates/blocks/p2p-share.twig:115 templates/blocks/p2p-share.twig:201
+#: templates/blocks/p2p-share.twig:251 templates/blocks/p2p-share.twig:305
+#: templates/blocks/p2p-share.twig:357
 msgid "We will not use your number for anything else."
 msgstr "Nous n’utiliserons pas votre numéro pour autre chose."
 
-#: templates/blocks/p2p-share.twig:127 templates/blocks/p2p-share.twig:219
-#: templates/blocks/p2p-share.twig:266 templates/blocks/p2p-share.twig:315
-#: templates/blocks/p2p-share.twig:362
+#: templates/blocks/p2p-share.twig:127 templates/blocks/p2p-share.twig:213
+#: templates/blocks/p2p-share.twig:263 templates/blocks/p2p-share.twig:317
+#: templates/blocks/p2p-share.twig:369
 msgid "Send SMS"
 msgstr "Envoyer un SMS"
 
-#: templates/blocks/p2p-share.twig:128 templates/blocks/p2p-share.twig:174
-#: templates/blocks/p2p-share.twig:220 templates/blocks/p2p-share.twig:267
-#: templates/blocks/p2p-share.twig:316 templates/blocks/p2p-share.twig:363
+#: templates/blocks/p2p-share.twig:128 templates/blocks/p2p-share.twig:165
+#: templates/blocks/p2p-share.twig:214 templates/blocks/p2p-share.twig:264
+#: templates/blocks/p2p-share.twig:318 templates/blocks/p2p-share.twig:370
 msgid "Sending..."
 msgstr "Envoi..."
 
-#: templates/blocks/p2p-share.twig:129 templates/blocks/p2p-share.twig:175
-#: templates/blocks/p2p-share.twig:221 templates/blocks/p2p-share.twig:268
-#: templates/blocks/p2p-share.twig:317 templates/blocks/p2p-share.twig:364
+#: templates/blocks/p2p-share.twig:129 templates/blocks/p2p-share.twig:166
+#: templates/blocks/p2p-share.twig:215 templates/blocks/p2p-share.twig:265
+#: templates/blocks/p2p-share.twig:319 templates/blocks/p2p-share.twig:371
 msgid "👍 Done!"
 msgstr "👍 Fait!"
 
-#: templates/blocks/p2p-share.twig:136 templates/blocks/p2p-share.twig:182
-#: templates/blocks/p2p-share.twig:229 templates/blocks/p2p-share.twig:275
-#: templates/blocks/p2p-share.twig:324 templates/blocks/p2p-share.twig:371
+#: templates/blocks/p2p-share.twig:136 templates/blocks/p2p-share.twig:173
+#: templates/blocks/p2p-share.twig:223 templates/blocks/p2p-share.twig:272
+#: templates/blocks/p2p-share.twig:326 templates/blocks/p2p-share.twig:378
 msgid "Back"
 msgstr "Retour"
 
@@ -469,39 +884,37 @@ msgstr "Retour"
 msgid "Share by Email"
 msgstr "Partager par email"
 
-#: templates/blocks/p2p-share.twig:148 templates/blocks/p2p-share.twig:193
-#: templates/blocks/p2p-share.twig:240
-msgid "Copy/Paste this text:"
-msgstr "Copiez/collez ce texte :"
-
-#: templates/blocks/p2p-share.twig:153 templates/blocks/p2p-share.twig:198
-#: templates/blocks/p2p-share.twig:245
-msgid "Copy to clipboard"
-msgstr "Copier dans le presse-papiers"
-
-#: templates/blocks/p2p-share.twig:158
+#: templates/blocks/p2p-share.twig:148
 msgid "Email:"
 msgstr "Email :"
 
-#: templates/blocks/p2p-share.twig:161
+#: templates/blocks/p2p-share.twig:151
 msgid "Great! Let us send you an email you can forward to your friends."
 msgstr ""
 "Génial! Laissez-nous vous envoyer un e-mail que vous pouvez transmettre à "
 "vos amis."
 
-#: templates/blocks/p2p-share.twig:162
+#: templates/blocks/p2p-share.twig:152
 msgid "We will not use your email address for anything else."
 msgstr "Nous n’utiliserons pas votre adresse e-mail pour autre chose."
 
-#: templates/blocks/p2p-share.twig:173
+#: templates/blocks/p2p-share.twig:164
 msgid "Send Email"
 msgstr "Envoyer un email"
 
-#: templates/blocks/p2p-share.twig:189
+#: templates/blocks/p2p-share.twig:180
 msgid "Share by SMS"
 msgstr "Partager par SMS"
 
-#: templates/blocks/p2p-share.twig:207 templates/blocks/p2p-share.twig:303
+#: templates/blocks/p2p-share.twig:184 templates/blocks/p2p-share.twig:234
+msgid "Copy/Paste this text:"
+msgstr "Copiez/collez ce texte :"
+
+#: templates/blocks/p2p-share.twig:191 templates/blocks/p2p-share.twig:241
+msgid "Copy to clipboard"
+msgstr "Copier dans le presse-papiers"
+
+#: templates/blocks/p2p-share.twig:200 templates/blocks/p2p-share.twig:304
 msgid ""
 "Great! Enter your phone number to receive an SMS you can forward to your "
 "friends."
@@ -509,22 +922,22 @@ msgstr ""
 "Génial! Entrez votre numéro de téléphone pour recevoir un SMS que vous "
 "pouvez transmettre à vos amis."
 
-#: templates/blocks/p2p-share.twig:236
+#: templates/blocks/p2p-share.twig:230
 msgid "Share by Signal"
 msgstr "Partager par signal"
 
-#: templates/blocks/p2p-share.twig:254
+#: templates/blocks/p2p-share.twig:250
 msgid ""
 "Great! Enter your phone number to receive an SMS you can forward on Signal."
 msgstr ""
 "Génial! Entrez votre numéro de téléphone pour recevoir un SMS que vous "
 "pouvez transférer sur Signal."
 
-#: templates/blocks/p2p-share.twig:282
+#: templates/blocks/p2p-share.twig:279
 msgid "Share on Threema"
 msgstr "Partager sur Threema"
 
-#: templates/blocks/p2p-share.twig:289
+#: templates/blocks/p2p-share.twig:286
 msgid ""
 "Click the button to open Threema. You can edit the message before sending."
 msgstr ""
@@ -535,23 +948,47 @@ msgstr ""
 msgid "Open Threema"
 msgstr "Ouvrez Threema"
 
-#: templates/blocks/p2p-share.twig:331
+#: templates/blocks/p2p-share.twig:333
 msgid "Share on Telegram"
 msgstr "Partagez sur Telegram"
 
-#: templates/blocks/p2p-share.twig:337
+#: templates/blocks/p2p-share.twig:339
 msgid ""
 "Click the button to open Telegram. You can edit the message before sending."
 msgstr ""
 "Cliquez sur le bouton pour ouvrir Telegram. Vous pouvez modifier le message "
 "avant de l’envoyer."
 
-#: templates/blocks/p2p-share.twig:340
+#: templates/blocks/p2p-share.twig:345
 msgid "Open Telegram"
 msgstr "Ouvrir le télégramme"
 
-#: templates/blocks/p2p-share.twig:350
+#: templates/blocks/p2p-share.twig:356
 msgid "Great! Enter your phone number to receive an SMS with a Telegram link."
 msgstr ""
 "génial! Entrez votre numéro de téléphone pour recevoir un SMS avec un lien "
 "Telegram."
+
+#: templates/teasers/tease-magazine-articles.twig:65
+#: templates/teasers/tease-magazine-articles.twig:73
+msgid "by"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Planet4 GPCH Plugin Blocks"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/greenpeace/planet4-gpch-plugin-blocks"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Provides Planet4 content blocks specific to Greenpeace Switzerland"
+msgstr ""
+
+#~ msgid ""
+#~ "WhatsApp limits sending to 5 people at a time. You can click the button "
+#~ "again to send to more people."
+#~ msgstr ""
+#~ "WhatsApp limite l’envoi à 5 personnes à la fois. Vous pouvez cliquer à "
+#~ "nouveau sur le bouton pour envoyer à plus de personnes."
