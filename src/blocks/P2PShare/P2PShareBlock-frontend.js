@@ -32,7 +32,42 @@ function setParentHeight(upsizeOnly = false) {
 window.onresize = setParentHeight;
 window.onload = setParentHeight;
 
-// Next button events
+// Next step button clicks
+const stepButtons = p2pShareElement.querySelectorAll(':scope .buttons.next-step button:not(.donate)');
+
+stepButtons.forEach((item) => {
+	item.addEventListener('click', (event) => {
+		const nextElementSelector = event.target.getAttribute('data-next-element');
+
+		if (nextElementSelector !== null) {
+			const elementToShow = document.querySelector(nextElementSelector);
+
+			event.target.closest('.p2p-share-step').classList.add('hidden', 'prev');
+			elementToShow.style.visibility = 'visible';
+			elementToShow.classList.remove('hidden');
+		}
+	});
+});
+
+// Donate Button event
+const donateButton = p2pShareElement.querySelector(':scope .buttons.next-step button.donate');
+
+donateButton.addEventListener('click', (event) => {
+	if (event.target.dataset.buttonBehavior === 'scroll-to-form' || event.target.dataset.buttonBehavior === '') {
+		const element = document.querySelector('.rnw-widget-container');
+
+		element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+	} else if (event.target.dataset.buttonBehavior === 'scroll-to-anchor') {
+		const donateAnchor = event.target.dataset.donateAnchor;
+		if (donateAnchor !== '') {
+			// Set a random string first in case the anchor is already set
+			location.hash = '#randomstring';
+			location.hash = '#' + donateAnchor;
+		}
+	}
+});
+
+// Action button events
 const nextButtons = p2pShareElement.querySelectorAll(':scope .controls .next');
 
 nextButtons.forEach((item) => {
@@ -52,35 +87,6 @@ nextButtons.forEach((item) => {
 			elementToShow.style.visibility = 'visible';
 			elementToShow.classList.remove('hidden');
 		} catch (e) {}
-	});
-});
-
-// Radio fields auto forward to next step
-const radioForwardFields = p2pShareElement.querySelectorAll(':scope input.autoforward');
-
-radioForwardFields.forEach((item) => {
-	item.addEventListener('change', (event) => {
-		const nextElementSelector = event.target.getAttribute('data-next-element');
-
-		if (nextElementSelector !== null) {
-			const elementToShow = document.querySelector(nextElementSelector);
-
-			event.target.closest('.p2p-share-step').classList.add('hidden', 'prev');
-			elementToShow.style.visibility = 'visible';
-			elementToShow.classList.remove('hidden');
-		}
-	});
-	// Add the same functionality to the label
-	item.nextElementSibling.addEventListener('click', (event) => {
-		const nextElementSelector = event.currentTarget.previousElementSibling.getAttribute('data-next-element');
-
-		if (nextElementSelector !== null) {
-			const elementToShow = document.querySelector(nextElementSelector);
-
-			event.currentTarget.previousElementSibling.closest('.p2p-share-step').classList.add('hidden', 'prev');
-			elementToShow.style.visibility = 'visible';
-			elementToShow.classList.remove('hidden');
-		}
 	});
 });
 
@@ -109,11 +115,34 @@ clipboardButtons.forEach((item) => {
 
 		const textField = document.getElementById(event.target.dataset.copyField);
 
-		textField.select();
-		const result = document.execCommand('copy');
+		let apiPermissionGranted = false;
+		let success = false;
 
-		if (result !== false) {
-			event.target.innerText = __('👍 Copied!', 'planet4-gpch-plugin-blocks');
+		// Check Clipboard API permissions
+		navigator.permissions.query({ name: 'clipboard-write' }).then((result) => {
+			if (result.state === 'granted' || result.state === 'prompt') {
+				apiPermissionGranted = true;
+			}
+		});
+
+		// If the clipboard API is not available, try the deprecated execCommand method
+		if (navigator.clipboard === undefined || apiPermissionGranted === false) {
+			textField.select();
+			success = document.execCommand('copy');
+		} else {
+			navigator.clipboard.writeText(textField.value).then(
+				() => {
+					success = true;
+				},
+				() => {
+					success = false;
+				}
+			);
+		}
+
+		if (success !== false) {
+			event.target.innerText = '👍 ' + __('Copied!', 'planet4-gpch-plugin-blocks');
+			event.target.classList.remove('primary');
 		}
 	});
 });

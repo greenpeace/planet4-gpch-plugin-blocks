@@ -46,12 +46,13 @@ To generate autoload files, run
 
 ### Translations
 
-Generate and use .pot/.po/.mo files as usual. Make sure to include translations in Twig templates.
-
-Transform po files into additional JSON for use with Javascript.
+1. Generate .pot files: Use [wp-cli](https://developer.wordpress.org/cli/commands/i18n/make-pot/) or [PoEdit](https://developer.wordpress.org/cli/commands/i18n/make-pot/). PoEdit is the preferred option as it reads strings from all files including Twig templates.
+2. Create the .po and .mo files for each language using Poedit
+3. Transform the po files into additional JSON for use with Javascript.  
+ 
 See [the guide in dev docs](https://developer.wordpress.org/block-editor/how-to-guides/internationalization/)
 
 Example: 
-`wp i18n make-json planet4-gpch-plugin-blocks-de_CH.po --no-purge`
+wp i18n make-json planet4-gpch-plugin-blocks-de_CH.po --no-purge
 
 Then rename the files to use the handle instead of the auto generated md5 string in the filename.
