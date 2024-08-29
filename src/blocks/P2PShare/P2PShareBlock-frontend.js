@@ -52,20 +52,22 @@ stepButtons.forEach((item) => {
 // Donate Button event
 const donateButton = p2pShareElement.querySelector(':scope .buttons.next-step button.donate');
 
-donateButton.addEventListener('click', (event) => {
-	if (event.target.dataset.buttonBehavior === 'scroll-to-form' || event.target.dataset.buttonBehavior === '') {
-		const element = document.querySelector('.rnw-widget-container');
+if (donateButton !== null) {
+	donateButton.addEventListener('click', (event) => {
+		if (event.target.dataset.buttonBehavior === 'scroll-to-form' || event.target.dataset.buttonBehavior === '') {
+			const element = document.querySelector('.rnw-widget-container');
 
-		element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
-	} else if (event.target.dataset.buttonBehavior === 'scroll-to-anchor') {
-		const donateAnchor = event.target.dataset.donateAnchor;
-		if (donateAnchor !== '') {
-			// Set a random string first in case the anchor is already set
-			location.hash = '#randomstring';
-			location.hash = '#' + donateAnchor;
+			element.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
+		} else if (event.target.dataset.buttonBehavior === 'scroll-to-anchor') {
+			const donateAnchor = event.target.dataset.donateAnchor;
+			if (donateAnchor !== '') {
+				// Set a random string first in case the anchor is already set
+				location.hash = '#randomstring';
+				location.hash = '#' + donateAnchor;
+			}
 		}
-	}
-});
+	});
+}
 
 // Action button events
 const nextButtons = p2pShareElement.querySelectorAll(':scope .controls .next');
