@@ -562,6 +562,10 @@ class ActionDividerBlock extends BaseBlock {
 	 */
 	public function render_block( $block ) {
 		$fields = get_fields();
+        
+        if ($fields === false) {
+            return;
+        }
 
 		if ( isset( $fields['action_link']['target'] ) && $fields['action_link']['target'] != '' ) {
 			$target = $fields['action_link']['target'];
