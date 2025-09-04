@@ -1,52 +1,55 @@
 {% if (events is iterable) and events|length > 0 %}
-	<h2>{{ title }}</h2>
-	<section class="block articles-block">
-		<div class="article-list-section clearfix">
-			{% for event in events %}
-				<article class="article-list-item {{ event.classes }} ">
-					<div class="article-list-item-image article-list-item-image-max-width">
-						<a href="{{ event.link }}">
-							<img class="d-flex topicwise-article-image"
-								 src=" {{ TimberImage(event.thumbnail_id).src('articles-medium-large') }}"
-								 alt="" title="">
-						</a>
-					</div>
+    <h2>{{ title }}</h2>
 
-					<div class="article-list-item-body">
-						<div class="article-list-item-tags top-page-tags">
-							<a class="tag-item tag-item--main page-type page-type-story"
-							   href="{{ archive_link }}">{{ __('Event', 'planet4-gpch-blocks') }}</a>
+    <div class="wp-block-query posts-list p4-query-loop is-custom-layout-list is-layout-flow wp-block-query-is-layout-flow">
+        <ul class="wp-block-post-template is-layout-flow wp-block-post-template-is-layout-flow">
+            {% for event in events %}
+                <li class="wp-block-post post type-post format-standard has-post-thumbnail hentry p4-page-type-story">
+                    <div class="wp-block-columns is-layout-flex wp-block-columns-is-layout-flex {{ event.classes }}">
+                        <figure class="wp-block-post-featured-image"><a
+                                    href="{{ event.link }}" target="_self"><img
+                                        loading="lazy" decoding="async" width="1200" height="900"
+                                        src="{{ TimberImage(event.thumbnail_id).src('articles-medium-large') }}"
+                                        class="attachment-post-thumbnail size-post-thumbnail wp-post-image wp-stateless-item"
+                                        style="object-fit:cover;"
+                                ></a>
+                        </figure>
 
-							{% if event.tags|length > 0 %}
-								<span class="tag-wrap-bullet" aria-hidden="true">•</span>
-								<div class="tag-wrap tags">
-									{% for tag in event.tags %}
-										<a class="tag-item tag"
-										   href="{{ function('get_tag_link', tag) }}">#{{ tag.name }}</a>
-									{% endfor %}
-								</div>
-							{% endif %}
-						</div>
+                        <div class="wp-block-group is-layout-flow wp-block-group-is-layout-flow">
+                            <div class="wp-block-group is-layout-flex wp-block-group-is-layout-flex">
+                                <div class="wp-block-post-terms"><a
+                                            href="{{ archive_link }}">{{ __('Event', 'planet4-gpch-blocks') }}</a></div>
 
-						<header>
-							<h4 class="article-list-item-headline">
-								<a href=" {{ event.link }}">
-									{{ event.post_title|raw }}</a>
-							</h4>
-							<p class="article-list-item-meta">
-								<time class="article-list-item-date"
-									  datetime="">{{ event.date|date("l, d. F Y") }}{% if (event.start_time) %} {{ event.start_time|date("H:i") }}{% endif %}</time>
-							</p>
-						</header>
+                                {% if event.tags|length > 0 %}
+                                    <div class="taxonomy-post_tag wp-block-post-terms">
+                                        {% for tag in event.tags %}
+                                            <a class="tag-item tag" rel="tag"
+                                               href="{{ function('get_tag_link', tag) }}">{{ tag.name }}</a>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
 
-						<p class="article-list-item-content">
-							{{ event.post_excerpt }}
-						</p>
-					</div>
-				</article>
-			{% endfor %}
-		</div>
-	</section>
+                            <h4 class="wp-block-post-title"><a href="{{ event.link }}"
+                                                               target="_self">{{ event.post_title|raw }}</a></h4>
+
+                            <div class="wp-block-post-excerpt">
+                                <p class="wp-block-post-excerpt__excerpt">
+                                    {{ event.post_excerpt }}
+                                </p></div>
+
+                            <div class="wp-block-group posts-list-meta is-layout-flow wp-block-group-is-layout-flow">
+                                <div class="wp-block-post-date">
+                                    <time class="article-list-item-date"
+                                          datetime="">{{ event.date|date("l, d. F Y") }}{% if (event.start_time) %} {{ event.start_time|date("H:i") }}{% endif %}</time>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 {% else %}
-	{{ no_events_text|e('wp_kses_post')|raw }}
+    {{ no_events_text|e('wp_kses_post')|raw }}
 {% endif %}
