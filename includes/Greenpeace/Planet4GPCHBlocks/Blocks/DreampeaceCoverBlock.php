@@ -3,6 +3,7 @@
 namespace Greenpeace\Planet4GPCHBlocks\Blocks;
 
 use Greenpeace\Planet4GPCHBlocks\AssetEnqueuer;
+use Timber\Timber;
 
 /**
  * Dreampeace Cover Block Class.
@@ -88,6 +89,6 @@ class DreampeaceCoverBlock extends BaseBlock {
 	public function dynamic_render_callback( $block_attributes, $content ) {
 		$this->block_attributes = $block_attributes;
 
-		return \Timber::fetch( $this->template_file, $this->block_attributes );
+		return Timber::fetch( $this->template_file, $this->block_attributes );
 	}
 }

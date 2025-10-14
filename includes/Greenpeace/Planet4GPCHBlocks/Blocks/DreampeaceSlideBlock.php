@@ -3,6 +3,7 @@
 namespace Greenpeace\Planet4GPCHBlocks\Blocks;
 
 use Greenpeace\Planet4GPCHBlocks\AssetEnqueuer;
+use Timber\Timber;
 
 /**
  * Dreampeace Slide Block Class.
@@ -99,6 +100,6 @@ class DreampeaceSlideBlock extends BaseBlock {
 
 		$this->block_attributes['imageAttributes'] = [ 'style' => 'object-position: ' . $block_attributes['imagePosition'] . ';' ];
 
-		return \Timber::fetch( $this->template_file, $this->block_attributes );
+		return Timber::fetch( $this->template_file, $this->block_attributes );
 	}
 }
