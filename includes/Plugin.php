@@ -78,10 +78,6 @@ class Planet4_GPCH_Plugin_Blocks {
 		if ( ! class_exists( 'ACF' ) ) {
 			add_action( 'admin_notices', array( $this, 'error_message_no_acf' ) );
 		}
-		// Output an error message in case Timber isn't installed.
-		if ( ! class_exists( 'Timber' ) ) {
-			add_action( 'admin_notices', array( $this, 'error_message_no_timber' ) );
-		}
 	}
 
 
@@ -113,18 +109,6 @@ class Planet4_GPCH_Plugin_Blocks {
 		?>
         <div class="error notice">
             <p><?php _e( 'Planet 4 GPCH Blocks: Advanced Custom Fields must be installed and activated for this plugin to work.', 'planet4-gpch-plugin-blocks' ); ?></p>
-        </div>
-		<?php
-	}
-
-
-	/**
-	 * Outputs an error message in Wordpress admin about Timber not being installed
-	 */
-	public function error_message_no_timber() {
-		?>
-        <div class="error notice">
-            <p><?php _e( 'Planet 4 GPCH Blocks: Timber must be installed and activated for this plugin to work.', 'planet4-gpch-plugin-blocks' ); ?></p>
         </div>
 		<?php
 	}
