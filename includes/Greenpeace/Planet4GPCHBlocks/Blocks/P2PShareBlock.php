@@ -6,6 +6,7 @@ use Greenpeace\Planet4GPCHBlocks\AssetEnqueuer;
 use Greenpeace\Planet4GPCHBlocks\SmsClient;
 use PHPLicengine\Api\Api;
 use PHPLicengine\Service\Bitlink;
+use Timber\Timber;
 
 /**
  * P2P Share Block Class.
@@ -175,7 +176,7 @@ class P2PShareBlock extends BaseBlock {
 		);
 
 		// Output template
-		return \Timber::fetch( $this->template_file, $params );
+		return Timber::fetch( $this->template_file, $params );
 	}
 
 	/**

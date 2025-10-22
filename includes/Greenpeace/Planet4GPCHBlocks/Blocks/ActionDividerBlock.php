@@ -2,6 +2,8 @@
 
 namespace Greenpeace\Planet4GPCHBlocks\Blocks;
 
+use Timber\Timber;
+
 class ActionDividerBlock extends BaseBlock {
 	/**
 	 * @var string Template file path
@@ -596,6 +598,6 @@ class ActionDividerBlock extends BaseBlock {
 		}
 
 		// output template
-		\Timber::render( $this->template_file, $params );
+		Timber::render( $this->template_file, $params );
 	}
 }

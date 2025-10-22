@@ -4,6 +4,7 @@ namespace Greenpeace\Planet4GPCHBlocks\Blocks;
 
 use Greenpeace\Planet4GPCHBlocks\RaiseNowAPI;
 use NumberFormatter;
+use Timber\Timber;
 
 class DonationProgressBarBlock extends BaseBlock {
 	/**
@@ -410,7 +411,7 @@ class DonationProgressBarBlock extends BaseBlock {
 		);
 
 		// Output template
-		\Timber::render( $this->template_file, $params );
+		Timber::render( $this->template_file, $params );
 	}
 
 	protected function get_numbers( $searchTerms ) {

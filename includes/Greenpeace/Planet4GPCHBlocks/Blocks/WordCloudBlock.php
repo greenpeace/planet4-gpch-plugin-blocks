@@ -2,6 +2,8 @@
 
 namespace Greenpeace\Planet4GPCHBlocks\Blocks;
 
+use Timber\Timber;
+
 class WordCloudBlock extends BaseBlock {
 	/**
 	 * @var string Template file path
@@ -828,7 +830,7 @@ Amor 2',
 		}
 
 		// Output template
-		\Timber::render( $this->template_file, $params );
+		Timber::render( $this->template_file, $params );
 	}
 
 	/**

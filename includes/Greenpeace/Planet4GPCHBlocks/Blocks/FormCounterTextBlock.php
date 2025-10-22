@@ -2,6 +2,8 @@
 
 namespace Greenpeace\Planet4GPCHBlocks\Blocks;
 
+use Timber\Timber;
+
 class FormCounterTextBlock extends BaseFormBlock {
 	/**
 	 * @var string Template file path
@@ -273,6 +275,6 @@ class FormCounterTextBlock extends BaseFormBlock {
 		);
 
 		// Output template
-		\Timber::render( $this->template_file, $params );
+		Timber::render( $this->template_file, $params );
 	}
 }
