@@ -2,6 +2,8 @@
 
 namespace Greenpeace\Planet4GPCHBlocks\Blocks;
 
+use Timber\Timber;
+
 class EventsBlock extends BaseBlock {
 	/**
 	 * @var string Template file path
@@ -341,7 +343,7 @@ class EventsBlock extends BaseBlock {
 		);
 
 		// Output template
-		\Timber::render( $this->template_file, $params );
+		Timber::render( $this->template_file, $params );
 
 		// Restore original Post Data
 		wp_reset_postdata();

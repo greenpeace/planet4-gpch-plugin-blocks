@@ -2,6 +2,8 @@
 
 namespace Greenpeace\Planet4GPCHBlocks\Blocks;
 
+use Timber\Timber;
+
 class FormProgressBarBlock extends BaseFormBlock {
 	/**
 	 * @var string Template file path
@@ -293,6 +295,6 @@ class FormProgressBarBlock extends BaseFormBlock {
 		);
 
 		// Output template
-		\Timber::render( $this->template_file, $params );
+		Timber::render( $this->template_file, $params );
 	}
 }

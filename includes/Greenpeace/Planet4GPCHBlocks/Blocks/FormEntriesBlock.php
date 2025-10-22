@@ -3,6 +3,7 @@
 namespace Greenpeace\Planet4GPCHBlocks\Blocks;
 
 use Greenpeace\Planet4GPCHBlocks\AssetEnqueuer;
+use Timber\Timber;
 
 /**
  * Form Entries Block Class.
@@ -104,7 +105,7 @@ class FormEntriesBlock extends BaseBlock {
 			);
 
 			// Output template
-			return \Timber::fetch( $this->template_file, $params );
+			return Timber::fetch( $this->template_file, $params );
 		} else {
 			return '<p style="color: red;">Missing content block configuration</p>';
 		}

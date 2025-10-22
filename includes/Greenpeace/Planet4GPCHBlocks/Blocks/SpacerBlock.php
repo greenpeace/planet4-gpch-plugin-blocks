@@ -2,6 +2,8 @@
 
 namespace Greenpeace\Planet4GPCHBlocks\Blocks;
 
+use Timber\Timber;
+
 class SpacerBlock extends BaseBlock {
 	/**
 	 * @var string Template file path
@@ -79,6 +81,6 @@ class SpacerBlock extends BaseBlock {
 		$params = array();
 
 		// Output template
-		\Timber::render( $this->template_file, $params );
+		Timber::render( $this->template_file, $params );
 	}
 }
