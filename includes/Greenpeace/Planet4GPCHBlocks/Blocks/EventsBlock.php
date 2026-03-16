@@ -260,81 +260,42 @@ class EventsBlock extends BaseBlock {
 	 */
 	public function render_block( $block ) {
 		$fields = get_fields();
+		$event_count = isset( $fields['event_count'] ) ? (int) $fields['event_count'] : 4;
+		$display = isset( $fields['display'] ) ? $fields['display'] : 'upcoming';
+		$order = isset( $fields['order'] ) ? strtoupper( $fields['order'] ) : 'ASC';
 
 		// Events filter
 		$args = array(
 			'post_type'      => array( 'gpch_event' ),
 			'post_status'    => array( 'publish' ),
-			//'nopaging'       => true,
-			'order'          => $fields['order'],
+			'order'          => in_array( $order, array( 'ASC', 'DESC' ), true ) ? $order : 'ASC',
 			'orderby'        => 'meta_value_num',
-			'posts_per_page' => $fields['event_count'],
 			'meta_key'       => 'event_date',
+			'no_found_rows'  => true,
 		);
 
-		// Filter by date if either 'past' or 'upcoming' are selected.
-		// Use event_end_date when available, otherwise fall back to event_date.
+		// Keep SQL light and handle end-date fallback logic in PHP.
 		$today = date( 'Ymd' );
-		if ( $fields['display'] == 'upcoming' ) {
+
+		if ( 'upcoming' === $display ) {
+			// Events are at most 3 months long, so this window still includes ongoing events.
+			$window_start = date( 'Ymd', strtotime( '-3 months' ) );
+
 			$args['meta_query'] = array(
-				'relation' => 'OR',
 				array(
-					'key'     => 'event_end_date',
-					'value'   => $today,
+					'key'     => 'event_date',
+					'value'   => $window_start,
 					'type'    => 'NUMERIC',
 					'compare' => '>=',
 				),
-				array(
-					'relation' => 'AND',
-					array(
-						'relation' => 'OR',
-						array(
-							'key'     => 'event_end_date',
-							'compare' => 'NOT EXISTS',
-						),
-						array(
-							'key'     => 'event_end_date',
-							'value'   => '',
-							'compare' => '=',
-						),
-					),
-					array(
-						'key'     => 'event_date',
-						'value'   => $today,
-						'type'    => 'NUMERIC',
-						'compare' => '>=',
-					),
-				),
 			);
-		} else if ( $fields['display'] == 'past' ) {
+		} else if ( 'past' === $display ) {
 			$args['meta_query'] = array(
-				'relation' => 'OR',
 				array(
-					'key'     => 'event_end_date',
+					'key'     => 'event_date',
 					'value'   => $today,
 					'type'    => 'NUMERIC',
 					'compare' => '<',
-				),
-				array(
-					'relation' => 'AND',
-					array(
-						'relation' => 'OR',
-						array(
-							'key'     => 'event_end_date',
-							'compare' => 'NOT EXISTS',
-						),
-						array(
-							'key'     => 'event_end_date',
-							'value'   => '',
-							'compare' => '=',
-						),
-					),
-					array(
-						'key'     => 'event_date',
-						'value'   => $today,
-						'type'    => 'NUMERIC',
-						'compare' => '<',
-					),
 				),
 			);
 		}
@@ -349,36 +310,59 @@ class EventsBlock extends BaseBlock {
 			$args['post__in'] = $fields['select_posts'];
 		}
 
-		$result = new \WP_Query( $args );
-
 		$events = array();
+		$requires_php_date_filter = in_array( $display, array( 'upcoming', 'past' ), true );
 
-		foreach ( $result->posts as $event ) {
-			// Get post thumbnail
-			if ( has_post_thumbnail( $event->ID ) ) {
-				$event->thumbnail_id = get_post_thumbnail_id( $event->ID );
+		if ( $requires_php_date_filter ) {
+			$today_numeric = (int) $today;
+			$page = 1;
+			$batch_size = max( $event_count * 4, 20 );
+
+			while ( count( $events ) < $event_count ) {
+				$page_args = $args;
+				$page_args['posts_per_page'] = $batch_size;
+				$page_args['paged'] = $page;
+
+				$result = new \WP_Query( $page_args );
+				if ( empty( $result->posts ) ) {
+					break;
+				}
+
+				foreach ( $result->posts as $event ) {
+					$event_date = (int) get_post_meta( $event->ID, 'event_date', true );
+					$end_date = get_post_meta( $event->ID, 'event_end_date', true );
+					
+					// If end date is set, use it for filtering, otherwise fall back to event date.
+					$effective_end_date = '' !== $end_date ? (int) $end_date : $event_date;
+
+					if ( $display === 'upcoming' && $effective_end_date < $today_numeric ) {
+						continue;
+					}
+
+					if ( $display === 'past' && $effective_end_date >= $today_numeric ) {
+						continue;
+					}
+
+					$events[] = $this->prepare_event( $event );
+					
+					if ( count( $events ) >= $event_count ) {
+						break;
+					}
+				}
+
+				if ( count( $result->posts ) < $batch_size ) {
+					break;
+				}
+
+				$page++;
 			}
+		} else { // if "All Events" is selected, we can directly limit in SQL
+			$args['posts_per_page'] = $event_count;
+			$result = new \WP_Query( $args );
 
-			// Get tags
-			$event->tags = wp_get_post_tags( $event->ID );
-
-			// Class list for color schemes
-			$classes = '';
-			foreach ( $event->tags as $tag ) {
-				$classes .= 'tag-' . $tag->slug . " ";
+			foreach ( $result->posts as $event ) {
+				$events[] = $this->prepare_event( $event );
 			}
-			$event->classes = $classes;
-
-			// Permalink
-			$event->link = get_post_permalink( $event );
-
-			// Event date , time and place (from ACF field)
-			$event->date       = get_field( 'event_date', $event->ID );
-			$event->end_date   = get_field( 'event_end_date', $event->ID );
-			$event->start_time = get_field( 'start_time', $event->ID );
-			$event->place      = get_field( 'place', $event->ID );
-
-			$events[] = $event;
 		}
 
 		// Prepare parameters for template
@@ -394,5 +378,40 @@ class EventsBlock extends BaseBlock {
 
 		// Restore original Post Data
 		wp_reset_postdata();
+	}
+
+	/**
+	 * Prepare event data for template output.
+	 *
+	 * @param object $event Event post object.
+	 *
+	 * @return object
+	 */
+	private function prepare_event( $event ) {
+		// Get post thumbnail.
+		if ( has_post_thumbnail( $event->ID ) ) {
+			$event->thumbnail_id = get_post_thumbnail_id( $event->ID );
+		}
+
+		// Get tags.
+		$event->tags = wp_get_post_tags( $event->ID );
+
+		// Class list for color schemes.
+		$classes = '';
+		foreach ( $event->tags as $tag ) {
+			$classes .= 'tag-' . $tag->slug . ' ';
+		}
+		$event->classes = $classes;
+
+		// Permalink.
+		$event->link = get_post_permalink( $event );
+
+		// Event date, time and place (from ACF fields).
+		$event->date       = get_field( 'event_date', $event->ID );
+		$event->end_date   = get_field( 'event_end_date', $event->ID );
+		$event->start_time = get_field( 'start_time', $event->ID );
+		$event->place      = get_field( 'place', $event->ID );
+
+		return $event;
 	}
 }
