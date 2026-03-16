@@ -272,23 +272,69 @@ class EventsBlock extends BaseBlock {
 			'meta_key'       => 'event_date',
 		);
 
-		// Filter by date if either 'past' or 'upcoming' are selected
+		// Filter by date if either 'past' or 'upcoming' are selected.
+		// Use event_end_date when available, otherwise fall back to event_date.
+		$today = date( 'Ymd' );
 		if ( $fields['display'] == 'upcoming' ) {
 			$args['meta_query'] = array(
+				'relation' => 'OR',
 				array(
-					'key'     => 'event_date',
-					'value'   => date( 'Ymd' ),
-					'type'    => 'DATE',
+					'key'     => 'event_end_date',
+					'value'   => $today,
+					'type'    => 'NUMERIC',
 					'compare' => '>=',
+				),
+				array(
+					'relation' => 'AND',
+					array(
+						'relation' => 'OR',
+						array(
+							'key'     => 'event_end_date',
+							'compare' => 'NOT EXISTS',
+						),
+						array(
+							'key'     => 'event_end_date',
+							'value'   => '',
+							'compare' => '=',
+						),
+					),
+					array(
+						'key'     => 'event_date',
+						'value'   => $today,
+						'type'    => 'NUMERIC',
+						'compare' => '>=',
+					),
 				),
 			);
 		} else if ( $fields['display'] == 'past' ) {
 			$args['meta_query'] = array(
+				'relation' => 'OR',
 				array(
-					'key'     => 'event_date',
-					'value'   => date( 'Ymd' ),
-					'type'    => 'DATE',
+					'key'     => 'event_end_date',
+					'value'   => $today,
+					'type'    => 'NUMERIC',
 					'compare' => '<',
+				),
+				array(
+					'relation' => 'AND',
+					array(
+						'relation' => 'OR',
+						array(
+							'key'     => 'event_end_date',
+							'compare' => 'NOT EXISTS',
+						),
+						array(
+							'key'     => 'event_end_date',
+							'value'   => '',
+							'compare' => '=',
+						),
+					),
+					array(
+						'key'     => 'event_date',
+						'value'   => $today,
+						'type'    => 'NUMERIC',
+						'compare' => '<',
+					),
 				),
 			);
 		}
@@ -328,6 +374,7 @@ class EventsBlock extends BaseBlock {
 
 			// Event date , time and place (from ACF field)
 			$event->date       = get_field( 'event_date', $event->ID );
+			$event->end_date   = get_field( 'event_end_date', $event->ID );
 			$event->start_time = get_field( 'start_time', $event->ID );
 			$event->place      = get_field( 'place', $event->ID );
 
