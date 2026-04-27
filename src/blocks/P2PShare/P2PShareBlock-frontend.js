@@ -13,13 +13,13 @@ p2pStepElements.forEach((item) => {
 });
 document.querySelector('.p2p-share-step-1').classList.remove('hidden');
 
-// Resize parent element to max child height
+// Resize parent element currently shown step height
 function setParentHeight(upsizeOnly = false) {
 	let maxHeight = 0;
 	const currentHeight = p2pShareElement.offsetHeight;
 
 	p2pStepElements.forEach((item) => {
-		if (item.offsetHeight > maxHeight) {
+		if (! item.classList.contains('hidden') && item.offsetHeight > maxHeight) {
 			maxHeight = item.offsetHeight;
 		}
 	});
@@ -46,6 +46,8 @@ stepButtons.forEach((item) => {
 			elementToShow.style.visibility = 'visible';
 			elementToShow.classList.remove('hidden');
 		}
+
+		setParentHeight(true);
 	});
 });
 
