@@ -409,7 +409,7 @@ class EventsBlock extends BaseBlock {
 		// Event date, time and place (from ACF fields).
 		$event->date       = get_field( 'event_date', $event->ID );
 		$event->end_date   = get_field( 'event_end_date', $event->ID );
-		$event->start_time = get_field( 'start_time', $event->ID );
+		$event->start_time = get_field( 'start_time_freeform', $event->ID );
 		$event->place      = get_field( 'place', $event->ID );
 
 		return $event;
