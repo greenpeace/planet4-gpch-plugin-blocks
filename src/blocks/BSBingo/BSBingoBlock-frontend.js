@@ -1,4 +1,4 @@
-import anime from 'animejs/lib/anime.es.js';
+import { animate } from 'animejs';
 
 /* global Event */
 const bsBoxesElements = document.getElementsByClassName('box');
